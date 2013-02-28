@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>用 PostScript Type1 字体把文本字符串画在图像上</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagepsslantfont.html">imagepsslantfont</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagerectangle.html">imagerectangle</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagepstext" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagepstext</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">imagepstext</span> &mdash; <span class="dc-title">用 PostScript Type1 字体把文本字符串画在图像上</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagepstext-unknown">
+  <h3 class="title">说明</h3>
+   <div class="methodsynopsis dc-description">
+    <span class="type">array</span> <span class="methodname"><b>imagepstext</b></span>
+     ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$image</tt></span>
+    , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$text</tt></span>
+    , <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$font</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$size</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$foreground</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$background</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$x</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$y</tt></span>
+    [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$space</tt></span>
+    ], <span class="methodparam"><span class="type">int</span> <tt class="parameter">$tightness</tt></span>
+    , <span class="methodparam"><span class="type">float</span> <tt class="parameter">$angle</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$antialias_steps</tt></span>
+    )</div>
+
+  <p class="para rdfs-comment">
+   <i><tt class="parameter">foreground</tt></i> 是文本的颜色，<i><tt class="parameter">background</tt></i>
+   是文本以防锯齿（antialiasing）方式尝试淡入的颜色。以 <i><tt class="parameter">background</tt></i>
+   为颜色的像素实际上不会被画上去，所以背景图像不需要是实心的颜色。
+  </p>
+  <p class="para">
+   以 <i><tt class="parameter">x</tt></i>，<i><tt class="parameter">y</tt></i>
+   给出的坐标定义了第一个字符的起点（或参考点，基本是字符的左下角）。这和
+   <span class="function"><a href="function.imagestring.html" class="function">imagestring()</a></span> 不同，其
+   <i><tt class="parameter">x</tt></i>，<i><tt class="parameter">y</tt></i>
+   坐标定义的是第一个字符的右上角。如果不很理解请参考 PostScript
+   文档中关于字体及其度量系统的部分。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">space</tt></i> 可以用来改变字体中默认间距的值。此值将被加到通常的值上，可以为负值。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">tightness</tt></i> 可以控制字符之间的间距。此值将被加到通常字符宽度上，可以为负值。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">angle</tt></i> 以角度表示。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">size</tt></i> 以像素表示。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">antialias_steps</tt></i>
+   可以控制防混色文本使用的颜色的数目。允许值为
+   4 和 16。大的数值推荐用于大小小于 20
+   的文本，对文本质量的效果相当明显。对更大的大小，用 4，计算强度小一些。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">space</tt></i> 和 <i><tt class="parameter">tightness</tt></i>
+   以字符间距单元表示，1 个单元为 1 em-square 的一千分之一。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">space</tt></i>，<i><tt class="parameter">tightness</tt></i>，<i><tt class="parameter">angle</tt></i>
+   和 <i><tt class="parameter">antialias_steps</tt></i> 参数为可选项。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数仅在 PHP
+编译时指定了 <strong class="option configure">--with-t1lib[=DIR]</strong>
+ 时可用。</span></p></blockquote>
+  <p class="para">
+   本函数返回一个包含下列单元的数组：
+   <table class="doctable informaltable">
+    
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="left">0</td>
+       <td align="left">左下角的 X 坐标</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left">1</td>
+       <td align="left">左下角的 Y 坐标</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left">2</td>
+       <td align="left">右上角的 X 坐标</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left">3</td>
+       <td align="left">右上角的 Y 坐标</td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.imagepsbbox.html" class="function">imagepsbbox()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagepsslantfont.html">imagepsslantfont</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagerectangle.html">imagerectangle</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

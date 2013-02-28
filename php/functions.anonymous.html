@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>匿名函数</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="functions.internal.html">内部（内置）函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.oop5.html">类与对象</a></div>
+ <div class="up"><a href="language.functions.html">函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="functions.anonymous" class="sect1">
+   <h2 class="title">匿名函数</h2>
+
+   <p class="simpara">
+	匿名函数（Anonymous functions），也叫闭包函数（<i>closures</i>），允许
+	临时创建一个没有指定名称的函数。最经常用作回调函数（<a href="language.pseudo-types.html#language.types.callback" class="link">callback</a>）的参数。
+	当然，也有其他应用的情况。
+   </p>
+
+   <div class="example" id="example-144">
+    <p><b>Example #1 Anonymous function 示例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">preg_replace_callback</span><span style="color: #007700">(</span><span style="color: #DD0000">'~-([a-z])~'</span><span style="color: #007700">,&nbsp;function&nbsp;(</span><span style="color: #0000BB">$match</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">strtoupper</span><span style="color: #007700">(</span><span style="color: #0000BB">$match</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]);<br />},&nbsp;</span><span style="color: #DD0000">'hello-world'</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;输出&nbsp;helloWorld<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <p class="simpara">
+	闭包函数也可以作为变量的值来使用。PHP会自动把表达式转换成内置类<b class="classname">Closure</b>的
+	对象实例。把一个closure对象赋值给一个变量的方式与普通变量赋值的语法是一样的，最后也要加上分号。
+   </p>
+
+   <div class="example" id="example-145">
+    <p><b>Example #2 匿名函数变量赋值示例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$greet&nbsp;</span><span style="color: #007700">=&nbsp;function(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Hello&nbsp;%s\r\n"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br />};<br /><br /></span><span style="color: #0000BB">$greet</span><span style="color: #007700">(</span><span style="color: #DD0000">'World'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$greet</span><span style="color: #007700">(</span><span style="color: #DD0000">'PHP'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   
+   <p class="simpara">
+	Closure对象也会从父作用域中继承类属性。这些变量都必须在函数或类的头部声明。从父作用域中继承
+	变量与使用全局变量是*不同*的。全局变量存在于一个全局的范围，无论当前在执行的是哪个函数。而closure
+	的父类作用域则是声明该closure的函数（不一定要是它被调用的函数）。示例如下：
+   </p>
+
+   <div class="example" id="example-146">
+    <p><b>Example #3 Closures和作用域</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;一个基本的购物车，包括一些已经添加的商品和每种商品的数量。<br />//&nbsp;其中有一个方法用来计算购物车中所有商品的总价格。该方法使用了一个closure作为回调函数。<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Cart<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;</span><span style="color: #0000BB">PRICE_BUTTER&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1.00</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;</span><span style="color: #0000BB">PRICE_MILK&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">3.00</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;</span><span style="color: #0000BB">PRICE_EGGS&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">6.95</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$products&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">add</span><span style="color: #007700">(</span><span style="color: #0000BB">$product</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$quantity</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">products</span><span style="color: #007700">[</span><span style="color: #0000BB">$product</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$quantity</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">getQuantity</span><span style="color: #007700">(</span><span style="color: #0000BB">$product</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">products</span><span style="color: #007700">[</span><span style="color: #0000BB">$product</span><span style="color: #007700">])&nbsp;?&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">products</span><span style="color: #007700">[</span><span style="color: #0000BB">$product</span><span style="color: #007700">]&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">FALSE</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">getTotal</span><span style="color: #007700">(</span><span style="color: #0000BB">$tax</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$total&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0.00</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$callback&nbsp;</span><span style="color: #007700">=<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;(</span><span style="color: #0000BB">$quantity</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$product</span><span style="color: #007700">)&nbsp;use&nbsp;(</span><span style="color: #0000BB">$tax</span><span style="color: #007700">,&nbsp;&amp;</span><span style="color: #0000BB">$total</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$pricePerItem&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">constant</span><span style="color: #007700">(</span><span style="color: #0000BB">__CLASS__&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"::PRICE_"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">strtoupper</span><span style="color: #007700">(</span><span style="color: #0000BB">$product</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$total&nbsp;</span><span style="color: #007700">+=&nbsp;(</span><span style="color: #0000BB">$pricePerItem&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">$quantity</span><span style="color: #007700">)&nbsp;*&nbsp;(</span><span style="color: #0000BB">$tax&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">1.0</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">array_walk</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">products</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$callback</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">$total</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$my_cart&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Cart</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;往购物车里添加条目<br /></span><span style="color: #0000BB">$my_cart</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">add</span><span style="color: #007700">(</span><span style="color: #DD0000">'butter'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$my_cart</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">add</span><span style="color: #007700">(</span><span style="color: #DD0000">'milk'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$my_cart</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">add</span><span style="color: #007700">(</span><span style="color: #DD0000">'eggs'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">6</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;打出出总价格，其中有&nbsp;5%&nbsp;的销售税.<br /></span><span style="color: #007700">print&nbsp;</span><span style="color: #0000BB">$my_cart</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getTotal</span><span style="color: #007700">(</span><span style="color: #0000BB">0.05</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">//&nbsp;The&nbsp;result&nbsp;is&nbsp;54.29<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   
+   <p class="simpara">
+	匿名函数目前是通过<a href="reserved.classes.html#reserved.classes.closure" class="link">
+    <b class="classname">Closure</b></a>类来实现的。目前还不稳定，不适用于正式开发。
+   </p>
+   
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <span class="simpara">    
+	 匿名函数只在PHP 5.3.0 及以上版本有效。
+    </span>
+   </p></blockquote>
+
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <span class="simpara">
+     在closure内部可以调用 <span class="function"><a href="function.func-num-args.html" class="function">func_num_args()</a></span>,
+     <span class="function"><a href="function.func-get-arg.html" class="function">func_get_arg()</a></span>, 和 <span class="function"><a href="function.func-get-args.html" class="function">func_get_args()</a></span>
+     等函数来获取参数信息。
+    </span>
+   </p></blockquote>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="functions.internal.html">内部（内置）函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.oop5.html">类与对象</a></div>
+ <div class="up"><a href="language.functions.html">函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

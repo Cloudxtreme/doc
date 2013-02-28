@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>对数组中的每个成员应用用户函数</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-walk-recursive.html">array_walk_recursive</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array.html">array</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-walk" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">array_walk</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">array_walk</span> &mdash; <span class="dc-title">对数组中的每个成员应用用户函数</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.array-walk-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>array_walk</b></span>
+    ( <span class="methodparam"><span class="type">array</span> <tt class="parameter reference">&$array</tt></span>
+   , <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.callback" class="type callback">callback</a></span> <tt class="parameter">$funcname</tt></span>
+   [, <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$userdata</tt></span>
+  ] )</div>
+
+  <p class="simpara">
+   成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+  </p>
+  <p class="simpara">
+   将用户自定义函数 <i><tt class="parameter">funcname</tt></i> 应用到
+   <i><tt class="parameter">array</tt></i> 数组中的每个单元。典型情况下
+   <i><tt class="parameter">funcname</tt></i> 接受两个参数。<i><tt class="parameter">array</tt></i>
+   参数的值作为第一个，键名作为第二个。如果提供了可选参数
+   <i><tt class="parameter">userdata</tt></i>，将被作为第三个参数传递给
+   callback <i><tt class="parameter">funcname</tt></i>。
+  </p>
+  <p class="simpara">
+   如果 <i><tt class="parameter">funcname</tt></i> 函数需要的参数比给出的多，则每次
+   <span class="function"><b>array_walk()</b></span> 调用 <i><tt class="parameter">funcname</tt></i>
+   时都会产生一个 <a href="errorfunc.constants.html" class="link">E_WARNING</a>
+   级的错误。这些警告可以通过在 <span class="function"><b>array_walk()</b></span> 调用前加上
+   PHP 的错误操作符 <a href="language.operators.errorcontrol.html" class="link">@</a>
+   来抑制，或者用 <span class="function"><a href="function.error-reporting.html" class="function">error_reporting()</a></span>。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    如果 <i><tt class="parameter">funcname</tt></i> 需要直接作用于数组中的值，则给
+    <i><tt class="parameter">funcname</tt></i> 的第一个参数指定为<a href="language.references.html" class="link">引用</a>。这样任何对这些单元的改变也将会改变原始数组本身。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    将键名和 userdata 传递到 <i><tt class="parameter">funcname</tt></i> 中是 PHP 4.0 新增加的。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <span class="function"><b>array_walk()</b></span> 不会受到 <i><tt class="parameter">array</tt></i>
+   内部数组指针的影响。<span class="function"><b>array_walk()</b></span>
+   会遍历整个数组而不管指针的位置。
+  </p>
+  <p class="para">
+   用户不应在回调函数中改变该数组本身。例如增加/删除单元，unset
+   单元等等。如果 <span class="function"><b>array_walk()</b></span>
+   作用的数组改变了，则此函数的的行为未经定义，且不可预期。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3925">
+    <p><b>Example #1 <span class="function"><b>array_walk()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$fruits&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"d"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"lemon"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"a"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"orange"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"banana"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"apple"</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">test_alter</span><span style="color: #007700">(&amp;</span><span style="color: #0000BB">$item1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$key</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$prefix</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$item1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$prefix</span><span style="color: #DD0000">:&nbsp;</span><span style="color: #0000BB">$item1</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">test_print</span><span style="color: #007700">(</span><span style="color: #0000BB">$item2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$key</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$key</span><span style="color: #DD0000">.&nbsp;</span><span style="color: #0000BB">$item2</span><span style="color: #DD0000">&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />}<br /><br />echo&nbsp;</span><span style="color: #DD0000">"Before&nbsp;...:\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">array_walk</span><span style="color: #007700">(</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'test_print'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">array_walk</span><span style="color: #007700">(</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'test_alter'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'fruit'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"...&nbsp;and&nbsp;after:\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">array_walk</span><span style="color: #007700">(</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'test_print'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Before ...:
+d. lemon
+a. orange
+b. banana
+c. apple
+... and after:
+d. fruit: lemon
+a. fruit: orange
+b. fruit: banana
+c. fruit: apple
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="simpara">
+   参见 <span class="function"><a href="function.array-walk-recursive.html" class="function">array_walk_recursive()</a></span>，<span class="function"><a href="function.create-function.html" class="function">create_function()</a></span>，<span class="function"><a href="function.list.html" class="function">list()</a></span>，<a href="control-structures.foreach.html" class="link">foreach</a>，<span class="function"><a href="function.each.html" class="function">each()</a></span>，<span class="function"><a href="function.call-user-func-array.html" class="function">call_user_func_array()</a></span>，<span class="function"><a href="function.array-map.html" class="function">array_map()</a></span>
+   和<a href="language.pseudo-types.html#language.types.callback" class="link">callback</a> 类型的信息。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-walk-recursive.html">array_walk_recursive</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array.html">array</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

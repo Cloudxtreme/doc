@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>用正则表达式不区分大小写将字符串分割到数组中</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.split.html">split</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.sql-regcase.html">sql_regcase</a></div>
+ <div class="up"><a href="ref.regex.html">POSIX Regex 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.spliti" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">spliti</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.1, PHP 5)</p><p class="refpurpose"><span class="refname">spliti</span> &mdash; <span class="dc-title">用正则表达式不区分大小写将字符串分割到数组中</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.spliti-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>spliti</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$pattern</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$string</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$limit</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   本函数和 <span class="function"><a href="function.split.html" class="function">split()</a></span> 相同，只除了在匹配字母字符时忽略大小写的区别。
+  </p>
+  <p class="para">
+   本例用 &#039;a&#039; 做分隔符来分割一个字符串：
+   <div class="example" id="example-3752">
+    <p><b>Example #1 <span class="function"><b>spliti()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$string&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"aBBBaCCCADDDaEEEaGGGA"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$chunks&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">spliti&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">"a"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$string</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$chunks</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+  [0] =&gt;
+  [1] =&gt; BBB
+  [2] =&gt; CCC
+  [3] =&gt; DDD
+  [4] =&gt; EEEaGGGA
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><b>preg_spliti()</b></span>，<span class="function"><a href="function.split.html" class="function">split()</a></span>，<span class="function"><a href="function.explode.html" class="function">explode()</a></span>
+   和 <span class="function"><a href="function.implode.html" class="function">implode()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.split.html">split</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.sql-regcase.html">sql_regcase</a></div>
+ <div class="up"><a href="ref.regex.html">POSIX Regex 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

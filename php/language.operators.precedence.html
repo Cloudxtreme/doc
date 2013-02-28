@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运算符优先级</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.operators.html">运算符</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.operators.arithmetic.html">算术运算符</a></div>
+ <div class="up"><a href="language.operators.html">运算符</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="language.operators.precedence" class="sect1">
+   <h2 class="title">运算符优先级</h2>
+   <p class="para">
+    运算符优先级指定了两个表达式绑定得有多“紧密”。例如，表达式 <i>1 + 5 *
+    3</i> 的结果是 <i>16</i> 而不是 <i>18</i>
+    是因为乘号（“*”）的优先级比加号（“+”）高。必要时可以用括号来强制改变优先级。例如：<i>(1
+    + 5) * 3</i> 的值为 <i>18</i>。如果运算符优先级相同，则使用从左到右的左联顺序。
+   </p>
+   <p class="para">
+    下表从高到低列出了运算符的优先级。同一行中的运算符具有相同优先级，此时它们的结合方向决定求值顺序。
+    <table class="doctable table">
+     <caption><b>运算符优先级</b></caption>
+     
+      <thead valign="middle">
+       <tr valign="middle">
+        <th>结合方向</th>
+        <th>运算符</th>
+        <th>附加信息</th>
+       </tr>
+
+      </thead>
+
+      <tbody valign="middle" class="tbody">
+       <tr valign="middle">
+        <td align="left">非结合</td>
+        <td align="left">clone new</td>
+        <td align="left"><a href="language.oop5.cloning.html" class="link">clone</a> 和 <a href="language.oop5.basic.html#language.oop5.basic.new" class="link">new</a></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">[</td>
+        <td align="left"><span class="function"><a href="function.array.html" class="function">array()</a></span></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">非结合</td>
+        <td align="left">++ --</td>
+        <td align="left">
+         <a href="language.operators.increment.html" class="link">递增／递减运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">非结合</td>
+        <td align="left">~ - (int) (float) (string) (array) (object) (bool) @</td>
+        <td align="left">
+         <a href="language.types.html" class="link">类型</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">非结合</td>
+        <td align="left">instanceof</td>
+        <td align="left">
+         <a href="language.types.html" class="link">类型</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">右结合</td>
+        <td align="left">!</td>
+        <td align="left">
+         <a href="language.operators.logical.html" class="link">逻辑操作符</a>
+        </td>
+       </tr>
+      
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">* / %</td>
+        <td align="left">
+         <a href="language.operators.arithmetic.html" class="link">算术运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">+ - .</td>
+        <td align="left">
+         <a href="language.operators.arithmetic.html" class="link">算术运算符</a>和<a href="language.operators.string.html" class="link">字符串运算符</a></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">&lt;&lt; &gt;&gt;</td>
+        <td align="left">
+         <a href="language.operators.bitwise.html" class="link">位运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">非结合</td>
+        <td align="left">&lt; &lt;= &gt; &gt;= &lt;&gt;</td>
+        <td align="left">
+         <a href="language.operators.comparison.html" class="link">比较运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">非结合</td>
+        <td align="left">== != === !==</td>
+        <td align="left">
+         <a href="language.operators.comparison.html" class="link">比较运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">&amp;</td>
+        <td align="left">
+         <a href="language.operators.bitwise.html" class="link">位运算符</a>和<a href="language.references.html" class="link">引用</a></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">^</td>
+        <td align="left">
+         <a href="language.operators.bitwise.html" class="link">位运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">|</td>
+        <td align="left">
+         <a href="language.operators.bitwise.html" class="link">位运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">&amp;&amp;</td>
+        <td align="left">
+         <a href="language.operators.logical.html" class="link">逻辑运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">||</td>
+        <td align="left">
+         <a href="language.operators.logical.html" class="link">逻辑运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">? :</td>
+        <td align="left">
+         <a href="language.operators.comparison.html#language.operators.comparison.ternary" class="link">三元运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">右</td>
+        <td align="left">
+         = += -= *= /= .= %= &amp;= |= ^= &lt;&lt;= &gt;&gt;=
+        </td>
+        <td align="left">
+         <a href="language.operators.assignment.html" class="link">赋值运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">and</td>
+        <td align="left">
+         <a href="language.operators.logical.html" class="link">逻辑运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">xor</td>
+        <td align="left">
+         <a href="language.operators.logical.html" class="link">逻辑运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">or</td>
+        <td align="left">
+         <a href="language.operators.logical.html" class="link">逻辑运算符</a>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">左</td>
+        <td align="left">,</td>
+        <td align="left">多处用到</td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+   <p class="para">
+    左联表示表达式从左向右求值，右联相反。
+    <div class="example" id="example-101">
+     <p><b>Example #1 结合方向</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">3&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">3&nbsp;</span><span style="color: #007700">%&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;(3&nbsp;*&nbsp;3)&nbsp;%&nbsp;5&nbsp;=&nbsp;4<br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">true&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;(true&nbsp;?&nbsp;0&nbsp;:&nbsp;true)&nbsp;?&nbsp;1&nbsp;:&nbsp;2&nbsp;=&nbsp;2<br /><br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">+=&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;$a&nbsp;=&nbsp;($b&nbsp;+=&nbsp;3)&nbsp;-&gt;&nbsp;$a&nbsp;=&nbsp;5,&nbsp;$b&nbsp;=&nbsp;5<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+    使用括号可以增强代码的可读性。
+   </p>
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     尽管 <i>=</i> 比其它大多数的运算符的优先级低，PHP
+     仍旧允许类似如下的表达式：<i>if (!$a = foo())</i>，在此例中
+     <i>foo()</i> 的返回值被赋给了 <var class="varname"><var class="varname">$a</var></var>。
+    </p>
+   </p></blockquote>
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.operators.html">运算符</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.operators.arithmetic.html">算术运算符</a></div>
+ <div class="up"><a href="language.operators.html">运算符</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

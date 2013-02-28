@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>根据区域设置格式化本地时间／日期</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.mktime.html">mktime</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.strptime.html">strptime</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.strftime" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">strftime</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">strftime</span> &mdash; <span class="dc-title">根据区域设置格式化本地时间／日期</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.strftime-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>strftime</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$format</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timestamp</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   返回用给定的格式字串对给出的 <i><tt class="parameter">timestamp</tt></i>
+   进行格式输出后的字符串。如果没有给出时间戳则用当前的本地时间。月份和星期几以及其它和语言有关的字符串写法和用
+   <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span> 设定的当前的区域有关。
+  </p>
+  <p class="para">
+   格式字串能识别下列转换标记：
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <span class="simpara">
+      %a - 当前区域星期几的简写
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %A - 当前区域星期几的全称
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %b - 当前区域月份的简写
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %B - 当前区域月份的全称
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %c - 当前区域首选的日期时间表达
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %C - 世纪值（年份除以 100 后取整，范围从 00 到 99）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %d - 月份中的第几天，十进制数字（范围从 01 到 31）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %D - 和 %m/%d/%y 一样
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %e - 月份中的第几天，十进制数字，一位的数字前会加上一个空格（范围从 &#039; 1&#039; 到 &#039;31&#039;）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %g - 和 %G 一样，但是没有世纪
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %G - 4 位数的年份，符合 ISO 星期数（参见
+      %V）。和 %V 的格式和值一样，只除了如果 ISO
+      星期数属于前一年或者后一年，则使用那一年。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %h - 和 %b 一样
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %H - 24 小时制的十进制小时数（范围从 00 到 23）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %I - 12 小时制的十进制小时数（范围从 00 到 12）
+    </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %j - 年份中的第几天，十进制数（范围从  001 到 366）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %m - 十进制月份（范围从 01 到 12）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %M - 十进制分钟数
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %n - 换行符
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %p - 根据给定的时间值为 `am&#039; 或 `pm&#039;，或者当前区域设置中的相应字符串
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %r - 用 a.m. 和 p.m. 符号的时间
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %R - 24 小时符号的时间
+     </span>
+     </li>
+    <li class="listitem">
+     <span class="simpara">
+      %S - 十进制秒数
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %t - 制表符
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %T - 当前时间，和 %H:%M:%S 一样
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %u - 星期几的十进制数表达 [1,7]，1 表示星期一
+     </span>
+     <div class="warning"><b class="warning">Warning</b>
+      <p class="simpara">
+       尽管 ISO 9889:1999（当前的 C 标准）明确指出一周从星期一开始，但是
+       Sun Solaris 的一周似乎从星期天开始并作为 1。
+      </p>
+     </div>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %U - 本年的第几周，从第一周的第一个星期天作为第一天开始
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %V - 本年第几周的 ISO 8601:1988 格式，范围从 01 到 53，第
+      1 周是本年第一个至少还有 4 天的星期，星期一作为每周的第一天。（用
+      %G 或者 %g 作为指定时间戳相应周数的年份组成。）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %W - 本年的第几周数，从第一周的第一个星期一作为第一天开始
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %w - 星期中的第几天，星期天为 0
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %x - 当前区域首选的时间表示法，不包括时间
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %X - 当前区域首选的时间表示法，不包括日期
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %y - 没有世纪数的十进制年份（范围从 00 到 99）
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %Y - 包括世纪数的十进制年份
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %Z 或 %z - 时区名或缩写
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      %% - 文字上的 `%&#039; 字符
+     </span>
+    </li>
+   </ul>
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     可能不是所有的转换标记都被 C 库文件支持，这种情况下 PHP
+     的 <span class="function"><b>strftime()</b></span>
+     也不支持。此外，不是所有的平台都支持负的时间戳，因此日期的范围可能限定在不早于
+     Unix 纪元。这意味着例如
+     %e, %T，%R 和 %D（可能更多）以及早于
+     <i>Jan 1, 1970</i> 的时间在 Windows，一些 Linux
+     发行版本，以及其它几个操作系统中无效。对于 Windows
+     系统，所支持的转换标记可在
+     <a href="http://msdn.microsoft.com/en-us/library/fe06s4ak.aspx" class="link external">&raquo;&nbsp;<acronym title="Microsoft Developer Network">MSDN</acronym> 网站</a>找到。
+    </p>
+   </p></blockquote>
+   <div class="example" id="example-604">
+    <p><b>Example #1 <span class="function"><b>strftime()</b></span> 区域的例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />setlocale</span><span style="color: #007700">(</span><span style="color: #0000BB">LC_TIME</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"C"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%A"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">setlocale</span><span style="color: #007700">(</span><span style="color: #0000BB">LC_TIME</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"fi_FI"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"&nbsp;in&nbsp;Finnish&nbsp;is&nbsp;%A,"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">setlocale</span><span style="color: #007700">(</span><span style="color: #0000BB">LC_TIME</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"fr_FR"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"&nbsp;in&nbsp;French&nbsp;%A&nbsp;and"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">setlocale</span><span style="color: #007700">(</span><span style="color: #0000BB">LC_TIME</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"de_DE"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"&nbsp;in&nbsp;German&nbsp;%A.\n"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   本例在你的系统中安装有各自的区域设置后才能工作。
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <span class="simpara">
+     %G 和 %V，如果数字编号系统未能充分理解，基于 ISO 8601:1988
+     的星期数可能得出未预期的结果。见上面的 %V 和以下的例子。
+    </span>
+   </p></blockquote>
+    <div class="example" id="example-605">
+    <p><b>Example #2 ISO 8601:1988 week number example</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;December&nbsp;2002&nbsp;/&nbsp;January&nbsp;2003<br />ISOWk&nbsp;&nbsp;M&nbsp;&nbsp;&nbsp;Tu&nbsp;&nbsp;W&nbsp;&nbsp;&nbsp;Thu&nbsp;F&nbsp;&nbsp;&nbsp;Sa&nbsp;&nbsp;Su<br />-----&nbsp;----------------------------<br />51&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16&nbsp;&nbsp;17&nbsp;&nbsp;18&nbsp;&nbsp;19&nbsp;&nbsp;20&nbsp;&nbsp;21&nbsp;&nbsp;22<br />52&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;24&nbsp;&nbsp;25&nbsp;&nbsp;26&nbsp;&nbsp;27&nbsp;&nbsp;28&nbsp;&nbsp;29<br />1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30&nbsp;&nbsp;31&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5<br />2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;10&nbsp;&nbsp;11&nbsp;&nbsp;12<br />3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13&nbsp;&nbsp;14&nbsp;&nbsp;15&nbsp;&nbsp;16&nbsp;&nbsp;17&nbsp;&nbsp;18&nbsp;&nbsp;19&nbsp;&nbsp;&nbsp;*/<br /><br />//&nbsp;Outputs:&nbsp;12/28/2002&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;52,2002,2002<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"12/28/2002&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"12/28/2002"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;Outputs:&nbsp;12/30/2002&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;1,2003,2002<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"12/30/2002&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"12/30/2002"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;Outputs:&nbsp;1/3/2003&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;1,2003,2003<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"1/3/2003&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"1/3/2003"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;Outputs:&nbsp;1/10/2003&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;2,2003,2003<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"1/10/2003&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"1/10/2003"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /><br /><br /></span><span style="color: #FF8000">/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;December&nbsp;2004&nbsp;/&nbsp;January&nbsp;2005<br />ISOWk&nbsp;&nbsp;M&nbsp;&nbsp;&nbsp;Tu&nbsp;&nbsp;W&nbsp;&nbsp;&nbsp;Thu&nbsp;F&nbsp;&nbsp;&nbsp;Sa&nbsp;&nbsp;Su<br />-----&nbsp;----------------------------<br />51&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13&nbsp;&nbsp;14&nbsp;&nbsp;15&nbsp;&nbsp;16&nbsp;&nbsp;17&nbsp;&nbsp;18&nbsp;&nbsp;19<br />52&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20&nbsp;&nbsp;21&nbsp;&nbsp;22&nbsp;&nbsp;23&nbsp;&nbsp;24&nbsp;&nbsp;25&nbsp;&nbsp;26<br />53&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;27&nbsp;&nbsp;28&nbsp;&nbsp;29&nbsp;&nbsp;30&nbsp;&nbsp;31&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;2<br />1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;9<br />2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10&nbsp;&nbsp;11&nbsp;&nbsp;12&nbsp;&nbsp;13&nbsp;&nbsp;14&nbsp;&nbsp;15&nbsp;&nbsp;16&nbsp;&nbsp;&nbsp;*/<br /><br />//&nbsp;Outputs:&nbsp;12/23/2004&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;52,2004,2004<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"12/23/2004&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"12/23/2004"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;Outputs:&nbsp;12/31/2004&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;53,2004,2004<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"12/31/2004&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"12/31/2004"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;Outputs:&nbsp;1/2/2005&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;53,2004,2005<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"1/2/2005&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"1/2/2005"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;Outputs:&nbsp;1/3/2005&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;1,2005,2005<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"1/3/2005&nbsp;-&nbsp;%V,%G,%Y&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strftime</span><span style="color: #007700">(</span><span style="color: #DD0000">"%V,%G,%Y"</span><span style="color: #007700">,</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"1/3/2005"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span>，<span class="function"><a href="function.mktime.html" class="function">mktime()</a></span>，<span class="function"><a href="function.strptime.html" class="function">strptime()</a></span>
+   以及 <a href="http://www.opengroup.org/onlinepubs/007908799/xsh/strftime.html" class="link external">&raquo;&nbsp;Open Group specification of
+   <span class="function"><b>strftime()</b></span></a>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.mktime.html">mktime</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.strptime.html">strptime</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

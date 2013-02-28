@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>以 C 语言风格使用反斜线转义字符串中的字符</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.strings.html">字符串函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.addslashes.html">addslashes</a></div>
+ <div class="up"><a href="ref.strings.html">字符串函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.addcslashes" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">addcslashes</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">addcslashes</span> &mdash; <span class="dc-title">以 C 语言风格使用反斜线转义字符串中的字符</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.addcslashes-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>addcslashes</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$str</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$charlist</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   返回字符串，该字符串在属于参数 <i><tt class="parameter">charlist</tt></i>
+   列表中的字符前都加上了反斜线。如果 <i><tt class="parameter">charlist</tt></i>
+   中包含有 <i>\n</i>，<i>\r</i>
+   等字符，将以 C 语言风格转换，而其它非字母数字且 ASCII 码低于 32 以及高于 126 
+   的字符均转换成使用八进制表示。
+  </p>
+  <p class="para">
+   当选择对字符 0，a，b，f，n，r，t
+   和 v 进行转义时需要小心，它们将被转换成
+   \0，\a，\b，\f，\n，\r，\t 和 
+   \v。在 PHP 中，只有 \0（NULL），\r（回车符），\n（换行符）和
+   \t（制表符）是预定义的转义序列， 而在
+   C 语言中，上述的所有转换后的字符都是预定义的转义序列。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">charlist</tt></i> 参数，如“\0..\37”，将转义所有
+   ASCII 码介于 0 和 31 之间的字符。
+   <div class="example" id="example-3754">
+    <p><b>Example #1 <span class="function"><b>addcslashes()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$escaped&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">addcslashes</span><span style="color: #007700">(</span><span style="color: #0000BB">$not_escaped</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"\0..\37!@\177..\377"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   当定义 charlist
+   参数中的字符序列时，需要确实知道介于自己设置的开始及结束范围之内的都是些什么字符。
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">addcslashes</span><span style="color: #007700">(</span><span style="color: #DD0000">'foo[&nbsp;]'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'A..z'</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;输出：\f\o\o\[&nbsp;\]<br />//&nbsp;所有大小写字母均被转义<br />//&nbsp;...&nbsp;但&nbsp;[\]^_`&nbsp;以及分隔符、换行符、回车符等也一并被转义了。<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   另外，如果设置范围中的结束字符 ASCII 
+   码高于开始字符，则不会创建范围，只是将开始字符、结束字符以及其间的字符逐个转义。可使用
+   <span class="function"><a href="function.ord.html" class="function">ord()</a></span> 函数获取字符的 ASCII 码值。
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">addcslashes</span><span style="color: #007700">(</span><span style="color: #DD0000">"zoo['.']"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'z..A'</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;输出：\zoo['\.']<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   参见 
+   <span class="function"><a href="function.stripcslashes.html" class="function">stripcslashes()</a></span>，<span class="function"><a href="function.stripslashes.html" class="function">stripslashes()</a></span>，<span class="function"><a href="function.addslashes.html" class="function">addslashes()</a></span>，<span class="function"><a href="function.htmlspecialchars.html" class="function">htmlspecialchars()</a></span>
+   和 <span class="function"><a href="function.quotemeta.html" class="function">quotemeta()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.strings.html">字符串函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.addslashes.html">addslashes</a></div>
+ <div class="up"><a href="ref.strings.html">字符串函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

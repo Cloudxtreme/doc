@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回数组中所有的键名</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-key-exists.html">array_key_exists</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-map.html">array_map</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-keys" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_keys</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">array_keys</span> &mdash; <span class="dc-title">返回数组中所有的键名</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.array-keys-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>array_keys</b></span>
+       ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$input</tt></span>
+      [, <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$search_value</tt></span>
+      [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$strict</tt></span>
+     ]] )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>array_keys()</b></span> 返回 <i><tt class="parameter">input</tt></i>
+     数组中的数字或者字符串的键名。
+    </p>
+    <p class="para">
+     如果指定了可选参数 <i><tt class="parameter">search_value</tt></i>，则只返回该值的键名。否则
+     <i><tt class="parameter">input</tt></i> 数组中的所有键名都会被返回。自
+     PHP 5 起，可以用 <i><tt class="parameter">strict</tt></i> 参数来进行全等比较（===）。
+    </p>
+    <p class="para">
+     <div class="example" id="example-3885">
+      <p><b>Example #1 <span class="function"><b>array_keys()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">100</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"color"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_keys</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">$array&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_keys</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">$array&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"color"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"size"&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(</span><span style="color: #DD0000">"small"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"medium"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"large"</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_keys</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上例程会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; 0
+    [1] =&gt; color
+)
+Array
+(
+    [0] =&gt; 0
+    [1] =&gt; 3
+    [2] =&gt; 4
+)
+Array
+(
+    [0] =&gt; color
+    [1] =&gt; size
+)
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.array-values.html" class="function">array_values()</a></span> 和 <span class="function"><a href="function.array-key-exists.html" class="function">array_key_exists()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-key-exists.html">array_key_exists</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-map.html">array_map</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

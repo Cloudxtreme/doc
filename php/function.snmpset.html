@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置一个 SNMP 对象</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.snmprealwalk.html">snmprealwalk</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.snmpwalk.html">snmpwalk</a></div>
+ <div class="up"><a href="ref.snmp.html">SNMP 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.snmpset" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">snmpset</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">snmpset</span> &mdash; <span class="dc-title">设置一个 SNMP 对象</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.snmpset-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>snmpset</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$hostname</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$community</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$object_id</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$type</tt></span>
+   , <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$value</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timeout</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$retries</tt></span>
+  ]] )</div>
+
+
+  <p class="para rdfs-comment">
+   设置指定的 SNMP 对象的值，成功返回 <b><tt>TRUE</tt></b>，错误则返回 <b><tt>FALSE</tt></b>。
+  </p>
+
+  <p class="para">
+   函数 <span class="function"><b>snmpset()</b></span> 用于设置由
+   <i><tt class="parameter">object_id</tt></i> 指定的 SNMP
+   对象的值。<i><tt class="parameter">hostname</tt></i> 
+   指定 SNMP 代理，而 <i><tt class="parameter">community</tt></i>
+   参数指定具有读权限的域。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.snmprealwalk.html">snmprealwalk</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.snmpwalk.html">snmpwalk</a></div>
+ <div class="up"><a href="ref.snmp.html">SNMP 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

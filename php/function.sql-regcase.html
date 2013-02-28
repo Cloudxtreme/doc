@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>产生用于不区分大小的匹配的正则表达式</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.spliti.html">spliti</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="book.ssdeep.html">ssdeep</a></div>
+ <div class="up"><a href="ref.regex.html">POSIX Regex 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.sql-regcase" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">sql_regcase</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">sql_regcase</span> &mdash; <span class="dc-title">产生用于不区分大小的匹配的正则表达式</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.sql-regcase-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>sql_regcase</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$string</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   返回与 <i><tt class="parameter">string</tt></i>
+   相匹配的正则表达式，不论大小写字母。返回的表达式是将
+   <i><tt class="parameter">string</tt></i>
+   中的每个字母字符转换为方括号表达式，该方括号表达式包含了该字母的大小写形式。其它字符保留不变。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3753">
+    <p><b>Example #1 <span class="function"><b>sql_regcase()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">sql_regcase&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">"Foo&nbsp;-&nbsp;bar."</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+[Ff][Oo][Oo] - [Bb][Aa][Rr].
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   可以用于在仅支持区分大小写正则表达式的产品中完成不区分大小写的模式匹配。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.spliti.html">spliti</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="book.ssdeep.html">ssdeep</a></div>
+ <div class="up"><a href="ref.regex.html">POSIX Regex 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回字符串的子串</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.substr-replace.html">substr_replace</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.trim.html">trim</a></div>
+ <div class="up"><a href="ref.strings.html">字符串函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.substr" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">substr</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">substr</span> &mdash; <span class="dc-title">返回字符串的子串</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.substr-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>substr</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$string</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$start</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$length</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   返回字符串 <i><tt class="parameter">string</tt></i> 由 <i><tt class="parameter">start</tt></i> 和 <i><tt class="parameter">length</tt></i> 参数指定的子字符串。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.substr-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">string</tt></i></span>
+     <dd>
+
+      <p class="para">
+       输入字符串。
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">start</tt></i></span>
+     <dd>
+
+      <p class="para">
+	   如果 <i><tt class="parameter">start</tt></i> 是非负数，返回的字符串将从 <i><tt class="parameter">string</tt></i> 的 <i><tt class="parameter">start</tt></i> 位置开始，从 0 开始计算。例如，在字符串 “<i>abcdef</i>” 中，在位置 <i>0</i> 的字符是 “<i>a</i>”，位置 <i>2</i> 的字符串是 “<i>c</i>” 等等。
+      </p>
+      <p class="para">
+	   如果 <i><tt class="parameter">start</tt></i> 是负数，返回的字符串将从 <i><tt class="parameter">string</tt></i> 结尾处向前数第 <i><tt class="parameter">start</tt></i> 个字符开始。
+      </p>
+      <p class="para">
+	   如果 <i><tt class="parameter">string</tt></i> 的长度小于或等于 <i><tt class="parameter">start</tt></i>，将返回 <b><tt>FALSE</tt></b>。
+      </p>
+      <p class="para">
+       <div class="example" id="example-3850">
+        <p><b>Example #1 使用负数 <i><tt class="parameter">start</tt></i></b></p>
+        <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$rest&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">"abcdef"</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;返回&nbsp;"f"<br /></span><span style="color: #0000BB">$rest&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">"abcdef"</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">2</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;返回&nbsp;"ef"<br /></span><span style="color: #0000BB">$rest&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">"abcdef"</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">3</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;返回&nbsp;"d"<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+        </div>
+
+       </div>
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">length</tt></i></span>
+     <dd>
+
+      <p class="para">
+	   如果提供了正数的 <i><tt class="parameter">length</tt></i>，返回的字符串将从 <i><tt class="parameter">start</tt></i> 处开始最多包括 <i><tt class="parameter">length</tt></i> 个字符（取决于 <i><tt class="parameter">string</tt></i> 的长度）。
+      </p>
+      <p class="para">
+	   如果提供了负数的 <i><tt class="parameter">length</tt></i>，那么 <i><tt class="parameter">string</tt></i> 末尾处的许多字符将会被漏掉（若 <i><tt class="parameter">start</tt></i> 是负数则从字符串尾部算起）。如果 <i><tt class="parameter">start</tt></i> 不在这段文本中，那么将返回一个空字符串。
+      </p>
+      <p class="para">
+	   如果提供了值为 <i>0</i>，<b><tt>FALSE</tt></b> 或 <b><tt>NULL</tt></b> 的 <i><tt class="parameter">length</tt></i>，那么将返回一个空字符串。
+      </p>
+      <p class="para">
+	   如果没有提供 <i><tt class="parameter">length</tt></i>，返回的子字符串将从 <i><tt class="parameter">start</tt></i> 位置开始直到字符串结尾。
+      </p>
+      <div class="example" id="example-3851">
+       <p><b>Example #2 使用负数 <i><tt class="parameter">length</tt></i></b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$rest&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">"abcdef"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;返回&nbsp;"abcde"<br /></span><span style="color: #0000BB">$rest&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">"abcdef"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;返回&nbsp;"cde"<br /></span><span style="color: #0000BB">$rest&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">"abcdef"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">4</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">4</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;返回&nbsp;""<br /></span><span style="color: #0000BB">$rest&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">"abcdef"</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">3</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;返回&nbsp;"de"<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.substr-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回提取的子字符串， 或者在失败时返回 <b><tt>FALSE</tt></b>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.substr-examples">
+  <h3 class="title">范例</h3>
+  <p class="para">
+   <div class="example" id="example-3852">
+    <p><b>Example #3 <span class="function"><b>substr()</b></span> 基本用法</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">'abcdef'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;bcdef<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">'abcdef'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;bcd<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">'abcdef'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">4</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;abcd<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">'abcdef'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">8</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;abcdef<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">'abcdef'</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;f<br /><br />//&nbsp;访问字符串中的单个字符<br />//&nbsp;也可以使用中括号<br /></span><span style="color: #0000BB">$string&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'abcdef'</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #0000BB">$string</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;a<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$string</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;d<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$string</span><span style="color: #007700">[</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$string</span><span style="color: #007700">)-</span><span style="color: #0000BB">1</span><span style="color: #007700">];&nbsp;</span><span style="color: #FF8000">//&nbsp;f<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>   
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.substr-errors">
+  <h3 class="title">错误/异常</h3>
+  <p class="para">
+   错误时返回 <b><tt>FALSE</tt></b>。
+   <div class="example" id="example-3853">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">));&nbsp;</span><span style="color: #FF8000">//&nbsp;bool(false)<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>   
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.substr-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.strrchr.html" class="function" rel="rdfs-seeAlso">strrchr()</a> - 查找指定字符在字符串中的最后一次出现</span></li>
+    <li class="member"><span class="function"><a href="function.substr-replace.html" class="function" rel="rdfs-seeAlso">substr_replace()</a> - 替换字符串的子串</span></li>
+    <li class="member"><span class="function"><a href="function.preg-match.html" class="function" rel="rdfs-seeAlso">preg_match()</a> - 执行一个正则表达式匹配</span></li>
+    <li class="member"><span class="function"><a href="function.trim.html" class="function" rel="rdfs-seeAlso">trim()</a> - 去除字符串首尾处的空白字符（或者其他字符）</span></li>
+    <li class="member"><span class="function"><a href="function.mb-substr.html" class="function" rel="rdfs-seeAlso">mb_substr()</a> - Get part of string</span></li>
+    <li class="member"><span class="function"><a href="function.wordwrap.html" class="function" rel="rdfs-seeAlso">wordwrap()</a> - 打断字符串为指定数量的字串</span></li>
+    <li class="member"><a href="language.types.string.html#language.types.string.substr" class="link">字符串访问和修改</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.substr-replace.html">substr_replace</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.trim.html">trim</a></div>
+ <div class="up"><a href="ref.strings.html">字符串函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,694 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>字符串</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.types.float.html">浮点型</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.types.array.html">数组</a></div>
+ <div class="up"><a href="language.types.html">类型</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="language.types.string" class="sect1">
+ <h2 class="title">字符串</h2>
+
+ 
+ <p class="para">
+  一个<span class="type"><span class="type 字符串">字符串</span></span> 就是由一系列的字符组成，因此，一个字符就是一个字节。这就是说，一个字节只能有256种不同的变化，这也暗示了PHP无
+法原生支持Unicode 。 更多信息可参考函数
+  <span class="function"><a href="function.utf8-encode.html" class="function">utf8_encode()</a></span>和 <span class="function"><a href="function.utf8-decode.html" class="function">utf8_decode()</a></span>。
+ </p>
+
+ <blockquote class="note"><p><b class="note">Note</b>: 
+  <span class="simpara">
+    一个很长的<span class="type"><span class="type 字符串">字符串</span></span>是没有问题的，PHP对于<span class="type"><span class="type 字符串">字符串</span></span>; 而对字符串长度的限制只和运行PHP程序的该台计
+算机的内存大小有关。
+  </span>
+ </p></blockquote>
+
+ <div class="sect2" id="language.types.string.syntax">
+  <h3 class="title">语法</h3>
+
+  <p class="para">
+   一个<span class="type"><span class="type 字符串">字符串</span></span> 通过下面的4种方法来定义：
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <a href="language.types.string.html#language.types.string.syntax.single" class="link">单引号</a>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <a href="language.types.string.html#language.types.string.syntax.double" class="link">双引号</a>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <a href="language.types.string.html#language.types.string.syntax.heredoc" class="link">heredoc 语法结构</a>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <a href="language.types.string.html#language.types.string.syntax.nowdoc" class="link">nowdoc 语法结构</a>
+     (自PHP 5.3.0以后)
+    </span>
+   </li>
+  </ul>
+
+  <div class="sect3" id="language.types.string.syntax.single">
+   <h4 class="title">单引号</h4>
+
+   <p class="para">
+    定义一个<span class="type"><span class="type 字符串">字符串</span></span> 的最简单的方法是用单引号把它包围起来 (标点符号 <i>&#039;</i>)。
+   </p>
+
+   <p class="para">
+    如果想要输出一个单引号，需在它的前面加个反斜线 (<i>\</i>)。在单引号前或在<span class="type"><span class="type 字符串">字符串</span></span>的结尾处
+想要输出反斜线，输入两条 (<i>\\</i>)。注意，如果在任何其它的字符前加了反斜线，反斜线将会被直接输出。
+   </p>
+
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <span class="simpara">
+     不像<a href="language.types.string.html#language.types.string.syntax.double" class="link">双引号</a>
+     和<a href="language.types.string.html#language.types.string.syntax.heredoc" class="link">heredoc</a>语法结构，
+在单引号<span class="type"><span class="type 字符串">字符串</span></span>中的<a href="language.variables.html" class="link">变量</a> 和特殊含义的字符将 
+<em class="emphasis">不会</em> 被替换。
+    </span>
+   </p></blockquote>
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'this&nbsp;is&nbsp;a&nbsp;simple&nbsp;string'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;可以录入多行<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'You&nbsp;can&nbsp;also&nbsp;have&nbsp;embedded&nbsp;newlines&nbsp;in&nbsp;<br />strings&nbsp;this&nbsp;way&nbsp;as&nbsp;it&nbsp;is<br />okay&nbsp;to&nbsp;do'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;输出：&nbsp;Arnold&nbsp;once&nbsp;said:&nbsp;"I'll&nbsp;be&nbsp;back"<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'Arnold&nbsp;once&nbsp;said:&nbsp;"I\'ll&nbsp;be&nbsp;back"'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;输出：&nbsp;You&nbsp;deleted&nbsp;C:\*.*?<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'You&nbsp;deleted&nbsp;C:\\*.*?'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;输出：&nbsp;You&nbsp;deleted&nbsp;C:\*.*?<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'You&nbsp;deleted&nbsp;C:\*.*?'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;输出：&nbsp;This&nbsp;will&nbsp;not&nbsp;expand:&nbsp;\n&nbsp;a&nbsp;newline<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'This&nbsp;will&nbsp;not&nbsp;expand:&nbsp;\n&nbsp;a&nbsp;newline'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;输出：&nbsp;Variables&nbsp;do&nbsp;not&nbsp;$expand&nbsp;$either<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'Variables&nbsp;do&nbsp;not&nbsp;$expand&nbsp;$either'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+  </div>
+
+  <div class="sect3" id="language.types.string.syntax.double">
+   <h4 class="title">双引号</h4>
+
+   <p class="para">
+    如果<span class="type"><span class="type 字符串">字符串</span></span>是包围在双引号(&quot;)中， PHP将对一些特殊的字符进行解析：
+   </p>
+
+   <table class="doctable table">
+    <caption><b>Escaped characters</b></caption>
+
+    
+     <thead valign="middle">
+      <tr valign="middle">
+       <th>Sequence</th>
+       <th>Meaning</th>
+      </tr>
+
+     </thead>
+
+
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="left"><i>\n</i></td>
+       <td align="left">换行 (LF or 0x0A (10) in ASCII)</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\r</i></td>
+       <td align="left">回车 (CR or 0x0D (13) in ASCII)</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\t</i></td>
+       <td align="left">水平方向的 tab(HT or 0x09 (9) in ASCII)</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\v</i></td>
+       <td align="left">竖直方向的 tab (VT or 0x0B (11) in ASCII) (since PHP 5.2.5)</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\f</i></td>
+       <td align="left">换页 (FF or 0x0C (12) in ASCII) (since PHP 5.2.5)</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\\</i></td>
+       <td align="left">反斜线</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\$</i></td>
+       <td align="left">美金dollar标记</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\&quot;</i></td>
+       <td align="left">双引号</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\[0-7]{1,3}</i></td>
+       <td align="left">
+        符合该表达式顺序的字符串是一个八进制的字符
+       </td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>\x[0-9A-Fa-f]{1,2}</i></td>
+       <td align="left">
+        符合该表达式顺序的字符串是一个十六进制的字符
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+
+   <p class="para">
+    和单引号 <span class="type"><span class="type 字符串">字符串</span></span>一样， 如果输出上述之外的字符，反斜线会被打印出来。 PHP5.1.1以
+前，<i>\{$var}</i> 中的反斜线还不会被显示出来。
+   </p>
+
+   <p class="para">
+    用双引号定义的 <span class="type"><span class="type 字符串">字符串</span></span>最重要的特征是变量会被进行，更多信息见<a href="language.types.string.html#language.types.string.parsing" class="link">字符串解析</a>。
+   </p>
+  </div>
+  
+  <div class="sect3" id="language.types.string.syntax.heredoc">
+   <h4 class="title">Heredoc结构</h4>
+
+   <p class="simpara">
+    第三种定义<span class="type"><span class="type 字符串">字符串</span></span>的方法是用heredoc句法结构：<i>&lt;&lt;&lt;</i>。在该提示
+符后面，要定义个标识符，然后是一个新行。接下来是<span class="type"><span class="type 字符串">字符串</span></span> 本身，最后要用前面定义的标识符作为结束标志。
+   </p>
+
+   <p class="simpara">
+    结束时所引用的标识符<em class="emphasis">必须</em>在一行的开始位置， 而且，标识符的命名也要像其它标签一样遵守PHP的规则：只能包含
+字母、数字和下划线，并且不能用数字和下划线作为开头。
+   </p>
+   
+   <div class="warning"><b class="warning">Warning</b>
+    <p class="simpara">
+     要注意的是结束标识符这行除了 <em class="emphasis">可能</em>有一个分号(<i>;</i>)外，绝对不能包括
+其它字符。这意味着标识符<em class="emphasis">不能缩进</em>，分号的前后也不能有任何空白或tabs。更重要的是结束标识符的前面必须是个被本地
+操作系统认可的新行标签，比如在UNIX和Mac OS X系统中是<i>\n</i> ，而结束标识符（可能有个分号）的后面也必须跟个
+新行标签。
+    </p>
+
+    <p class="simpara">
+     如果不遵守该规则导致结束标签不“干净”，PHP将认为它不是结束标识符而继续寻找。如果在文件结束前也没有找到一个正确的结束标识符，PHP将会在最后一
+行产生一个句法错误。
+    </p>
+
+    <p class="para">
+    Heredocs结构不能用来初始化class，而从PHP 5.3以后，则该限制只能用在包含变量的情况下。
+    </p>
+    
+    <div class="example" id="example-70">
+     <p><b>Example #1 非法的示例</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;EOT<br /></span><span style="color: #DD0000">bar<br /></span><span style="color: #007700">EOT;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </div>
+
+   <p class="para">
+    Heredoc结构就象是没有使用双引号的双引号<span class="type"><span class="type 字符串">字符串</span></span>， 这就是说在heredoc结构中引号不用被替换，但是上文中列出的字符
+(<i>\n</i>等)也可使用。 变量将被替换，但在heredoc结构中<span class="type"><span class="type 字符串">字符串</span></span>表达复杂变量时，要格外小
+心。
+   </p>
+
+   <div class="example" id="example-71"> 
+    <p><b>Example #2 Heredoc结构的字符串示例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;EOD<br /></span><span style="color: #DD0000">Example&nbsp;of&nbsp;string<br />spanning&nbsp;multiple&nbsp;lines<br />using&nbsp;heredoc&nbsp;syntax.<br /></span><span style="color: #007700">EOD;<br /><br /></span><span style="color: #FF8000">/*&nbsp;含有变量的更复杂示例&nbsp;*/<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">foo<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span style="color: #0000BB">$foo</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span style="color: #0000BB">$bar</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Foo'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">bar&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'Bar1'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Bar2'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Bar3'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'MyName'</span><span style="color: #007700">;<br /><br />echo&nbsp;&lt;&lt;&lt;EOT<br /></span><span style="color: #DD0000">My&nbsp;name&nbsp;is&nbsp;"</span><span style="color: #0000BB">$name</span><span style="color: #DD0000">".&nbsp;I&nbsp;am&nbsp;printing&nbsp;some&nbsp;</span><span style="color: #0000BB">$foo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo</span><span style="color: #DD0000">.<br />Now,&nbsp;I&nbsp;am&nbsp;printing&nbsp;some&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$foo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">bar</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]}</span><span style="color: #DD0000">.<br />This&nbsp;should&nbsp;print&nbsp;a&nbsp;capital&nbsp;'A':&nbsp;\x41<br /></span><span style="color: #007700">EOT;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <p class="para">以上例程会输出：</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+My name is &quot;MyName&quot;. I am printing some Foo.
+Now, I am printing some Bar2.
+This should print a capital &#039;A&#039;: A</pre></div>
+   </div>
+
+   <p class="para">
+    也可以把Heredoc结构用在函数参数中来传输数据：
+   </p>
+
+   <div class="example" id="example-72"> 
+    <p><b>Example #3 Heredoc结构在参数中的示例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />var_dump</span><span style="color: #007700">(array(&lt;&lt;&lt;EOD<br /></span><span style="color: #DD0000">foobar!<br /></span><span style="color: #007700">EOD<br />));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <p class="para">
+   在PHP 5.3.0以后，也可以用Heredoc结构来初始化静态变量和类的属性和常量：
+   </p>
+
+   <div class="example" id="example-73"> 
+    <p><b>Example #4 使用Heredoc结构来初始化静态值</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;静态变量<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;LABEL<br /></span><span style="color: #DD0000">Nothing&nbsp;in&nbsp;here...<br /></span><span style="color: #007700">LABEL;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;类的常量、属性<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">foo<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;</span><span style="color: #0000BB">BAR&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;FOOBAR<br /></span><span style="color: #DD0000">Constant&nbsp;example<br /></span><span style="color: #007700">FOOBAR;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$baz&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;FOOBAR<br /></span><span style="color: #DD0000">Property&nbsp;example<br /></span><span style="color: #007700">FOOBAR;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <p class="para">
+    在PHP 5.3.0中还在Heredoc结构中用双引号来声明标志符：
+   </p>
+
+   <div class="example" id="example-74"> 
+    <p><b>Example #5 在heredoc结构中使用双引号</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;&lt;&lt;&lt;"FOOBAR"<br /></span><span style="color: #DD0000">Hello&nbsp;World!<br /></span><span style="color: #007700">FOOBAR;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     PHP4才引入了Heredoc结构。
+    </p>
+   </p></blockquote>
+
+  </div>
+  
+  <div class="sect3" id="language.types.string.syntax.nowdoc">
+   <h4 class="title">Nowdoc结构</h4>
+   
+   <p class="para">
+    就象heredoc结构类似于双引号字符串，Nowdoc结构是类似于单引号字符串的。Nowdoc结构很象heredoc结构，但是
+nowdoc<em class="emphasis">不进行解析操作</em> 。 这种结构很适合用在不需要进行转义的PHP代码和其它大段文本。与SGML的
+<i>&lt;![CDATA[ ]]&gt;</i> 结构是用来声明大段的不用解析的文本类似，nowdoc结构也有相同的特征。
+   </p>
+   
+   <p class="para">
+    一个nowdoc结构也用和heredocs结构一样的标记 <i>&lt;&lt;&lt;</i>， 但是跟在后面的标志符要用
+单引号括起来，就像<i>&lt;&lt;&lt;&#039;EOT&#039;</i>这样。heredocs结构的所有规则也同样适用于nowdoc结
+构，尤其是结束标志符的规则。
+   </p>
+   
+   <div class="example" id="example-75">
+    <p><b>Example #6 Nowdoc结构字符串示例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;'EOD'<br /></span><span style="color: #DD0000">Example&nbsp;of&nbsp;string<br />spanning&nbsp;multiple&nbsp;lines<br />using&nbsp;nowdoc&nbsp;syntax.<br /></span><span style="color: #007700">EOD;<br /><br /></span><span style="color: #FF8000">/*&nbsp;含有变量的更复杂的示例&nbsp;*/<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">foo<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$foo</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$bar</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Foo'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">bar&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'Bar1'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Bar2'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Bar3'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'MyName'</span><span style="color: #007700">;<br /><br />echo&nbsp;&lt;&lt;&lt;'EOT'<br /></span><span style="color: #DD0000">My&nbsp;name&nbsp;is&nbsp;"$name".&nbsp;I&nbsp;am&nbsp;printing&nbsp;some&nbsp;$foo-&gt;foo.<br />Now,&nbsp;I&nbsp;am&nbsp;printing&nbsp;some&nbsp;{$foo-&gt;bar[1]}.<br />This&nbsp;should&nbsp;not&nbsp;print&nbsp;a&nbsp;capital&nbsp;'A':&nbsp;\x41<br /></span><span style="color: #007700">EOT;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <p class="para">以上例程会输出：</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+My name is &quot;$name&quot;. I am printing some $foo-&gt;foo.
+Now, I am printing some {$foo-&gt;bar[1]}.
+This should not print a capital &#039;A&#039;: \x41</pre></div></div>
+   
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     不象 heredocs结构，nowdocs结构可以用在任意的静态数据环境中，最典型的示例是用来初始化类的属性或常量：
+    </p>
+    
+    <div class="example" id="example-76">
+     <p><b>Example #7 表态数据的示例</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;'EOT'<br /></span><span style="color: #DD0000">bar<br /></span><span style="color: #007700">EOT;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p></blockquote>
+
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     Nowdoc结构是在PHP 5.3.0中加入的。
+    </p>
+   </p></blockquote>
+
+  </div>
+
+  <div class="sect3" id="language.types.string.parsing">
+   <h4 class="title">变量解析</h4>
+
+   <p class="simpara">
+    当<span class="type"><span class="type 字符串">字符串</span></span>用双引号或heredoc结构定义时，其中的<a href="language.variables.html" class="link">变
+量</a>将会被解析。
+   </p>
+
+   <p class="simpara">
+    这里共有两种语法规则：一种<a href="language.types.string.html#language.types.string.parsing.simple" class="link">简单
+</a> 规则，一种<a href="language.types.string.html#language.types.string.parsing.complex" class="link">复杂</a>规
+则。简单的句法规则是最常用和最方便的， 它可以用最少的代码在一个<span class="type"><span class="type 字符串">字符串</span></span>中加入变量， <span class="type"><span class="type 数组">数组</span></span> 值，或  
+<span class="type"><span class="type 对象">对象</span></span>属性。
+   </p>
+
+   <p class="simpara">
+    复杂的句法规则是在PHP4以后加入的，被花括号包围的表达式是其明显标记。
+   </p>
+
+   <div class="sect4" id="language.types.string.parsing.simple">
+    <h5 class="title">简单句法规则</h5>
+
+    <p class="simpara">
+     当PHP解析器遇到一个美元符号 (<i>$</i>) ， 它会和其它很多解析器一样，去尽量形成一个合法的变量名。可以用花括
+号来明确变量名的界线。
+    </p>
+
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$beer&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Heineken'</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$beer</span><span style="color: #DD0000">'s&nbsp;taste&nbsp;is&nbsp;great"</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//有效；单引号"'"是非法的变量名组成元素<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"He&nbsp;drank&nbsp;some&nbsp;</span><span style="color: #0000BB">$beers</span><span style="color: #DD0000">"</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//无效;字母s是有效的变量名组成元素，但是这里的变量是$beer<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"He&nbsp;drank&nbsp;some&nbsp;</span><span style="color: #007700">${</span><span style="color: #0000BB">beer</span><span style="color: #007700">}</span><span style="color: #DD0000">s"</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"He&nbsp;drank&nbsp;some&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$beer</span><span style="color: #007700">}</span><span style="color: #DD0000">s"</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+    <p class="simpara">
+     类似的，一个 <span class="type"><span class="type 数组">数组</span></span> 索引或一个 <span class="type"><span class="type 对象">对象</span></span> 属性也可被解析。数组索引要用方括号
+(<i>]</i>) 来表示边际， 对象属性则是和上述的变量规则相同。
+    </p>
+
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;下面的例子是在字符串中引用数组<br />//&nbsp;当数组处于字符串外部时，要把数组的值用括号括起来且不要用花括号{&nbsp;}<br /><br />//&nbsp;显示所有错误<br /></span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">(</span><span style="color: #0000BB">E_ALL</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$fruits&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'strawberry'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'red'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'banana'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'yellow'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;有效；但是注意在字符串外面不能这样引用数组<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"A&nbsp;banana&nbsp;is&nbsp;</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">[</span><span style="color: #0000BB">banana</span><span style="color: #007700">]</span><span style="color: #DD0000">."</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"A&nbsp;banana&nbsp;is&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">[</span><span style="color: #DD0000">'banana'</span><span style="color: #007700">]}</span><span style="color: #DD0000">."</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效，但是PHP会先寻找常量banana<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"A&nbsp;banana&nbsp;is&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">[</span><span style="color: #0000BB">banana</span><span style="color: #007700">]}</span><span style="color: #DD0000">."</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;无效，要用花括号，这里将会产生一个解析错误<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"A&nbsp;banana&nbsp;is&nbsp;</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">[</span><span style="color: #DD0000">'banana']."</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"A&nbsp;banana&nbsp;is&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">[</span><span style="color: #DD0000">'banana'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">"."</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;square&nbsp;is&nbsp;</span><span style="color: #0000BB">$square</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">width</span><span style="color: #DD0000">&nbsp;meters&nbsp;broad."</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;无效，解决方法见复杂结构<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;square&nbsp;is&nbsp;</span><span style="color: #0000BB">$square</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">width00</span><span style="color: #DD0000">&nbsp;centimeters&nbsp;broad."</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+
+     </div>
+
+    </div>
+
+    <p class="simpara">
+     如果想要表达更复杂的结构，请用复杂句法规则。
+    </p>
+   </div>
+
+   <div class="sect4" id="language.types.string.parsing.complex">
+    <h5 class="title">复杂句法规则</h5>
+
+    <p class="simpara">
+     复杂句法规则不是结构复杂而命名，而是因为它可以使用复杂的表达式。
+    </p>
+
+    <p class="simpara">
+     任何想用在<span class="type"><span class="type 字符串">字符串</span></span>中标量变量，数组变量或对象属性都可使用这种方法。
+     只需简单地像在<span class="type"><span class="type 字符串">字符串</span></span>以外的地方那样写出表达式， 然后用花括号<i>{</i>和
+     <i>}</i>把它括起来。 由于 <i>{</i> 无法被转义，只有
+<i>$</i> 要紧挨着 <i>{</i>才会被认出来，可以用 
+<i>{\$</i> 来表达 <i>{$</i>。下面的示例可以更好的解释：
+    </p>
+
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;显示所有错误<br /></span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">(</span><span style="color: #0000BB">E_ALL</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$great&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'fantastic'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;无效，输出: This is { fantastic}<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;{&nbsp;</span><span style="color: #0000BB">$great</span><span style="color: #DD0000">}"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效，输出：&nbsp;This&nbsp;is&nbsp;fantastic<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$great</span><span style="color: #007700">}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;</span><span style="color: #007700">${</span><span style="color: #0000BB">great</span><span style="color: #007700">}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;square&nbsp;is&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$square</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">width</span><span style="color: #007700">}</span><span style="color: #DD0000">00&nbsp;centimeters&nbsp;broad."</span><span style="color: #007700">;&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;works:&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">4</span><span style="color: #007700">][</span><span style="color: #0000BB">3</span><span style="color: #007700">]}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;这是错误的表达式，因为就象$foo[bar]&nbsp;的格式不能在字符串以外的地方使用一样。<br />//&nbsp;换句话说，只有在PHP能找到常量foo&nbsp;的前提下才会正常工作；这里会产生一个E_NOTICE (undefined constant)级别的错误。<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;wrong:&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #0000BB">foo</span><span style="color: #007700">][</span><span style="color: #0000BB">3</span><span style="color: #007700">]}</span><span style="color: #DD0000">"</span><span style="color: #007700">;&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效，当在字符串中使用多重数组时，一定要用括号将它括起来<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;works:&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">][</span><span style="color: #0000BB">3</span><span style="color: #007700">]}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;works:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$arr</span><span style="color: #007700">[</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">][</span><span style="color: #0000BB">3</span><span style="color: #007700">];<br /><br />echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;works&nbsp;too:&nbsp;</span><span style="color: #007700">{</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">values</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">]-&gt;</span><span style="color: #0000BB">name</span><span style="color: #007700">}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br />echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;var&nbsp;named&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #DD0000">:&nbsp;</span><span style="color: #007700">{${</span><span style="color: #0000BB">$name</span><span style="color: #007700">}}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br />echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;var&nbsp;named&nbsp;by&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;getName():<br /></span><span style="color: #007700">{${</span><span style="color: #0000BB">getName</span><span style="color: #007700">()}}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br />echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;var&nbsp;named&nbsp;by&nbsp;the&nbsp;return&nbsp;value&nbsp;of<br />\$object-&gt;getName():&nbsp;</span><span style="color: #007700">{${</span><span style="color: #0000BB">$object</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getName</span><span style="color: #007700">()}}</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;无效，输出：&nbsp;This&nbsp;is&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;getName():&nbsp;{getName()}<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;is&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;getName():&nbsp;{getName()}"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+
+     </div>
+
+    </div>
+
+    <p class="para">
+     也可以在字符串中用变量来调用类的属性。
+    </p>
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'I&nbsp;am&nbsp;bar.'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'bar'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$baz&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'bar'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'baz'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'quux'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #007700">{</span><span style="color: #0000BB">$foo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">$bar</span><span style="color: #007700">}</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #007700">{</span><span style="color: #0000BB">$foo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">$baz</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]}</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   <p class="para">以上例程会输出：</p>
+   <div class="example-contents screen"><br />
+I am bar.<br />
+I am bar.<br />
+   </div>
+   </div>
+    
+    <blockquote class="note"><p><b class="note">Note</b>: 
+     <p class="para">
+      函数、行为、类的静态变量和类的常量只有在PHP 5以后才可在 <i>{$}</i> 中使用。然而，只有在用返回的值作为名
+称的变量存在的情况下才会进行处理，只单一使用花括号 (<i>{}</i>) 无法处理从函数或行为的返回值或从类的常量或静态变量的返
+回值。
+     </p>
+    </p></blockquote>
+
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;显示所有错误<br /></span><span style="color: #0000BB">error_reporting</span><span style="color: #007700">(</span><span style="color: #0000BB">E_ALL</span><span style="color: #007700">);<br /><br />class&nbsp;</span><span style="color: #0000BB">beers&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;</span><span style="color: #0000BB">softdrink&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'rootbeer'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;</span><span style="color: #0000BB">$ale&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'ipa'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$rootbeer&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'A&nbsp;&amp;&nbsp;W'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$ipa&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Alexander&nbsp;Keith\'s'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;有效，输出：&nbsp;I'd&nbsp;like&nbsp;an&nbsp;A&nbsp;&amp;&nbsp;W<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"I'd&nbsp;like&nbsp;an&nbsp;</span><span style="color: #007700">{${</span><span style="color: #0000BB">beers</span><span style="color: #007700">::</span><span style="color: #0000BB">softdrink</span><span style="color: #007700">}}</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;也有效，输出：&nbsp;I'd&nbsp;like&nbsp;an&nbsp;Alexander&nbsp;Keith's<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"I'd&nbsp;like&nbsp;an&nbsp;</span><span style="color: #007700">{${</span><span style="color: #0000BB">beers</span><span style="color: #007700">::</span><span style="color: #0000BB">$ale</span><span style="color: #007700">}}</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+   </div>
+  </div>
+  
+  <div class="sect3" id="language.types.string.substr">
+   <h4 class="title">存取和修改字符串中的字符</h4>
+
+   <p class="para">
+    <span class="type"><span class="type 字符串">字符串</span></span>中的字符可以通过一个以0为开始的，用类似<span class="type"><span class="type 数组">数组</span></span>结构中的方括号包含对应的数字来查找和修改，比如
+<var class="varname"><var class="varname">$str[42]</var></var>， 可以把 <span class="type"><span class="type 字符串">字符串</span></span>想像<span class="type"><span class="type 数组">数组</span></span> 。 函数
+<span class="function"><a href="function.substr.html" class="function">substr()</a></span> 和 <span class="function"><a href="function.substr-replace.html" class="function">substr_replace()</a></span>可以用来实现多于一个字符
+的情况。
+   </p>
+
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <span class="simpara">
+     <span class="type"><span class="type 字符串">字符串</span></span>为了同样的目的也可以用花括号，比如     <var class="varname"><var class="varname">$str{42}</var></var>，但是， 在
+PHP 5.3.0中不推荐使用这种格式，应该用方括号，就像     <var class="varname"><var class="varname">$str[42]</var></var>。
+    </span>
+   </p></blockquote>
+
+   <div class="warning"><b class="warning">Warning</b>
+    <p class="simpara">
+     方括号中的数字超出范围将会产生空白。非整数类型被转换成整数，非整数类型转变成整数，非法类型会产生一个
+<b><tt>E_NOTICE</tt></b>级别错误，负数在写入时会产生一个<b><tt>E_NOTICE</tt></b>，但读
+取的是空字符串。被指定的字符串只有第一个字符可用，空字符串用指定为空字节。下面为英文原文：
+     Writing to an out of range offset pads the string with spaces.
+     Non-integer types are converted to integer.
+     Illegal offset type emits <b><tt>E_NOTICE</tt></b>.
+     Negative offset emits <b><tt>E_NOTICE</tt></b> in write but reads
+empty string.
+     Only the first character of an assigned string is used.
+     Assigning empty string assigns NUL byte.
+    </p>
+   </div>
+
+   <div class="example" id="example-77">
+    <p><b>Example #8 Some string examples</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;取得字符串的第一个字符<br /></span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'This&nbsp;is&nbsp;a&nbsp;test.'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">];<br /><br /></span><span style="color: #FF8000">//&nbsp;取得字符串的第三个字符<br /></span><span style="color: #0000BB">$third&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br /><br /></span><span style="color: #FF8000">//&nbsp;取得字符串的最后一个字符<br /></span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'This&nbsp;is&nbsp;still&nbsp;a&nbsp;test.'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$last&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">[</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">)-</span><span style="color: #0000BB">1</span><span style="color: #007700">];&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;修改字符串的最后一个字符<br /></span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Look&nbsp;at&nbsp;the&nbsp;sea'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$str</span><span style="color: #007700">[</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">)-</span><span style="color: #0000BB">1</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #DD0000">'e'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     用 <i>[]</i> 或
+     <i>{}</i> 存取其它类型的变量只会返回 <b><tt>NULL</tt></b>.
+    </p>
+   </p></blockquote>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="language.types.string.useful-funcs">
+  <h3 class="title">有用的函数和操作符</h3>
+
+  <p class="para">
+   <span class="type"><span class="type 字符串">字符串</span></span>可以用&#039;.&#039; (点) 操作符连接起来， 注意 &#039;+&#039; (加号) 操作符 <em class="emphasis">没有</em> 
+这个功能。
+   更多信息参考 <a href="language.operators.string.html" class="link">字符串操作符</a> 。
+  </p>
+
+  <p class="para">
+   对于<span class="type"><span class="type 字符串">字符串</span></span> 的操作有很多有用的函数。
+  </p>
+
+  <p class="simpara">
+   可以参考 <a href="ref.strings.html" class="link">字符串函数</a> 了解大部分函数， 高级的查找&amp;替换功能可以参考
+<a href="ref.regex.html" class="link">正则表达式函数</a> 或 <a href="ref.pcre.html" class="link">Perl类型的正则
+表达式函数</a>。
+  </p>
+
+  <p class="simpara">
+   另外还有<a href="ref.url.html" class="link">URL字符串的函数</a>， 也有加密/解密字符串的函数。
+   (<a href="ref.mcrypt.html" class="link">mcrypt</a> 和
+   <a href="ref.mhash.html" class="link">mhash</a>).
+  </p>
+
+  <p class="simpara">
+   最后，可以参考 <a href="ref.ctype.html" class="link">字符类型函数</a>。
+  </p>
+ </div>
+
+ <div class="sect2" id="language.types.string.casting">
+  <h3 class="title">转换成字符串</h3>
+  
+  <p class="para">
+   一个值可以通过在其前面加上<i>(string)</i>或用<span class="function"><a href="function.strval.html" class="function">strval()</a></span>函数来转变成
+字符串。
+   在一个需要<span class="type"><span class="type 字符串">字符串</span></span>的表达式中，<span class="type"><span class="type 字符串">字符串</span></span>会自动转变，比如在使用函数
+<span class="function"><a href="function.echo.html" class="function">echo()</a></span> 或 <span class="function"><a href="function.print.html" class="function">print()</a></span> 时， 或在一个变量和一个 <span class="type"><span class="type 字符串
+">字符串
+</span></span>进行比较时，就会发生这种转变 <a href="language.types.html" class="link">类型</a> 和
+   <a href="language.types.type-juggling.html" class="link">类型转换</a> 可以更好的解释下面的事情，也可参考函
+数 <span class="function"><a href="function.settype.html" class="function">settype()</a></span> 。
+  </p>
+  
+  <p class="para">
+   一个<span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span> <b><tt>TRUE</tt></b> 值被转换成 <span class="type"><span class="type 字符串">字符串</span></span><i>&quot;1&quot;</i>。 
+<span class="type"><a href="language.types.boolean.html" class="type Boolean">Boolean</a></span> <b><tt>FALSE</tt></b> 被转换成<i>&quot;&quot;</i> (空的字符串)。 这种转变可以在
+<span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span> 和 <span class="type"><span class="type 字符串">字符串</span></span> 之间往返进行。
+  </p>
+
+  <p class="para"> 
+   一个 <span class="type"><span class="type 整数">整数</span></span> 或 <span class="type"><span class="type 浮点数">浮点数</span></span> 被转变为数字的字面样式的<span class="type"><span class="type 字符串">字符串</span></span>  (包括
+<span class="type"><span class="type 浮点数">浮点数</span></span>中的指数部分)，使用指数计数法的浮点数 (<i>4.1E+6</i>)也可转变。
+  </p>
+
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    在脚本场所(category LC_NUMERIC)定义了小数点，更多可以参考函数 <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span>。
+   </p>
+  </p></blockquote>
+
+  <p class="para">
+   <span class="type"><span class="type 数组">数组</span></span>转换成 <span class="type"><span class="type 字符串">字符串</span></span>
+   <i>&quot;Array&quot;</i>，因此， <span class="function"><a href="function.echo.html" class="function">echo()</a></span> 和 
+<span class="function"><a href="function.print.html" class="function">print()</a></span> c无法显示出该<span class="type"><span class="type 数组">数组</span></span>的值。如果显示一个数组值，可以用 
+<i>echo $arr[&#039;foo&#039;]</i>这种结构，更多内容见下文。
+  </p>
+
+  <p class="para">
+   在PHP 4中<span class="type"><span class="type 对象">对象</span></span>被转换成 <span class="type"><span class="type 字符串">字符串</span></span>
+   <i>&quot;Object&quot;</i>， 果为了调试原因需要打印出对象的值，方法见正文。为了得到对象的类的名称，可以用 
+<span class="function"><a href="function.get-class.html" class="function">get_class()</a></span> 函数。 在PHP5中， 可以用
+   <a href="language.oop5.magic.html" class="link">__toString</a> 。
+  </p>
+
+  <p class="para">
+   <span class="type"><span class="type 资源">资源</span></span>总会被转变成<i>&quot;Resource id #1&quot;</i>这种结构的 <span class="type"><span class="type 字符串
+">字符串
+</span></span>， 其中的 <i>1</i> 是PHP分配给该资源的独特数字。不用过多关注这种结构，它马上要转变了。为了得到一个
+<span class="type"><a href="language.types.resource.html" class="type resource">resource</a></span>类型，可以用函数   <span class="function"><a href="function.get-resource-type.html" class="function">get_resource_type()</a></span>。
+  </p>
+
+  <p class="para">
+   <b><tt>NULL</tt></b> 总是被转变成空的字符串。
+  </p>
+  
+  <p class="para">
+   如上面所说的，直接把<span class="type"><span class="type 数组">数组</span></span>，
+   <span class="type"><span class="type 对象">对象</span></span>或 <span class="type"><span class="type 资源">资源</span></span> 转换成 <span class="type"><span class="type 字符串">字符串</span></span> 不会得到超出其自身的更多信息。可以使用函数 
+<span class="function"><a href="function.print-r.html" class="function">print_r()</a></span> 和 <span class="function"><a href="function.var-dump.html" class="function">var_dump()</a></span> 列出这些类型的内容。
+  </p>
+  
+  <p class="para">
+   大部分的PHP值可以转变成 <span class="type"><span class="type 字符串">字符串</span></span>s 来长期储存，这被称作串行化，可以用函数
+   <span class="function"><a href="function.serialize.html" class="function">serialize()</a></span> 来实现。 如果PHP引擎设定支持
+   <a href="ref.wddx.html" class="link">WDDX</a> ， PHP值也可储存成XML格式。
+  </p>
+
+ </div>
+
+ <div class="sect2" id="language.types.string.conversion">
+  <h3 class="title">字符串转变成数字</h3>
+
+  <p class="simpara">
+   当一个<span class="type"><span class="type 字符串">字符串</span></span> 被用在了一个数字的环境中，结果和类型如下：
+  </p>
+
+  <p class="simpara">
+   如果<span class="type"><span class="type 字符串">字符串</span></span> 没有包含 &#039;.&#039;，&#039;e&#039;或&#039;E&#039; 并且数字值符合整数类型的限定 (   
+<b><tt>PHP_INT_MAX</tt></b>定义的)， 这个 <span class="type"><span class="type 字符串">字符串</span></span> 可被认定是一个 
+<span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>， 在其它情况下被认定为一个<span class="type"><a href="language.types.float.html" class="type float">float</a></span>。
+  </p>
+
+  <p class="para">
+   <span class="type"><span class="type 字符串">字符串</span></span>的开始部分给定了它的值，如果   <span class="type"><span class="type 字符串">字符串</span></span> 以合法的数字开始，这个数字可直接使用。 否则，值就
+是 0 (零)。 合法数值由符号，后面跟着一个或多个数字（可能有个小数点），再跟着可选的指数符号如&#039;e&#039; 或 &#039;E&#039;，后面跟着一个或多个数字。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #DD0000">"10.5"</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;float&nbsp;(11.5)<br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #DD0000">"-1.3e3"</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;float&nbsp;(-1299)<br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #DD0000">"bob-1.3e3"</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;integer&nbsp;(1)<br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #DD0000">"bob3"</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;integer&nbsp;(1)<br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #DD0000">"10&nbsp;Small&nbsp;Pigs"</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;integer&nbsp;(11)<br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">4&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #DD0000">"10.2&nbsp;Little&nbsp;Piggies"</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;float&nbsp;(14.2)<br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"10.0&nbsp;pigs&nbsp;"&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;float&nbsp;(11)<br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"10.0&nbsp;pigs&nbsp;"&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">1.0</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$foo&nbsp;is&nbsp;float&nbsp;(11)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+
+  <p class="simpara">
+   更多信息可以参考Unix手册中的strtod(3)。
+  </p>
+
+  <p class="para">
+   本节中的示例可以通过复制/粘贴到下面的代码中来显示：
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"\$foo==</span><span style="color: #0000BB">$foo</span><span style="color: #DD0000">;&nbsp;type&nbsp;is&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">gettype&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+
+  <p class="para">
+   不要想像在C语言中的那样，通过一个整数转换得到相应字符，使用函数 <span class="function"><a href="function.ord.html" class="function">ord()</a></span> 和 
+<span class="function"><a href="function.chr.html" class="function">chr()</a></span> 实现ASCII码和字符间的转换。
+  </p>
+
+ </div>
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.types.float.html">浮点型</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.types.array.html">数组</a></div>
+ <div class="up"><a href="language.types.html">类型</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

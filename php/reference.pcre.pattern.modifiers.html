@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>模式修饰符</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="reference.pcre.pattern.syntax.html">模式语法</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="reference.pcre.pattern.differences.html">与perl的不同之处</a></div>
+ <div class="up"><a href="pcre.pattern.html">PCRE模式</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="reference.pcre.pattern.modifiers" class="article">
+ <h1>模式修饰符</h1>
+
+ 
+  <p class="para">
+  下面列出了当前可用的PCRE修饰符. 括号中提到的名字是PCRE内部这些修饰符的名称.
+  模式修饰符中的空格,换行符会被忽略, 其他字符会导致错误.
+  </p>
+  <p class="para">
+   <blockquote class="blockquote">
+    <dl>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">i</em> (<i>PCRE_CASELESS</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       如果设置了这个修饰符, 模式中的字母会进行大小写不敏感匹配.
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">m</em> (<i>PCRE_MULTILINE</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       默认情况下, PCRE认为目标字符串是由单行字符组成的(然而实际上它可能会包含多行), 
+   &quot;行首&quot;元字符(^)仅匹配字符串的开始位置, 而&quot;行末&quot;元字符($)仅匹配字符串末尾, 
+   或者最后的换行符(除非设置了<em class="emphasis">D</em>修饰符). 这个行为和perl相同.
+       </span>
+       <span class="simpara">
+       当这个修饰符设置之后, &quot;行首&quot;和&quot;行末&quot;就会匹配目标字符串中任意换行符之前或之后, 另外,
+       还分别匹配目标字符串的最开始和最末尾位置. 这等同于perl的/m修饰符. 如果目标字符串
+       中没有&quot;\n&quot;字符, 或者模式中没有出现^或$, 设置这个修饰符不产生任何影响.
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">s</em> (<i>PCRE_DOTALL</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       如果设置了这个修饰符, 模式中的点号元字符匹配所有字符, 包含换行符. 如果没有这个
+       修饰符, 点号不匹配换行符. 这个修饰符等同于perl中的/s修饰符. 一个取反字符类比如
+       [^a]总是匹配换行符, 而不依赖于这个修饰符的设置.
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">x</em> (<i>PCRE_EXTENDED</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       如果设置了这个修饰符, 模式中的没有经过转义的或不在字符类中的空白数据字符总会被忽略, 
+       并且位于一个未转义的字符类外部的#字符和下一个换行符之间的字符也被忽略. 这个修饰符
+       等同于perl中的/x修饰符, 使被编译模式中可以包含注释. 注意: 这仅用于数据字符. 空白字符
+       还是不能在模式的特殊字符序列中出现, 比如序列(?(引入了一个条件子组(译注: 这种语法定义的
+       特殊字符序列中如果出现空白字符会导致编译错误. 比如(  ?(就会导致错误.).
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">e</em> (<i>PREG_REPLACE_EVAL</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       如果这个修饰符设置了, <span class="function"><a href="function.preg-replace.html" class="function">preg_replace()</a></span>在进行了对替换字符串的
+       后向引用替换之后, 将替换后的字符串作为php代码评估之行(eval函数方式), 并使用之行结果
+       作为实际参与替换的字符串. 单引号, 双引号, 反斜线(<i>\</i>)和NULL字符在
+       后向引用替换时会被用反斜线转义.
+       </span>
+       <div class="tip"><b class="tip">Tip</b>
+        <p class="para">
+        请确保<i><tt class="parameter">replacement</tt></i>参数由合法php代码字符串组成, 否则php将会
+       在<span class="function"><a href="function.preg-replace.html" class="function">preg_replace()</a></span>调用的行上 产生一个解释错误.
+        </p>
+       </div>
+       <blockquote class="note"><p><b class="note">Note</b>: 
+        <p class="para">
+        仅<span class="function"><a href="function.preg-replace.html" class="function">preg_replace()</a></span>使用此修饰符, 其他PCRE函数忽略此修饰符.
+        </p>
+       </p></blockquote>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">A</em> (<i>PCRE_ANCHORED</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       如果设置了这个修饰符, 模式被强制为&quot;锚定&quot;模式, 也就是说约束匹配使其仅从
+       目标字符串的开始位置搜索. 这个效果同样可以使用适当的模式构造出来, 并且
+       这也是perl种实现这种模式的唯一途径.
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">D</em> (<i>PCRE_DOLLAR_ENDONLY</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       如果这个修饰符被设置, 模式中的元字符美元符号仅仅匹配目标字符串的末尾. 如果这个修饰符
+       没有设置, 当字符串以一个换行符结尾时, 美元符号还会匹配该换行符(但不会匹配之前的任何换行符).
+   如果设置了修饰符<em class="emphasis">m</em>, 这个修饰符被忽略. 在perl中没有与此修饰符等同的修饰符.
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">S</em></span>
+      <dd>
+
+       <span class="simpara">
+       当一个模式需要多次使用的时候, 为了得到匹配速度的提升, 值得花费一些时间
+       对其进行一些额外的分析. 如果设置了这个修饰符, 这个额外的分析就会执行. 当前, 
+       这种对一个模式的分析仅仅适用于非锚定模式的匹配(即没有单独的固定开始字符).
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">U</em> (<i>PCRE_UNGREEDY</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       这个修饰符逆转了量词的&quot;贪婪&quot;模式. 使量词默认为非贪婪的, 通过量词后紧跟<i>?</i>
+       的方式可以使其成为贪婪的. 这和perl是不兼容的. 它同样可以使用
+       <a href="reference.pcre.pattern.syntax.html#regexp.reference.internal-options" class="link">模式内修饰符设置</a>
+       (<i>?U</i>)进行设置, 或者在量词后以问号标记其非贪婪(比如<i>.*?</i>).
+       </span>
+       <blockquote class="note"><p><b class="note">Note</b>: 
+        <p class="para">
+        在非贪婪模式, 通常不能匹配超过
+        <a href="pcre.configuration.html#ini.pcre.backtrack-limit" class="link">pcre.backtrack_limit</a>
+        的字符.
+        </p>
+       </p></blockquote>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">X</em> (<i>PCRE_EXTRA</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       这个修饰符打开了PCRE与perl不兼容的附件功能. 模式中的任意反斜线后就ingen一个
+       没有特殊含义的字符都会导致一个错误, 以此保留这些字符以保证向后兼容性. 默认
+       情况下, 在perl中, 反斜线紧跟一个没有特殊含义的字符被认为是该字符的原文.
+       当前没有其他特性由这个修饰符控制.
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">J</em> (<i>PCRE_INFO_JCHANGED</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       内部选项设置(?J)修改本地的<i>PCRE_DUPNAMES</i>选项. 允许子组重名.
+       (译注:只能通过内部选项设置, 外部的/J设置会产生错误.)
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">u</em> (<i>PCRE8</i>)</span>
+      <dd>
+
+       <span class="simpara">
+       此修正符打开一个与perl不兼容的附加功能. 模式字符串被认为是utf-8的. 这个修饰符
+       从unix版php 4.1.0或更高, win32版php 4.2.3开始可用. php 4.3.5开始检查模式的utf-8合法性.
+        This modifier turns on additional functionality of PCRE that
+        is incompatible with Perl. Pattern strings are treated as
+        UTF-8. This modifier is available from PHP 4.1.0 or greater
+        on Unix and from PHP 4.2.3 on win32.
+        UTF-8 validity of the pattern is checked since PHP 4.3.5.
+       </span>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </blockquote>
+  </p>
+</div>
+<hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="reference.pcre.pattern.syntax.html">模式语法</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="reference.pcre.pattern.differences.html">与perl的不同之处</a></div>
+ <div class="up"><a href="pcre.pattern.html">PCRE模式</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

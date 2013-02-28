@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>关闭一个 PostgreSQL 连接</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.pg-client-encoding.html">pg_client_encoding</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.pg-connect.html">pg_connect</a></div>
+ <div class="up"><a href="ref.pgsql.html">PostgreSQL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.pg-close" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">pg_close</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">pg_close</span> &mdash; <span class="dc-title">关闭一个 PostgreSQL 连接</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.pg-close-unknown">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type">bool</span> <span class="methodname"><b>pg_close</b></span>
+      ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$connection</tt></span>
+     )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>pg_close()</b></span> 关闭由所给资源 <i><tt class="parameter">connection</tt></i>
+     指定的到 PostgreSQL 数据库的非持久连接。成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+    </p>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+     <p class="para">
+      使用 <span class="function"><b>pg_close()</b></span> 并不很必要，因为非持久连接在本脚本执行结束后会自动关闭。
+     </p>
+    </p></blockquote>
+    <p class="para">
+     <div class="example" id="example-1647">
+      <p><b>Example #1 <span class="function"><b>pg_close()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;$dbconn&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"host=localhost&nbsp;port=5432&nbsp;dbname=mary"</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;die(</span><span style="color: #DD0000">"Could&nbsp;not&nbsp;connect"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;print(</span><span style="color: #DD0000">"Connected&nbsp;successfully"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">pg_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbconn</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     如果在此连接中打开了 large object 资源，则在关闭所有 large object 资源之前不要关闭连接。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.pg-client-encoding.html">pg_client_encoding</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.pg-connect.html">pg_connect</a></div>
+ <div class="up"><a href="ref.pgsql.html">PostgreSQL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

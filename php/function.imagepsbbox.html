@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>给出一个使用 PostScript Type1 字体的文本方框</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagepolygon.html">imagepolygon</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagepsencodefont.html">imagepsencodefont</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagepsbbox" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagepsbbox</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">imagepsbbox</span> &mdash; <span class="dc-title">给出一个使用 PostScript Type1 字体的文本方框</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagepsbbox-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>imagepsbbox</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$text</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$font</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$size</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$space</tt></span>
+   ], <span class="methodparam"><span class="type">int</span> <tt class="parameter">$tightness</tt></span>
+   , <span class="methodparam"><span class="type">float</span> <tt class="parameter">$angle</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <i><tt class="parameter">size</tt></i> 以像素表示。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">space</tt></i> 可以用来改变字体中默认间距的值。此值将被加到通常的值上，可以为负值。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">tightness</tt></i> 可以控制字符之间的间距。此值将被加到通常字符宽度上，可以为负值。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">angle</tt></i> 以角度表示。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">space</tt></i> 和 <i><tt class="parameter">tightness</tt></i>
+   以字符间距单元表示，1 个单元为 1 em-square 的一千分之一。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">space</tt></i>，<i><tt class="parameter">tightness</tt></i>
+   和 <i><tt class="parameter">angle</tt></i> 参数为可选项。
+  </p>
+  <p class="para">
+   围绕文本范围的虚拟方框是用从字符度量学中的可用信息来计算的，不幸的是往往和实际上光栅生成的文本的结果有少许不同。如果角度为
+   0 度，（根据经验）文本在每个方向上都需要多 1 个像素。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数仅在 PHP
+编译时指定了 <strong class="option configure">--with-t1lib[=DIR]</strong>
+ 时可用。</span></p></blockquote>
+  <p class="para">
+   本函数返回包含有下列单元的数组：
+   <table class="doctable informaltable">
+   
+    <tbody valign="middle" class="tbody">
+     <tr valign="middle">
+      <td align="left">0</td>
+      <td align="left">左下角的 X 坐标</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">1</td>
+      <td align="left">左下角的 Y 坐标</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">2</td>
+      <td align="left">右上角的 X 坐标</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">3</td>
+      <td align="left">右上角的 Y 坐标</td>
+     </tr>
+
+    </tbody>
+   
+   </table>
+
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.imagepstext.html" class="function">imagepstext()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagepolygon.html">imagepolygon</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagepsencodefont.html">imagepsencodefont</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>带索引检查计算数组的交集</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-flip.html">array_flip</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-intersect-key.html">array_intersect_key</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-intersect-assoc" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">array_intersect_assoc</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5)</p><p class="refpurpose"><span class="refname">array_intersect_assoc</span> &mdash; <span class="dc-title">带索引检查计算数组的交集</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.array-intersect-assoc-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>array_intersect_assoc</b></span>
+    ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array1</tt></span>
+   , <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array2</tt></span>
+   [, <span class="methodparam"><span class="type">array</span> <tt class="parameter">$ ...</tt></span>
+  ] )</div>
+
+  <p class="simpara">
+   <span class="function"><b>array_intersect_assoc()</b></span> 返回一个数组，该数组包含了所有在
+   <i><tt class="parameter">array1</tt></i> 中也同时出现在所有其它参数数组中的值。注意和
+   <span class="function"><a href="function.array-intersect.html" class="function">array_intersect()</a></span> 不同的是键名也用于比较。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3878">
+    <p><b>Example #1 <span class="function"><b>array_intersect_assoc()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array1&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"brown"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$array2&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"yellow"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result_array&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_intersect_assoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$array1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$array2</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     $result_array 将是：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [a] =&gt; green
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="simpara">
+   上面例子中可以看到只有键值对 <i>&quot;a&quot; =&gt;
+   &quot;green&quot;</i> 在两个数组中都存在从而被返回。值
+   <i>&quot;red&quot;</i> 没有被返回是因为在
+   <var class="varname"><var class="varname">$array1</var></var> 中它的键名是 <i>0</i>
+   而在 <var class="varname"><var class="varname">$array2</var></var> 中 <i>&quot;red&quot;</i>
+   的键名是 <i>1</i>。
+  </p>
+  <p class="simpara">
+   键值对 <em class="emphasis">key =&gt; value</em>
+   中的两个值仅在 <i>(string) $elem1 === (string)
+   $elem2 </i> 时被认为相等。也就是说使用了严格检查，字符串的表达必须相同。
+   
+  </p>
+  <p class="simpara">
+   参见 <span class="function"><a href="function.array-intersect.html" class="function">array_intersect()</a></span>，<span class="function"><a href="function.array-uintersect-assoc.html" class="function">array_uintersect_assoc()</a></span>，<span class="function"><a href="function.array-intersect-uassoc.html" class="function">array_intersect_uassoc()</a></span>，<span class="function"><a href="function.array-uintersect-uassoc.html" class="function">array_uintersect_uassoc()</a></span>，<span class="function"><a href="function.array-diff.html" class="function">array_diff()</a></span>
+   和 <span class="function"><a href="function.array-diff-assoc.html" class="function">array_diff_assoc()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-flip.html">array_flip</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-intersect-key.html">array_intersect_key</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

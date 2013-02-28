@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>为一幅图像分配颜色 + alpha</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagecolorallocate.html">imagecolorallocate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagecolorat.html">imagecolorat</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagecolorallocatealpha" class="refentry">
+  <div class="refnamediv">
+   <h1 class="refname">imagecolorallocatealpha</h1>
+   <p class="verinfo">(PHP 4 &gt;= 4.3.2, PHP 5)</p><p class="refpurpose"><span class="refname">imagecolorallocatealpha</span> &mdash; <span class="dc-title">为一幅图像分配颜色 + alpha</span></p>
+
+  </div>
+  <div class="refsect1 unknown" id="refsect1-function.imagecolorallocatealpha-unknown">
+   <h3 class="title">说明</h3>
+   <div class="methodsynopsis dc-description">
+    <span class="type">int</span> <span class="methodname"><b>imagecolorallocatealpha</b></span>
+     ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$image</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$red</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$green</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$blue</tt></span>
+    , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$alpha</tt></span>
+    )</div>
+
+   <p class="para rdfs-comment">
+    <span class="function"><b>imagecolorallocatealpha()</b></span> 的行为和
+    <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span> 相同，但多了一个额外的透明度参数
+    <i><tt class="parameter">alpha</tt></i>，其值从
+    <i>0</i> 到 <i>127</i>。<i>0</i>
+    表示完全不透明，<i>127</i> 表示完全透明。
+   </p>
+   <p class="para">
+    如果分配失败则返回 <b><tt>FALSE</tt></b>。
+   </p>
+   <p class="para">
+    <div class="example" id="example-2565">
+     <p><b>Example #1 使用 <span class="function"><b>imagecolorallocatealpha()</b></span> 的例子</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$size&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">300</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$image</span><span style="color: #007700">=</span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">$size</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$size</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;用白色背景加黑色边框画个方框<br /></span><span style="color: #0000BB">$back&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$border&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledrectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$back</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagerectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$border</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$yellow_x&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">100</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$yellow_y&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">75</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$red_x&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">120</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$red_y&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">165</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$blue_x&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">187</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$blue_y&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">125</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$radius&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">150</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;用&nbsp;alpha&nbsp;值分配一些颜色<br /></span><span style="color: #0000BB">$yellow&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocatealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">75</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$red&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocatealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">75</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$blue&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocatealpha</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">75</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;画三个交迭的圆<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$yellow_x</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$yellow_y</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$radius</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$radius</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$yellow</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$red_x</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$red_y</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$radius</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$radius</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$red</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$blue_x</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$blue_y</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$radius</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$radius</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$blue</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;不要忘记输出正确的&nbsp;header！<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-type:&nbsp;image/png'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;最后输出结果<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+   <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数需要 GD 2.0.1 或更高版本(推荐 2.0.28 及更高版本)。</span></p></blockquote>
+   <p class="para">
+    参见 <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span> 和
+    <span class="function"><a href="function.imagecolordeallocate.html" class="function">imagecolordeallocate()</a></span>。
+   </p>
+  </div>
+
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagecolorallocate.html">imagecolorallocate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagecolorat.html">imagecolorat</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

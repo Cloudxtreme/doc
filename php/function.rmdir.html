@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>删除目录</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.rewind.html">rewind</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.set-file-buffer.html">set_file_buffer</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.rmdir" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">rmdir</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">rmdir</span> &mdash; <span class="dc-title">删除目录</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.rmdir-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>rmdir</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$dirname</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   尝试删除 <i><tt class="parameter">dirname</tt></i> 所指定的目录。
+   该目录必须是空的，而且要有相应的权限。成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    自 PHP 5.0.0 起 <span class="function"><b>rmdir()</b></span> 也可用于<em class="emphasis">某些</em>
+    URL 封装协议。参见<a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>
+    的列表看看 <span class="function"><b>rmdir()</b></span> 支持哪些 URL 封装协议。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">在 PHP 5.0.0 中增加了 对上下文(Context)的支持。
+有关 <i>上下文(Context)</i> 的说明参见 <a href="ref.stream.html" class="xref">Stream 函数</a>。</span></p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">当启用
+<a href="features.safe-mode.html" class="link">安全模式</a>时，
+PHP 会在执行脚本时检查被脚本操作的目录是否与被执行的脚本有相同的 UID（所有者）。</span></p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.mkdir.html" class="function">mkdir()</a></span> 和 <span class="function"><a href="function.unlink.html" class="function">unlink()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.rewind.html">rewind</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.set-file-buffer.html">set_file_buffer</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回对象的类名</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.get-class-vars.html">get_class_vars</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.get-declared-classes.html">get_declared_classes</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Object 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.get-class" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">get_class</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">get_class</span> &mdash; <span class="dc-title">返回对象的类名</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.get-class-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>get_class</b></span>
+    ([ <span class="methodparam"><span class="type">object</span> <tt class="parameter">$obj</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   返回对象实例 <i><tt class="parameter">obj</tt></i>
+   所属类的名字。如果 <i><tt class="parameter">obj</tt></i>
+   不是一个对象则返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    在 PHP 扩展库中定义的类返回其原始定义的名字。在 PHP 4 中
+    <span class="function"><b>get_class()</b></span> 返回用户定义的类名的小写形式，但是在
+    PHP 5 中将返回类名定义时的名字，如同扩展库中的类名一样。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    自 PHP 5 起，如果在对象的方法中调用则
+    <i><tt class="parameter">obj</tt></i> 为可选项。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <div class="example" id="example-3970">
+    <p><b>Example #1 使用 <span class="function"><b>get_class()</b></span></b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;implements&nbsp;some&nbsp;logic<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">name</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"My&nbsp;name&nbsp;is&nbsp;"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">)&nbsp;,&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;create&nbsp;an&nbsp;object<br /></span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">//&nbsp;external&nbsp;call<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"Its&nbsp;name&nbsp;is&nbsp;"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$bar</span><span style="color: #007700">)&nbsp;,&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;internal&nbsp;call<br /></span><span style="color: #0000BB">$bar</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name</span><span style="color: #007700">();<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Its name is foo
+My name is foo
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.get-parent-class.html" class="function">get_parent_class()</a></span>、
+   <span class="function"><a href="function.gettype.html" class="function">gettype()</a></span> 和
+   <span class="function"><a href="function.is-subclass-of.html" class="function">is_subclass_of()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.get-class-vars.html">get_class_vars</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.get-declared-classes.html">get_declared_classes</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Object 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

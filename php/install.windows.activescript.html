@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>ActiveScript</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.windows.manual.html">Manual Installation Steps</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.windows.iis.html">Microsoft IIS</a></div>
+ <div class="up"><a href="install.windows.html">Windows 系统下的安装</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="install.windows.activescript" class="sect1">
+  <h2 class="title">ActiveScript</h2>
+  <p class="para">本节将介绍有关 ActiveScript 安装需要注意的方面。</p>
+  <p class="para">ActiveScript 是一个只运行在 Windows 下的 SAPI，可以在任何兼容 ActiveScript 的主机上使用 PHP 脚本，例如 Windows Script Host、ASP/ASP.NET、Windows Script Components 或 Microsoft Scriptlet control。</p>
+  <p class="para">PHP 5.0.1 以后，ActiveScript 被移动到了
+  <a href="http://pecl.php.net/" class="link external">&raquo;&nbsp;PECL</a>库。<acronym title="PHP Extension and Application Repository">PECL</acronym> 扩展的
+<acronym title="Dynamic Link Library">DLL</acronym> 当前不可用。参见
+<a href="install.windows.building.html" class="link">在
+Windows 上构建</a> 章节。</p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">应该首先阅读
+    <a href="install.windows.manual.html" class="link">手动安装步骤</a>！</p>
+  </p></blockquote>
+  <p class="para">PHP 安装完成后，应该下载 ActiveScript DLL（
+  <var class="filename">php5activescript.dll</var>）并将其放入 PHP 主目录（例如 
+  <var class="filename">C:\php</var>）。</p>
+  <p class="para">准备好全部所需文件后，必须在系统中注册 DLL。做法是打开命令提示行窗口（位于开始菜单），然后输入类似 
+  <i>cd C:\php</i>的命令进入 PHP 目录，最后输入 
+  <i>regsvr32 php5activescript.dll</i>注册该 DLL。</p>
+  <p class="para">要测试 ActiveScript 是否正确工作，请创建一个新文件，命名为 
+  <i>test.wsf</i>（这个扩展名很重要）然后输入： 
+  <div class="example-contents">
+    <div class="cdata"><pre>
+&lt;job xml:id=&quot;test&quot;&gt;
+
+ &lt;script language=&quot;PHPScript&quot;&gt;
+  $WScript-&gt;Echo(&quot;Hello World!&quot;);
+ &lt;/script&gt;
+
+&lt;/job&gt;
+</pre></div>
+</div>
+保存并双击这个文件。如果您看到一个小窗口，内容为“Hello World!&quot;，说明安装成功。</p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">在 PHP 4 中，该引擎被命名为“ActivePHP”，如果使用 PHP 4，应该将上例中的“PHPScript”替换为“ActivePHP”。</p>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">ActiveScript 不使用默认的 <var class="filename">php.ini</var> 文件，而仅在调用它的 .exe 文件所在目录中寻找。如果想装载 PHP 扩展等，应该创建 
+    <var class="filename">php-activescript.ini</var>并将其放入那个目录。</p>
+  </p></blockquote>
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.windows.manual.html">Manual Installation Steps</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.windows.iis.html">Microsoft IIS</a></div>
+ <div class="up"><a href="install.windows.html">Windows 系统下的安装</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

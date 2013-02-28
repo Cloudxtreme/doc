@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>将整个文件读入一个字符串</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.file-exists.html">file_exists</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.file-put-contents.html">file_put_contents</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.file-get-contents" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">file_get_contents</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5)</p><p class="refpurpose"><span class="refname">file_get_contents</span> &mdash; <span class="dc-title">将整个文件读入一个字符串</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.file-get-contents-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>file_get_contents</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$use_include_path</tt></span>
+   [, <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$context</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$offset</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$maxlen</tt></span>
+  ]]]] )</div>
+
+  <p class="para rdfs-comment">
+   和 <span class="function"><a href="function.file.html" class="function">file()</a></span> 一样，只除了
+   <span class="function"><b>file_get_contents()</b></span> 把文件读入一个字符串。将在参数
+   <i><tt class="parameter">offset</tt></i> 所指定的位置开始读取长度为
+   <i><tt class="parameter">maxlen</tt></i> 的内容。如果失败，<span class="function"><b>file_get_contents()</b></span>
+   将返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <p class="para">
+   <span class="function"><b>file_get_contents()</b></span>
+   函数是用来将文件的内容读入到一个字符串中的首选方法。如果操作系统支持还会使用内存映射技术来增强性能。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    如果要打开有特殊字符的 URL （比如说有空格），就需要使用
+    <span class="function"><a href="function.urlencode.html" class="function">urlencode()</a></span> 进行 URL 编码。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+   <i><tt class="parameter">context</tt></i> 参数可以用 <b><tt>NULL</tt></b> 来忽略。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.file-get-contents-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead valign="middle">
+      <tr valign="middle">
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="left">5.0.0</td>
+       <td align="left">
+        添加了对 context 的支持。
+       </td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left">5.1.0</td>
+       <td align="left">
+        添加了 <i><tt class="parameter">offset</tt></i> 和
+        <i><tt class="parameter">maxlen</tt></i> 参数。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.file-get-contents-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数可安全用于二进制对象。</span></p></blockquote>
+  <div class="tip"><b class="tip">Tip</b><p class="simpara">如已启用<a href="filesystem.configuration.html#ini.allow-url-fopen" class="link">fopen 包装器</a>，在此函数中， URL 可作为文件名。关于如何指定文件名详见 <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>。各种
+wapper 的不同功能请参见 <a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>，注意其用法及其可提供的预定义变量。</p></div>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">在 PHP 5.0.0 中增加了 对上下文(Context)的支持。
+有关 <i>上下文(Context)</i> 的说明参见 <a href="ref.stream.html" class="xref">Stream 函数</a>。</span></p></blockquote>
+  <div class="warning"><b class="warning">Warning</b><p class="para">使用 SSL 时，Microsoft IIS
+会违反协议不发送<i>close_notify</i>标记就关闭连接。PHP 会在到达数据尾端时报告“SSL: Fatal Protocol Error”。
+要解决此问题，<a href="errorfunc.configuration.html#ini.error-reporting" class="link">error_reporting</a> 应设定为降低级别至不包含警告。
+PHP 4.3.7 及更高版本可以在使用 <i>https://</i> 包装器打开流时检测出有问题的 IIS 服务器软件 并抑制警告。在使用
+<span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span> 创建 <i>ssl://</i> 套接字时, 开发者需检测并抑制此警告。</p></div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.file-get-contents-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.file.html" class="function" rel="rdfs-seeAlso">file()</a> - 把整个文件读入一个数组中</span></li>
+    <li class="member"><span class="function"><a href="function.fgets.html" class="function" rel="rdfs-seeAlso">fgets()</a> - 从文件指针中读取一行</span></li>
+    <li class="member"><span class="function"><a href="function.fread.html" class="function" rel="rdfs-seeAlso">fread()</a> - 读取文件（可安全用于二进制文件）</span></li>
+    <li class="member"><span class="function"><a href="function.readfile.html" class="function" rel="rdfs-seeAlso">readfile()</a> - 输出一个文件</span></li>
+    <li class="member"><span class="function"><a href="function.file-put-contents.html" class="function" rel="rdfs-seeAlso">file_put_contents()</a> - 将一个字符串写入文件</span></li>
+    <li class="member"><span class="function"><a href="function.stream-get-contents.html" class="function" rel="rdfs-seeAlso">stream_get_contents()</a> - Reads remainder of a stream into a string</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.file-exists.html">file_exists</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.file-put-contents.html">file_put_contents</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

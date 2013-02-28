@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>在文件指针中定位</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fscanf.html">fscanf</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fstat.html">fstat</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.fseek" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">fseek</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">fseek</span> &mdash; <span class="dc-title">在文件指针中定位</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.fseek-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">int</span> <span class="methodname"><b>fseek</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$handle</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$offset</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$whence</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   在与
+   <i><tt class="parameter">handle</tt></i>
+   关联的文件中设定文件指针位置。新位置从文件头开始以字节数度量，是以
+   <i><tt class="parameter">whence</tt></i>
+   指定的位置加上
+   <i><tt class="parameter">offset</tt></i>。<i><tt class="parameter">whence</tt></i>
+   的值定义为：
+   <ul class="simplelist">
+    <li class="member"><b><tt>SEEK_SET</tt></b> - 设定位置等于 <i><tt class="parameter">offset</tt></i> 字节。</li>
+    <li class="member"><b><tt>SEEK_CUR</tt></b> - 设定位置为当前位置加上 <i><tt class="parameter">offset</tt></i>。</li>
+    <li class="member"><b><tt>SEEK_END</tt></b> - 设定位置为文件尾加上
+    <i><tt class="parameter">offset</tt></i>。（要移动到文件尾之前的位置，需要给
+    <i><tt class="parameter">offset</tt></i> 传递一个负值。）</li>
+   </ul>
+  </p>
+  <p class="para">
+   如果没有指定
+   <i><tt class="parameter">whence</tt></i>，默认为
+  <b><tt>SEEK_SET</tt></b>。
+  </p>
+  <p class="para">
+   成功则返回 0；否则返回 -1。注意移动到 EOF 之后的位置不算错误。
+  </p>
+  <p class="para">
+   <div class="example" id="example-1841">
+    <p><b>Example #1 <span class="function"><b>fseek()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$fp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">'somefile.txt'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;read&nbsp;some&nbsp;data<br /></span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fgets</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">4096</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;move&nbsp;back&nbsp;to&nbsp;the&nbsp;begining&nbsp;of&nbsp;the&nbsp;file<br />//&nbsp;same&nbsp;as&nbsp;rewind($fp);<br /></span><span style="color: #0000BB">fseek</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   可能不能用于在
+   <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>
+   中以 &quot;http://&quot; 或 &quot;ftp://&quot; 格式打开所返回的文件指针。在附加模式（加参数 &quot;a&quot; 打开文件）中
+   <span class="function"><a href="function.ftell.html" class="function">ftell()</a></span> 会返回未定义错误。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    <i><tt class="parameter">whence</tt></i> 参数是 PHP 4.0.0 之后增加的。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    如果使用附加模试（&quot;a&quot; 或 &quot;a+&quot;），任何写入文件数据都会被附加上去，而文件的位置将会被忽略。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.ftell.html" class="function">ftell()</a></span> 和
+   <span class="function"><a href="function.rewind.html" class="function">rewind()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fscanf.html">fscanf</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fstat.html">fstat</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

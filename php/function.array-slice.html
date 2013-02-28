@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从数组中取出一段</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-shift.html">array_shift</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-splice.html">array_splice</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-slice" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_slice</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">array_slice</span> &mdash; <span class="dc-title">从数组中取出一段</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.array-slice-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>array_slice</b></span>
+       ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array</tt></span>
+      , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$offset</tt></span>
+      [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$length</tt></span>
+      [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$preserve_keys</tt></span>
+     ]] )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>array_slice()</b></span> 返回根据 <i><tt class="parameter">offset</tt></i> 和
+     <i><tt class="parameter">length</tt></i> 参数所指定的 <i><tt class="parameter">array</tt></i>
+     数组中的一段序列。
+    </p>
+    <p class="para">
+     如果 <i><tt class="parameter">offset</tt></i> 非负，则序列将从 <i><tt class="parameter">array</tt></i>
+     中的此偏移量开始。如果 <i><tt class="parameter">offset</tt></i> 为负，则序列将从
+     <i><tt class="parameter">array</tt></i> 中距离末端这么远的地方开始。
+    </p>
+    <p class="para">
+     如果给出了 <i><tt class="parameter">length</tt></i> 并且为正，则序列中将具有这么多的单元。如果给出了
+     <i><tt class="parameter">length</tt></i> 并且为负，则序列将终止在距离数组末端这么远的地方。如果省略，则序列将从
+     <i><tt class="parameter">offset</tt></i> 开始一直到 <i><tt class="parameter">array</tt></i> 的末端。
+    </p>
+    <p class="para">
+     注意 <span class="function"><b>array_slice()</b></span> 默认将重置数组的键。自
+     PHP 5.0.2 起，可以通过将
+     <i><tt class="parameter">preserve_keys</tt></i> 设为 <b><tt>TRUE</tt></b> 来改变此行为。
+    </p>
+    <p class="para">
+     <div class="example" id="example-3911">
+      <p><b>Example #1 <span class="function"><b>array_slice()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"d"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"e"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"c",&nbsp;"d",&nbsp;and&nbsp;"e"<br /></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"d"<br /></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"a",&nbsp;"b",&nbsp;and&nbsp;"c"<br /><br />//&nbsp;note&nbsp;the&nbsp;differences&nbsp;in&nbsp;the&nbsp;array&nbsp;keys<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上例程会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; c
+    [1] =&gt; d
+)
+Array
+(
+    [2] =&gt; c
+    [3] =&gt; d
+)
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.array-splice.html" class="function">array_splice()</a></span> 和 <span class="function"><a href="function.unset.html" class="function">unset()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-shift.html">array_shift</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-splice.html">array_splice</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>以 JPEG 格式将图像输出到浏览器或文件</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imageistruecolor.html">imageistruecolor</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagelayereffect.html">imagelayereffect</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagejpeg" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagejpeg</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">imagejpeg</span> &mdash; <span class="dc-title">以 JPEG 格式将图像输出到浏览器或文件</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagejpeg-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>imagejpeg</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$image</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$quality</tt></span>
+  ]] )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>imagejpeg()</b></span> 从 <i><tt class="parameter">image</tt></i>
+   图像以 <i><tt class="parameter">filename</tt></i> 为文件名创建一个
+   <acronym title="Joint Photographic Experts Group">JPEG</acronym> 图像。<i><tt class="parameter">image</tt></i>
+   参数是 <span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span> 函数的返回值。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">filename</tt></i>
+   参数为可选，如果省略，则原始图像流将被直接输出。要省略
+   <i><tt class="parameter">filename</tt></i> 参数而提供
+   <i><tt class="parameter">quality</tt></i> 参数，使用空字符串（&#039;&#039;）。通过
+   <span class="function"><a href="function.header.html" class="function">header()</a></span> 发送 Content-type: image/jpeg 可以使 PHP
+   脚本直接输出 <acronym title="Joint Photographic Experts Group">JPEG</acronym> 图像。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">JPEG 支持仅在 PHP 与 GD-1.8 或更高版本一起编译时可用.</span></p></blockquote>
+  <p class="para">
+   <i><tt class="parameter">quality</tt></i> 为可选项，范围从
+   0（最差质量，文件更小）到 100（最佳质量，文件最大）。默认为
+   IJG 默认的质量值（大约 75）。
+  </p>
+  <p class="para">
+   如果想输出渐进式 JPEG，需要用
+   <span class="function"><a href="function.imageinterlace.html" class="function">imageinterlace()</a></span> 函数将隔行扫描比特置位。
+  </p>
+  <p class="para">
+   参见
+   <span class="function"><a href="function.imagepng.html" class="function">imagepng()</a></span>，<span class="function"><a href="function.imagegif.html" class="function">imagegif()</a></span>，<span class="function"><a href="function.imagewbmp.html" class="function">imagewbmp()</a></span>，<span class="function"><a href="function.imageinterlace.html" class="function">imageinterlace()</a></span>
+   和 <span class="function"><a href="function.imagetypes.html" class="function">imagetypes()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imageistruecolor.html">imageistruecolor</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagelayereffect.html">imagelayereffect</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

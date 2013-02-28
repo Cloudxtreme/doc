@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设置标记以在保存 PNG 图像时保存完整的 alpha 通道信息（与单一透明色相反）</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagerotate.html">imagerotate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagesetbrush.html">imagesetbrush</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagesavealpha" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagesavealpha</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.2, PHP 5)</p><p class="refpurpose"><span class="refname">imagesavealpha</span> &mdash; <span class="dc-title">设置标记以在保存 PNG 图像时保存完整的 alpha 通道信息（与单一透明色相反）</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagesavealpha-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>imagesavealpha</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$image</tt></span>
+   , <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$saveflag</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>imagesavealpha()</b></span> 设置标记以在保存
+   PNG 图像时保存完整的 alpha 通道信息（与单一透明色相反）。
+  </p>
+  <p class="para">
+   要使用本函数，必须将 alphablending
+   清位（<i>imagealphablending($im, false)</i>）。
+  </p>
+  <p class="para">
+   不是所有的浏览器都支持 alpha 通道，如果在你的浏览器上碰到问题，试着用兼容
+   alpha 通道的浏览器（例如最新版的 Mozilla）重新加载脚本。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数需要 GD 2.0.1 或更高版本(推荐 2.0.28 及更高版本)。</span></p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.imagealphablending.html" class="function">imagealphablending()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagerotate.html">imagerotate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagesetbrush.html">imagesetbrush</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

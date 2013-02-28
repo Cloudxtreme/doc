@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>读取文件（可安全用于二进制文件）</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fputs.html">fputs</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fscanf.html">fscanf</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.fread" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">fread</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">fread</span> &mdash; <span class="dc-title">读取文件（可安全用于二进制文件）</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.fread-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>fread</b></span>
+    ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$handle</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$length</tt></span>
+   )</div>
+
+  <p class="simpara">
+   <span class="function"><b>fread()</b></span> 从文件指针
+   <i><tt class="parameter">handle</tt></i> 读取最多
+   <i><tt class="parameter">length</tt></i> 个字节。该函数在读取完最多
+   <i><tt class="parameter">length</tt></i> 个字节数，或到达
+   EOF 的时候，或（对于网络流）当一个包可用时，或（在打开用户空间流之后）已读取了
+   8192 个字节时就会停止读取文件，视乎先碰到哪种情况。
+  </p>
+  <p class="simpara">
+   返回所读取的字符串，如果出错返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;get&nbsp;contents&nbsp;of&nbsp;a&nbsp;file&nbsp;into&nbsp;a&nbsp;string<br /></span><span style="color: #0000BB">$filename&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"/usr/local/something.txt"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$handle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"r"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$contents&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fread</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">filesize&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <div class="warning"><b class="warning">Warning</b>
+   <p class="para">
+    在区分二进制文件和文本文件的系统上（如
+    Windows）打开文件时，<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span> 函数的 mode 参数要加上 &#039;b&#039;。
+   </p>
+  </div>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$filename&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"c:\\files\\somepic.gif"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$handle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"rb"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$contents&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fread</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">filesize&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <div class="warning"><b class="warning">Warning</b>
+   <p class="para">
+    当从任何不是普通本地文件读取时，例如在读取从<a href="features.remote-files.html" class="link">远程文件</a>或
+    <span class="function"><a href="function.popen.html" class="function">popen()</a></span> 以及 <span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span>
+    返回的流时，读取会在一个包可用之后停止。这意味着应该如下例所示将数据收集起来合并成大块。
+   </p>
+  </div>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;对&nbsp;PHP&nbsp;5&nbsp;及更高版本<br /></span><span style="color: #0000BB">$handle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"http://www.example.com/"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"rb"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$contents&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stream_get_contents</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$handle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">"http://www.example.com/"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"rb"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$contents&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">;<br />while&nbsp;(!</span><span style="color: #0000BB">feof</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$contents&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #0000BB">fread</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">8192</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    如果只是想将一个文件的内容读入到一个字符串中，用
+    <span class="function"><a href="function.file-get-contents.html" class="function">file_get_contents()</a></span>，它的性能比上面的代码好得多。
+   </p>
+  </p></blockquote>
+  <p class="simpara">
+   参见
+   <span class="function"><a href="function.fwrite.html" class="function">fwrite()</a></span>，<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>，<span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span>，<span class="function"><a href="function.popen.html" class="function">popen()</a></span>，<span class="function"><a href="function.fgets.html" class="function">fgets()</a></span>，<span class="function"><a href="function.fgetss.html" class="function">fgetss()</a></span>，<span class="function"><a href="function.fscanf.html" class="function">fscanf()</a></span>，<span class="function"><a href="function.file.html" class="function">file()</a></span>
+   和 <span class="function"><a href="function.fpassthru.html" class="function">fpassthru()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fputs.html">fputs</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fscanf.html">fscanf</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

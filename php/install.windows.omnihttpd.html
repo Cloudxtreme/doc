@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>OmniHTTPd Server</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.windows.sun.html">Microsoft Windows 下的 Sun，iPlanet 和 Netscape 服务器</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.windows.sambar.html">Microsoft Windows 下的 Sambar 服务器</a></div>
+ <div class="up"><a href="install.windows.html">Windows 系统下的安装</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="install.windows.omnihttpd" class="sect1">
+<h2 class="title">OmniHTTPd Server</h2>
+<p class="para">本节包括针对 Windows 下的 
+<a href="http://www.omnicron.ca/" class="link external">&raquo;&nbsp;OmniHTTPd</a>的内容与提示。</p>
+<blockquote class="note"><p><b class="note">Note</b>: 
+  <p class="para">应该首先阅读
+  <a href="install.windows.manual.html" class="link">手工安装步骤</a>！</p>
+</p></blockquote><div class="warning"><b class="warning">Warning</b><p class="para">服务器使用 CGI 方式进行部署可能存在几个公开的缺陷。请阅读
+<a href="security.cgi-bin.html" class="link">CGI 安全</a>一章 以学习 如何抵御这些攻击。</p></div> 
+<p class="simpara">要在 OmniHTTPd 中安装 PHP 需要完成以下步骤。这是 CGI 方式的安装。OmniHTTPd 支持 SAPI，但是有测试显示以 ISAPI 模块方式使用 PHP 不太稳定。</p>
+<blockquote class="note"><p><b class="note">Note</b>: 
+  <b>CGI 用户重要提示</b><br />
+  <p class="para">请阅读 
+  <a href="faq.installation.html#faq.installation.forceredirect" class="link">FAQ：cgi.force_redirect</a>中的重要细节。此选项需要被设为 
+  <i>0</i>。</p>
+</p></blockquote>
+<p class="para">
+  <ol type="1">
+    <li class="listitem">
+      <p class="para">安装 OmniHTTPd 服务器。</p>
+    </li>
+    <li class="listitem">
+      <p class="para">右键点击系统托盘中蓝色的 OmniHTTPd 图标并选择 
+      <i>Properties</i></p>
+    </li>
+    <li class="listitem">
+      <p class="para">点击 
+      <i>web Server Global Settings</i></p>
+    </li>
+    <li class="listitem">
+      <p class="para">在“External”标签页，输入：
+      <i>virtual = .php | actual = c:\php\php.exe</i>（如果是 PHP 5 则用 
+      <var class="filename">php-cgi.exe</var>），并点击 Add 按钮</p>
+    </li>
+    <li class="listitem">
+      <p class="para">在 
+      <i>Mime</i>标签页，输入：
+      <i>virtual = wwwserver/stdcgi | actual = .php</i>，并点击 Add 按钮</p>
+    </li>
+    <li class="listitem">
+      <p class="para">点击 
+      <i>OK</i></p>
+    </li>
+  </ol>
+</p>
+<p class="simpara">对每个想要和 PHP 关联的后缀都重复 2 - 6 步。</p>
+<blockquote class="note"><p><b class="note">Note</b>: 
+  <p class="para">有些 OmniHTTPd 安装包中内置了 PHP 支持。可以在安装时选择自定义安装，取消选中 PHP 部分。推荐使用最新的 PHP 可执行包。有些 OmniHTTPd 服务器内置了 PHP 4 beta 版，应该选择不安装内置版而安装自己的版本。如果服务器已经安装了，则在上面的第 4 和 5 步用 Replace 按钮来设置新的准确的信息。</p>
+   </p></blockquote>
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.windows.sun.html">Microsoft Windows 下的 Sun，iPlanet 和 Netscape 服务器</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.windows.sambar.html">Microsoft Windows 下的 Sambar 服务器</a></div>
+ <div class="up"><a href="install.windows.html">Windows 系统下的安装</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

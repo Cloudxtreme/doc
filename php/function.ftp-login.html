@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>登录 FTP 服务器</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.ftp-get.html">ftp_get</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.ftp-mdtm.html">ftp_mdtm</a></div>
+ <div class="up"><a href="ref.ftp.html">FTP 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.ftp-login" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">ftp_login</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">ftp_login</span> &mdash; <span class="dc-title">登录 FTP 服务器</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.ftp-login-unknown">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type">bool</span> <span class="methodname"><b>ftp_login</b></span>
+      ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$ftp_stream</tt></span>
+     , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$username</tt></span>
+     , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$password</tt></span>
+     )</div>
+
+    <p class="para rdfs-comment">
+     使用用户名和密码登录入给定的 FTP 连接。
+    </p>
+    <p class="para">
+     成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+    </p>
+    <div class="example" id="example-3262">
+     <p><b>Example #1 <span class="function"><b>ftp_login()</b></span> 例子</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$ftp_server&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"ftp.example.com"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$ftp_user&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"foo"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$ftp_pass&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"bar"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;set&nbsp;up&nbsp;a&nbsp;connection&nbsp;or&nbsp;die<br /></span><span style="color: #0000BB">$conn_id&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ftp_connect</span><span style="color: #007700">(</span><span style="color: #0000BB">$ftp_server</span><span style="color: #007700">)&nbsp;or&nbsp;die(</span><span style="color: #DD0000">"Couldn't&nbsp;connect&nbsp;to&nbsp;</span><span style="color: #0000BB">$ftp_server</span><span style="color: #DD0000">"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;try&nbsp;to&nbsp;login<br /></span><span style="color: #007700">if&nbsp;(@</span><span style="color: #0000BB">ftp_login</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn_id</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ftp_user</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ftp_pass</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Connected&nbsp;as&nbsp;</span><span style="color: #0000BB">$ftp_user</span><span style="color: #DD0000">@</span><span style="color: #0000BB">$ftp_server</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Couldn't&nbsp;connect&nbsp;as&nbsp;</span><span style="color: #0000BB">$ftp_user</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.ftp-get.html">ftp_get</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.ftp-mdtm.html">ftp_mdtm</a></div>
+ <div class="up"><a href="ref.ftp.html">FTP 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>判断文件是否是通过 HTTP POST 上传的</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-readable.html">is_readable</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.is-writable.html">is_writable</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.is-uploaded-file" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">is_uploaded_file</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.3, PHP 5)</p><p class="refpurpose"><span class="refname">is_uploaded_file</span> &mdash; <span class="dc-title">判断文件是否是通过 HTTP POST 上传的</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.is-uploaded-file-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>is_uploaded_file</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   如果 <i><tt class="parameter">filename</tt></i> 所给出的文件是通过
+   HTTP POST 上传的则返回 <b><tt>TRUE</tt></b>。这可以用来确保恶意的用户无法欺骗脚本去访问本不能访问的文件，例如
+   <var class="filename">/etc/passwd</var>。
+  </p>
+  <p class="para">
+   这种检查显得格外重要，如果上传的文件有可能会造成对用户或本系统的其他用户显示其内容的话。
+  </p>
+  <p class="para">
+   为了能使 <span class="function"><b>is_uploaded_file()</b></span> 函数正常工作，必段指定类似于
+   $_FILES[&#039;userfile&#039;][&#039;tmp_name&#039;] 的变量，而在从客户端上传的文件名
+   $_FILES[&#039;userfile&#039;][&#039;name&#039;] 不能正常运作。
+  </p>
+  <div class="example" id="example-1850">
+   <p><b>Example #1 <span class="function"><b>is_uploaded_file()</b></span> 例子</b></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">is_uploaded_file</span><span style="color: #007700">(</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">'userfile'</span><span style="color: #007700">][</span><span style="color: #DD0000">'tmp_name'</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"File&nbsp;"</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">'userfile'</span><span style="color: #007700">][</span><span style="color: #DD0000">'name'</span><span style="color: #007700">]&nbsp;.</span><span style="color: #DD0000">"&nbsp;uploaded&nbsp;successfully.\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Displaying&nbsp;contents\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">readfile</span><span style="color: #007700">(</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">'userfile'</span><span style="color: #007700">][</span><span style="color: #DD0000">'tmp_name'</span><span style="color: #007700">]);<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Possible&nbsp;file&nbsp;upload&nbsp;attack:&nbsp;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"filename&nbsp;'"</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">'userfile'</span><span style="color: #007700">][</span><span style="color: #DD0000">'tmp_name'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">"'."</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <p class="para">
+   <span class="function"><b>is_uploaded_file()</b></span> 仅可用于
+   PHP 3 的 3.0.16 版之后，以及 PHP 4 的 4.0.2
+   版之后。如果执意要用老版本，可以用下面的函数来保护自己：
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     以下例子<em class="emphasis">不能</em>用于
+     PHP 4 的 4.0.2 版之后。它依赖的 PHP 内部函数在该版本之后改变了。
+    </p>
+   </p></blockquote>
+  </p>
+   <div class="example" id="example-1851">
+    <p><b>Example #2 <span class="function"><b>is_uploaded_file()</b></span> 可运行于 PHP 4 &lt; 4.0.3 的例子</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/*&nbsp;Userland&nbsp;test&nbsp;for&nbsp;uploaded&nbsp;file.&nbsp;*/<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">is_uploaded_file_4_0_2</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$tmp_file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">get_cfg_var</span><span style="color: #007700">(</span><span style="color: #DD0000">'upload_tmp_dir'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp_file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">tempnam</span><span style="color: #007700">(</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp_file&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">'/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">basename</span><span style="color: #007700">(</span><span style="color: #0000BB">$filename</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;User&nbsp;might&nbsp;have&nbsp;trailing&nbsp;slash&nbsp;in&nbsp;php.ini...&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;(</span><span style="color: #0000BB">ereg_replace</span><span style="color: #007700">(</span><span style="color: #DD0000">'/+'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'/'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$tmp_file</span><span style="color: #007700">)&nbsp;==&nbsp;</span><span style="color: #0000BB">$filename</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #FF8000">/*&nbsp;This&nbsp;is&nbsp;how&nbsp;to&nbsp;use&nbsp;it,&nbsp;since&nbsp;you&nbsp;also&nbsp;don't&nbsp;have<br />&nbsp;*&nbsp;move_uploaded_file()&nbsp;in&nbsp;these&nbsp;older&nbsp;versions:&nbsp;*/<br /></span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">is_uploaded_file_4_0_2</span><span style="color: #007700">(</span><span style="color: #0000BB">$HTTP_POST_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">'userfile'</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">copy</span><span style="color: #007700">(</span><span style="color: #0000BB">$HTTP_POST_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">'userfile'</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">"/place/to/put/uploaded/file"</span><span style="color: #007700">);<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Possible&nbsp;file&nbsp;upload&nbsp;attack:&nbsp;filename&nbsp;'</span><span style="color: #0000BB">$HTTP_POST_FILES</span><span style="color: #007700">[</span><span style="color: #0000BB">userfile</span><span style="color: #007700">]</span><span style="color: #DD0000">'."</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <p class="para">
+   参见 <span class="function"><a href="function.move-uploaded-file.html" class="function">move_uploaded_file()</a></span>，以及<a href="features.file-upload.html" class="link">文件上传处理</a>一章中的简单使用例子。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-readable.html">is_readable</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.is-writable.html">is_writable</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

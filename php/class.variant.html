@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>VARIANT 类</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="class.dotnet.html">DOTNET</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.com-addref.html">com_addref</a></div>
+ <div class="up"><a href="ref.com.html">COM 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="class.variant" class="refentry">
+  <div class="refnamediv">
+   <h1 class="refname">VARIANT</h1>
+   <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5)</p><p class="refpurpose"><span class="refname">VARIANT</span> &mdash; <span class="dc-title">VARIANT 类</span></p>
+
+  </div>
+  <div class="refsynopsisdiv">
+  <pre class="synopsis">$vVar = new <b class="classname">VARIANT</b>($var)</pre>
+  </div>
+  <div class="refsect1 unknown" id="refsect1-class.variant-unknown">
+   <h3 class="title">描述</h3>
+   <p class="simpara">
+    用于将变量封装进 VARIANT 结构中的简单容器。
+   </p>
+  </div>
+
+  <div class="refsect1 unknown" id="refsect1-class.variant-unknown">
+   <h3 class="title">方法</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type">string</span> <span class="methodname"><b>VARIANT::VARIANT</b></span>
+      ([ <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$value</tt></span>
+     [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$type</tt></span>
+     [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$codepage</tt></span>
+    ]]] )</div>
+
+   <p class="para rdfs-comment">
+    VARIANT 类构造函数。参数：
+    <dl>
+
+    <dt>
+<span class="term">value</span>
+    <dd>
+
+     <span class="simpara">
+      初始值。若省略则创建一个 VT_EMPTY 对象。
+     </span>
+    </dd>
+
+    </dt>
+
+    <dt>
+<span class="term">type</span>
+    <dd>
+
+     <span class="simpara">
+      指定 VARIANT 对象的内容类型。可用的值为
+      <b><tt>VT_UI1</tt></b>、<b><tt>VT_UI2</tt></b>、<b><tt>VT_UI4</tt></b>、<b><tt>VT_I1</tt></b>、<b><tt>VT_I2</tt></b>、<b><tt>VT_I4</tt></b>、<b><tt>VT_R4</tt></b>、<b><tt>VT_R8</tt></b>、<b><tt>VT_INT</tt></b>、<b><tt>VT_UINT</tt></b>、<b><tt>VT_BOOL</tt></b>、<b><tt>VT_ERROR</tt></b>、<b><tt>VT_CY</tt></b>、<b><tt>VT_DATE</tt></b>、<b><tt>VT_BSTR</tt></b>、<b><tt>VT_DECIMAL</tt></b>、<b><tt>VT_UNKNOWN</tt></b>、<b><tt>VT_DISPATCH</tt></b>
+      和 <b><tt>VT_VARIANT</tt></b>。这些值相互排斥，但是可以使用
+      <b><tt>VT_BYREF</tt></b>
+      将它们联合起来指定为一个值。若省略，则使用参数
+      <i><tt class="parameter">value</tt></i> 的类型。额外信息请查阅 msdn 库。
+     </span>
+    </dd>
+
+    </dt>
+
+    <dt>
+<span class="term">codepage</span>
+    <dd>
+
+     <span class="simpara">
+      指定用于将 PHP 字符串（php-strings）转换成 
+      UNICODE 字符串（unicode-strings）的代码页，反之亦然。可用的值为
+      <b><tt>CP_ACP</tt></b>、<b><tt>CP_MACCP</tt></b>、<b><tt>CP_OEMCP</tt></b>、<b><tt>CP_SYMBOL</tt></b>、<b><tt>CP_THREAD_ACP</tt></b>, <b><tt>CP_UTF7</tt></b>
+      和 <b><tt>CP_UTF8</tt></b>。
+     </span>
+    </dd>
+
+    </dt>
+
+    </dl>
+
+   </p>
+  </div>
+
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="class.dotnet.html">DOTNET</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.com-addref.html">com_addref</a></div>
+ <div class="up"><a href="ref.com.html">COM 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

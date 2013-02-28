@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从 PNG 文件或 URL 新建一图像</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagecreatefromjpeg.html">imagecreatefromjpeg</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagecreatefromstring.html">imagecreatefromstring</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagecreatefrompng" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecreatefrompng</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">imagecreatefrompng</span> &mdash; <span class="dc-title">从 PNG 文件或 URL 新建一图像</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagecreatefrompng-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">resource</span> <span class="methodname"><b>imagecreatefrompng</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>imagecreatefrompng()</b></span>
+   返回一图像标识符，代表了从给定的文件名取得的图像。
+  </p>
+  <p class="para">
+   <span class="function"><b>imagecreatefrompng()</b></span>
+   在失败时返回一个空字符串，并且输出一条错误信息，不幸地在浏览器中显示为断链接。为减轻调试工作下面的例子会产生一个错误
+   <acronym title="Portable Network Graphics">PNG</acronym>：
+   <div class="example" id="example-2574">
+    <p><b>Example #1 处理创建过程中的错误</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">LoadPNG</span><span style="color: #007700">(</span><span style="color: #0000BB">$imgname</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$im&nbsp;</span><span style="color: #007700">=&nbsp;@</span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #0000BB">$imgname</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">/*&nbsp;Attempt&nbsp;to&nbsp;open&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if(!</span><span style="color: #0000BB">$im</span><span style="color: #007700">)&nbsp;{&nbsp;</span><span style="color: #FF8000">/*&nbsp;See&nbsp;if&nbsp;it&nbsp;failed&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$im&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">150</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">30</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">/*&nbsp;Create&nbsp;a&nbsp;blank&nbsp;image&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$bgc&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tc&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">imagefilledrectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">150</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">30</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$bgc</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;Output&nbsp;an&nbsp;errmsg&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">imagestring</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Error&nbsp;loading&nbsp;</span><span style="color: #0000BB">$imgname</span><span style="color: #DD0000">"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$tc</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$im</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <div class="tip"><b class="tip">Tip</b><p class="simpara">如已启用<a href="filesystem.configuration.html#ini.allow-url-fopen" class="link">fopen 包装器</a>，在此函数中， URL 可作为文件名。关于如何指定文件名详见 <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>。各种
+wapper 的不同功能请参见 <a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>，注意其用法及其可提供的预定义变量。</p></div>
+  <div class="warning"><b class="warning">Warning</b><p class="para">Windows 版本的 PHP 在 4.3.0
+版之前不支持通过此函数访问远程文件，即使已经启用 <a href="filesystem.configuration.html#ini.allow-url-fopen" class="link">allow_url_fopen</a>.
+</p></div>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagecreatefromjpeg.html">imagecreatefromjpeg</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagecreatefromstring.html">imagecreatefromstring</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>设定文件的访问和修改时间</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.tmpfile.html">tmpfile</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.umask.html">umask</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.touch" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">touch</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">touch</span> &mdash; <span class="dc-title">设定文件的访问和修改时间</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.touch-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>touch</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$time</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$atime</tt></span>
+  ]] )</div>
+
+  <p class="para rdfs-comment">
+   尝试将由 <i><tt class="parameter">filename</tt></i>
+   给出的文件的访问和修改时间设定为给出的时间。如果没有给出可选参数
+   <i><tt class="parameter">time</tt></i>，则使用当前系统时间。如果给出了第三个参数
+   <i><tt class="parameter">atime</tt></i>，则给定文件的访问时间会被设为
+   <i><tt class="parameter">atime</tt></i>。注意访问时间总是会被修改的，不论有几个参数。
+  </p>
+  <p class="para">
+   如果文件不存在，则会被创建。成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+  </p>
+  <p class="para">
+   <div class="example" id="example-1868">
+    <p><b>Example #1 <span class="function"><b>touch()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">touch</span><span style="color: #007700">(</span><span style="color: #0000BB">$FileName</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$FileName</span><span style="color: #DD0000">&nbsp;modification&nbsp;time&nbsp;has&nbsp;been&nbsp;changed&nbsp;to&nbsp;present&nbsp;time"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Sorry,&nbsp;could&nbsp;not&nbsp;change&nbsp;modification&nbsp;time&nbsp;of&nbsp;</span><span style="color: #0000BB">$FileName</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.tmpfile.html">tmpfile</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.umask.html">umask</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

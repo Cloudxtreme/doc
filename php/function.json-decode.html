@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>对 JSON 格式的字符串进行编码</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.json.html">JSON 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.json-encode.html">json_encode</a></div>
+ <div class="up"><a href="ref.json.html">JSON 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.json-decode" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">json_decode</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.2.0, PECL json &gt;= 1.2.0)</p><p class="refpurpose"><span class="refname">json_decode</span> &mdash; <span class="dc-title">对 JSON 格式的字符串进行编码</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.json-decode-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <span class="methodname"><b>json_decode</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$json</tt></span>
+   [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$assoc</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   接受一个 JSON 格式的字符串并且把它转换为 PHP 变量
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.json-decode-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">json</tt></i></span>
+     <dd>
+
+      <p class="para">
+       待解码的 <i><tt class="parameter">json</tt></i> <span class="type"><a href="language.types.string.html" class="type string">string</a></span> 格式的字符串。
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">assoc</tt></i></span>
+     <dd>
+
+      <p class="para">
+       当该参数为 <b><tt>TRUE</tt></b> 时，将返回 <span class="type"><a href="language.types.array.html" class="type array">array</a></span> 而非 <span class="type"><a href="language.types.object.html" class="type object">object</a></span> 。
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.json-decode-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   Returns an <span class="type"><a href="language.types.object.html" class="type object">object</a></span> or if the optional
+   <i><tt class="parameter">assoc</tt></i> parameter is <b><tt>TRUE</tt></b>, an associative 
+   <span class="type"><a href="language.types.array.html" class="type array">array</a></span> is instead returned.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.json-decode-examples">
+  <h3 class="title">范例</h3>
+  <p class="para">
+   <div class="example" id="example-2922">
+    <p><b>Example #1 <span class="function"><b>json_decode()</b></span> 的例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$json&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'{"a":1,"b":2,"c":3,"d":4,"e":5}'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">json_decode</span><span style="color: #007700">(</span><span style="color: #0000BB">$json</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">json_decode</span><span style="color: #007700">(</span><span style="color: #0000BB">$json</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+object(stdClass)#1 (5) {
+    [&quot;a&quot;] =&gt; int(1)
+    [&quot;b&quot;] =&gt; int(2)
+    [&quot;c&quot;] =&gt; int(3)
+    [&quot;d&quot;] =&gt; int(4)
+    [&quot;e&quot;] =&gt; int(5)
+}
+
+array(5) {
+    [&quot;a&quot;] =&gt; int(1)
+    [&quot;b&quot;] =&gt; int(2)
+    [&quot;c&quot;] =&gt; int(3)
+    [&quot;d&quot;] =&gt; int(4)
+    [&quot;e&quot;] =&gt; int(5)
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.json-decode-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.json-encode.html" class="function" rel="rdfs-seeAlso">json_encode()</a> - 对变量进行 JSON 编码</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.json.html">JSON 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.json-encode.html">json_encode</a></div>
+ <div class="up"><a href="ref.json.html">JSON 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

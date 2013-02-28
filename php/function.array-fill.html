@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>用给定的值填充数组</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-fill-keys.html">array_fill_keys</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-filter.html">array_filter</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-fill" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_fill</h1>
+    <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5)</p><p class="refpurpose"><span class="refname">array_fill</span> &mdash; <span class="dc-title">用给定的值填充数组</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.array-fill-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>array_fill</b></span>
+       ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$start_index</tt></span>
+      , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$num</tt></span>
+      , <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$value</tt></span>
+      )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>array_fill()</b></span> 用 <i><tt class="parameter">value</tt></i>
+     参数的值将一个数组填充 <i><tt class="parameter">num</tt></i> 个条目，键名由
+     <i><tt class="parameter">start_index</tt></i> 参数指定的开始。注意
+     <i><tt class="parameter">num</tt></i> 必须是一个大于零的数值，否则
+     PHP 会发出一条警告。
+    </p>
+    <p class="para">
+     <div class="example" id="example-3873">
+      <p><b>Example #1 <span class="function"><b>array_fill()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_fill</span><span style="color: #007700">(</span><span style="color: #0000BB">5</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">6</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'banana'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>
+       <var class="varname"><var class="varname">$a</var></var> 现在是：
+      </p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [5]  =&gt; banana
+    [6]  =&gt; banana
+    [7]  =&gt; banana
+    [8]  =&gt; banana
+    [9]  =&gt; banana
+    [10] =&gt; banana
+)
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.str-repeat.html" class="function">str_repeat()</a></span> 和 <span class="function"><a href="function.range.html" class="function">range()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-fill-keys.html">array_fill_keys</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-filter.html">array_filter</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

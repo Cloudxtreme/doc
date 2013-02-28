@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>将缓冲内容输出到文件</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.feof.html">feof</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fgetc.html">fgetc</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.fflush" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">fflush</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.1, PHP 5)</p><p class="refpurpose"><span class="refname">fflush</span> &mdash; <span class="dc-title">将缓冲内容输出到文件</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.fflush-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>fflush</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$handle</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   本函数强制将所有缓冲的输出写入
+   <i><tt class="parameter">handle</tt></i> 文件句柄所指向的资源。
+   成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+  </p>
+  <p class="para">文件指针必须是有效的，必须指向由
+<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span> 或 <span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span> 成功打开的文件(并还未由 <span class="function"><a href="function.fclose.html" class="function">fclose()</a></span> 关闭)。</p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.feof.html">feof</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fgetc.html">fgetc</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

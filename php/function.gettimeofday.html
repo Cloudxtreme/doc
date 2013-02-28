@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得当前时间</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.getdate.html">getdate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.gmdate.html">gmdate</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.gettimeofday" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">gettimeofday</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">gettimeofday</span> &mdash; <span class="dc-title">取得当前时间</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.gettimeofday-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <span class="methodname"><b>gettimeofday</b></span>
+    ([ <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$return_float</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   本函数是 gettimeofday(2) 的接口。返回一个关联数组，包含有系统调用返回的数据。
+  </p>
+  <p class="para">
+   自 PHP 5.1.0 起有个可选参数
+   <i><tt class="parameter">return_float</tt></i>，当其设为
+   <b><tt>TRUE</tt></b> 时，<span class="function"><b>gettimeofday()</b></span>
+   会返回一个浮点数。
+  </p>
+  <p class="para">
+   数组中的键为：
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <span class="simpara">
+      &quot;sec&quot; - 自 Unix 纪元起的秒数
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;usec&quot; - 微秒数
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;minuteswest&quot; - 格林威治向西的分钟数
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;dsttime&quot; - 夏令时修正的类型
+     </span>
+    </li>
+   </ul>
+  </p>
+  <p class="para">
+   <div class="example" id="example-596">
+    <p><b>Example #1 <span class="function"><b>gettimeofday()</b></span> example</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">gettimeofday</span><span style="color: #007700">());<br /><br />echo&nbsp;</span><span style="color: #0000BB">gettimeofday</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [sec] =&gt; 1073504408
+    [usec] =&gt; 238215
+    [minuteswest] =&gt; 0
+    [dsttime] =&gt; 1
+)
+
+1073504408.23910
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.getdate.html">getdate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.gmdate.html">gmdate</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

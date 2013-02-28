@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从 FTP 服务器上下载一个文件并保存到本地一个已经打开的文件中</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.ftp-exec.html">ftp_exec</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.ftp-fput.html">ftp_fput</a></div>
+ <div class="up"><a href="ref.ftp.html">FTP 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.ftp-fget" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">ftp_fget</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">ftp_fget</span> &mdash; <span class="dc-title">从 FTP 服务器上下载一个文件并保存到本地一个已经打开的文件中</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.ftp-fget-unknown">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type">bool</span> <span class="methodname"><b>ftp_fget</b></span>
+      ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$ftp_stream</tt></span>
+     , <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$handle</tt></span>
+     , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$remote_file</tt></span>
+     , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$mode</tt></span>
+     [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$resumepos</tt></span>
+    ] )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>ftp_fget()</b></span> 函数用来下载由
+     <i><tt class="parameter">remote_file</tt></i> 指定的文件，并写入到本地已经被打开的一个文件中。参数
+     <i><tt class="parameter">handle</tt></i> 为本地已经打开的文件的句柄。传送模式参数 <i><tt class="parameter">mode</tt></i>
+     必须是 (文本模式) <b><tt>FTP_ASCII</tt></b> 或 (二进制模式) <b><tt>FTP_BINARY</tt></b> 中的一个。
+    </p>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+     <p class="para">
+      参数 <i><tt class="parameter">resumepos</tt></i> 仅适用于 PHP 4.3.0 以上版本.
+     </p>
+    </p></blockquote>
+    <p class="para">
+     成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.ftp-get.html" class="function">ftp_get()</a></span>，<span class="function"><a href="function.ftp-nb-get.html" class="function">ftp_nb_get()</a></span>
+     和 <span class="function"><a href="function.ftp-nb-fget.html" class="function">ftp_nb_fget()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.ftp-exec.html">ftp_exec</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.ftp-fput.html">ftp_fput</a></div>
+ <div class="up"><a href="ref.ftp.html">FTP 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

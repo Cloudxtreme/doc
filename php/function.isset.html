@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>检测变量是否设置</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-string.html">is_string</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.print-r.html">print_r</a></div>
+ <div class="up"><a href="ref.var.html">Variable handling 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.isset" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">isset</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">isset</span> &mdash; <span class="dc-title">检测变量是否设置</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.isset-unknown">
+    <h3 class="title">描述</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">bool</span> <span class="methodname"><b>isset</b></span>
+       ( <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$var</tt></span>
+      [, <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$var</tt></span>
+      [, <span class="methodparam"> <tt class="parameter">$...</tt></span>
+     ]] )</div>
+
+    <p class="simpara">
+     如果 <i><tt class="parameter">var</tt></i> 存在则返回 <b><tt>TRUE</tt></b>，否则返回 <b><tt>FALSE</tt></b>。
+    </p>
+    <p class="para">
+     如果已经使用 <span class="function"><a href="function.unset.html" class="function">unset()</a></span> 
+     释放了一个变量之后，它将不再是 
+     <span class="function"><b>isset()</b></span>。若使用 <span class="function"><b>isset()</b></span>
+     测试一个被设置成 <b><tt>NULL</tt></b> 的变量，将返回 <b><tt>FALSE</tt></b>。同时要注意的是一个 <b><tt>NULL</tt></b> 字节（<i>&quot;\0&quot;</i>）并不等同于
+     PHP 的  <b><tt>NULL</tt></b> 常数。
+    </p>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+     <b>警告</b><br />
+     <p class="para">
+      <span class="function"><b>isset()</b></span> 
+      只能用于变量，因为传递任何其它参数都将造成解析错误。若想检测<a href="language.constants.html" class="link">常量</a>是否已设置，可使用 
+      <span class="function"><a href="function.defined.html" class="function">defined()</a></span> 函数。
+     </p>
+    </p></blockquote>
+    <p class="para">
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$var&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;结果为&nbsp;TRUE，所以后边的文本将被打印出来。<br /></span><span style="color: #007700">if&nbsp;(isset(</span><span style="color: #0000BB">$var</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;</span><span style="color: #DD0000">"This&nbsp;var&nbsp;is&nbsp;set&nbsp;set&nbsp;so&nbsp;I&nbsp;will&nbsp;print."</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;在后边的例子中，我们将使用&nbsp;var_dump&nbsp;输出&nbsp;isset()&nbsp;的返回值。<br /><br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"test"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"anothertest"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset(</span><span style="color: #0000BB">$a</span><span style="color: #007700">)&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;TRUE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">)&nbsp;);&nbsp;</span><span style="color: #FF8000">//&nbsp;TRUE<br /><br /></span><span style="color: #007700">unset&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">)&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;FALSE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">)&nbsp;);&nbsp;</span><span style="color: #FF8000">//&nbsp;FALSE<br /><br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">NULL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset&nbsp;(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">)&nbsp;);&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;FALSE<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     这对于数组中的元素也同样有效：
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$a&nbsp;</span><span style="color: #007700">=&nbsp;array&nbsp;(</span><span style="color: #DD0000">'test'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'hello'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">NULL</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #DD0000">'test'</span><span style="color: #007700">])&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;TRUE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">])&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;FALSE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;isset&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #DD0000">'hello'</span><span style="color: #007700">])&nbsp;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;FALSE<br /><br />//&nbsp;键&nbsp;'hello'&nbsp;的值等于&nbsp;NULL，所以被认为是未置值的。<br />//&nbsp;如果想检测&nbsp;NULL&nbsp;键值，可以试试下边的方法。&nbsp;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">array_key_exists</span><span style="color: #007700">(</span><span style="color: #DD0000">'hello'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">)&nbsp;);&nbsp;</span><span style="color: #FF8000">//&nbsp;TRUE<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    
+    <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">因为是一个语言构造器而不是一个函数，不能被
+<a href="functions.variable-functions.html" class="link">可变函数</a> 调用。
+</span>
+</p></blockquote>
+    
+    <p class="simpara">
+     参见 <span class="function"><a href="function.empty.html" class="function">empty()</a></span>、<span class="function"><a href="function.unset.html" class="function">unset()</a></span>、<span class="function"><a href="function.defined.html" class="function">defined()</a></span>、<span class="function"><a href="function.array-key-exists.html" class="function">array_key_exists()</a></span> 和错误控制 
+     <a href="language.operators.errorcontrol.html" class="link">@</a>
+     运算符。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-string.html">is_string</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.print-r.html">print_r</a></div>
+ <div class="up"><a href="ref.var.html">Variable handling 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

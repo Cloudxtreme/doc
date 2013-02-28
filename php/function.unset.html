@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>释放给定的变量</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.unserialize.html">unserialize</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.var-dump.html">var_dump</a></div>
+ <div class="up"><a href="ref.var.html">Variable handling 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.unset" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">unset</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">unset</span> &mdash; <span class="dc-title">释放给定的变量</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.unset-unknown">
+    <h3 class="title">描述</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type"><span class="type void">void</span></span> <span class="methodname"><b>unset</b></span>
+       ( <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$var</tt></span>
+      [, <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <tt class="parameter">$var</tt></span>
+      [, <span class="methodparam"> <tt class="parameter">$...</tt></span>
+     ]] )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>unset()</b></span> 销毁指定的变量。注意在
+     PHP 3 中，<span class="function"><b>unset()</b></span> 将返回
+     <b><tt>TRUE</tt></b>（实际上是整型值 1），而在 PHP 4
+     中，<span class="function"><b>unset()</b></span> 
+     不再是一个真正的函数：它现在是一个语句。这样就没有了返回值，试图获取
+     <span class="function"><b>unset()</b></span> 的返回值将导致解析错误。
+    </p>
+    <p class="para">
+     <div class="example" id="example-4151">
+      <p><b>Example #1 <span class="function"><b>unset()</b></span> 示例</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;销毁单个变量<br /></span><span style="color: #007700">unset&nbsp;(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;销毁单个数组元素<br /></span><span style="color: #007700">unset&nbsp;(</span><span style="color: #0000BB">$bar</span><span style="color: #007700">[</span><span style="color: #DD0000">'quux'</span><span style="color: #007700">]);<br /><br /></span><span style="color: #FF8000">//&nbsp;销毁一个以上的变量<br /></span><span style="color: #007700">unset&nbsp;(</span><span style="color: #0000BB">$foo1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$foo2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$foo3</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     <span class="function"><b>unset()</b></span> 在函数中的行为会依赖于想要销毁的变量的类型而有所不同。
+    </p>
+    <p class="para">
+     如果在函数中 <span class="function"><b>unset()</b></span> 
+     一个全局变量，则只是局部变量被销毁，而在调用环境中的变量将保持调用
+     <span class="function"><b>unset()</b></span> 之前一样的值。
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">destroy_foo</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$foo</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">$foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'bar'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">destroy_foo</span><span style="color: #007700">();<br />echo&nbsp;</span><span style="color: #0000BB">$foo</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+     上边的例子将输出：
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+bar
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     如果在函数中 <span class="function"><b>unset()</b></span> 
+     一个通过引用传递的变量，则只是局部变量被销毁，而在调用环境中的变量将保持调用
+     <span class="function"><b>unset()</b></span> 之前一样的值。
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">(&amp;</span><span style="color: #0000BB">$bar</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$bar</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"blah"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'something'</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$bar</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$bar</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$bar</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+     上边的例子将输出：
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+something
+something
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     如果在函数中 <span class="function"><b>unset()</b></span> 
+     一个静态变量，那么在函数内部此静态变量将被销毁。但是，当再次调用此函数时，此静态变量将被复原为上次被销毁之前的值。
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">++;<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$a</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+     上边的例子将输出：
+     <div class="informalexample">
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+1
+2
+3
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     如果您想在函数中 <span class="function"><b>unset()</b></span>
+     一个全局变量，可使用 <var class="varname"><var class="varname"><a href="reserved.variables.globals.html" class="classname">$GLOBALS</a></var></var>
+     数组来实现：
+     <div class="informalexample">
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$GLOBALS</span><span style="color: #007700">[</span><span style="color: #DD0000">'bar'</span><span style="color: #007700">]);<br />}<br /><br /></span><span style="color: #0000BB">$bar&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"something"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    
+    <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">因为是一个语言构造器而不是一个函数，不能被
+<a href="functions.variable-functions.html" class="link">可变函数</a> 调用。
+</span>
+</p></blockquote>
+    
+    <p class="para">
+     参见 <span class="function"><a href="function.isset.html" class="function">isset()</a></span> 和
+     <span class="function"><a href="function.empty.html" class="function">empty()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.unserialize.html">unserialize</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.var-dump.html">var_dump</a></div>
+ <div class="up"><a href="ref.var.html">Variable handling 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得本地时间</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.idate.html">idate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.microtime.html">microtime</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.localtime" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">localtime</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">localtime</span> &mdash; <span class="dc-title">取得本地时间</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.localtime-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>localtime</b></span>
+    ([ <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timestamp</tt></span>
+   [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$is_associative</tt></span>
+  ]] )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>localtime()</b></span> 函数返回一个数组，其结构和
+   C 函数调用返回的完全一样。<span class="function"><b>localtime()</b></span>
+   的第一个参数是时间戳，如果没有给出则使用从
+   <span class="function"><a href="function.time.html" class="function">time()</a></span> 返回的当前时间。第二个参数是
+   <i><tt class="parameter">is_associative</tt></i>，如果设为 <b><tt>FALSE</tt></b>
+   或未提供则返回的是普通的数字索引数组。如果该参数设为 <b><tt>TRUE</tt></b> 则
+   <span class="function"><b>localtime()</b></span> 函数返回包含有所有从
+   C 的 localtime 函数调用所返回的不同单元的关联数组。关联数组中不同的键名为：
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_sec&quot; - 秒数
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_min&quot; - 分钟数
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_hour&quot; - 小时
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_mday&quot; - 月份中的第几日
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_mon&quot; - 年份中的第几个月，从 0 开始表示一月
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_year&quot; - 年份，从 1900 开始
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_wday&quot; - 星期中的第几天
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_yday&quot; - 一年中的第几天
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      &quot;tm_isdst&quot; - 夏令时当前是否生效
+     </span>
+    </li>
+   </ul>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    月份从 0（一月）到 11（十二月），星期数从 0（星期天）到 6（星期六）。
+   </span>
+  </p></blockquote>
+  <p class="para">
+   <div class="example" id="example-600">
+    <p><b>Example #1 <span class="function"><a href="function.time.html" class="function">time()</a></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$localtime&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">localtime</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$localtime_assoc&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">localtime</span><span style="color: #007700">(</span><span style="color: #0000BB">time</span><span style="color: #007700">(),&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$localtime</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$localtime_assoc</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; 24
+    [1] =&gt; 3
+    [2] =&gt; 19
+    [3] =&gt; 3
+    [4] =&gt; 3
+    [5] =&gt; 105
+    [6] =&gt; 0
+    [7] =&gt; 92
+    [9] =&gt; 1
+)
+
+Array
+(
+    [tm_sec] =&gt; 24
+    [tm_min] =&gt; 3
+    [tm_hour] =&gt; 19
+    [tm_mday] =&gt; 3
+    [tm_mon] =&gt; 3
+    [tm_year] =&gt; 105
+    [tm_wday] =&gt; 0
+    [tm_yday] =&gt; 92
+    [tm_isdst] =&gt; 1
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.idate.html">idate</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.microtime.html">microtime</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

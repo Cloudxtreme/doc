@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>对数组按照键名逆向排序</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.key.html">key</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.ksort.html">ksort</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.krsort" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">krsort</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">krsort</span> &mdash; <span class="dc-title">对数组按照键名逆向排序</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.krsort-unknown">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type">bool</span> <span class="methodname"><b>krsort</b></span>
+      ( <span class="methodparam"><span class="type">array</span> <tt class="parameter reference">&$array</tt></span>
+     [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$sort_flags</tt></span>
+    ] )</div>
+
+    <p class="para rdfs-comment">
+     对数组按照键名逆向排序，保留键名到数据的关联。主要用于结合数组。
+    </p>
+    <p class="para">
+     成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+    </p>
+    <p class="para">
+     <div class="example" id="example-3944">
+      <p><b>Example #1 <span class="function"><b>krsort()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$fruits&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"d"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"lemon"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"a"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"orange"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"banana"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">"apple"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">krsort</span><span style="color: #007700">(</span><span style="color: #0000BB">$fruits</span><span style="color: #007700">);<br />foreach&nbsp;(</span><span style="color: #0000BB">$fruits&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$val</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$key</span><span style="color: #DD0000">&nbsp;=&nbsp;</span><span style="color: #0000BB">$val</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上例程会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+d = lemon
+c = apple
+b = banana
+a = orange
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     可以用可选参数 <i><tt class="parameter">sort_flags</tt></i> 改变排序的行为，详情见 <span class="function"><a href="function.sort.html" class="function">sort()</a></span>。
+    </p>
+    <p class="simpara">
+     参见 <span class="function"><a href="function.asort.html" class="function">asort()</a></span>，<span class="function"><a href="function.arsort.html" class="function">arsort()</a></span>，<span class="function"><a href="function.ksort.html" class="function">ksort()</a></span>，<span class="function"><a href="function.sort.html" class="function">sort()</a></span>，<span class="function"><a href="function.natsort.html" class="function">natsort()</a></span> 和 <span class="function"><a href="function.rsort.html" class="function">rsort()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.key.html">key</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.ksort.html">ksort</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>测试文件指针是否到了文件结束的位置</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fclose.html">fclose</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fflush.html">fflush</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.feof" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">feof</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">feof</span> &mdash; <span class="dc-title">测试文件指针是否到了文件结束的位置</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.feof-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>feof</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$handle</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   如果文件指针到了 EOF 或者出错时则返回 <b><tt>TRUE</tt></b>，否则返回一个错误（包括 socket
+   超时），其它情况则返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <div class="warning"><b class="warning">Warning</b>
+   <p class="simpara">
+    如果服务器没有关闭由 <span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span> 所打开的连接，<span class="function"><b>feof()</b></span>
+    会一直等待直到超时而返回 <b><tt>TRUE</tt></b>。默认的超时限制是 60 秒，可以使用
+    <span class="function"><a href="function.stream-set-timeout.html" class="function">stream_set_timeout()</a></span> 来改变这个值。
+   </p>
+  </div>
+  <p class="para">文件指针必须是有效的，必须指向由
+<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span> 或 <span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span> 成功打开的文件(并还未由 <span class="function"><a href="function.fclose.html" class="function">fclose()</a></span> 关闭)。</p>
+  <div class="warning"><b class="warning">Warning</b>
+   <p class="para">
+    如果传递的文件指针无效可能会陷入无限循环中，因为 EOF 不会返回 TRUE。
+    <div class="example" id="example-1822">
+     <p><b>Example #1 使用无效文件指针的 <span class="function"><b>feof()</b></span> 例子</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;如果文件不可读取或者不存在，fopen&nbsp;函数返回&nbsp;FALSE<br /></span><span style="color: #0000BB">$file&nbsp;</span><span style="color: #007700">=&nbsp;@</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"no_such_file"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"r"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;来自&nbsp;fopen&nbsp;的&nbsp;FALSE&nbsp;会发出一条警告信息并在这里陷入无限循环<br /></span><span style="color: #007700">while&nbsp;(!</span><span style="color: #0000BB">feof</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">))&nbsp;{<br />}<br /><br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$file</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fclose.html">fclose</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fflush.html">fflush</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

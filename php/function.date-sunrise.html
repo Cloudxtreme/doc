@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回给定的日期与地点的日出时间</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date-sun-info.html">date_sun_info</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.date-sunset.html">date_sunset</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.date-sunrise" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">date_sunrise</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose"><span class="refname">date_sunrise</span> &mdash; <span class="dc-title">返回给定的日期与地点的日出时间</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.date-sunrise-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <span class="methodname"><b>date_sunrise</b></span>
+    ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timestamp</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$format</tt></span>
+   [, <span class="methodparam"><span class="type">float</span> <tt class="parameter">$latitude</tt></span>
+   [, <span class="methodparam"><span class="type">float</span> <tt class="parameter">$longitude</tt></span>
+   [, <span class="methodparam"><span class="type">float</span> <tt class="parameter">$zenith</tt></span>
+   [, <span class="methodparam"><span class="type">float</span> <tt class="parameter">$gmt_offset</tt></span>
+  ]]]]] )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>date_sunrise()</b></span> 返回给定的日期（以
+   <i><tt class="parameter">timestamp</tt></i> 指定）与地点的日出时间。<i><tt class="parameter">latitude</tt></i>，<i><tt class="parameter">longitude</tt></i>
+   和 <i><tt class="parameter">zenith</tt></i> 参数默认值分别为配置选项中的
+   <i>date.default_latitude</i>，<i>date.default_longitude</i>
+   和 <i>date.sunrise_zenith</i>。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">latitude</tt></i> 默认是指北纬。因此如果要指定南纬，必须传递一个负值。同样规则也适用于
+   <i><tt class="parameter">longitude</tt></i>，其默认是指东经。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">gmt_offset</tt></i> 参数的单位是小时。
+  </p>
+  <table class="doctable table">
+   <caption><b><i><tt class="parameter">format</tt></i> 常量</b></caption>
+   
+    <thead valign="middle">
+     <tr valign="middle">
+      <th>常量</th>
+      <th>说明</th>
+      <th>取值举例</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle" class="tbody">
+     <tr valign="middle">
+      <td align="left">SUNFUNCS_RET_STRING</td>
+      <td align="left">以 <span class="type"><a href="language.types.string.html" class="type string">string</a></span> 格式返回结果</td>
+      <td align="left">16:46</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">SUNFUNCS_RET_DOUBLE</td>
+      <td align="left">以 <span class="type"><a href="language.types.float.html" class="type float">float</a></span> 格式返回结果</td>
+      <td align="left">16.78243132</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">SUNFUNCS_RET_TIMESTAMP</td>
+      <td align="left">以 <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span> 格式（时间戳）返回结果</td>
+      <td align="left">1095034606</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+  <p class="para">
+   <div class="example" id="example-589">
+    <p><b>Example #1 <span class="function"><b>date_sunrise()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">/*&nbsp;计算葡萄牙里斯本的日出时间<br />Latitude:&nbsp;&nbsp;北纬&nbsp;38.4&nbsp;度<br />Longitude:&nbsp;西经&nbsp;9&nbsp;度<br />Zenith&nbsp;~=&nbsp;90<br />offset:&nbsp;+1&nbsp;GMT<br />*/<br /><br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"D&nbsp;M&nbsp;d&nbsp;Y"</span><span style="color: #007700">).&nbsp;</span><span style="color: #DD0000">',&nbsp;sunrise&nbsp;time&nbsp;:&nbsp;'&nbsp;</span><span style="color: #007700">.</span><span style="color: #0000BB">date_sunrise</span><span style="color: #007700">(</span><span style="color: #0000BB">time</span><span style="color: #007700">(),&nbsp;</span><span style="color: #0000BB">SUNFUNCS_RET_STRING</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">38.4</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">9</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">90</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Mon Dec 20 2004, sunrise time : 08:54
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.date-sunset.html" class="function">date_sunset()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date-sun-info.html">date_sun_info</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.date-sunset.html">date_sunset</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

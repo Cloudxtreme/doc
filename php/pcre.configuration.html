@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运行时配置</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="pcre.installation.html">安装</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="pcre.resources.html">资源类型</a></div>
+ <div class="up"><a href="pcre.setup.html">安装/配置</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="pcre.configuration" class="section">
+ <h2 class="title">运行时配置</h2>
+ <p class="simpara">
+这些函数的行为受 <var class="filename">php.ini</var> 中的设置影响。
+</p>
+ <p class="para">
+  <table class="doctable table">
+   <caption><b>PCRE配置选项</b></caption>
+   
+    <thead valign="middle">
+     <tr valign="middle">
+      <th>名称</th>
+      <th>默认值</th>
+      <th>可修改范围</th>
+      <th>修改日志</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle" class="tbody">
+     <tr valign="middle">
+      <td align="left"><a href="pcre.configuration.html#ini.pcre.backtrack-limit" class="link">pcre.backtrack_limit</a></td>
+      <td align="left">&quot;100000&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">php 5.2.0可用.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left"><a href="pcre.configuration.html#ini.pcre.recursion-limit" class="link">pcre.recursion_limit</a></td>
+      <td align="left">&quot;100000&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">php 5.2.0可用.</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+  有关 PHP_INI_* 样式的更多详情与定义，见 <a href="configuration.changes.modes.html" class="xref">Where a configuration setting may be set</a>。
+ </p>
+
+ <p class="para">这是配置指令的简短说明。</p>
+
+ <p class="para">
+  <dl>
+
+   <dt id="ini.pcre.backtrack-limit">
+    <span class="term">
+     <i><tt class="parameter">pcre.backtrack_limit</tt></i>
+     <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+    </span>
+    <dd>
+
+     <p class="para">
+      PCRE的回溯限制.
+     </p>
+    </dd>
+
+   </dt>
+
+   <dt id="ini.pcre.recursion-limit">
+    <span class="term">
+     <i><tt class="parameter">pcre.recursion_limit</tt></i>
+     <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+    </span>
+    <dd>
+
+     <p class="para">
+     PCRE的递归限制. 请注意, 如果 讲这个值设置为一个很大的数字, 你可能会消耗掉
+     所有的进程可用堆栈, 最终导致php崩溃(直到达到系统限制的堆栈大小).
+     </p>
+    </dd>
+
+   </dt>
+
+  </dl>
+
+ </p>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="pcre.installation.html">安装</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="pcre.resources.html">资源类型</a></div>
+ <div class="up"><a href="pcre.setup.html">安装/配置</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

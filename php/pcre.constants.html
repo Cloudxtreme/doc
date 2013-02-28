@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>预定义常量</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="pcre.resources.html">资源类型</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="pcre.examples.html">范例</a></div>
+ <div class="up"><a href="book.pcre.html">PCRE</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="pcre.constants" class="appendix">
+ <h1>预定义常量</h1>
+
+ <p class="simpara">下列常量由此扩展定义，且仅在此扩展编译入 PHP 或在运行时动态载入时可用。</p>
+ <table class="doctable table">
+  <caption><b>PREG 常量</b></caption>
+  
+   <thead valign="middle">
+    <tr valign="middle">
+     <th>常量</th>
+     <th>描述</th>
+    </tr>
+
+   </thead>
+
+   <tbody valign="middle" class="tbody">
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_PATTERN_ORDER</tt></b></td>
+     <td align="left">
+     结果按照”规则”排序, 仅用于<span class="function"><a href="function.preg-match-all.html" class="function">preg_match_all()</a></span>, 
+     即<var class="varname"><var class="varname">$matches[0]</var></var>是完整规则的匹配结果, 
+  <var class="varname"><var class="varname">$matches[1]</var></var>是第一个子组匹配的结果, 等等.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_SET_ORDER</tt></b></td>
+     <td align="left">
+     结果按照”集合”排序, 仅用于<span class="function"><a href="function.preg-match-all.html" class="function">preg_match_all()</a></span>, 
+     即<var class="varname"><var class="varname">$matches[0]</var></var>保存第一次匹配结果的所有结果(包含子组)信息, 
+  <var class="varname"><var class="varname">$matches[1]</var></var>保存第二次的结果信息, 等等.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_OFFSET_CAPTURE</tt></b></td>
+     <td align="left">
+     查看<b><tt>PREG_SPLIT_OFFSET_CAPTURE</tt></b>的描述, 这个标记自php 4.3.0起可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_SPLIT_NO_EMPTY</tt></b></td>
+     <td align="left">
+     这个标记告诉<span class="function"><a href="function.preg-split.html" class="function">preg_split()</a></span>进返回非空部分.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_SPLIT_DELIM_CAPTURE</tt></b></td>
+     <td align="left">
+     这个标记告诉<span class="function"><a href="function.preg-split.html" class="function">preg_split()</a></span>同时捕获括号表达式匹配到的内容.
+     这个标记自php 4.0.5开始可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_SPLIT_OFFSET_CAPTURE</tt></b></td>
+     <td align="left">
+     如果设置了这个标记, 每次出现的匹配子串的偏移量也会被返回. 注意, 这会改变返回数组中的值, 
+     每个元素都是由匹配子串作为第0个元素, 它相对目标字符串的偏移量作为第1个元素的数组. 这个
+     标记自php 4.3.0开始可用, 并且只能用于<span class="function"><a href="function.preg-split.html" class="function">preg_split()</a></span>.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_NO_ERROR</tt></b></td>
+     <td align="left">
+     没有匹配错误时调用<span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span>返回. php 5.2.0可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_INTERNAL_ERROR</tt></b></td>
+     <td align="left">
+     如果有PCRE内部错误时调用<span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span>返回. php 5.2.0可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_BACKTRACK_LIMIT_ERROR</tt></b></td>
+     <td align="left">
+     如果调用<a href="pcre.configuration.html#ini.pcre.backtrack-limit" class="link">回溯限制</a>超出, 
+     调用<span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span>时返回. php 5.2.0可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_RECURSION_LIMIT_ERROR</tt></b></td>
+     <td align="left">
+     如果<a href="pcre.configuration.html#ini.pcre.recursion-limit" class="link">递归限制</a>超出, 
+     调用<span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span>时返回. php 5.2.0可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_BAD_UTF8_ERROR</tt></b></td>
+     <td align="left">
+     如果最后一个错误时由于异常的utf-8数据(仅在运行在
+     <a href="reference.pcre.pattern.modifiers.html" class="link">UTF-8 模式</a>正则表达式下可用.)
+  导致的, 调用<span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span>返回. php 5.2.0可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PREG_BAD_UTF8_OFFSET_ERROR</tt></b></td>
+     <td align="left">
+     如果偏移量与合法的urf-8代码不匹配(仅在运行在
+     <a href="reference.pcre.pattern.modifiers.html" class="link">UTF-8 模式</a>正则表达式下可用.).
+  调用<span class="function"><a href="function.preg-last-error.html" class="function">preg_last_error()</a></span>返回. php 5.2.0可用.
+     </td>
+    </tr>
+
+    <tr valign="middle">
+     <td align="left"><b><tt>PCRE_VERSION</tt></b></td>
+     <td align="left">
+     PCRE版本号和发布日期(比如: &quot;<i>7.0 18-Dec-2006</i>&quot;). php 5.2.4可用.
+     </td>
+    </tr>
+
+   </tbody>
+  
+ </table>
+
+</div>
+<hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="pcre.resources.html">资源类型</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="pcre.examples.html">范例</a></div>
+ <div class="up"><a href="book.pcre.html">PCRE</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

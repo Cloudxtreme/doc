@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>对图像使用过滤器</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagefilltoborder.html">imagefilltoborder</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagefontheight.html">imagefontheight</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagefilter" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagefilter</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose"><span class="refname">imagefilter</span> &mdash; <span class="dc-title">对图像使用过滤器</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagefilter-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>imagefilter</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$src_im</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$filtertype</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$arg1</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$arg2</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$arg3</tt></span>
+  ]]] )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>imagefilter()</b></span> 把过滤器
+   <i><tt class="parameter">filtertype</tt></i> 应用到图像上，在需要时使用
+   <i><tt class="parameter">arg1</tt></i>，<i><tt class="parameter">arg2</tt></i> 和
+   <i><tt class="parameter">arg3</tt></i>。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">filtertype</tt></i> 可以是下列中的一个：
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_NEGATE</tt></i>：将图像中所有颜色反转。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_GRAYSCALE</tt></i>：将图像转换为灰度的。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_BRIGHTNESS</tt></i>：改变图像的亮度。用
+      <i><tt class="parameter">arg1</tt></i> 设定亮度级别。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_CONTRAST</tt></i>：改变图像的对比度。用
+      <i><tt class="parameter">arg1</tt></i> 设定对比度级别。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_COLORIZE</tt></i>：与
+      <i><tt class="parameter">IMG_FILTER_GRAYSCALE</tt></i> 类似，不过可以指定颜色。用
+      <i><tt class="parameter">arg1</tt></i>，<i><tt class="parameter">arg2</tt></i> 和
+      <i><tt class="parameter">arg3</tt></i> 分别指定
+      <i><tt class="parameter">red</tt></i>，<i><tt class="parameter">blue</tt></i> 和
+      <i><tt class="parameter">green</tt></i>。每种颜色范围是 0 到 255。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_EDGEDETECT</tt></i>：用边缘检测来突出图像的边缘。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_EMBOSS</tt></i>：使图像浮雕化。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_GAUSSIAN_BLUR</tt></i>：用高斯算法模糊图像。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_SELECTIVE_BLUR</tt></i>：模糊图像。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_MEAN_REMOVAL</tt></i>：用平均移除法来达到轮廓效果。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      <i><tt class="parameter">IMG_FILTER_SMOOTH</tt></i>：使图像更柔滑。用
+      <i><tt class="parameter">arg1</tt></i> 设定柔滑级别。
+     </span>
+    </li>
+   </ul>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数仅在与 GD 库捆绑编译的 PHP 版本中可用。</span></p></blockquote>
+  <p class="para">
+   成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+  </p>
+  <p class="para">
+   <div class="example" id="example-2583">
+    <p><b>Example #1 <span class="function"><b>imagefilter()</b></span> 灰度例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$im&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #DD0000">'dave.png'</span><span style="color: #007700">);<br />if&nbsp;(</span><span style="color: #0000BB">$im&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">imagefilter</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">IMG_FILTER_GRAYSCALE</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Image&nbsp;converted&nbsp;to&nbsp;grayscale.'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'dave.png'</span><span style="color: #007700">);<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Conversion&nbsp;to&nbsp;grayscale&nbsp;failed.'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="example-2584">
+    <p><b>Example #2 <span class="function"><b>imagefilter()</b></span> 亮度例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$im&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #DD0000">'sean.png'</span><span style="color: #007700">);<br />if&nbsp;(</span><span style="color: #0000BB">$im&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">imagefilter</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">IMG_FILTER_BRIGHTNESS</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Image&nbsp;brightness&nbsp;changed.'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'sean.png'</span><span style="color: #007700">);<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Image&nbsp;brightness&nbsp;change&nbsp;failed.'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="example-2585">
+    <p><b>Example #3 <span class="function"><b>imagefilter()</b></span> 上彩例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$im&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #DD0000">'philip.png'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/*&nbsp;R,&nbsp;G,&nbsp;B,&nbsp;so&nbsp;0,&nbsp;255,&nbsp;0&nbsp;is&nbsp;green&nbsp;*/<br /></span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$im&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">imagefilter</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">IMG_FILTER_COLORIZE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Image&nbsp;successfully&nbsp;shaded&nbsp;green.'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'philip.png'</span><span style="color: #007700">);<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Green&nbsp;shading&nbsp;failed.'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagefilltoborder.html">imagefilltoborder</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagefontheight.html">imagefontheight</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

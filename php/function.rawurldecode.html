@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>对已编码的 URL 字符串进行解码</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.parse-url.html">parse_url</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.rawurlencode.html">rawurlencode</a></div>
+ <div class="up"><a href="ref.url.html">URL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.rawurldecode" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">rawurldecode</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">rawurldecode</span> &mdash; <span class="dc-title">对已编码的 URL 字符串进行解码</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.rawurldecode-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>rawurldecode</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$str</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   返回字符串，此字符串中百分号（<i>%</i>）后跟两位十六进制数的序列都将被替换成原义字符。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3205">
+    <p><b>Example #1 <span class="function"><b>rawurldecode()</b></span> 示例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">rawurldecode</span><span style="color: #007700">(</span><span style="color: #DD0000">'foo%20bar%40baz'</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;foo&nbsp;bar@baz<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    <span class="function"><b>rawurldecode()</b></span> 不会把加号（&#039;+&#039;）解码为空格，而
+    <span class="function"><a href="function.urldecode.html" class="function">urldecode()</a></span> 可以。
+   </p>
+  </p></blockquote>
+  <p class="simpara">
+   参见 <span class="function"><a href="function.rawurlencode.html" class="function">rawurlencode()</a></span>，<span class="function"><a href="function.urldecode.html" class="function">urldecode()</a></span>
+   和 <span class="function"><a href="function.urlencode.html" class="function">urlencode()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.parse-url.html">parse_url</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.rawurlencode.html">rawurlencode</a></div>
+ <div class="up"><a href="ref.url.html">URL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

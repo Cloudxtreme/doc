@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运行时配置</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="memcache.installation.html">安装</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="memcache.resources.html">资源类型</a></div>
+ <div class="up"><a href="memcache.setup.html">安装/配置</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="memcache.ini" class="section">
+ <h2 class="title">运行时配置</h2>
+ <p class="simpara">
+这些函数的行为受 <var class="filename">php.ini</var> 中的设置影响。
+</p>
+ <p class="para">
+  <table class="doctable table">
+   <caption><b>Memcache配置选项</b></caption>
+   
+    <thead valign="middle">
+     <tr valign="middle">
+      <th>Name</th>
+      <th>Default</th>
+      <th>Changeable</th>
+      <th>Changelog</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle" class="tbody">
+     <tr valign="middle">
+      <td align="left"><a href="memcache.ini.html#ini.memcache.allow-failover" class="link">memcache.allow_failover</a></td>
+      <td align="left">&quot;1&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Available since memcache 2.0.2.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left"><a href="memcache.ini.html#ini.memcache.max-failover-attempts" class="link">memcache.max_failover_attempts</a></td>
+      <td align="left">&quot;20&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Available since memcache 2.1.0.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left"><a href="memcache.ini.html#ini.memcache.chunk-size" class="link">memcache.chunk_size</a></td>
+      <td align="left">&quot;8192&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Available since memcache 2.0.2.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left"><a href="memcache.ini.html#ini.memcache.default-port" class="link">memcache.default_port</a></td>
+      <td align="left">&quot;11211&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Available since memcache 2.0.2.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left"><a href="memcache.ini.html#ini.memcache.hash-strategy" class="link">memcache.hash_strategy</a></td>
+      <td align="left">&quot;standard&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Available since memcache 2.2.0.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left"><a href="memcache.ini.html#ini.memcache.hash-function" class="link">memcache.hash_function</a></td>
+      <td align="left">&quot;crc32&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Available since memcache 2.2.0.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">session.save_handler</td>
+      <td align="left">&quot;files&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Supported since memcache 2.1.2</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">session.save_path</td>
+      <td align="left">&quot;&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">Supported since memcache 2.1.2</td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+  有关 PHP_INI_* 样式的更多详情与定义，见 <a href="configuration.changes.modes.html" class="xref">Where a configuration setting may be set</a>。
+ </p>
+
+<p class="para">这是配置指令的简短说明。</p>
+
+<p class="para">
+ <dl>
+
+  
+  <dt id="ini.memcache.allow-failover">
+   <span class="term">
+    <i><tt class="parameter">memcache.allow_failover</tt></i>
+    <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+     是否在发生错误时（对用户）透明的转移到其他服务器。
+    </p>
+   </dd>
+
+  </dt>
+
+  
+  <dt id="ini.memcache.max-failover-attempts">
+   <span class="term">
+    <i><tt class="parameter">memcache.max_failover_attempts</tt></i>
+    <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+    定义在写入和获取数据时最多尝试的服务器次数（即：故障转移最大尝试数），仅和
+    memcache.allow_failover结合使用。
+    </p>
+   </dd>
+
+  </dt>
+
+  
+  <dt id="ini.memcache.chunk-size">
+   <span class="term">
+    <i><tt class="parameter">memcache.chunk_size</tt></i>
+    <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+    数据传输块大小，这个值越小网络I/O次数越多，如果发现莫名的速度降低， 可以尝试将此值调至32768。
+    </p>
+   </dd>
+
+  </dt>
+
+  
+  <dt id="ini.memcache.default-port">
+   <span class="term">
+    <i><tt class="parameter">memcache.default_port</tt></i>
+    <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+    在尝试连接memcache的时候如果没有单独指定端口默认使用的TCP端口号。
+    </p>
+   </dd>
+
+  </dt>
+
+
+  <dt id="ini.memcache.hash-strategy">
+   <span class="term">
+    <i><tt class="parameter">memcache.hash_strategy</tt></i>
+    <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+    控制key到服务器的映射（分布式）策略。值 
+     <i>consistent</i>允许服务器增减而不会（大量）导致健的重新映射
+     （译注：参见http://tech.idv2.com/2008/07/24/memcached-004/），设置为
+     <i>standard</i>则使用余数方式进行key的映射。
+    </p>
+   </dd>
+
+  </dt>
+
+  
+  <dt id="ini.memcache.hash-function">
+   <span class="term">
+    <i><tt class="parameter">memcache.hash_function</tt></i>
+    <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+    控制在key-server映射时使用哪个hash函数<i>crc32</i> 
+    标明使用标准CRC32进行hash，<i>fnv</i>则说明使用FNV-1a。
+    </p>
+   </dd>
+
+  </dt>
+
+
+  <dt id="ini.memcache.session-handler">
+   <span class="term">
+    <i><tt class="parameter">session.save_handler</tt></i>
+    <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+    当值为<i>memcache</i>时标记使用memcache作为session处理器。
+    </p>
+   </dd>
+
+  </dt>
+
+
+  <dt id="ini.memcache.save-path">
+   <span class="term">
+    <i><tt class="parameter">session.save_path</tt></i>
+    <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+   </span>
+   <dd>
+
+    <p class="para">
+    定义一个逗号分割的用于session存储的服务器url列表，例如：
+     <i>&quot;tcp://host1:11211, tcp://host2:11211&quot;</i>.
+    </p>
+    <p class="para">
+    每个url可以包含参数，这些参数于方法<span class="function"><a href="memcache.addserver.html" class="function">Memcache::addServer()</a></span>的参数相同。比如： 
+     <i>&quot;tcp://host1:11211?persistent=1&amp;weight=1&amp;timeout=1&amp;retry_interval=15&quot;</i>
+    </p>
+   </dd>
+
+  </dt>
+
+
+ </dl>
+
+</p>
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="memcache.installation.html">安装</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="memcache.resources.html">资源类型</a></div>
+ <div class="up"><a href="memcache.setup.html">安装/配置</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

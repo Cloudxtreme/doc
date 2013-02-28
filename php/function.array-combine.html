@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>创建一个数组，用一个数组的值作为其键名，另一个数组的值作为其值</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-chunk.html">array_chunk</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-count-values.html">array_count_values</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-combine" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_combine</h1>
+    <p class="verinfo">(PHP 5)</p><p class="refpurpose"><span class="refname">array_combine</span> &mdash; <span class="dc-title">
+     创建一个数组，用一个数组的值作为其键名，另一个数组的值作为其值
+    </span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.array-combine-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>array_combine</b></span>
+       ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$keys</tt></span>
+      , <span class="methodparam"><span class="type">array</span> <tt class="parameter">$values</tt></span>
+      )</div>
+
+    <p class="para rdfs-comment">
+     返回一个 <span class="type"><a href="language.types.array.html" class="type array">array</a></span>，用来自
+     <i><tt class="parameter">keys</tt></i> 数组的值作为键名，来自
+     <i><tt class="parameter">values</tt></i> 数组的值作为相应的值。
+    </p>
+    <p class="para">
+     如果两个数组的单元数不同或者数组为空时返回 <b><tt>FALSE</tt></b>。
+    </p>
+    <p class="para">
+     <div class="example" id="example-3865">
+      <p><b>Example #1 简单的 <span class="function"><b>array_combine()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$a&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'green'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'red'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'yellow'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'avocado'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'apple'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'banana'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_combine</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上例程会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [green]  =&gt; avocado
+    [red]    =&gt; apple
+    [yellow] =&gt; banana
+)
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.array-merge.html" class="function">array_merge()</a></span>，<span class="function"><a href="function.array-walk.html" class="function">array_walk()</a></span>
+     和 <span class="function"><a href="function.array-values.html" class="function">array_values()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-chunk.html">array_chunk</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-count-values.html">array_count_values</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

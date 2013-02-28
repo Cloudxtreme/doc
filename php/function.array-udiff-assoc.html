@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>带索引检查计算数组的差集，用回调函数比较数据</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-sum.html">array_sum</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-udiff-uassoc.html">array_udiff_uassoc</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-udiff-assoc" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">array_udiff_assoc</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose"><span class="refname">array_udiff_assoc</span> &mdash; <span class="dc-title">带索引检查计算数组的差集，用回调函数比较数据</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.array-udiff-assoc-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>array_udiff_assoc</b></span>
+    ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array1</tt></span>
+   , <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array2</tt></span>
+   [, <span class="methodparam"><span class="type">array</span> <tt class="parameter">$ ...</tt></span>
+   ], <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.callback" class="type callback">callback</a></span> <tt class="parameter">$data_compare_func</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>array_udiff_assoc()</b></span> 返回一个数组，该数组包括了所有在
+   <i><tt class="parameter">array1</tt></i> 中但是不在任何其它参数数组中的值。注意和
+   <span class="function"><a href="function.array-diff.html" class="function">array_diff()</a></span> 与 <span class="function"><a href="function.array-udiff.html" class="function">array_udiff()</a></span>
+   不同的是键名也用于比较。数组数据的比较是用用户提供的回调函数进行的。在此方面和
+   <span class="function"><a href="function.array-diff-assoc.html" class="function">array_diff_assoc()</a></span> 的行为正好相反，后者是用内部函数进行比较的。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3914">
+    <p><b>Example #1 <span class="function"><b>array_udiff_assoc()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">cr&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;</span><span style="color: #0000BB">$priv_member</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">$val</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">priv_member&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$val</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">comp_func_cr</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">priv_member&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">priv_member</span><span style="color: #007700">)&nbsp;return&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(</span><span style="color: #0000BB">$a</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">priv_member&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">priv_member</span><span style="color: #007700">)?&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">:-</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"0.1"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">9</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"0.5"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">12</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">23</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">4</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">2&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(-</span><span style="color: #0000BB">15</span><span style="color: #007700">),);<br /></span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"0.2"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">9</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"0.5"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">22</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">3</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(</span><span style="color: #0000BB">4</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">2&nbsp;</span><span style="color: #007700">=&gt;&nbsp;new&nbsp;</span><span style="color: #0000BB">cr</span><span style="color: #007700">(-</span><span style="color: #0000BB">15</span><span style="color: #007700">),);<br /><br /></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_udiff_assoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">,&nbsp;array(</span><span style="color: #DD0000">"cr"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"comp_func_cr"</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0.1] =&gt; cr Object
+        (
+            [priv_member:private] =&gt; 9
+        )
+
+    [0.5] =&gt; cr Object
+        (
+            [priv_member:private] =&gt; 12
+        )
+
+    [0] =&gt; cr Object
+        (
+            [priv_member:private] =&gt; 23
+        )
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="simpara">
+   上例中可以看到键值对 <i>&quot;1&quot; =&gt; new cr(4)</i>
+   同时出现在两个数组中因此不在本函数的输出中。
+  </p>
+  <p class="simpara">
+   此比较是通过用户提供的回调函数来进行的。如果认为第一个参数小于，等于，或大于第二个参数时必须分别返回一个小于零，等于零，或大于零的整数。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    注意本函数只检查了多维数组中的一维。当然，可以用
+    <i>array_udiff_assoc($array1[0], $array2[0], &quot;some_comparison_func&quot;);</i>
+    来检查更深的维度。
+   </span>
+  </p></blockquote>
+  <p class="para">
+   参见
+   <span class="function"><a href="function.array-diff.html" class="function">array_diff()</a></span>，<span class="function"><a href="function.array-diff-assoc.html" class="function">array_diff_assoc()</a></span>，<span class="function"><a href="function.array-diff-uassoc.html" class="function">array_diff_uassoc()</a></span>，<span class="function"><a href="function.array-udiff.html" class="function">array_udiff()</a></span>，<span class="function"><a href="function.array-udiff-uassoc.html" class="function">array_udiff_uassoc()</a></span>，<span class="function"><a href="function.array-intersect.html" class="function">array_intersect()</a></span>，<span class="function"><a href="function.array-intersect-assoc.html" class="function">array_intersect_assoc()</a></span>，<span class="function"><a href="function.array-uintersect.html" class="function">array_uintersect()</a></span>，<span class="function"><a href="function.array-uintersect-assoc.html" class="function">array_uintersect_assoc()</a></span>
+   和
+   <span class="function"><a href="function.array-uintersect-uassoc.html" class="function">array_uintersect_uassoc()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-sum.html">array_sum</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-udiff-uassoc.html">array_udiff_uassoc</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>安装</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="mysql.requirements.html">需求</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="mysql.configuration.html">运行时配置</a></div>
+ <div class="up"><a href="mysql.setup.html">安装/配置</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="mysql.installation" class="section">
+ <h2 class="title">安装</h2>
+
+ <p class="para" id="mysql.configure">
+  编译时，只要使用
+  <strong class="option configure">--with-mysql[=DIR]</strong>
+
+  配置选项即可，其中可选的
+  <i>[DIR]</i> 指向 MySQL 的安装目录。
+ </p>
+ <p class="para">
+  虽然本 MySQL 扩展库兼容 MySQL 4.1.0
+  及其以后版本，但是它不支持这些版本提供的额外功能。要使用这些功能，请使用
+  <a href="ref.mysqli.html" class="link">MySQLi</a> 扩展库。
+ </p>
+ <p class="para">
+  如果要同时安装 mysql 扩展库和 mysqli 扩展库，必须使用同一个客户端库以避免任何冲突。
+ </p>
+
+ <div class="section" id="mysql.installation.linux">
+  <h2 class="title">在 Linux 系统下安装</h2>
+  <div class="section">
+   <h2 class="title">PHP 4</h2>
+   <p class="para">
+    默认开启了 <strong class="option configure">--with-mysql</strong>
+
+    选项。此默认行为可以用
+    <strong class="option configure">--without-mysql</strong>
+
+    配置选项来禁止。如果启用 MySQL 而不指定安装目录的话，PHP
+    将使用绑定的 MySQL 客户端连接库。
+   </p>
+   <p class="para">
+    还有其它应用程序使用 MySQL（例如
+    auth-mysql）的用户不要用绑定的库，而要指定 MySQL 的安装目录，如这样：<strong class="option configure">--with-mysql=/path/to/mysql</strong>
+。这将强制
+    PHP 使用随 MySQL 安装的客户端连接库，就可以避免任何冲突。
+   </p>
+  </div>
+  <div class="section">
+   <h2 class="title">PHP 5+</h2>
+   <p class="para">
+    MySQL 默认未启用，也没有绑定的 MySQL 库。其原因见此
+    <a href="faq.databases.html#faq.databases.mysql.php5" class="link">FAQ</a>。使用
+    <strong class="option configure">--with-mysql[=DIR]</strong>
+
+    配置选项来加入 MySQL 的支持。可以从
+    <a href="http://www.mysql.com/" class="link external">&raquo;&nbsp;MySQL</a>
+    下载<em class="emphasis">头文件和库</em>。
+   </p>
+  </div>
+ </div>
+
+ <div class="section" id="mysql.installation.windows">
+  <h2 class="title">在 Windows 系统下安装</h2>
+  <div class="section">
+   <h2 class="title">PHP 4</h2>
+   <p class="para">
+    PHP MySQL 扩展已经编译入 PHP。
+   </p>
+  </div>
+  <div class="section">
+   <h2 class="title">PHP 5+</h2>
+   <p class="para">
+    MySQL 默认未启用，因此必须在 <var class="filename">php.ini</var> 中激活
+    <var class="filename">php_mysql.dll</var> 动态连接库。此外，PHP
+    还需要访问 MySQL 客户端连接库。PHP 的 Windows
+    发行版包括了一个
+    <var class="filename">libmysql.dll</var>，为了让 PHP 能和
+    MySQL 对话，此文件必须放在 Windows 的系统路径
+    <span class="envar">PATH</span> 中。怎样做见 FAQ
+    中的“<a href="faq.installation.html#faq.installation.addtopath" class="link">怎样把 PHP
+    目录加入到 Windows 路径中</a>”。尽管将
+    <var class="filename">libmysql.dll</var> 拷贝到 Windows
+    系统目录中也可以（因为系统目录默认在系统路径
+    <span class="envar">PATH</span> 中），但不推荐这样做。
+   </p>
+   <p class="para">
+    要激活任何 PHP 扩展库（例如
+    <var class="filename">php_mysql.dll</var>），PHP 指令
+    <a href="ini.core.html#ini.extension-dir" class="link">extension_dir</a>
+    要被设为 PHP 扩展库所在的目录。参见<a href="install.windows.manual.html" class="link">手工 Windows
+    安装指南</a>。PHP 5 下 extension_dir 取值的一个例子是
+    <i>c:\php\ext</i>。
+   </p>
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     如果启动 web 服务器时出现类似如下的错误：<i>&quot;Unable
+     to load dynamic library &#039;./php_mysql.dll&#039;&quot;</i>，这是因为系统找不到
+     <var class="filename">php_mysql.dll</var> 和／或
+     <var class="filename">libmysql.dll</var>。
+    </p>
+   </p></blockquote>
+  </div>
+ </div>
+
+ <div class="section" id="mysql.installation.notes">
+  <h2 class="title">MySQL 安装注意事项</h2>
+   <div class="warning"><b class="warning">Warning</b>
+    <p class="para">
+     当同时加在本扩展库和 recode 扩展库时 PHP 可能会崩溃。更多信息见
+     <a href="ref.recode.html" class="link">recode</a> 扩展库。
+    </p>
+   </div>
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     如果需要不同于
+     <em class="emphasis">latin</em>（默认值）的字符集，必须安装外部的（非绑定的）已编译入所需字符集支持的
+     libmysql。
+    </p>
+   </p></blockquote>
+ </div>
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="mysql.requirements.html">需求</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="mysql.configuration.html">运行时配置</a></div>
+ <div class="up"><a href="mysql.setup.html">安装/配置</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

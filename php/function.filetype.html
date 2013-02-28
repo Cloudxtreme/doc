@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得文件类型</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.filesize.html">filesize</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.flock.html">flock</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.filetype" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">filetype</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">filetype</span> &mdash; <span class="dc-title">取得文件类型</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.filetype-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>filetype</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   返回文件的类型。可能的值有
+   fifo，char，dir，block，link，file 和 unknown。
+  </p>
+  <p class="para">
+   如果出错则返回 <b><tt>FALSE</tt></b>。如果 stat 调用失败或者文件类型未知的话
+   <span class="function"><b>filetype()</b></span> 还会产生一个 <b><tt>E_NOTICE</tt></b> 消息。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数的结果会被缓存。参见
+<span class="function"><a href="function.clearstatcache.html" class="function">clearstatcache()</a></span> 以获得更多细节。</span></p></blockquote>
+  <div class="tip"><b class="tip">Tip</b><p class="simpara">自 PHP 5.0.0 起, 此函数也用于<em class="emphasis">某些</em>
+URL 包装器。请参见 <a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>以获得支持 <span class="function"><a href="function.stat.html" class="function">stat()</a></span> 系列函数功能的包装器列表。</p></div>
+  <p class="para">
+   <div class="example" id="example-1833">
+    <p><b>Example #1 <span class="function"><b>filetype()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">filetype</span><span style="color: #007700">(</span><span style="color: #DD0000">'/etc/passwd'</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;file<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">filetype</span><span style="color: #007700">(</span><span style="color: #DD0000">'/etc/'</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;dir<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="simpara">
+   参见
+   <span class="function"><a href="function.is-dir.html" class="function">is_dir()</a></span>，<span class="function"><a href="function.is-file.html" class="function">is_file()</a></span>，<span class="function"><a href="function.is-link.html" class="function">is_link()</a></span>，<span class="function"><a href="function.file-exists.html" class="function">file_exists()</a></span>，<span class="function"><a href="function.stat.html" class="function">stat()</a></span>
+   和 <span class="function"><a href="function.mime-content-type.html" class="function">mime_content_type()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.filesize.html">filesize</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.flock.html">flock</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

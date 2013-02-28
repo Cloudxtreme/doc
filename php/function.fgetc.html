@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从文件指针中读取字符</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fflush.html">fflush</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fgetcsv.html">fgetcsv</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.fgetc" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">fgetc</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">fgetc</span> &mdash; <span class="dc-title">从文件指针中读取字符</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.fgetc-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>fgetc</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$handle</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   返回一个包含有一个字符的字符串，该字符从 <i><tt class="parameter">handle</tt></i>
+   指向的文件中得到。碰到 EOF 则返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <p class="para">文件指针必须是有效的，必须指向由
+<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span> 或 <span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span> 成功打开的文件(并还未由 <span class="function"><a href="function.fclose.html" class="function">fclose()</a></span> 关闭)。</p>
+  <div class="warning"><b class="warning">Warning</b><p class="simpara">此函数可能返回布尔值
+<b><tt>FALSE</tt></b>，但也可能返回等同于 <b><tt>FALSE</tt></b> 的非布尔值，例如 <i>0</i> 或
+&quot;&quot;(空串)。请阅读 <a href="language.types.boolean.html" class="link">布尔类型</a>章节以获取更多信息。应使用 <a href="language.operators.comparison.html" class="link">===
+运算符</a> 来测试此函数的返回值。</p></div>
+  <p class="para">
+   <div class="example" id="example-1823">
+    <p><b>Example #1 <span class="function"><b>fgetc()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$fp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">'somefile.txt'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'</span><span style="color: #007700">);<br />if&nbsp;(!</span><span style="color: #0000BB">$fp</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Could&nbsp;not&nbsp;open&nbsp;file&nbsp;somefile.txt'</span><span style="color: #007700">;<br />}<br />while&nbsp;(</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">!==&nbsp;(</span><span style="color: #0000BB">$char&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fgetc</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">)))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$char</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数可安全用于二进制对象。</span></p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.fread.html" class="function">fread()</a></span>，<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>，<span class="function"><a href="function.popen.html" class="function">popen()</a></span>，<span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span>
+   和 <span class="function"><a href="function.fgets.html" class="function">fgets()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.fflush.html">fflush</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fgetcsv.html">fgetcsv</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

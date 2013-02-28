@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>把数组中的一部分去掉并用其它值取代</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-slice.html">array_slice</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-sum.html">array_sum</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-splice" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_splice</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">array_splice</span> &mdash; <span class="dc-title">
+     把数组中的一部分去掉并用其它值取代
+    </span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.array-splice-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>array_splice</b></span>
+       ( <span class="methodparam"><span class="type">array</span> <tt class="parameter reference">&$input</tt></span>
+      , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$offset</tt></span>
+      [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$length</tt></span>
+      [, <span class="methodparam"><span class="type">array</span> <tt class="parameter">$
+        replacement
+       </tt></span>
+     ]] )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>array_splice()</b></span> 把 <i><tt class="parameter">input</tt></i> 数组中由
+     <i><tt class="parameter">offset</tt></i> 和 <i><tt class="parameter">length</tt></i>
+     指定的单元去掉，如果提供了 <i><tt class="parameter">replacement</tt></i> 参数，则用
+     <i><tt class="parameter">replacement</tt></i>
+     数组中的单元取代。返回一个包含有被移除单元的数组。注意
+     <i><tt class="parameter">input</tt></i> 中的数字键名不被保留。
+    </p>
+    <p class="para">
+     如果 <i><tt class="parameter">offset</tt></i> 为正，则从 <i><tt class="parameter">input</tt></i>
+     数组中该值指定的偏移量开始移除。如果 <i><tt class="parameter">offset</tt></i>
+     为负，则从 <i><tt class="parameter">input</tt></i> 末尾倒数该值指定的偏移量开始移除。
+    </p>
+    <p class="para">
+     如果省略 <i><tt class="parameter">length</tt></i>，则移除数组中从 <i><tt class="parameter">offset</tt></i>
+     到结尾的所有部分。如果指定了 <i><tt class="parameter">length</tt></i>
+     并且为正值，则移除这么多单元。如果指定了 <i><tt class="parameter">length</tt></i>
+     并且为负值，则移除从 <i><tt class="parameter">offset</tt></i> 到数组末尾倒数
+     <i><tt class="parameter">length</tt></i> 为止中间所有的单元。小窍门：当给出了
+     <i><tt class="parameter">replacement</tt></i> 时要移除从 <i><tt class="parameter">offset</tt></i>
+     到数组末尾所有单元时，用 <i>count($input)</i> 作为 <i><tt class="parameter">length</tt></i>。
+    </p>
+    <p class="para">
+     如果给出了 <i><tt class="parameter">replacement</tt></i> 数组，则被移除的单元被此数组中的单元替代。如果
+     <i><tt class="parameter">offset</tt></i> 和 <i><tt class="parameter">length</tt></i>
+     的组合结果是不会移除任何值，则 <i><tt class="parameter">replacement</tt></i>
+     数组中的单元将被插入到 <i><tt class="parameter">offset</tt></i>
+     指定的位置。注意替换数组中的键名不保留。如果用来替换的值只是一个单元，那么不需要给它加上
+     <i>array()</i>，除非该单元本身就是一个数组。
+    </p>
+    <p class="para">
+     以下表达式以同样方式修改了 <var class="varname"><var class="varname">$input</var></var>：
+     <table class="doctable table">
+      <caption><b><span class="function"><b>array_splice()</b></span> 等价表达式</b></caption>
+      
+       <tbody valign="middle" class="tbody">
+        <tr valign="middle">
+         <td align="left">
+          array_push($input, $x, $y)
+         </td>
+         <td align="left">
+          array_splice($input, count($input), 0, array($x, $y))
+         </td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">
+          array_pop($input)
+         </td>
+         <td align="left">
+          array_splice($input, -1)
+         </td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">
+          array_shift($input)
+         </td>
+         <td align="left">
+          array_splice($input, 0, 1)
+         </td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">
+          array_unshift($input, $x, $y)
+         </td>
+         <td align="left">
+          array_splice($input, 0, 0, array($x, $y))
+         </td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">
+          $input[$x] = $y // 对于键名和偏移量等值的数组
+         </td>
+         <td align="left">
+          array_splice($input, $x, 1, $y)
+         </td>
+        </tr>
+
+       </tbody>
+      
+     </table>
+
+    </p>
+    <p class="para">
+     返回一个包含被移除单元的数组。
+    </p>
+    <p class="para">
+     <div class="example" id="example-3912">
+      <p><b>Example #1 <span class="function"><b>array_splice()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"yellow"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_splice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;$input&nbsp;is&nbsp;now&nbsp;array("red",&nbsp;"green")<br /><br /></span><span style="color: #0000BB">$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"yellow"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_splice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;$input&nbsp;is&nbsp;now&nbsp;array("red",&nbsp;"yellow")<br /><br /></span><span style="color: #0000BB">$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"yellow"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_splice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"orange"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;$input&nbsp;is&nbsp;now&nbsp;array("red",&nbsp;"orange")<br /><br /></span><span style="color: #0000BB">$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"yellow"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_splice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;array(</span><span style="color: #DD0000">"black"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"maroon"</span><span style="color: #007700">));<br /></span><span style="color: #FF8000">//&nbsp;$input&nbsp;is&nbsp;now&nbsp;array("red",&nbsp;"green",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"blue",&nbsp;"black",&nbsp;"maroon")<br /><br /></span><span style="color: #0000BB">$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"yellow"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_splice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"purple"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;$input&nbsp;is&nbsp;now&nbsp;array("red",&nbsp;"green",<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"blue",&nbsp;"purple",&nbsp;"yellow");<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.array-slice.html" class="function">array_slice()</a></span>，<span class="function"><a href="function.unset.html" class="function">unset()</a></span>
+     和 <span class="function"><a href="function.array-merge.html" class="function">array_merge()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-slice.html">array_slice</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-sum.html">array_sum</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

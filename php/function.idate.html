@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>将本地时间日期格式化为整数</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.gmstrftime.html">gmstrftime</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.localtime.html">localtime</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.idate" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">idate</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose"><span class="refname">idate</span> &mdash; <span class="dc-title">将本地时间日期格式化为整数</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.idate-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">int</span> <span class="methodname"><b>idate</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$format</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timestamp</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   根据给定的格式字符对 <i><tt class="parameter">timestamp</tt></i>
+   格式化并返回数字结果。<i><tt class="parameter">timestamp</tt></i>
+   为可选项，默认值为本地当前时间，即 <span class="function"><a href="function.time.html" class="function">time()</a></span> 的值。
+  </p>
+  <p class="para">
+   和 <span class="function"><a href="function.date.html" class="function">date()</a></span> 不同，<span class="function"><b>idate()</b></span>
+   只接受一个字符作为 <i><tt class="parameter">format</tt></i> 参数。
+  </p>
+  <p class="para">
+   <table class="doctable table">
+    <caption><b><i><tt class="parameter">format</tt></i> 参数可识别以下字符</b></caption>
+    
+     <thead valign="middle">
+      <tr valign="middle">
+       <th><i><tt class="parameter">format</tt></i> 字符</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="left"><i>B</i></td>
+       <td align="left">Swatch Beat/Internet Time</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>d</i></td>
+       <td align="left">月份中的第几天</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>h</i></td>
+       <td align="left">小时（12 小时格式）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>H</i></td>
+       <td align="left">小时（24 小时格式）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>i</i></td>
+       <td align="left">分钟</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>I</i></td>
+       <td align="left">如果启用夏时制则返回 <i>1</i>，否则返回 <i>0</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>L</i></td>
+       <td align="left">如果是闰年则返回 <i>1</i>，否则返回 <i>0</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>m</i></td>
+       <td align="left">月份的数字</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>s</i></td>
+       <td align="left">秒数</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>t</i></td>
+       <td align="left">本月的总天数</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>U</i></td>
+       <td align="left">自 Unix 纪元（January 1 1970 00:00:00
+       GMT）起的秒数——这和 <span class="function"><a href="function.time.html" class="function">time()</a></span> 作用相同</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>w</i></td>
+       <td align="left">星期中的第几天（星期天是 <i>0</i>）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>W</i></td>
+       <td align="left">ISO-8601 格式年份中的第几个星期，每星期从星期一开始</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>y</i></td>
+       <td align="left">年份（1 或 2 位数字——见下面说明）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>Y</i></td>
+       <td align="left">年份（4 位数字）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>z</i></td>
+       <td align="left">年份中的第几天</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>Z</i></td>
+       <td align="left">以秒为单位的时区偏移量</td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    因为 <span class="function"><b>idate()</b></span> 总是返回
+    <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>，不能以“0”开头，因此 <span class="function"><b>idate()</b></span>
+    可能会返回比用户期望中要少的数字。见下面例子：
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$timestamp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">'1st&nbsp;January&nbsp;2004'</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//1072915200<br /><br />//&nbsp;下面以两位数字格式显示年份，但是因为<br />//&nbsp;以“0”打头，因此只会显示“4”<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">idate</span><span style="color: #007700">(</span><span style="color: #DD0000">'y'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$timestamp</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.date.html" class="function">date()</a></span> 和
+   <span class="function"><a href="function.time.html" class="function">time()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.gmstrftime.html">gmstrftime</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.localtime.html">localtime</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

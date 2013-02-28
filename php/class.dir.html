@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>directory 类</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.chroot.html">chroot</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.closedir.html">closedir</a></div>
+ <div class="up"><a href="ref.dir.html">Directory 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="class.dir" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">dir</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">dir</span> &mdash; <span class="dc-title">directory 类</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-class.dir-description">
+  <h3 class="title">说明</h3>
+  <div class="classsynopsis">
+   <div class="ooclass"></div>
+   <div class="constructorsynopsis dc-description">
+     <span class="methodname"><b>dir::dir</b></span>
+     ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$directory</tt></span>
+    )</div>
+
+   <div class="fieldsynopsis">
+    <span class="type">string</span> <var class="varname">$<var class="varname">path</var></var>
+   ;</div>
+
+   <div class="fieldsynopsis">
+    <span class="type">resource</span> <var class="varname">$<var class="varname">handle</var></var>
+   ;</div>
+
+   <div class="methodsynopsis dc-description"><span class="type">string</span> <span class="methodname"><b>read</b></span> ( <span class="methodparam">void</span> )</div>
+
+   <div class="methodsynopsis dc-description"><span class="type">void</span> <span class="methodname"><a href="function.rewind.html" class="methodname">rewind</a></span> ( <span class="methodparam">void</span> )</div>
+
+   <div class="methodsynopsis dc-description"><span class="type">void</span> <span class="methodname"><b>close</b></span> ( <span class="methodparam">void</span> )</div>
+
+  </div>
+  <p class="para">
+   这是个仿冒面向对象的机制来读取一个目录。给定的
+   <i><tt class="parameter">directory</tt></i> 被打开。一旦目录被打开，有两个属性可用。handle
+   属性可以用在其它目录函数例如
+   <span class="function"><a href="function.readdir.html" class="function">readdir()</a></span>，<span class="function"><a href="function.rewinddir.html" class="function">rewinddir()</a></span> 和
+   <span class="function"><a href="function.closedir.html" class="function">closedir()</a></span> 中。path
+   属性被设为被打开的目录路径。有三个方法可用：read，rewind 和 close。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-class.dir-examples">
+  <h3 class="title">范例</h3>
+  <p class="para">
+   <div class="example" id="example-1802">
+    <p><b>Example #1 <span class="function"><b>dir()</b></span> 例子</b></p>
+    <div class="example-contents"><p>
+     请留意下面例子中检查 <span class="function"><b>dir()</b></span>
+     返回值的风格。我们明确地测试返回值是否全等于（值和类型都相同 － 更多信息参见<a href="language.operators.comparison.html" class="link">比较运算符</a>）<b><tt>FALSE</tt></b>，否则任何目录项的名称求值为
+     <b><tt>FALSE</tt></b> 的都会导致循环停止。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$d&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dir</span><span style="color: #007700">(</span><span style="color: #DD0000">"/etc/php5"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"Handle:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$d</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">handle&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #DD0000">"Path:&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$d</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">path&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />while&nbsp;(</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">!==&nbsp;(</span><span style="color: #0000BB">$entry&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$d</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">read</span><span style="color: #007700">()))&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$entry</span><span style="color: #007700">.</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">$d</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Handle: Resource id #2
+Path: /etc/php5
+.
+..
+apache
+cgi
+cli
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-class.dir-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    read 方法返回的目录项的顺序依赖于系统。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    本函数定义了内部类
+    <b class="classname">Directory</b>，意味着不能再用同样的名字定义用户自己的类。PHP
+    预定义类的完整列表见<a href="reserved.classes.html" class="link">预定义类</a>一节。
+   </p>
+  </p></blockquote>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.chroot.html">chroot</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.closedir.html">closedir</a></div>
+ <div class="up"><a href="ref.dir.html">Directory 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

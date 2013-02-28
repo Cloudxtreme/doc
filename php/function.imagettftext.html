@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>用 TrueType 字体向图像写入文本</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagettfbbox.html">imagettfbbox</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagetypes.html">imagetypes</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagettftext" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagettftext</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">imagettftext</span> &mdash; <span class="dc-title">用 TrueType 字体向图像写入文本</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagettftext-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>imagettftext</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$image</tt></span>
+   , <span class="methodparam"><span class="type">float</span> <tt class="parameter">$size</tt></span>
+   , <span class="methodparam"><span class="type">float</span> <tt class="parameter">$angle</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$x</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$y</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$color</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$fontfile</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$text</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">image</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       图像资源。见 <span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>。
+      </span>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">size</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       字体大小。根据 GD 版本不同，应该以像素大小指定（GD1）或点大小（GD2）。
+      </span>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">angle</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       角度制表示的角度，0 度为从左向右读的文本。更高数值表示逆时针旋转。例如
+       90 度表示从下向上读的文本。
+      </span>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">x</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       由 <i><tt class="parameter">x</tt></i>，<i><tt class="parameter">y</tt></i>
+       所表示的坐标定义了第一个字符的基本点（大概是字符的左下角）。这和
+       <span class="function"><a href="function.imagestring.html" class="function">imagestring()</a></span> 不同，其 x，y 定义了第一个字符的左上角。例如
+       &quot;top left&quot; 为 0, 0。
+      </span>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">y</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       Y 坐标。它设定了字体基线的位置，不是字符的最底端。
+      </span>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">color</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       颜色索引。使用负的颜色索引值具有关闭防锯齿的效果。见
+       <span class="function"><a href="function.imagecolorallocate.html" class="function">imagecolorallocate()</a></span>。
+      </span>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">fontfile</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       是想要使用的 TrueType 字体的路径。
+      </span>
+      <span class="simpara">
+       根据 PHP 所使用的 GD 库的不同，<em class="emphasis">当 <i><tt class="parameter">fontfile</tt></i>
+       没有以 <i>/</i> 开头时则 <i>.ttf</i>
+       将被加到文件名之后</em>并且会在库定义字体路径中尝试搜索该文件名。
+      </span>
+      <span class="simpara">
+       当使用的 GD 库版本低于 2.0.18 时，一个空格字符
+       而不是分号将被用来作为不同字体文件的“路径分隔符”。不小心使用了此特性将会导致一条警告信息：<i>Warning:
+       Could not find/open font</i>。对受影响的版本来说唯一解决方案就是将字体移动到不包含空格的路径中去。
+      </span>
+      <p class="para">
+       很多情况下字体都放在脚本的同一个目录下。下面的小技巧可以减轻包含的问题。
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;Set&nbsp;the&nbsp;enviroment&nbsp;variable&nbsp;for&nbsp;GD<br /></span><span style="color: #0000BB">putenv</span><span style="color: #007700">(</span><span style="color: #DD0000">'GDFONTPATH='&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">realpath</span><span style="color: #007700">(</span><span style="color: #DD0000">'.'</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">//&nbsp;Name&nbsp;the&nbsp;font&nbsp;to&nbsp;be&nbsp;used&nbsp;(note&nbsp;the&nbsp;lack&nbsp;of&nbsp;the&nbsp;.ttf&nbsp;extension)<br /></span><span style="color: #0000BB">$font&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'SomeFont'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">text</tt></i></span>
+     <dd>
+
+      <span class="simpara">
+       文本字符串。
+      </span>
+      <span class="simpara">
+       可以包含十进制数字化字符表示（形式为：&amp;#8364;）来访问字体中超过位置
+       127 的字符。UTF-8 编码的字符串可以直接传递。
+      </span>
+      <span class="simpara">
+       如果字符串中使用的某个字符不被字体支持，一个空心矩形将替换该字符。
+      </span>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+  <p class="para">
+   <span class="function"><b>imagettftext()</b></span> 返回一个含有 8
+   个单元的数组表示了文本外框的四个角，顺序为坐下角，右下角，右上角，左上角。这些点是相对于文本的而和角度无关，因此“左上角”指的是以水平方向看文字时其左上角。
+  </p>
+  <p class="para">
+   <div class="example" id="example-2597">
+    <p><b>Example #1 <span class="function"><b>imagettftext()</b></span> 例子</b></p>
+    <div class="example-contents"><p>
+     本例中的脚本将生成一个白色的 400x30 像素 PNG 图像，其中有黑色（带灰色阴影）Arial
+     字体写的“Testing...”。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;Set&nbsp;the&nbsp;content-type<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-type:&nbsp;image/png"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;Create&nbsp;the&nbsp;image<br /></span><span style="color: #0000BB">$im&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">400</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">30</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;Create&nbsp;some&nbsp;colors<br /></span><span style="color: #0000BB">$white&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$grey&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">128</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">128</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">128</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$black&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagefilledrectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">399</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">29</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$white</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;The&nbsp;text&nbsp;to&nbsp;draw<br /></span><span style="color: #0000BB">$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Testing...'</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">//&nbsp;Replace&nbsp;path&nbsp;by&nbsp;your&nbsp;own&nbsp;font&nbsp;path<br /></span><span style="color: #0000BB">$font&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'arial.ttf'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">//&nbsp;Add&nbsp;some&nbsp;shadow&nbsp;to&nbsp;the&nbsp;text<br /></span><span style="color: #0000BB">imagettftext</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">11</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">21</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$grey</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$font</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;Add&nbsp;the&nbsp;text<br /></span><span style="color: #0000BB">imagettftext</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">10</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$black</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$font</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;Using&nbsp;imagepng()&nbsp;results&nbsp;in&nbsp;clearer&nbsp;text&nbsp;compared&nbsp;with&nbsp;imagejpeg()<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   本函数同时需要 GD 库和
+   <a href="http://www.freetype.org/" class="link external">&raquo;&nbsp;FreeType</a> 库。
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.imagettfbbox.html" class="function">imagettfbbox()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagettfbbox.html">imagettfbbox</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagetypes.html">imagetypes</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

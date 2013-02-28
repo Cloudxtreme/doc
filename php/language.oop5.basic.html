@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>基本概念</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="op5.intro.html">前言</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.oop5.properties.html">属性</a></div>
+ <div class="up"><a href="language.oop5.html">类与对象</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="language.oop5.basic" class="sect1">
+ <h2 class="title">基本概念</h2>
+
+ <div class="sect2" id="language.oop5.basic.class">
+  <h3 class="title">class</h3>
+  <p class="para">
+   每个类的定义都以关键字 class 开头，后面跟着类名，可以是任何非
+   PHP <a href="reserved.html" class="link">保留字</a>的名字。后面跟着一对花括号，里面包含有类成员和方法的定义。伪变量
+   <var class="varname"><var class="varname">$this</var></var> 可以在当一个方法在对象内部调用时使用。<var class="varname"><var class="varname">$this</var></var>
+   是一个到调用对象（通常是方法所属于的对象，但也可以是另一个对象，如果该方法是从第二个对象内<a href="language.oop5.static.html" class="link">静态</a>调用的话）的引用。看下面例子：
+   <div class="example" id="example-147">
+    <p><b>Example #1 面向对象语言中的 <var class="varname"><var class="varname">$this</var></var> 变量</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'$this&nbsp;is&nbsp;defined&nbsp;('</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">")\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"\$this&nbsp;is&nbsp;not&nbsp;defined.\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br />class&nbsp;</span><span style="color: #0000BB">B<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">bar</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">A</span><span style="color: #007700">::</span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">A</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$a</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">A</span><span style="color: #007700">::</span><span style="color: #0000BB">foo</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">B</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$b</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">bar</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">B</span><span style="color: #007700">::</span><span style="color: #0000BB">bar</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+$this is defined (a)
+$this is not defined.
+$this is defined (b)
+$this is not defined.
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <div class="example" id="example-148">
+   <p><b>Example #2 简单的类定义</b></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">SimpleClass<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;成员声明<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;</span><span style="color: #0000BB">$var&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'a&nbsp;default&nbsp;value'</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;方法声明<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">displayVar</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">var</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <p class="para">
+    <div class="example" id="example-149">
+      <p><b>Example #3 类成员的默认值</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">SimpleClass<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;无效的类成员定义：<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;</span><span style="color: #0000BB">$var1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'hello&nbsp;'</span><span style="color: #007700">.</span><span style="color: #DD0000">'world'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$var2&nbsp;</span><span style="color: #007700">=&nbsp;&lt;&lt;&lt;EOD<br /></span><span style="color: #DD0000">hello&nbsp;world<br /></span><span style="color: #007700">EOD;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$var3&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">2</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$var4&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">myStaticMethod</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$var5&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$myVar</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;正确的类成员定义：<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">public&nbsp;</span><span style="color: #0000BB">$var6&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">myConstant</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$var7&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">classConstant</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$var8&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">true</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">);<br /><br /><br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+    </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+    除此之外还有不少用于处理类与对象的函数，详情参见
+    <a href="ref.classobj.html" class="link">类 / 对象函数 </a>
+    </p>
+  </p></blockquote>
+ </div>
+
+ <div class="sect2" id="language.oop5.basic.new">
+  <h3 class="title">new</h3>
+  <p class="para">
+   要创建一个对象的实例，必须创建一个新对象并将其赋给一个变量。当创建新对象时该对象总是被赋值，除非该对象定义了<a href="language.oop5.decon.html" class="link">构造函数</a>并且在出错时抛出了一个<a href="language.exceptions.html" class="link">异常</a>。
+  </p>
+  <div class="example" id="example-150">
+   <p><b>Example #4 创建一个实例e</b></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$instance&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">SimpleClass</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <p class="para">
+   当把一个对象已经创建的实例赋给一个新变量时，新变量会访问同一个实例，就和用该对象赋值一样。此行为和给函数传递入实例时一样。可以用<a href="language.oop5.cloning.html" class="link">克隆</a>给一个已创建的对象建立一个新实例。
+  </p>
+  <div class="example" id="example-151">
+   <p><b>Example #5 对象赋值</b></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$assigned&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;&nbsp;</span><span style="color: #0000BB">$instance</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$reference&nbsp;&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$instance</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$instance</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">var&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'$assigned&nbsp;will&nbsp;have&nbsp;this&nbsp;value'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$instance&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;$instance&nbsp;and&nbsp;$reference&nbsp;become&nbsp;null<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$instance</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$reference</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$assigned</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上例程会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+NULL
+NULL
+object(SimpleClass)#1 (1) {
+   [&quot;var&quot;]=&gt;
+     string(30) &quot;$assigned will have this value&quot;
+}
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="sect2" id="language.oop5.basic.extends">
+  <h3 class="title">extends</h3>
+  <p class="para">
+   一个类可以在声明中用 extends
+   关键字继承另一个类的方法和成员。不能扩展多个类，只能继承一个基类。
+  </p>
+  <p class="para">
+   被继承的方法和成员可以通过用同样的名字重新声明被覆盖，除非父类定义方法时使用了
+   <a href="language.oop5.final.html" class="link">final</a> 关键字。可以通过
+   <a href="language.oop5.paamayim-nekudotayim.html" class="link">parent::</a>
+   来访问被覆盖的方法或成员。
+  </p>
+  <div class="example" id="example-152">
+   <p><b>Example #6 简单的类继承</b></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">ExtendClass&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">SimpleClass<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Redefine&nbsp;the&nbsp;parent&nbsp;method<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">displayVar</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Extending&nbsp;class\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">displayVar</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$extended&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">ExtendClass</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$extended</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">displayVar</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上例程会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Extending class
+a default value
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="op5.intro.html">前言</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.oop5.properties.html">属性</a></div>
+ <div class="up"><a href="language.oop5.html">类与对象</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

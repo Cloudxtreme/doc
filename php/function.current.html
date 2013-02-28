@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>返回数组中的当前单元</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.count.html">count</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.each.html">each</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.current" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">current</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">current</span> &mdash; <span class="dc-title">返回数组中的当前单元</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.current-unknown">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <span class="methodname"><b>current</b></span>
+      ( <span class="methodparam"><span class="type">array</span> <tt class="parameter reference">&$array</tt></span>
+     )</div>
+
+    <p class="para rdfs-comment">
+     每个数组中都有一个内部的指针指向它“当前的”单元，初始指向插入到数组中的第一个单元。
+    </p>
+    <p class="para">
+     <span class="function"><b>current()</b></span> 函数返回当前被内部指针指向的数组单元的值，并不移动指针。如果内部指针指向超出了单元列表的末端，<span class="function"><b>current()</b></span>
+     返回 <b><tt>FALSE</tt></b>。
+     <div class="warning"><b class="warning">Warning</b>
+      <p class="para">
+       如果数组包含有空的单元（0 或者 &quot;&quot;，空字符串）则本函数在碰到这个单元时也返回
+       <b><tt>FALSE</tt></b>。这使得用 <span class="function"><b>current()</b></span> 不可能判断是否到了此数组列表的末端。要正确遍历可能含有空单元的数组，用
+       <span class="function"><a href="function.each.html" class="function">each()</a></span> 函数。
+      </p>
+     </div>
+    </p>
+    <p class="para">
+     <div class="example" id="example-3935">
+      <p><b>Example #1 <span class="function"><b>current()</b></span> 及相关函数的用法示例</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$transport&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'foot'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'bike'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'car'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'plane'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">current</span><span style="color: #007700">(</span><span style="color: #0000BB">$transport</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;$mode&nbsp;=&nbsp;'foot';<br /></span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">next</span><span style="color: #007700">(</span><span style="color: #0000BB">$transport</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$mode&nbsp;=&nbsp;'bike';<br /></span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">current</span><span style="color: #007700">(</span><span style="color: #0000BB">$transport</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;$mode&nbsp;=&nbsp;'bike';<br /></span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">prev</span><span style="color: #007700">(</span><span style="color: #0000BB">$transport</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$mode&nbsp;=&nbsp;'foot';<br /></span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">end</span><span style="color: #007700">(</span><span style="color: #0000BB">$transport</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$mode&nbsp;=&nbsp;'plane';<br /></span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">current</span><span style="color: #007700">(</span><span style="color: #0000BB">$transport</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;$mode&nbsp;=&nbsp;'plane';<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.end.html" class="function">end()</a></span>，<span class="function"><a href="function.key.html" class="function">key()</a></span>，<span class="function"><a href="function.next.html" class="function">next()</a></span>，<span class="function"><a href="function.prev.html" class="function">prev()</a></span>
+     和 <span class="function"><a href="function.reset.html" class="function">reset()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.count.html">count</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.each.html">each</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

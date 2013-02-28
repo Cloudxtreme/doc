@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>运行时配置</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.fpm.install.html">安装</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.pecl.html">PECL 扩展库安装</a></div>
+ <div class="up"><a href="install.fpm.html">FastCGI 进程管理器 (FPM)</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="install.fpm.configuration" class="sect1">
+   <h2 class="title">运行时配置</h2>
+   <p class="para">
+    FPM 配置文件为<var class="filename">php-fpm.conf</var>，其语法类似 <var class="filename">php.ini</var> 。
+   </p>
+   <div class="sect2"> 
+    <h3 class="title"><var class="filename">php-fpm.conf</var> 全局配置段</h3>
+    <dl>
+
+     <dt id="pid">
+      <span class="term">
+       <i><tt class="parameter">pid</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        PID文件的位置. 默认为空.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="error-log">
+      <span class="term">
+       <i><tt class="parameter">error_log</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        错误日志的位置. 默认：
+        <i>安装路径#INSTALL_PREFIX#/log/php-fpm.log</i>.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="log-level">
+      <span class="term">
+       <i><tt class="parameter">log_level</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        错误级别. 可用级别为: alert（必须立即处理）, error（错误情况）, warning（警告情况）, notice（一般重要信息）,
+        debug（调试信息）. 默认: notice.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="emergency-restart-threshold">
+      <span class="term">
+       <i><tt class="parameter">emergency_restart_threshold</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        如果子进程在<i>emergency_restart_interval</i>设定的时间内收到该参数设定次数的SIGSEGV 或者 SIGBUS退出信息号，则FPM会重新启动。  0 表示 &#039;关闭该功能&#039;. 默认值: 0 (关闭).
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="emergency-restart-interval">
+      <span class="term">
+       <i><tt class="parameter">emergency_restart_interval</tt></i>
+       <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        emergency_restart_interval用于设定平滑重启的间隔时间. 这么做有助于解决加速器中共享内存的使用问题.
+        可用单位: s(秒), m(分), h(小时), 或者 d(天).
+        默认单位： s(秒). 默认值: 0 (关闭).
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="process-control-timeout">
+      <span class="term">
+       <i><tt class="parameter">process_control_timeout</tt></i>
+       <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置子进程接受主进程复用信号的超时时间. 可用单位: s(秒), m(分), h(小时), 或者 d(天)
+        默认单位: s(秒). 默认值: 0.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="daemonize">
+      <span class="term">
+       <i><tt class="parameter">daemonize</tt></i>
+       <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置FPM在后台运行. 设置 &#039;no&#039; 将 FPM 保持在前台运行用于调试. 默认值: yes.
+       </p> 
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </div>
+
+   <div class="sect2"> 
+    <h3 class="title">运行配置区段</h3>
+    <p class="para">
+     在FPM中，可以使用不同的设置来运行多个进程池。
+     这些设置可以针对每个进程池单独设置。 
+    </p>
+    <dl>
+
+     <dt id="listen">
+      <span class="term">
+       <i><tt class="parameter">listen</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置接受FastCGI请求的地址. 可用格式为:
+        &#039;ip:port&#039;, &#039;port&#039;, &#039;/path/to/unix/socket&#039;. 每个进程池都需要设置.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="listen-backlog">
+      <span class="term">
+       <i><tt class="parameter">listen.backlog</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置 listen(2) 的半连接队列长度.  &#039;-1&#039; 表示无限制. 默认值:
+        -1.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="listen-allowed-clients">
+      <span class="term">
+       <i><tt class="parameter">listen.allowed_clients</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置允许连接到FastCGI的服务器IPV4地址. 等同于PHP FastCGI (5.2.2+)中的 FCGI_WEB_SERVER_ADDRS环境变量. 仅对TCP监听起作用.
+        每个地址是用逗号分隔. 如果没有设置或者为空，则允许任何服务器请求连接. 默认值: any.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="listen-owner">
+      <span class="term">
+       <i><tt class="parameter">listen.owner</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        如果使用，表示设置Unix套接字的权限. 在Linux中，读写权限必须设置，以便用于WEB服务器连接. 在很多BSD派生的系统中可以忽略权限允许自由连接.
+        默认值: 运行所使用的用户合租, 权限为0666.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="listen-group">
+      <span class="term">
+       <i><tt class="parameter">listen.group</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        参见 <i>listen.owner</i>.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="listen-mode">
+      <span class="term">
+       <i><tt class="parameter">listen.mode</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        参见 <i>listen.owner</i>.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="user">
+      <span class="term">
+       <i><tt class="parameter">user</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        FPM 进程运行的Unix用户. 必须设置.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="group">
+      <span class="term">
+       <i><tt class="parameter">group</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        FPM 进程运行的Unix用户组. 如果没有设置，则默认用户的组被使用. 
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="pm">
+      <span class="term">
+       <i><tt class="parameter">pm</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置进程管理器如何管理子进程. 可用值: <i>static</i>, <i>dynamic</i>. 
+        必须设置.
+       </p>
+       <p class="para">
+        <i>static</i> - 子进程的数量是固定的 (<i>pm.max_children</i>).
+       </p>
+       <p class="para">
+        <i>dynamic</i> - 子进程的数量在下面配置的基础上动态设置: <i>pm.max_children</i>, <i>pm.start_servers</i>, 
+        <i>pm.min_spare_servers</i>, <i>pm.max_spare_servers</i>.
+       </p>
+      </dd>
+
+     </dt>
+
+     <dt id="pm.max-chidlren">
+      <span class="term">
+       <i><tt class="parameter">pm.max_children</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        子进程的数量，<i>pm</i> 设置为
+        <i>static</i> 时表示创建的， <i>pm</i> 设置为 <i>dynamic</i> 时表示最大可创建的. 必须设置.
+       </p>
+       <p class="para">
+        该选项设置可以同时提供服务的请求数限制. 类似 Apache 的 mpm_prefork 中 MaxClients 的设置和 普通PHP FastCGI中的 <var class="varname"><var class="varname">PHP_FCGI_CHILDREN</var></var> 环境变量.
+       </p>
+      </dd>
+
+     </dt>
+
+     <dt id="pm.start-servers">
+      <span class="term">
+       <i><tt class="parameter">pm.start_servers</tt></i>
+       <span class="type"><span class="type in">in</span></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置启动时创建的子进程数目. 
+        仅在 <i>pm</i> 设置为 <i>dynamic</i> 时使用.
+        默认值: min_spare_servers + (max_spare_servers -
+        min_spare_servers) / 2.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="pm.min-spare-servers">
+      <span class="term">
+       <i><tt class="parameter">pm.min_spare_servers</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置空闲服务进程的最低数目. 仅在 <i>pm</i> 设置为 <i>dynamic</i> 时使用. 必须设置.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="pm.max-spare-servers">
+      <span class="term">
+       <i><tt class="parameter">pm.max_spare_servers</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置空闲服务进程的最大数目. 仅在 <i>pm</i> 设置为 <i>dynamic</i> 时使用. 必须设置.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="pm.max-requests">
+      <span class="term">
+       <i><tt class="parameter">pm.max_requests</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. 如果设置为 &#039;0&#039; 则一直接受请求. 等同于
+        <var class="varname"><var class="varname">PHP_FCGI_MAX_REQUESTS</var></var> 环境变量. 默认值: 0.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="pm.status-path">
+      <span class="term">
+       <i><tt class="parameter">pm.status_path</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        FPM状态页面的网址. 如果没有设置, 则无法访问状态页面. 默认值: none.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="ping.path">
+      <span class="term">
+       <i><tt class="parameter">ping.path</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        FPM监控页面的ping网址. 如果没有设置, 则无法访问ping页面. 该页面用于外部检测FPM是否存活并且可以响应请求. 请注意必须以斜线开头 (/).
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="ping.response">
+      <span class="term">
+       <i><tt class="parameter">ping.response</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        用于定义ping请求的返回相应. 返回为 HTTP 200 的 text/plain 格式文本.
+        默认值: pong.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="request-terminate-timeout">
+      <span class="term">
+       <i><tt class="parameter">request_terminate_timeout</tt></i>
+       <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置单个请求的超时中止时间. 该选项可能会对php.ini设置中的&#039;max_execution_time&#039;因为某些特殊原因没有中止运行的脚本有用. 设置为 &#039;0&#039; 表示        &#039;Off&#039;. Available units: s(econds)(default), m(inutes), h(ours), or d(ays).
+        Default value: 0.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="request-slowlog-timeout">
+      <span class="term">
+       <i><tt class="parameter">request_slowlog_timeout</tt></i>
+       <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        当一个请求该设置的超时时间后，就会将对应的PHP调用堆栈信息完整写入到慢日志中. 设置为 &#039;0&#039; 表示 &#039;Off&#039;.
+        可用单位: s(秒)(默认), m(分), h(小时), 或者 d(天).
+        默认值: 0.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="slowlog">
+      <span class="term">
+       <i><tt class="parameter">slowlog</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        慢请求的记录日志. 默认值:
+        <i>#INSTALL_PREFIX#/log/php-fpm.log.slow</i>.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="rlimit-files">
+      <span class="term">
+       <i><tt class="parameter">rlimit_files</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置文件打开描述符的rlimit限制. 默认值: 系统定义值.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="rlimit-core">
+      <span class="term">
+       <i><tt class="parameter">rlimit_core</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置核心rlimit最大限制值. 可用值: &#039;unlimited&#039; 、0或者正整数.
+        默认值: 系统定义值.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="chroot">
+      <span class="term">
+       <i><tt class="parameter">chroot</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        启动时的Chroot目录. 所定义的目录需要是绝对路径. 如果没有设置, 则chroot不被使用.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="chdir">
+      <span class="term">
+       <i><tt class="parameter">chdir</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        设置启动目录，启动时会自动Chdir到该目录. 所定义的目录需要是绝对路径. 默认值: 当前目录，或者/目录（chroot时）.
+       </p> 
+      </dd>
+
+     </dt>
+
+     <dt id="catch-workers-output">
+      <span class="term">
+       <i><tt class="parameter">catch_workers_output</tt></i>
+       <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        重定向运行过程中的stdout和stderr到主要的错误日志文件中. 如果没有设置,
+        stdout 和 stderr 将会根据FastCGI的规则被重定向到 /dev/null .
+        默认值: 空.
+       </p> 
+      </dd>
+
+     </dt>
+
+    </dl>
+
+    <p class="para">
+     你还可以在为一个运行池传递附加的环境变量，或者更新PHP的配置值.
+     你可以在 <var class="filename">php-fpm.conf</var> 中下如下面的配置参数来做到：
+     <div class="example" id="example-63">
+      <p><b>Example #1 给运行池传递环境变量和设置PHP的配置值</b></p>
+      <div class="example-contents">
+       <div class="inicode"><pre class="inicode">env[HOSTNAME] = $HOSTNAME
+       env[PATH] = /usr/local/bin:/usr/bin:/bin
+       env[TMP] = /tmp
+       env[TMPDIR] = /tmp
+       env[TEMP] = /tmp
+
+       php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com
+       php_flag[display_errors] = off
+       php_admin_value[error_log] = /var/log/fpm-php.www.log
+       php_admin_flag[log_errors] = on
+       php_admin_value[memory_limit] = 32M</pre>
+</div>
+      </div>
+
+     </div>
+     PHP配置值通过 <i>php_value</i> 或者
+     <i>php_flag</i> 设置，并且会覆盖以前的值.
+     请注意 
+     <a href="ini.sect.safe-mode.html#ini.disable-functions" class="link">disable_functions</a> 或者 
+     <a href="ini.sect.safe-mode.html#ini.disable-classes" class="link">disable_classes</a> 在 <var class="filename">php.ini</var> 之中定义的值不会被覆盖掉, 
+     但是会将新的设置附加在原有值的后面.
+    </p>
+    <p class="para">
+     使用 <i>php_admin_value</i> 或者 <i>php_admin_flag</i>
+     定义的值，不能被PHP代码中的 <span class="function"><a href="function.ini-set.html" class="function">ini_set()</a></span> 覆盖.
+    </p>
+   </div>
+   
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.fpm.install.html">安装</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.pecl.html">PECL 扩展库安装</a></div>
+ <div class="up"><a href="install.fpm.html">FastCGI 进程管理器 (FPM)</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

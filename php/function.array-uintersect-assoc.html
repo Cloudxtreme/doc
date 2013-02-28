@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>带索引检查计算数组的交集，用回调函数比较数据</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-udiff.html">array_udiff</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-uintersect-uassoc.html">array_uintersect_uassoc</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-uintersect-assoc" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">array_uintersect_assoc</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose"><span class="refname">array_uintersect_assoc</span> &mdash; <span class="dc-title">带索引检查计算数组的交集，用回调函数比较数据</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.array-uintersect-assoc-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>array_uintersect_assoc</b></span>
+    ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array1</tt></span>
+   , <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array2</tt></span>
+   [, <span class="methodparam"><span class="type">array</span> <tt class="parameter">$ ...</tt></span>
+   ], <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.callback" class="type callback">callback</a></span> <tt class="parameter">$data_compare_func</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>array_uintersect_assoc()</b></span> 返回一个数组，该数组包含了所有在
+   <i><tt class="parameter">array1</tt></i> 中也同时出现在所有其它参数数组中的值。注意和
+   <span class="function"><a href="function.array-uintersect.html" class="function">array_uintersect()</a></span> 不同的是键名也要比较。数据是用回调函数比较的。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3917">
+    <p><b>Example #1 <span class="function"><b>array_uintersect_assoc()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array1&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"brown"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$array2&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"GREEN"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"B"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"brown"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"yellow"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_uintersect_assoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$array1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$array2</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"strcasecmp"</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [a] =&gt; green
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   此比较是通过用户提供的回调函数来进行的。如果认为第一个参数小于，等于，或大于第二个参数时必须分别返回一个小于零，等于零，或大于零的整数。
+  </p>
+  <p class="para">
+   参见
+   <span class="function"><a href="function.array-uintersect.html" class="function">array_uintersect()</a></span>，<span class="function"><a href="function.array-intersect-assoc.html" class="function">array_intersect_assoc()</a></span>，<span class="function"><a href="function.array-intersect-uassoc.html" class="function">array_intersect_uassoc()</a></span>
+   和
+   <span class="function"><a href="function.array-uintersect-uassoc.html" class="function">array_uintersect_uassoc()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-udiff.html">array_udiff</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-uintersect-uassoc.html">array_uintersect_uassoc</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

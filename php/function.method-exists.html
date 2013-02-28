@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>检查类的方法是否存在</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-subclass-of.html">is_subclass_of</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.property-exists.html">property_exists</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Object 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.method-exists" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">method_exists</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">method_exists</span> &mdash; <span class="dc-title">检查类的方法是否存在</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.method-exists-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>method_exists</b></span>
+    ( <span class="methodparam"><span class="type">object</span> <tt class="parameter">$object</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$method_name</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   如果 <i><tt class="parameter">method_name</tt></i>
+   所指的方法在 <i><tt class="parameter">object</tt></i>
+   所指的对象类中已定义，则返回 <b><tt>TRUE</tt></b>，否则返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3979">
+    <p><b>Example #1 <span class="function"><b>method_exists()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$directory&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Directory</span><span style="color: #007700">(</span><span style="color: #DD0000">'.'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">method_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$directory</span><span style="color: #007700">,</span><span style="color: #DD0000">'read'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+bool(true)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.function-exists.html" class="function">function_exists()</a></span> 和
+   <span class="function"><a href="function.is-callable.html" class="function">is_callable()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-subclass-of.html">is_subclass_of</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.property-exists.html">property_exists</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Object 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

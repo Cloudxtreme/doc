@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Internet 领域：TCP，UDP，SSL 和 TLS</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="transports.html">所支持的套接字传输器（Socket Transports）列表</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="transports.unix.html">Unix 领域：Unix 和 UDG</a></div>
+ <div class="up"><a href="transports.html">所支持的套接字传输器（Socket Transports）列表</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="transports.inet" class="section">
+    <h2 class="title">Internet 领域：TCP，UDP，SSL 和 TLS</h2>
+    <p class="simpara">PHP 3，PHP 4，PHP 5。 
+    <i>ssl://</i>&amp; 
+    <i>tls://</i>自 PHP 4.3 起可用。</p>
+    <p class="simpara">
+    <i>sslv2://</i>&amp; 
+    <i>sslv3://</i>自 PHP 5.0.2 起可用。</p>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+      <span class="simpara">如果没有指定传输器，则假定为 
+      <i>tcp://</i>。</span>
+    </p></blockquote>
+    <ul class="itemizedlist">
+      <li class="listitem">
+        <span class="simpara">
+          <i>127.0.0.1</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>fe80::1</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>www.example.com</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>tcp://127.0.0.1</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>tcp://fe80::1</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>tcp://www.example.com</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>udp://www.example.com</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>ssl://www.example.com</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>sslv2://www.example.com</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>sslv3://www.example.com</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>tls://www.example.com</i>
+        </span>
+      </li>
+    </ul>
+    <p class="simpara">Internet 领域套接字在目标地址中还期望有一个端口号。在 
+    <span class="function"><a href="function.fsockopen.html" class="function">fsockopen()</a></span>中在第二个参数中指定，这样就不会影响传输器的 URL。然而在 
+    <span class="function"><a href="function.stream-socket-client.html" class="function">stream_socket_client()</a></span>和相关的函数中是用传统的 URL，端口号在传输器 URL 后面以冒号分隔而指定。</p>
+    <ul class="itemizedlist">
+      <li class="listitem">
+        <span class="simpara">
+          <i>tcp://127.0.0.1:80</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>tcp://[fe80::1]:80</i>
+        </span>
+      </li>
+      <li class="listitem">
+        <span class="simpara">
+          <i>tcp://www.example.com:80</i>
+        </span>
+      </li>
+    </ul>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+      <b>带端口号的 IPv6 数字地址</b><br />
+      <span class="simpara">在上面的第二个例子中，IPv4 和主机名的例子只加了一个冒号和端口号，但 IPv6 的地址被放在方括号中：
+      <i>[fe80::1]</i>。这是为了将 IPv6 地址中的冒号和用来分隔端口号的冒号区别开来。</span>
+    </p></blockquote>
+    <p class="simpara">
+    <i>ssl://</i>和 
+    <i>tls://</i>传输器（仅在 openssl 支持已编译入 PHP 后可用）是 
+    <i>tcp://</i>传输器加入 SSL 加密后的扩展。在 PHP 4.3.0 中 OpenSSL 支持必须被静态编译入 PHP，在 PHP 5.0.0 中可以编译为模块或者静态的。</p>
+    <p class="simpara">
+    <i>ssl://</i>将根据远程服务器的兼容性和参数设置尝试与之建立 SSL V2 或 SSL V3 链接 
+    <i>sslv2://</i>和 
+    <i>sslv3://</i>将明确的选择 SSL V2 或 SSL V3 协议进行连接。</p>
+    <p class="para">
+      <table class="doctable table">
+        <caption><b>
+        <i>ssl://</i>和 
+        <i>tls://</i>传输器的上下文选项（自 PHP 4.3.2 起）</b></caption>
+        
+          <thead valign="middle">
+            <tr valign="middle">
+              <th>名称</th>
+              <th>用法</th>
+              <th>默认值</th>
+            </tr>
+
+          </thead>
+
+          <tbody valign="middle" class="tbody">
+            <tr valign="middle">
+              <td align="left">
+                <i>verify_peer</i>
+              </td>
+              <td align="left">&amp;true; 或 &amp;false;。用于 SSL 证书请求验证。</td>
+              <td align="left">&amp;false;</td>
+            </tr>
+
+            <tr valign="middle">
+              <td align="left">
+                <i>allow_self_signed</i>
+              </td>
+              <td align="left">&amp;true; 或 &amp;false;。允许自签名的证书。</td>
+              <td align="left">&amp;false;</td>
+            </tr>
+
+            <tr valign="middle">
+              <td align="left">
+                <i>cafile</i>
+              </td>
+              <td align="left">本地文件系统中证书授权机构文件的位置，应和 
+              <i>verify_peer</i>上下文选项一起使用来认证远端的身份。</td>
+              <td class="empty">&nbsp;</td>
+            </tr>
+
+            <tr valign="middle">
+              <td align="left">
+                <i>capath</i>
+              </td>
+              <td align="left">如果没有指定 
+              <i>cafile</i>或者如果该处没找到证书，则在 
+              <i>capath</i>指定的目录中搜索相配的证书。
+              <i>capath</i>必须是一个正确的被散列化的证书目录。</td>
+              <td class="empty">&nbsp;</td>
+            </tr>
+
+            <tr valign="middle">
+              <td align="left">
+                <i>local_cert</i>
+              </td>
+              <td align="left">文件系统中本地证书文件的路径。必须是一个用 PEM 编码并包含你的证书和私人密钥的文件。可以选择包括发行者的证书链。</td>
+              <td class="empty">&nbsp;</td>
+            </tr>
+
+            <tr valign="middle">
+              <td align="left">
+                <i>passphrase</i>
+              </td>
+              <td align="left">你的 
+              <i>local_cert</i>文件编码的 passphrase。</td>
+              <td class="empty">&nbsp;</td>
+            </tr>
+
+            <tr valign="middle">
+              <td align="left">
+                <i>CN_match</i>
+              </td>
+              <td align="left">所期待的 Common Name。PHP 能进行有限的通配符匹配。如果 Common Name 与此不匹配，连接尝试会失败。</td>
+              <td class="empty">&nbsp;</td>
+            </tr>
+
+          </tbody>
+        
+      </table>
+
+    </p>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+      <span class="simpara">因为 
+      <i>ssl://</i>是 
+      <a href="wrappers.http.html" class="link">
+        <i>https://</i>
+      </a>和 
+      <a href="wrappers.ftp.html" class="link">
+        <i>ftps://</i>
+      </a>封装协议的底层传输器，适用于 
+      <i>ssl://</i>的任何上下文选项也适用于 
+      <i>https://</i>和 
+      <i>ftps://</i>。</span>
+    </p></blockquote>
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="transports.html">所支持的套接字传输器（Socket Transports）列表</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="transports.unix.html">Unix 领域：Unix 和 UDG</a></div>
+ <div class="up"><a href="transports.html">所支持的套接字传输器（Socket Transports）列表</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>continue</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="control-structures.break.html">break</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="control-structures.switch.html">switch</a></div>
+ <div class="up"><a href="language.control-structures.html">控制结构</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="control-structures.continue" class="sect1">
+  <h2 class="title"><i>continue</i></h2>
+  <p class="simpara">
+   <i>continue</i>
+   在循环结构用用来跳过本次循环中剩余的代码并在条件求值为真时开始执行下一次循环。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    注意在 PHP 中
+    <a href="control-structures.switch.html" class="link">switch</a>
+    语句被认为是可以使用 <i>continue</i> 的一种循环结构。
+   </span>
+  </p></blockquote>
+  <p class="simpara">
+   <i>continue</i> 接受一个可选的数字参数来决定跳过几重循环到循环结尾。
+  </p>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">while&nbsp;(list&nbsp;(</span><span style="color: #0000BB">$key</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">)&nbsp;=&nbsp;</span><span style="color: #0000BB">each</span><span style="color: #007700">(</span><span style="color: #0000BB">$arr</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!(</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">%&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">))&nbsp;{&nbsp;</span><span style="color: #FF8000">//&nbsp;skip&nbsp;odd&nbsp;members<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">continue;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">do_something_odd</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />while&nbsp;(</span><span style="color: #0000BB">$i</span><span style="color: #007700">++&nbsp;&lt;&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Outer&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&amp;nbsp;&amp;nbsp;Middle&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"&amp;nbsp;&amp;nbsp;Inner&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"This&nbsp;never&nbsp;gets&nbsp;output.&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Neither&nbsp;does&nbsp;this.&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   省略 <i>continue</i>
+   后面的分号会导致混淆。以下例子示意了不应该这样做。
+  </p>
+  <p class="para">
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;</span><span style="color: #007700">for&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">;&nbsp;++</span><span style="color: #0000BB">$i</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$i</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <p class="para">
+     希望得到的结果是：
+    </p>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+0
+1
+3
+4
+</pre></div>
+    </div>
+    <p class="para">
+     可实际的输出是：
+    </p>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+2
+</pre></div>
+    </div>
+    <p class="para">
+     因为 <span class="function"><a href="function.print.html" class="function">print()</a></span> 调用的返回值是
+     <i>int(1)</i>，看上去作为了上述可选的数字参数。
+    </p>
+   </div>
+  </p>
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="control-structures.break.html">break</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="control-structures.switch.html">switch</a></div>
+ <div class="up"><a href="language.control-structures.html">控制结构</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,11 @@
+Wed, 23 May 2012 08:34:42 -0700
+ripper/eventids2.c	Tue, 22 May 2012 22:35:27 -0700
+ripper/lib/ripper/core.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/lib/ripper/filter.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/lib/ripper/lexer.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/lib/ripper/sexp.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/lib/ripper.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/tools/generate-param-macros.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/tools/generate.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/tools/preproc.rb	Tue, 22 May 2012 22:35:27 -0700
+ripper/tools/strip.rb	Tue, 22 May 2012 22:35:27 -0700

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>打开一个持久的 PostgreSQL 连接</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.pg-parameter-status.html">pg_parameter_status</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.pg-ping.html">pg_ping</a></div>
+ <div class="up"><a href="ref.pgsql.html">PostgreSQL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.pg-pconnect" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">pg_pconnect</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">pg_pconnect</span> &mdash; <span class="dc-title">打开一个持久的 PostgreSQL 连接</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.pg-pconnect-unknown">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type">resource</span> <span class="methodname"><b>pg_pconnect</b></span> 
+      ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$connection_string</tt></span>
+     )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>pg_pconnect()</b></span> 打开一个到 PostgreSQL 数据库的持久连接。返回其它 PostgreSQL 函数所需要的连接资源号。
+    </p>
+    <p class="para">
+     <i><tt class="parameter">connection_string</tt></i> 参数的定义见 <span class="function"><a href="function.pg-connect.html" class="function">pg_connect()</a></span>。
+    </p>
+    <p class="para">
+     要打开持久连接功能，<var class="filename">php.ini</var> 中的 <a href="pgsql.configuration.html#ini.pgsql.allow-persistent" class="link">pgsql.allow_persistent</a> 参数必须为 &quot;On&quot;（也是默认值）。
+最大持久连接数目由 <var class="filename">php.ini</var> 中的 <a href="pgsql.configuration.html#ini.pgsql.max-persistent" class="link">pgsql.max_persistent</a>
+参数定义（默认为 -1 表示没有限制）。所有连接的数目可由 <var class="filename">php.ini</var> 中的 <a href="pgsql.configuration.html#ini.pgsql.max-links" class="link">pgsql.max_links</a> 参数设置。
+    </p>
+    <p class="para">
+     <span class="function"><a href="function.pg-close.html" class="function">pg_close()</a></span> 不能关闭由 <span class="function"><b>pg_pconnect()</b></span> 打开的持久连接。
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.pg-connect.html" class="function">pg_connect()</a></span> 以及<a href="features.persistent-connections.html" class="link">持久数据库连接</a>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.pg-parameter-status.html">pg_parameter_status</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.pg-ping.html">pg_ping</a></div>
+ <div class="up"><a href="ref.pgsql.html">PostgreSQL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

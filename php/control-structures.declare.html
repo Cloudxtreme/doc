@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>declare</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="control-structures.switch.html">switch</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.return.html">return</a></div>
+ <div class="up"><a href="language.control-structures.html">控制结构</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="control-structures.declare" class="sect1">
+  <h2 class="title"><i>declare</i></h2>
+  <p class="para">
+   <i>declare</i> 结构用来设定一段代码的执行指令。<i>declare</i>
+   的语法和其它流程控制结构相似：
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="cdata"><pre>
+declare (directive)
+    statement
+</pre></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <i>directive</i> 部分允许设定 <i>declare</i>
+   代码段的行为。目前只认识两个指令：<i>ticks</i>（更多信息见下面
+   <a href="control-structures.declare.html#control-structures.declare.ticks" class="link">ticks</a> 指令）以及 
+   <i>encoding</i>(更多信息见下面 <a href="control-structures.declare.html#control-structures.declare.encoding" class="link">encoding</a>指令)。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+    <span class="simpara">
+     encoding 是 PHP 5.3.0 新增指令。
+    </span>
+  </p></blockquote> 
+  <p class="para">
+   <i>declare</i> 代码段中的 <i>statement</i>
+   部分将被执行——怎样执行以及执行中有什么副作用出现取决于
+   <i>directive</i> 中设定的指令。
+  </p>
+  <p class="para">
+   <i>declare</i> 结构也可用于全局范围，影响到其后的所有代码(但如果有
+    <i>declare</i> 结构的文件被其它文件包含，它对包含它的文件不起作用)。
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;these&nbsp;are&nbsp;the&nbsp;same:<br /><br />//&nbsp;you&nbsp;can&nbsp;use&nbsp;this:<br /></span><span style="color: #007700">declare(</span><span style="color: #0000BB">ticks</span><span style="color: #007700">=</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;entire&nbsp;script&nbsp;here<br /></span><span style="color: #007700">}<br /><br /></span><span style="color: #FF8000">//&nbsp;or&nbsp;you&nbsp;can&nbsp;use&nbsp;this:<br /></span><span style="color: #007700">declare(</span><span style="color: #0000BB">ticks</span><span style="color: #007700">=</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;entire&nbsp;script&nbsp;here<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+
+  <div class="sect2" id="control-structures.declare.ticks">
+   <h3 class="title">Ticks</h3>
+   <div class="caution"><b class="caution">Caution</b>
+     <p class="simpara">
+      ticks 指令在 PHP 5.3.0 中是过时指令，将会从 PHP 6.0.0 移除。
+     </p>
+   </div>
+   <p class="para">
+    Tick 是一个在 <i>declare</i> 代码段中解释器每执行
+    <var class="varname"><var class="varname">N</var></var> 条低级语句就会发生的事件。<var class="varname"><var class="varname">N</var></var>
+    的值是在 <i>declare</i> 中的 <i>directive</i> 部分用
+    <code class="code">ticks=N</code> 来指定的。
+   </p>
+   <p class="para">
+    在每个 tick 中出现的事件是由 <span class="function"><a href="function.register-tick-function.html" class="function">register_tick_function()</a></span>
+    来指定的。更多细节见下面的例子。注意每个 tick 中可以出现多个事件。
+   </p>
+   <p class="para">
+    <div class="example" id="example-116">
+     <p><b>Example #1 评估一段 PHP 代码的执行时间</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;A&nbsp;function&nbsp;that&nbsp;records&nbsp;the&nbsp;time&nbsp;when&nbsp;it&nbsp;is&nbsp;called<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">profile</span><span style="color: #007700">(</span><span style="color: #0000BB">$dump&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">FALSE</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$profile</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Return&nbsp;the&nbsp;times&nbsp;stored&nbsp;in&nbsp;profile,&nbsp;then&nbsp;erase&nbsp;it<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$dump</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$temp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$profile</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$profile</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(</span><span style="color: #0000BB">$temp</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$profile</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">microtime</span><span style="color: #007700">();<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;Set&nbsp;up&nbsp;a&nbsp;tick&nbsp;handler<br /></span><span style="color: #0000BB">register_tick_function</span><span style="color: #007700">(</span><span style="color: #DD0000">"profile"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;Initialize&nbsp;the&nbsp;function&nbsp;before&nbsp;the&nbsp;declare&nbsp;block<br /></span><span style="color: #0000BB">profile</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">//&nbsp;Run&nbsp;a&nbsp;block&nbsp;of&nbsp;code,&nbsp;throw&nbsp;a&nbsp;tick&nbsp;every&nbsp;2nd&nbsp;statement<br /></span><span style="color: #007700">declare(</span><span style="color: #0000BB">ticks</span><span style="color: #007700">=</span><span style="color: #0000BB">2</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$x&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$x&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">50</span><span style="color: #007700">;&nbsp;++</span><span style="color: #0000BB">$x</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">similar_text</span><span style="color: #007700">(</span><span style="color: #0000BB">md5</span><span style="color: #007700">(</span><span style="color: #0000BB">$x</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">md5</span><span style="color: #007700">(</span><span style="color: #0000BB">$x</span><span style="color: #007700">*</span><span style="color: #0000BB">$x</span><span style="color: #007700">)),&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;Display&nbsp;the&nbsp;data&nbsp;stored&nbsp;in&nbsp;the&nbsp;profiler<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">profile&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">TRUE</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+    这个例子评估“declare”中的 PHP
+    代码，每执行两条低级语句就记录一次时间。此信息可以用来找到一段特定代码中速度慢的部分。这个过程也可以用其它方法完成，但用
+    tick 更方便也更容易实现。
+   </p>
+   <p class="simpara">
+    Ticks 很适合用来做调试，以及实现简单的多任务，后台 I/O 和很多其它任务。
+   </p>
+   <p class="simpara">
+    参见 <span class="function"><a href="function.register-tick-function.html" class="function">register_tick_function()</a></span> 和
+    <span class="function"><a href="function.unregister-tick-function.html" class="function">unregister_tick_function()</a></span>。
+   </p>
+  </div>
+  <div class="sect2" id="control-structures.declare.encoding">
+    <h3 class="title">Encoding</h3>
+    <p class="para">
+      A script&#039;s encoding can be specified per-script using the encoding directive.
+    <div class="example" id="example-117">
+     <p><b>Example #2 Declaring an encoding for the script.</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">declare(</span><span style="color: #0000BB">encoding</span><span style="color: #007700">=</span><span style="color: #DD0000">'ISO-8859-1'</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;code&nbsp;here<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+
+    <div class="caution"><b class="caution">Caution</b>
+     <p class="simpara">
+      When combined with namespaces, the only legal syntax for declare
+      is <i>declare(encoding=&#039;...&#039;);</i> where <i>...</i>
+      is the encoding value.  <i>declare(encoding=&#039;...&#039;) {}</i>
+      will result in a parse error when combined with namespaces.
+     </p>
+    </div>
+    <p class="para">
+     The encoding declare value is ignored in PHP 5.3 unless php is compiled with
+     <i>--enable-zend-multibyte</i>.  In PHP 6.0, the <i>encoding</i>
+     directive will be used to inform the scanner what encoding the file is created in.  Legal
+     values are encoding names such as <i>UTF-8</i>.
+    </p>
+  </div>
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="control-structures.switch.html">switch</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.return.html">return</a></div>
+ <div class="up"><a href="language.control-structures.html">控制结构</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,1488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>php.ini 核心配置选项说明</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ini.sections.html">List of php.ini sections</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="extensions.html">扩展库分类</a></div>
+ <div class="up"><a href="ini.html">php.ini 配置选项</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="ini.core" class="section">
+  <h2 class="title"><var class="filename">php.ini</var> 核心配置选项说明</h2>
+  <p class="para">
+   该列表只包含核心的 <var class="filename">php.ini</var>
+   配置选项。扩展的配置选项在各个扩展的文档页面分别被描述。有关 session 的选项可以在
+   <a href="ref.session.html" class="link">sessions 页面</a>找到。
+  </p>
+
+  <div class="section" id="ini.sect.httpd-options">
+   <h2 class="title">Httpd 选项</h2>
+    <p class="para">
+     <table class="doctable table">
+      <caption><b>Httpd 选项</b></caption>
+      
+       <thead valign="middle">
+        <tr valign="middle">
+         <th>名称</th>
+         <th>默认值</th>
+         <th>可修改范围</th>
+         <th>更新记录</th>
+        </tr>
+
+       </thead>
+
+       <tbody valign="middle" class="tbody">
+        <tr valign="middle">
+         <td align="left">async_send</td>
+         <td align="left">&quot;0&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+       </tbody>
+      
+     </table>
+
+    </p>
+    <p class="para">
+    </p>
+   </div>
+
+  <div class="section" id="ini.sect.language-options">
+   <h2 class="title">语言选项</h2>
+   <p class="para">
+   <table class="doctable table">
+    <caption><b>语言和杂类配置选项</b></caption>
+    
+     <thead valign="middle">
+      <tr valign="middle">
+	    <th>名称</th>
+	    <th>默认值</th>
+	    <th>可修改范围</th>
+	    <th>更新记录</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle" class="tbody">
+     <tr valign="middle">
+      <td align="left">short_open_tag</td>
+      <td align="left">&quot;1&quot;</td>
+      <td align="left">PHP_INI_PERDIR</td>
+      <td align="left">在 PHP &lt;= 4.0.0 时是 PHP_INI_ALL。</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">asp_tags</td>
+      <td align="left">&quot;0&quot;</td>
+      <td align="left">PHP_INI_PERDIR</td>
+      <td align="left">在 PHP &lt;= 4.0.0 时是 PHP_INI_ALL。</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">precision</td>
+      <td align="left">&quot;14&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">y2k_compliance</td>
+      <td align="left">&quot;1&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">allow_call_time_pass_reference</td>
+      <td align="left">&quot;1&quot;</td>
+      <td align="left">PHP_INI_PERDIR</td>
+      <td align="left">在 PHP &lt;= 4.0.0 时是 PHP_INI_ALL。</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">expose_php</td>
+      <td align="left">&quot;1&quot;</td>
+      <td align="left">仅可在 <var class="filename">php.ini</var> 中配置。</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr valign="middle">
+      <td align="left">zend.ze1_compatibility_mode</td>
+      <td align="left">&quot;0&quot;</td>
+      <td align="left">PHP_INI_ALL</td>
+      <td align="left">从 PHP 5.0.0 起可用。</td>
+     </tr>
+
+    </tbody>
+    
+   </table>
+
+   </p>
+
+   <p class="para">这是配置指令的简短说明。</p>
+
+    <p class="para">
+     <dl>
+
+      <dt id="ini.short-open-tag">
+       <span class="term">
+        <i><tt class="parameter">short_open_tag</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         决定是否允许使用 PHP 代码开始标志的缩写形式（<strong class="userinput"><code>&lt;?
+         ?&gt;</code></strong>）。如果要和 XML 结合使用
+         PHP，可以禁用此选项以便于嵌入使用
+         <strong class="userinput"><code>&lt;?xml ?&gt;</code></strong>。否则还可以通过
+         PHP 来输出，例如：<strong class="userinput"><code>&lt;?php echo &#039;&lt;?xml
+         version=&quot;1.0&quot;&#039;; ?&gt;</code></strong>。如果禁用了，必须使用
+         PHP 代码开始标志的完整形式（<strong class="userinput"><code>&lt;?php
+         ?&gt;</code></strong>）。
+        </p>
+        <blockquote class="note"><p><b class="note">Note</b>: 
+         <p class="para">
+          本指令也会影响到缩写形式
+          <strong class="userinput"><code>&lt;?=</code></strong>，它和
+          <strong class="userinput"><code>&lt;? echo</code></strong> 等价。使用此缩写需要
+          <code class="systemitem systemitem">short_open_tag</code>
+          的值为 On。
+         </p>
+        </p></blockquote>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.asp-tags">
+       <span class="term">
+        <i><tt class="parameter">asp_tags</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <span class="simpara">
+         除了通常的
+         &lt;?php ?&gt;
+         标志之外还允许使用
+         ASP 风格的标志 &lt;% %&gt;。这也包括了输出变量值的缩写
+         &lt;%= $value %&gt;。更多信息见<a href="language.basic-syntax.phpmode.html" class="link">从 HTML 中分离</a>一节。
+        </span>
+        <blockquote class="note"><p><b class="note">Note</b>: 
+         <p class="para">
+          ASP 风格标志的支持是 3.0.4 版新加的。
+         </p>
+        </p></blockquote>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.precision">
+       <span class="term">
+        <i><tt class="parameter">precision</tt></i>
+        <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+       </span>
+       <dd>
+
+        <span class="simpara">
+         浮点数中显示有效数字的位数。
+        </span>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.y2k-compliance">
+       <span class="term">
+        <i><tt class="parameter">y2k_compliance</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <span class="simpara">
+         强制 2000 年兼容（在不兼容的浏览器中会出问题）。
+        </span>
+       </dd>
+
+      </dt>
+
+
+
+      <dt id="ini.allow-call-time-pass-reference">
+       <span class="term">
+        <i><tt class="parameter">allow_call_time_pass_reference</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         在函数调用时参数被按照引用传递时是否发出警告。此方法已不被赞成并在
+         PHP/Zend 未来的版本中很可能不再支持。鼓励使用的方法是在函数定义中指定哪些参数应该用引用传递。鼓励大家尝试关闭此选项并确保脚本能够正常运行，以确保该脚本也能在未来的版本中运行（每次使用此特性都会收到一条警告）。
+        </p>
+        <p class="para">
+         在函数调用时通过引用传递参数是不推荐的，因为它影响到了代码的整洁。如果函数的参数没有声明作为引用传递，函数可以通过未写入文档的方法修改其参数。要避免其副作用，最好仅在函数声明时指定那个参数需要通过引用传递。
+        </p>
+        <p class="para">
+         参见<a href="language.references.html" class="link">引用的解释</a>。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.expose-php">
+       <span class="term">
+        <i><tt class="parameter">expose_php</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         决定是否暴露 PHP 被安装在服务器上（例如在 Web
+         服务器的信息头中加上其签名）。没有任何安全上的威胁，只是让客户端能够知道是否在服务器中安装了
+         PHP。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.zend.ze1-compatibility-mode">
+       <span class="term">
+        <i><tt class="parameter">zend.ze1_compatibility_mode</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         启用 Zend 引擎 1(PHP 4) 兼容模式。这影响到了对象的复制、构造（无属性的对象会产生
+         <b><tt>FALSE</tt></b> 或 0）及<a href="language.oop5.object-comparison.html" class="link">比较</a>。此模式下，对象将以值传递，而不是默认的引用传递。
+        </p>
+        <p class="para">
+         参见<a href="migration5.html" class="link">从 PHP 4 移植到 PHP 5</a>。
+        </p>
+       </dd>
+
+      </dt>
+
+     </dl>
+
+    </p>
+   </div>
+
+  <div class="section" id="ini.sect.resource-limits">
+   <h2 class="title">资源限制</h2>
+   <p class="para">
+    <table class="doctable table">
+     <caption><b>资源限制</b></caption>
+     
+      <thead valign="middle">
+       <tr valign="middle">
+	    <th>名称</th>
+	    <th>默认值</th>
+	    <th>可修改范围</th>
+	    <th>更新记录</th>
+       </tr>
+
+      </thead>
+
+      <tbody valign="middle" class="tbody">
+       <tr valign="middle">
+        <td align="left">memory_limit</td>
+        <td align="left">&quot;8M&quot;</td>
+        <td align="left">PHP_INI_ALL</td>
+        <td class="empty">&nbsp;</td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+
+   <p class="para">这是配置指令的简短说明。</p>
+
+   <p class="para">
+    <dl>
+
+     <dt id="ini.memory-limit">
+      <span class="term">
+       <i><tt class="parameter">memory_limit</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        本指令设定了一个脚本所能够申请到的最大内存字节数。这有助于防止写得不好的脚本消耗光服务器上的可用内存。要使用此指令必须在编译的时候激活。因此
+        configure
+        一行中应该包括：<i>--enable-memory-limit</i>。如果不需要任何内存上的限制，必须将其设为
+        -1。
+       </p>
+       <p class="para">
+        自 4.3.2 起，当激活了 memory_limit，PHP 函数
+        <span class="function"><a href="function.memory-get-usage.html" class="function">memory_get_usage()</a></span> 便可以使用了。
+       </p>
+
+       <span class="simpara">当使用  <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+时, 其值以字节来衡量。还可以使用在<a href="faq.using.html#faq.using.shorthandbytes" class="link">FAQ</a>中描述的速记符。</span>
+
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </p>
+   <p class="para">
+    参见 <a href="info.configuration.html#ini.max-execution-time" class="link">max_execution_time</a>。
+   </p>
+  </div>
+
+  <div class="section" id="ini.sect.performance">
+   <h2 class="title">性能调整</h2>
+   <p class="para">
+    <table class="doctable table">
+     <caption><b>性能调整</b></caption>
+     
+      <thead valign="middle">
+       <tr valign="middle">
+        <th>名称</th>
+        <th>默认值</th>
+        <th>可修改范围</th>
+        <th>更新记录</th>
+       </tr>
+
+      </thead>
+
+      <tbody valign="middle" class="tbody">
+       <tr valign="middle">
+        <td align="left">realpath_cache_size</td>
+        <td align="left">&quot;16K&quot;</td>
+        <td align="left">PHP_INI_SYSTEM</td>
+        <td align="left">自 PHP 5.1.0 起可用。</td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">realpath_cache_ttl</td>
+        <td align="left">&quot;120&quot;</td>
+        <td align="left">PHP_INI_SYSTEM</td>
+        <td align="left">自 PHP 5.1.0 起可用。</td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+   <p class="para">这是配置指令的简短说明。</p>
+   <p class="para">
+    <dl>
+
+     <dt id="ini.realpath-cache-size">
+      <span class="term">
+       <i><tt class="parameter">realpath_cache_size</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        决定 PHP 所使用的真实路径缓冲区的大小。此值在
+        PHP 会打开很多文件的系统下应增大，以反映出所执行文件操作的数量。
+       </p>
+      </dd>
+
+     </dt>
+
+     <dt id="ini.realpath-cache-ttl">
+      <span class="term">
+       <i><tt class="parameter">realpath_cache_ttl</tt></i>
+       <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        对给定文件或目录以秒为单位的真实路径信息缓冲的时间。对文件很少改变的系统，可以考虑增大辞职。
+       </p>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </p>
+  </div>
+
+  <div class="section" id="ini.sect.data-handling">
+   <h2 class="title">数据处理</h2>
+    <p class="para">
+     <table class="doctable table">
+      <caption><b>数据处理配置选项</b></caption>
+      
+       <thead valign="middle">
+        <tr valign="middle">
+	     <th>名称</th>
+	     <th>默认值</th>
+	     <th>可修改范围</th>
+	     <th>更新记录</th>
+        </tr>
+
+       </thead>
+
+       <tbody valign="middle" class="tbody">
+        <tr valign="middle">
+         <td align="left">track_vars</td>
+         <td align="left">&quot;On&quot;</td>
+         <td align="left">PHP_INI_??</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">arg_separator.output</td>
+         <td align="left">&quot;&amp;&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td align="left">从 PHP 4.0.5 起可用。</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">arg_separator.input</td>
+         <td align="left">&quot;&amp;&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td align="left">从 PHP 4.0.5 起可用。</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">variables_order</td>
+         <td align="left">&quot;EGPCS&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td align="left">在 PHP &lt;= 5.0.5 时是 PHP_INI_ALL。</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">auto_globals_jit</td>
+         <td align="left">&quot;1&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td align="left">从 PHP 5.0.0 起可用。</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">register_globals</td>
+         <td align="left">&quot;0&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">register_argc_argv</td>
+         <td align="left">&quot;1&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。</td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">register_long_arrays</td>
+        <td align="left">&quot;1&quot;</td>
+        <td align="left">PHP_INI_PERDIR</td>
+        <td align="left">从 PHP 5.0.0 起可用。</td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">post_max_size</td>
+        <td align="left">&quot;8M&quot;</td>
+        <td align="left">PHP_INI_PERDIR</td>
+        <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。从 PHP 4.0.3 起可用。</td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">gpc_order</td>
+        <td align="left">&quot;GPC&quot;</td>
+        <td align="left">PHP_INI_ALL</td>
+        <td class="empty">&nbsp;</td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">auto_prepend_file</td>
+        <td align="left">NULL</td>
+        <td align="left">PHP_INI_PERDIR</td>
+        <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。</td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">auto_append_file</td>
+        <td align="left">NULL</td>
+        <td align="left">PHP_INI_PERDIR</td>
+        <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。</td>
+       </tr>
+
+        <tr valign="middle">
+         <td align="left">default_mimetype</td>
+         <td align="left">&quot;text/html&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">default_charset</td>
+         <td align="left">&quot;&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">always_populate_raw_post_data</td>
+         <td align="left">&quot;0&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。从 PHP 4.1.0 起可用。</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">allow_webdav_methods</td>
+         <td align="left">&quot;0&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+       </tbody>
+      
+     </table>
+
+    </p>
+
+    <p class="para">这是配置指令的简短说明。</p>
+
+    <p class="para">
+     <dl>
+
+      <dt id="ini.track-vars">
+       <span class="term">
+        <i><tt class="parameter">track_vars</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         如果激活，则环境变量，GET，POST，Cookie 和 Server
+         变量都能够分别在全局关联数组中找到：<var class="varname"><var class="varname"><a href="reserved.variables.environment.html" class="classname">$_ENV</a></var></var>，<var class="varname"><var class="varname"><a href="reserved.variables.get.html" class="classname">$_GET</a></var></var>，<var class="varname"><var class="varname"><a href="reserved.variables.post.html" class="classname">$_POST</a></var></var>，<var class="varname"><var class="varname"><a href="reserved.variables.cookies.html" class="classname">$_COOKIE</a></var></var> 和
+         <var class="varname"><var class="varname"><a href="reserved.variables.server.html" class="classname">$_SERVER</a></var></var>。
+        </p>
+        <p class="para">
+         注意自 PHP 4.0.3 起，<code class="systemitem systemitem">track_vars</code> 总是打开的。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.arg-separator.output">
+       <span class="term">
+        <i><tt class="parameter">arg_separator.output</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         PHP 所产生的 URL 中来分隔参数的分隔符。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.arg-separator.input">
+       <span class="term">
+        <i><tt class="parameter">arg_separator.input</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         PHP 用来将 URL 解析为变量的分隔符列表。
+        </p>
+        <blockquote class="note"><p><b class="note">Note</b>: 
+         <p class="para">
+          本指令中的每个字符都会被当成分隔符！
+         </p>
+        </p></blockquote>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.variables-order">
+       <span class="term">
+        <i><tt class="parameter">variables_order</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         设定 EGPCS（Environment，GET，POST，Cookie，Server）变量解析的顺序。默认设定为“EGPCS”。举例说，将其设为“GP”，会导致
+         PHP 完全忽略环境变量，cookies 和 server 变量，并用 GET
+         方法的变量覆盖 POST 方法的同名变量。
+        </p>
+        <p class="para">
+         参见 <a href="ini.core.html#ini.register-globals" class="link">register_globals</a>。
+        </p>
+       </dd>
+
+      </dt>
+
+
+     <dt id="ini.request-order">
+      <span class="term">
+       <i><tt class="parameter">request_order</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        This directive describes the order in which PHP registers GET, POST
+        and Cookie variables into the _REQUEST array. Registration is done
+        from left to right, newer values override older values.
+       </p>
+       <p class="para">
+        If this directive is not set, variables_order is used for
+        <var class="varname"><var class="varname"><a href="reserved.variables.request.html" class="classname">$_REQUEST</a></var></var> contents.
+       </p>
+      </dd>
+
+     </dt>
+
+
+      <dt id="ini.auto-globals-jit">
+       <span class="term">
+        <i><tt class="parameter">auto_globals_jit</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         启用后，SERVER 和 ENV 变量在他们第一次使用后 (Just In Time) 便被创建，而不是等到脚本开始运行时。如果这些变量没有在脚本总使用，启用这个变量会提高服务器性能。
+        </p>
+        <p class="para">
+         要使此选项有效，PHP 配置选项
+         <a href="ini.core.html#ini.register-globals" class="link">register_globals</a>,
+         <a href="ini.core.html#ini.register-long-arrays" class="link">register_long_arrays</a>,
+         和 <a href="ini.core.html#ini.register-argc-argv" class="link">register_argc_argv</a>
+         必须禁用。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.register-globals">
+       <span class="term">
+        <i><tt class="parameter">register_globals</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         决定是否将
+         EGPCS（Environment，GET，POST，Cookie，Server）变量注册为全局变量。
+        </p>
+        <p class="para">
+         PHP <a href="http://www.php.net/releases/4_2_0.php" class="link external">&raquo;&nbsp;4.2.0</a>
+         开始，本选项默认为
+         <em class="emphasis">off</em>。
+        </p>
+        <p class="para">
+         相关信息请阅读安全一章中的<a href="security.globals.html" class="link">使用 register_globals</a>。
+        </p>
+        <p class="para">
+         请注意
+         <code class="systemitem systemitem">register_globals</code>
+         不能在运行时设定（<span class="function"><a href="function.ini-set.html" class="function">ini_set()</a></span>），尽管如以上说明在主机允许时可以用
+         <var class="filename">.htaccess</var>。一个
+         <var class="filename">.htaccess</var> 项目的例子：<strong class="userinput"><code>php_flag register_globals off</code></strong>。
+        </p>
+        <blockquote class="note"><p><b class="note">Note</b>: 
+         <p class="para">
+          <code class="systemitem systemitem">register_globals</code>
+          受
+          <a href="ini.core.html#ini.variables-order" class="link">variables_order</a>
+          选项的影响。
+         </p>
+        </p></blockquote>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.register-argc-argv">
+       <span class="term">
+        <i><tt class="parameter">register_argc_argv</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <span class="simpara">
+         决定 PHP 是否定义 argv &amp; argc 变量（可能包含有 GET 信息）。
+        </span>
+        <span class="simpara">
+         参见<a href="features.commandline.html" class="link">命令行方式</a>。此外，本选项自
+         PHP 4.0.0 起可用，在此之前总是“On”。
+        </span>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.register-long-arrays">
+       <span class="term">
+        <i><tt class="parameter">register_long_arrays</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <span class="simpara">
+         设定 PHP 是否注册已过时的 <var class="varname"><var class="varname">$HTTP_*_VARS</var></var> 之类的<a href="language.variables.predefined.html" class="link">预定义变量</a>。如果为
+         On（默认值），则类似 <var class="varname"><var class="varname">$HTTP_GET_VARS</var></var>
+         的 PHP 变量会被注册。如果不使用，为性能考虑建议关闭此选项，而使用超全局数组例如
+         <var class="varname"><var class="varname"><a href="reserved.variables.get.html" class="classname">$_GET</a></var></var> 替代之。
+        </span>
+        <span class="simpara">
+         本指令自 PHP 5.0.0 起可用。
+        </span>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.post-max-size">
+       <span class="term">
+        <i><tt class="parameter">post_max_size</tt></i>
+        <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+       </span>
+       <dd>
+
+        <span class="simpara">
+         设定 POST 数据所允许的最大大小。此设定也影响到文件上传。要上传大文件，该值必须大于
+         <a href="ini.core.html#ini.upload-max-filesize" class="link">upload_max_filesize</a>。
+        </span>
+        <span class="simpara">
+         如果配置脚本中激活了内存限制，<a href="ini.core.html#ini.memory-limit" class="link">memory_limit</a>
+         也会影响文件上传。通常说，<a href="ini.core.html#ini.memory-limit" class="link">memory_limit</a>
+         应该比
+         <i><tt class="parameter">post_max_size</tt></i> 要大。
+        </span>
+
+        <span class="simpara">当使用  <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+时, 其值以字节来衡量。还可以使用在<a href="faq.using.html#faq.using.shorthandbytes" class="link">FAQ</a>中描述的速记符。</span>
+
+        <span class="simpara">
+         如果 POST 数据尺寸大于 post_max_size
+         <var class="varname"><var class="varname"><a href="reserved.variables.post.html" class="classname">$_POST</a></var></var> 和 <var class="varname"><var class="varname"><a href="reserved.variables.files.html" class="classname">$_FILES</a></var></var>
+         <a href="language.variables.superglobals.html" class="link">superglobals</a>
+         便会为空。这可以以多种方式证明，例如，传递
+         <var class="varname"><var class="varname"><a href="reserved.variables.get.html" class="classname">$_GET</a></var></var> 变量到脚本以处理数据，
+         也就是 <i>&lt;form action=&quot;edit.php?processed=1&quot;&gt;</i>,
+         然后查看 <var class="varname"><var class="varname"><a href="reserved.variables.get.html" class="classname">$_GET['processed']</a></var></var> 是否被设置。
+        </span>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.gpc-order">
+       <span class="term">
+        <i><tt class="parameter">gpc_order</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         设定 GET/POST/COOKIE 变量解析的顺序，默认为“GPC”。举例说，将其设为“GP”，会导致
+         PHP 完全忽略 cookie 变量，并用 GET
+         方法的变量覆盖 POST 方法的同名变量。
+        </p>
+        <blockquote class="note"><p><b class="note">Note</b>: 
+         <p class="para">
+          本选项不能用于 PHP 4。用
+          <a href="ini.core.html#ini.variables-order" class="link">variables_order</a> 替代之。
+         </p>
+        </p></blockquote>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.auto-prepend-file">
+       <span class="term">
+        <i><tt class="parameter">auto_prepend_file</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         指定在主文件之前自动解析的文件名。该文件就像调用了
+         <span class="function"><a href="function.include.html" class="function">include()</a></span> 函数一样被包含进来，因此会使用
+         <a href="ini.core.html#ini.include-path" class="link">include_path</a>。
+        </p>
+        <p class="para">
+         特殊值 <b><tt>none</tt></b>
+         禁止了自动前缀。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.auto-append-file">
+       <span class="term">
+        <i><tt class="parameter">auto_append_file</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         指定在主文件之后自动解析的文件名。该文件就像调用了
+         <span class="function"><a href="function.include.html" class="function">include()</a></span> 函数一样被包含进来，因此会使用
+         <a href="ini.core.html#ini.include-path" class="link">include_path</a>。
+        </p>
+        <p class="para">
+         特殊值 <b><tt>none</tt></b>
+         禁止了自动后缀。
+         <blockquote class="note"><p><b class="note">Note</b>: 
+          <span class="simpara">
+           如果脚本通过
+           <span class="function"><a href="function.exit.html" class="function">exit()</a></span> 终止，则自动后缀<em class="emphasis">不会</em>发生。
+          </span>
+         </p></blockquote>
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.default-mimetype">
+       <span class="term">
+        <i><tt class="parameter">default_mimetype</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.default-charset">
+       <span class="term">
+        <i><tt class="parameter">default_charset</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         自 4.0b4 起，PHP 总是默认在 HTTP 信息头
+         Content-type: 中输出字符编码。要禁止发送字符集，将本选项设为空即可。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.always-populate-raw-post-data">
+       <span class="term">
+        <i><tt class="parameter">always_populate_raw_post_data</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         总是产生 <var class="varname"><var class="varname"><a href="reserved.variables.httprawpostdata.html" class="classname">$HTTP_RAW_POST_DATA</a></var></var> 变量包含有原始的
+         POST 数据。否则，此变量仅在碰到未识别 MIME 类型的数据时产生。不过，访问原始
+         POST 数据的更好方法是 <a href="wrappers.php.html" class="link">php://input</a>。<var class="varname"><var class="varname"><a href="reserved.variables.httprawpostdata.html" class="classname">$HTTP_RAW_POST_DATA</a></var></var>
+         对于 <i>enctype=&quot;multipart/form-data&quot;</i> 表单数据不可用。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.allow-webdav-methods">
+       <span class="term">
+        <i><tt class="parameter">allow_webdav_methods</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         允许在 PHP 脚本中处理
+         WebDAV 的 HTTP 请求（例如
+         PROPFIND，PROPPATCH，MOVE，COPY 等）。此选项在 PHP 4.3.2 以后便不存在了。如果要取得这些请求的
+         POST 数据，也要设定
+         <a href="ini.core.html#ini.always-populate-raw-post-data" class="link">always_populate_raw_post_data</a>。
+        </p>
+       </dd>
+
+      </dt>
+
+     </dl>
+
+    </p>
+    <p class="para">
+     参见
+     <a href="info.configuration.html#ini.magic-quotes-gpc" class="link">magic_quotes_gpc</a>，<a href="info.configuration.html#ini.magic-quotes-runtime" class="link">magic-quotes-runtime</a> 和
+     <a href="sybase.configuration.html#ini.magic-quotes-sybase" class="link">magic_quotes_sybase</a>。
+    </p>
+   </div>
+
+  <div class="section" id="ini.sect.path-directory">
+   <h2 class="title">路径和目录</h2>
+    <p class="para">
+     <table class="doctable table">
+      <caption><b>路径和目录配置选项</b></caption>
+      
+       <thead valign="middle">
+        <tr valign="middle">
+	     <th>名称</th>
+	     <th>默认值</th>
+	     <th>可修改范围</th>
+	     <th>更新记录</th>
+        </tr>
+
+       </thead>
+
+       <tbody valign="middle" class="tbody">
+        <tr valign="middle">
+         <td align="left">include_path</td>
+         <td align="left">&quot;.;/path/to/php/pear&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">doc_root</td>
+         <td align="left">NULL</td>
+         <td align="left">PHP_INI_SYSTEM</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">user_dir</td>
+         <td align="left">NULL</td>
+         <td align="left">PHP_INI_SYSTEM</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">extension_dir</td>
+         <td align="left">&quot;/path/to/php&quot;</td>
+         <td align="left">PHP_INI_SYSTEM</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">extension</td>
+         <td align="left">NULL</td>
+         <td align="left">仅限于 <var class="filename">php.ini</var></td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">cgi.fix_pathinfo</td>
+         <td align="left">&quot;1&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td align="left">从 PHP 4.3.0 起可用</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">cgi.force_redirect</td>
+         <td align="left">&quot;1&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td align="left">从 PHP 4.2.0 起可用</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">cgi.redirect_status_env</td>
+         <td align="left">NULL</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td align="left">从 PHP 4.2.0 起可用</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">fastcgi.impersonate</td>
+         <td align="left">&quot;0&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td align="left">从 PHP 4.3.0 起可用</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">cgi.rfc2616_headers</td>
+         <td align="left">&quot;0&quot;</td>
+         <td align="left">PHP_INI_ALL</td>
+         <td align="left">从 PHP 4.3.0 起可用</td>
+        </tr>
+
+       </tbody>
+      
+     </table>
+
+    </p>
+
+    <p class="para">这是配置指令的简短说明。</p>
+
+    <p class="para">
+     <dl>
+
+      <dt id="ini.include-path">
+       <span class="term">
+        <i><tt class="parameter">include_path</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         指定一组目录用于
+         <span class="function"><a href="function.require.html" class="function">require()</a></span>，<span class="function"><a href="function.include.html" class="function">include()</a></span> 和
+         <span class="function"><b>fopen_with_path()</b></span>
+         函数来寻找文件。格式和系统的
+         <span class="envar">PATH</span>
+         环境变量类似：一组目录的列表，在 UNIX 下用冒号分隔，在
+         Windows 下用分号分隔。
+        </p>
+        <p class="para">
+         <div class="example" id="example-4498">
+          <p><b>Example #1 Unix include_path</b></p>
+          <div class="example-contents">
+<div class="php.inicode"><pre class="php.inicode">include_path=&quot;.:/php/includes&quot;</pre>
+</div>
+          </div>
+
+         </div>
+        </p>
+        <p class="para">
+         <div class="example" id="example-4499">
+          <p><b>Example #2 Windows include_path</b></p>
+          <div class="example-contents">
+<div class="php.inicode"><pre class="php.inicode">include_path=&quot;.;c:\php\includes&quot;</pre>
+</div>
+          </div>
+
+         </div>
+        </p>
+        <p class="para">
+         在包含路径中使用 <i>.</i>
+         可以允许相对路径，它代表当前目录。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.doc-root">
+       <span class="term">
+        <i><tt class="parameter">doc_root</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         PHP 在服务器上的根目录。仅在非空时使用。如果
+         PHP 被配置为<a href="ini.sect.safe-mode.html#ini.safe-mode" class="link">安全模式</a>，则此目录之外的文件一概不被解析。如果
+         PHP 编译时没有指定 FORCE_REDIRECT，并且在任何 web
+         服务器（除了 IIS）中以 CGI
+         方式运行 PHP，则应该设定 doc_root。替代方案是使用下面的
+         <a href="ini.core.html#ini.cgi.force-redirect" class="link">cgi.force_redirect</a>
+         配置选项。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.user-dir">
+       <span class="term">
+        <i><tt class="parameter">user_dir</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         在用户目录之下使用 <i>PHP</i>
+         文件的基本目录名，例如
+         <i>public_html</i>。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.extension-dir">
+       <span class="term">
+        <i><tt class="parameter">extension_dir</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         PHP 用来寻找动态连接扩展库的目录。参见
+         <a href="info.configuration.html#ini.enable-dl" class="link">enable_dl</a> 和
+         <span class="function"><a href="function.dl.html" class="function">dl()</a></span>。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.extension">
+       <span class="term">
+        <i><tt class="parameter">extension</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         当 PHP 启动时所加载的动态连接扩展库。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.cgi.fix-pathinfo">
+       <span class="term">
+        <i><tt class="parameter">cgi.fix_pathinfo</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         对 CGI 提供了<em class="emphasis">真正的</em> PATH_INFO/PATH_TRANSLATED
+         支持。以前 PHP 的行为是将 PATH_TRANSLATED 设为
+         SCRIPT_FILENAME，而不管 PATH_INFO 是什么。有关 PATH_INFO
+         的更多信息见 cgi 规格。将此值设为 1 将使 PHP CGI
+         修正其路径以遵守规格。设为 0 将使 PHP
+         的行为和从前一样。默认为零。用户应该修正其脚本使用 SCRIPT_FILENAME
+         而不是 PATH_TRANSLATED。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.cgi.force-redirect">
+       <span class="term">
+        <i><tt class="parameter">cgi.force_redirect</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         在大多数 web 服务器中以 CGI 方式运行 PHP
+         时很有必要用 cgi.force_redirect 提供安全。PHP
+         默认其为 On。可以将其关闭，但<em class="emphasis">风险自担</em>。
+        </p>
+        <blockquote class="note"><p><b class="note">Note</b>: 
+         <p class="para">
+          Windows 用户：可以安全地在 IIS 之下将其关闭，事实上必须这么做。要在
+          OmniHTTPD 或 Xitami 之下使用也必须将其关闭。
+         </p>
+        </p></blockquote>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.cgi.redirect-status-env">
+       <span class="term">
+        <i><tt class="parameter">cgi.redirect_status_env</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         如果打开了 cgi.force_redirect，并且不是在
+         Apache 或 Netscape（iPlanet）web
+         服务器之下运行，可能需要设定一个环境变量名，PHP
+         将去寻找它来知道可以继续执行下去。
+        </p>
+        <blockquote class="note"><p><b class="note">Note</b>: 
+         <p class="para">
+          设定此变量可能会导致安全问题，首先要知道自己在做什么。
+         </p>
+        </p></blockquote>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.fastcgi.impersonate">
+       <span class="term">
+        <i><tt class="parameter">fastcgi.impersonate</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         IIS（在基于 WINNT 的操作系统上）中的 FastCGI
+         支持模仿客户端安全令牌的能力。这使得 IIS
+         能够定义运行时所基于的请求的安全上下文。Apache
+         中的 mod_fastcgi 不支持此特性（03/17/2002）。如果在
+         IIS 中运行则设为 1。默认为 0。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.cgi.rfc2616-headers">
+       <span class="term">
+        <i><tt class="parameter">cgi.rfc2616_headers</tt></i>
+        <span class="type"><a href="language.types.integer.html" class="type int">int</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         指定 PHP 在发送 HTTP 响应代码时使用何种报头。如果设定为 0，PHP
+         发送一个 Status: 报头，Apache 和其它 web server 都支持。如果此选项设定为 1，PHP
+         将发送 <a href="http://www.faqs.org/rfcs/rfc2616" class="link external">&raquo;&nbsp;RFC 2616</a>
+         兼容的报头。除非你知道自己在做什么，否则保留其值为 0。
+        </p>
+       </dd>
+
+      </dt>
+
+     </dl>
+
+    </p>
+   </div>
+
+  <div class="section" id="ini.sect.file-uploads">
+   <h2 class="title">文件上传</h2>
+    <p class="para">
+     <table class="doctable table">
+      <caption><b>文件上传配置选项</b></caption>
+      
+       <thead valign="middle">
+        <tr valign="middle">
+	     <th>名称</th>
+	     <th>默认值</th>
+	     <th>可修改范围</th>
+	     <th>更新记录</th>
+        </tr>
+
+       </thead>
+
+       <tbody valign="middle" class="tbody">
+        <tr valign="middle">
+         <td align="left">file_uploads</td>
+         <td align="left">&quot;1&quot;</td>
+         <td align="left">PHP_INI_SYSTEM</td>
+         <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。从 PHP 4.0.3 起可用。</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">upload_tmp_dir</td>
+         <td align="left">NULL</td>
+         <td align="left">PHP_INI_SYSTEM</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+         <td align="left">upload_max_filesize</td>
+         <td align="left">&quot;2M&quot;</td>
+         <td align="left">PHP_INI_PERDIR</td>
+         <td align="left">在 PHP &lt;= 4.2.3 时是 PHP_INI_ALL。</td>
+        </tr>
+
+       </tbody>
+      
+     </table>
+
+    </p>
+
+    <p class="para">这是配置指令的简短说明。</p>
+
+    <p class="para">
+     <dl>
+
+      <dt id="ini.file-uploads">
+       <span class="term">
+        <i><tt class="parameter">file_uploads</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         是否允许 HTTP
+         <a href="features.file-upload.html" class="link">文件上传</a>。参见
+         <a href="ini.core.html#ini.upload-max-filesize" class="link">upload_max_filesize</a>，<a href="ini.core.html#ini.upload-tmp-dir" class="link">upload_tmp_dir</a> 和
+         <a href="ini.core.html#ini.post-max-size" class="link">post_max_size</a> 指令。
+        </p>
+
+        <span class="simpara">当使用  <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+时, 其值以字节来衡量。还可以使用在<a href="faq.using.html#faq.using.shorthandbytes" class="link">FAQ</a>中描述的速记符。</span>
+
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.upload-tmp-dir">
+       <span class="term">
+        <i><tt class="parameter">upload_tmp_dir</tt></i>
+        <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         文件上传时存放文件的临时目录。必须是
+         <i>PHP</i> 进程所有者用户可写的目录。如果未指定则
+         PHP 使用系统默认值。
+        </p>
+       </dd>
+
+      </dt>
+
+
+      <dt id="ini.upload-max-filesize">
+       <span class="term">
+        <i><tt class="parameter">upload_max_filesize</tt></i>
+        <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+         所上传的文件的最大大小。
+        </p>
+
+        <span class="simpara">当使用  <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span>
+时, 其值以字节来衡量。还可以使用在<a href="faq.using.html#faq.using.shorthandbytes" class="link">FAQ</a>中描述的速记符。</span>
+
+       </dd>
+
+      </dt>
+
+     </dl>
+
+    </p>
+   </div>
+
+  <div class="section" id="ini.sql-general">
+   <h2 class="title">普通 SQL</h2>
+    <p class="para">
+     <table class="doctable table">
+      <caption><b>普通 SQL 配置选项</b></caption>
+      
+       <thead valign="middle">
+        <tr valign="middle">
+	     <th>名称</th>
+	     <th>默认值</th>
+	     <th>可修改范围</th>
+	     <th>更新记录</th>
+        </tr>
+
+       </thead>
+
+       <tbody valign="middle" class="tbody">
+        <tr valign="middle">
+         <td align="left">sql.safe_mode</td>
+         <td align="left">&quot;0&quot;</td>
+         <td align="left">PHP_INI_SYSTEM</td>
+         <td class="empty">&nbsp;</td>
+        </tr>
+
+       </tbody>
+      
+     </table>
+
+    </p>
+
+    <p class="para">这是配置指令的简短说明。</p>
+
+    <p class="para">
+     <dl>
+
+      <dt id="ini.sql.safe-mode">
+       <span class="term">
+        <i><tt class="parameter">sql.safe_mode</tt></i>
+        <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+       </span>
+       <dd>
+
+        <p class="para">
+        </p>
+       </dd>
+
+      </dt>
+
+     </dl>
+
+    </p>
+   </div>
+
+   <div class="section" id="ini.sect.debugger">
+    <h2 class="title">调试器配置选项</h2>
+    <div class="caution"><b class="caution">Caution</b>
+     <p class="para">
+      仅 PHP 3 实现了一个默认的调试器。更多信息请参考<a href="debugger.html" class="xref">PHP 的调试</a>。
+     </p>
+    </div>
+
+    <dl>
+
+     <dt id="ini.debugger.host">
+      <span class="term">
+       <i><tt class="parameter">debugger.host</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        调试器所使用的主机的 DNS 名或 IP 地址。
+       </p>
+      </dd>
+
+     </dt>
+
+
+     <dt id="ini.debugger.port">
+      <span class="term">
+       <i><tt class="parameter">debugger.port</tt></i>
+       <span class="type"><a href="language.types.string.html" class="type string">string</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        调试器所用的端口号。
+       </p>
+      </dd>
+
+     </dt>
+
+
+     <dt id="ini.debugger.enabled">
+      <span class="term">
+       <i><tt class="parameter">debugger.enabled</tt></i>
+       <span class="type"><a href="language.types.boolean.html" class="type boolean">boolean</a></span>
+      </span>
+      <dd>
+
+       <p class="para">
+        是否启用调试器。
+       </p>
+      </dd>
+
+     </dt>
+
+
+    </dl>
+
+   </div>
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ini.sections.html">List of php.ini sections</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="extensions.html">扩展库分类</a></div>
+ <div class="up"><a href="ini.html">php.ini 配置选项</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

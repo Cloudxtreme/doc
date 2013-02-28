@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>将一个字符串写入文件</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.file-get-contents.html">file_get_contents</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.file.html">file</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.file-put-contents" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">file_put_contents</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose"><span class="refname">file_put_contents</span> &mdash; <span class="dc-title">将一个字符串写入文件</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.file-put-contents-description">
+  <h3 class="title">说明</h3>
+   <div class="methodsynopsis dc-description">
+    <span class="type">int</span> <span class="methodname"><b>file_put_contents</b></span>
+     ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+    , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$data</tt></span>
+    [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$flags</tt></span>
+    [, <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$context</tt></span>
+   ]] )</div>
+
+  <p class="simpara">
+   和依次调用 <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>，<span class="function"><a href="function.fwrite.html" class="function">fwrite()</a></span>
+   以及 <span class="function"><a href="function.fclose.html" class="function">fclose()</a></span> 功能一样。
+  </p>
+  <p class="para">
+   参数 <i><tt class="parameter">data</tt></i> 可以是数组（但不能为多维数组），这就相当于
+   <i>file_put_contents($filename, join(&#039;&#039;, $array))</i>
+  </p>
+  <p class="para">
+   自 PHP 5.1.0 起，<i><tt class="parameter">data</tt></i>
+   参数也可以被指定为 stream 资源，这里 stream
+   中所保存的缓存数据将被写入到指定文件中，这种用法就相似于使用
+   <span class="function"><a href="function.stream-copy-to-stream.html" class="function">stream_copy_to_stream()</a></span> 函数。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.file-put-contents-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">filename</tt></i></span>
+     <dd>
+
+      <p class="para">
+       要被写入数据的文件名。
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">data</tt></i></span>
+     <dd>
+
+      <p class="para">
+       要写入的数据。类型可以是 <span class="type"><a href="language.types.string.html" class="type string">string</a></span>，<span class="type"><a href="language.types.array.html" class="type array">array</a></span>
+       或者是 <span class="type"><span class="type stream">stream</span></span> 资源（如上面所说的那样）。
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">flags</tt></i></span>
+     <dd>
+
+      <p class="para">
+       <i><tt class="parameter">flags</tt></i> 可以是
+       <b><tt>FILE_USE_INCLUDE_PATH</tt></b>，<b><tt>FILE_APPEND</tt></b>
+       和／或 <b><tt>LOCK_EX</tt></b>（获得一个独占锁定），然而使用
+       <b><tt>FILE_USE_INCLUDE_PATH</tt></b> 时要特别谨慎。
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">context</tt></i></span>
+     <dd>
+
+      <p class="para">
+       一个 context 资源。
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.file-put-contents-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   该函数将返回写入到文件内数据的字节数。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.file-put-contents-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead valign="middle">
+      <tr valign="middle">
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="left">5.1.0</td>
+       <td align="left">
+        添加了对 <b><tt>LOCK_EX</tt></b> 的支持和 <i><tt class="parameter">data</tt></i>
+        参数处理 stream 资源的功能。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.file-put-contents-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数可安全用于二进制对象。</span></p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">在 PHP 5.0.0 中增加了 对上下文(Context)的支持。
+有关 <i>上下文(Context)</i> 的说明参见 <a href="ref.stream.html" class="xref">Stream 函数</a>。</span></p></blockquote>
+  <div class="tip"><b class="tip">Tip</b><p class="simpara">如已启用<a href="filesystem.configuration.html#ini.allow-url-fopen" class="link">fopen 包装器</a>，在此函数中， URL 可作为文件名。关于如何指定文件名详见 <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>。各种
+wapper 的不同功能请参见 <a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>，注意其用法及其可提供的预定义变量。</p></div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.file-put-contents-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.fopen.html" class="function" rel="rdfs-seeAlso">fopen()</a> - 打开文件或者 URL</span></li>
+    <li class="member"><span class="function"><a href="function.fwrite.html" class="function" rel="rdfs-seeAlso">fwrite()</a> - 写入文件（可安全用于二进制文件）</span></li>
+    <li class="member"><span class="function"><a href="function.file-get-contents.html" class="function" rel="rdfs-seeAlso">file_get_contents()</a> - 将整个文件读入一个字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.file-get-contents.html">file_get_contents</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.file.html">file</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

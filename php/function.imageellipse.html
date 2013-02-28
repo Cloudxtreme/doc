@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>画一个椭圆</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagedestroy.html">imagedestroy</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagefill.html">imagefill</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imageellipse" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imageellipse</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5)</p><p class="refpurpose"><span class="refname">imageellipse</span> &mdash; <span class="dc-title">画一个椭圆</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imageellipse-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>imageellipse</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$image</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$cx</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$cy</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$w</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$h</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$color</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>imageellipse()</b></span> 在 <i><tt class="parameter">image</tt></i>
+   所代表的图像中画一个中心为
+   <i><tt class="parameter">cx</tt></i>，<i><tt class="parameter">cy</tt></i>（图像左上角为
+   0, 0）的椭圆。<i><tt class="parameter">w</tt></i> 和 <i><tt class="parameter">h</tt></i>
+   分别指定了椭圆的宽度和高度，椭圆的颜色由 <i><tt class="parameter">color</tt></i> 指定。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    本函数添加于 PHP 4.0.6 且需要 GD 2.0.2 或更高版本，可以在
+    <a href="http://www.libgd.org/" class="link external">&raquo;&nbsp;http://www.libgd.org/</a> 获得。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <div class="example" id="example-2578">
+    <p><b>Example #1 <span class="function"><b>imageellipse()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//&nbsp;新建一个空白图像<br /></span><span style="color: #0000BB">$image&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">400</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">300</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;填充背景色<br /></span><span style="color: #0000BB">$bg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;选择椭圆的颜色<br /></span><span style="color: #0000BB">$col_ellipse&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;画一个椭圆<br /></span><span style="color: #0000BB">imageellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">150</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">300</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">200</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$col_ellipse</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;输出图像<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-type:&nbsp;image/png"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$image</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.imagefilledellipse.html" class="function">imagefilledellipse()</a></span> 和
+   <span class="function"><a href="function.imagearc.html" class="function">imagearc()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagedestroy.html">imagedestroy</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagefill.html">imagefill</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

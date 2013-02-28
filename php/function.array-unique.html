@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>移除数组中重复的值</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-uintersect.html">array_uintersect</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-unshift.html">array_unshift</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-unique" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_unique</h1>
+    <p class="verinfo">(PHP 4 &gt;= 4.0.1, PHP 5)</p><p class="refpurpose"><span class="refname">array_unique</span> &mdash; <span class="dc-title">移除数组中重复的值</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.array-unique-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>array_unique</b></span>
+       ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array</tt></span>
+      )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>array_unique()</b></span> 接受
+     <i><tt class="parameter">array</tt></i> 作为输入并返回没有重复值的新数组。
+    </p>
+    <p class="para">
+     注意键名保留不变。<span class="function"><b>array_unique()</b></span>
+     先将值作为字符串排序，然后对每个值只保留第一个遇到的键名，接着忽略所有后面的键名。这并不意味着在未排序的
+     <i><tt class="parameter">array</tt></i> 中同一个值的第一个出现的键名会被保留。
+    </p>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+     <span class="simpara">
+      当且仅当
+      <i>(string) $elem1 === (string) $elem2</i> 时两个单元被认为相同。就是说，当字符串的表达一样时。
+     </span>
+     <span class="simpara">
+      第一个单元将被保留。
+     </span>
+    </p></blockquote>
+    <p class="para">
+     <div class="example" id="example-3920">
+      <p><b>Example #1 <span class="function"><b>array_unique()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"green"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"blue"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"red"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_unique</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上例程会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [a] =&gt; green
+    [0] =&gt; red
+    [1] =&gt; blue
+)
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     <div class="example" id="example-3921">
+      <p><b>Example #2 <span class="function"><b>array_unique()</b></span> 和类型</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">4</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"4"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"3"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">4</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"3"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_unique</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上例程会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+array(2) {
+  [0] =&gt; int(4)
+  [2] =&gt; string(1) &quot;3&quot;
+}
+</pre></div>
+      </div>
+     </div>
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-uintersect.html">array_uintersect</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-unshift.html">array_unshift</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

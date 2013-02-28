@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得日期／时间信息</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date.html">date</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.gettimeofday.html">gettimeofday</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.getdate" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">getdate</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">getdate</span> &mdash; <span class="dc-title">取得日期／时间信息</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.getdate-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>getdate</b></span>
+    ([ <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timestamp</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   返回一个根据 <i><tt class="parameter">timestamp</tt></i>
+   得出的包含有日期信息的结合数组。如果没有给出时间戳则认为是当前本地时间。数组中的单元如下：
+  </p>
+  <p class="para">
+   <table class="doctable table">
+    <caption><b>返回的关联数组中的键名单元</b></caption>
+    
+     <thead valign="middle">
+      <tr valign="middle">
+       <th>键名</th>
+       <th>说明</th>
+       <th>返回值例子</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="left"><i>&quot;seconds&quot;</i></td>
+       <td align="left">秒的数字表示</td>
+       <td align="left"><i>0</i> 到 <i>59</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;minutes&quot;</i></td>
+       <td align="left">分钟的数字表示</td>
+       <td align="left"><i>0</i> 到 <i>59</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;hours&quot;</i></td>
+       <td align="left">小时的数字表示</td>
+       <td align="left"><i>0</i> 到 <i>23</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;mday&quot;</i></td>
+       <td align="left">月份中第几天的数字表示</td>
+       <td align="left"><i>1</i> 到 <i>31</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;wday&quot;</i></td>
+       <td align="left">星期中第几天的数字表示</td>
+       <td align="left"><i>0</i>（表示星期天）到 <i>6</i>（表示星期六）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;mon&quot;</i></td>
+       <td align="left">月份的数字表示</td>
+       <td align="left"><i>1</i> 到 <i>12</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;year&quot;</i></td>
+       <td align="left">4 位数字表示的完整年份</td>
+       <td align="left">例如：<i>1999</i> 或 <i>2003</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;yday&quot;</i></td>
+       <td align="left">一年中第几天的数字表示</td>
+       <td align="left"><i>0</i> 到 <i>365</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;weekday&quot;</i></td>
+       <td align="left">星期几的完整文本表示</td>
+       <td align="left"><i>Sunday</i> 到 <i>Saturday</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>&quot;month&quot;</i></td>
+       <td align="left">月份的完整文本表示</td>
+       <td align="left"><i>January&gt;</i> 到 <i>December</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>0</i></td>
+       <td align="left">
+        自从 Unix 纪元开始至今的秒数，和 <span class="function"><a href="function.time.html" class="function">time()</a></span>
+        的返回值以及用于 <span class="function"><a href="function.date.html" class="function">date()</a></span> 的值类似。
+       </td>
+       <td align="left">
+        系统相关，典型值为从 <i>-2147483648</i> 到
+        <i>2147483647</i>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+  <p class="para">
+   <div class="example" id="example-595">
+    <p><b>Example #1 <span class="function"><b>getdate()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">getdate</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$today</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [seconds] =&gt; 40
+    [minutes] =&gt; 58
+    [hours]   =&gt; 21
+    [mday]    =&gt; 17
+    [wday]    =&gt; 2
+    [mon]     =&gt; 6
+    [year]    =&gt; 2003
+    [yday]    =&gt; 167
+    [weekday] =&gt; Tuesday
+    [month]   =&gt; June
+    [0]       =&gt; 1055901520
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.date.html" class="function">date()</a></span>，<span class="function"><a href="function.time.html" class="function">time()</a></span>
+   和 <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date.html">date</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.gettimeofday.html">gettimeofday</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

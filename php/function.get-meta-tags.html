@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从一个文件中提取所有的 meta 标签 content 属性，返回一个数组</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.get-headers.html">get_headers</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.http-build-query.html">http_build_query</a></div>
+ <div class="up"><a href="ref.url.html">URL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.get-meta-tags" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">get_meta_tags</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">get_meta_tags</span> &mdash; <span class="dc-title">
+   从一个文件中提取所有的 meta 标签 content 属性，返回一个数组
+  </span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.get-meta-tags-unknown">
+  <h3 class="title">描述</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">array</span> <span class="methodname"><b>get_meta_tags</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$use_include_path</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   打开 <i><tt class="parameter">filename</tt></i> 逐行解析文件中的 
+   &lt;meta&gt; 标签。此参数可以是本地文件也可以是一个
+   <acronym title="Uniform Resource Locator">URL</acronym>。解析工作将在
+   <i>&lt;/head&gt;</i> 处停止。
+  </p>
+  <p class="para">
+   将 <i><tt class="parameter">use_include_path</tt></i> 设置为 <b><tt>TRUE</tt></b> 将使 
+   PHP 尝试按照 <a href="ini.core.html#ini.include-path" class="link">include_path</a>
+   标准包含路径中的每个指向去打开文件。这只用于本地文件，不适用于 URL。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3198">
+    <p><b>Example #1 <span class="function"><b>get_meta_tags()</b></span> 解析些什么</b></p>
+    <div class="example-contents">
+<div class="htmlcode"><pre class="htmlcode">&lt;meta name=&quot;author&quot; content=&quot;name&quot;&gt;
+&lt;meta name=&quot;keywords&quot; content=&quot;php documentation&quot;&gt;
+&lt;meta name=&quot;DESCRIPTION&quot; content=&quot;a php manual&quot;&gt;
+&lt;meta name=&quot;geo.position&quot; content=&quot;49.33;-86.59&quot;&gt;
+&lt;/head&gt; &lt;!-- 解析工作在此处停止 --&gt;</pre>
+</div>
+    </div>
+
+   </div>
+   （注意回车换行 － PHP 使用一个本地函数来解析输入，所以 Mac 上的文件将不能在 Unix 上正常工作）。
+  </p>
+  <p class="para"> 
+   返回的关联数组以属性 name 的值作为键，属性 content 
+   的值作为值，所以你可以很容易地使用标准数组函数遍历此关联数组或访问某个值。属性
+   name 中的特殊字符将使用‘_’替换，而其它字符则转换成小写。如果有两个
+   meta 标签拥有相同的 name，则只返回最后出现的那一个。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3199">
+    <p><b>Example #2 <span class="function"><b>get_meta_tags()</b></span> 的返回值</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;假设上边的标签是在&nbsp;www.example.com&nbsp;中<br /></span><span style="color: #0000BB">$tags&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">get_meta_tags</span><span style="color: #007700">(</span><span style="color: #DD0000">'http://www.example.com/'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;注意所有的键（key）均为小写，而键中的‘.’则转换成了‘_’。<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$tags</span><span style="color: #007700">[</span><span style="color: #DD0000">'author'</span><span style="color: #007700">];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;name<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$tags</span><span style="color: #007700">[</span><span style="color: #DD0000">'keywords'</span><span style="color: #007700">];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;php&nbsp;documentation<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$tags</span><span style="color: #007700">[</span><span style="color: #DD0000">'description'</span><span style="color: #007700">];&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;a&nbsp;php&nbsp;manual<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$tags</span><span style="color: #007700">[</span><span style="color: #DD0000">'geo_position'</span><span style="color: #007700">];&nbsp;</span><span style="color: #FF8000">//&nbsp;49.33;-86.59<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    从 PHP 4.0.5 开始，<span class="function"><b>get_meta_tags()</b></span>
+    支持没有使用引号括起来的 HTML 属性。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.htmlentities.html" class="function">htmlentities()</a></span> 和
+   <span class="function"><a href="function.urlencode.html" class="function">urlencode()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.get-headers.html">get_headers</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.http-build-query.html">http_build_query</a></div>
+ <div class="up"><a href="ref.url.html">URL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

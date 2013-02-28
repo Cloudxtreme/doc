@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>新建一个真彩色图像</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagecreatefromxpm.html">imagecreatefromxpm</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagedashedline.html">imagedashedline</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagecreatetruecolor" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecreatetruecolor</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5)</p><p class="refpurpose"><span class="refname">imagecreatetruecolor</span> &mdash; <span class="dc-title">新建一个真彩色图像</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagecreatetruecolor-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">resource</span> <span class="methodname"><b>imagecreatetruecolor</b></span>
+    ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$x_size</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$y_size</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>imagecreatetruecolor()</b></span> 返回一个图像标识符，代表了一幅大小为
+   <i><tt class="parameter">x_size</tt></i> 和 <i><tt class="parameter">y_size</tt></i> 的黑色图像。
+  </p>
+  <p class="para">
+   是否定义了本函数取决于 PHP 和 GD 的版本。从 PHP 4.0.6 到 4.1.x
+   只要加载了 GD 模块本函数一直存在，但是在没有安装 GD2 的时候调用，PHP
+   将发出致命错误并退出。在 PHP 4.2.x 中此行为改为发出警告而不是错误。其它版本只在安装了正确的
+   GD 版本时定义了本函数。
+  </p>
+  <p class="para">
+   <div class="example" id="example-2577">
+    <p><b>Example #1 新建一个新的 GD 图像流并输出图像</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />header</span><span style="color: #007700">(</span><span style="color: #DD0000">"Content-type:&nbsp;image/png"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$im&nbsp;</span><span style="color: #007700">=&nbsp;@</span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">50</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">100</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;die(</span><span style="color: #DD0000">"Cannot&nbsp;Initialize&nbsp;new&nbsp;GD&nbsp;image&nbsp;stream"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$text_color&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">233</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">14</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">91</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagestring</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">,&nbsp;&nbsp;</span><span style="color: #DD0000">"A&nbsp;Simple&nbsp;Text&nbsp;String"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text_color</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数需要 GD 2.0.1 或更高版本(推荐 2.0.28 及更高版本)。</span></p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    本函数不能用于 GIF 文件格式。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.imagedestroy.html" class="function">imagedestroy()</a></span> 和
+   <span class="function"><a href="function.imagecreate.html" class="function">imagecreate()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagecreatefromxpm.html">imagecreatefromxpm</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagedashedline.html">imagedashedline</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

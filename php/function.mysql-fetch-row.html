@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>从结果集中取得一行作为枚举数组</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.mysql-fetch-object.html">mysql_fetch_object</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.mysql-field-flags.html">mysql_field_flags</a></div>
+ <div class="up"><a href="ref.mysql.html">MySQL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.mysql-fetch-row" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">mysql_fetch_row</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">mysql_fetch_row</span> &mdash; <span class="dc-title">从结果集中取得一行作为枚举数组</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.mysql-fetch-row-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>mysql_fetch_row</b></span>
+       ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$result</tt></span>
+      )</div>
+
+    <p class="para rdfs-comment">
+     返回根据所取得的行生成的数组，如果没有更多行则返回 <b><tt>FALSE</tt></b>。
+    </p>
+    <p class="para">
+     <span class="function"><b>mysql_fetch_row()</b></span>
+     从和指定的结果标识关联的结果集中取得一行数据并作为数组返回。每个结果的列储存在一个数组的单元中，偏移量从 0 开始。
+    </p>
+    <p class="para">
+     依次调用 <span class="function"><b>mysql_fetch_row()</b></span>
+     将返回结果集中的下一行，如果没有更多行则返回 <b><tt>FALSE</tt></b>。
+    </p>
+    <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数返回的字段名<em class="emphasis">大小写敏感</em>。</span></p></blockquote>
+    <p class="para">
+     参见 <span class="function"><a href="function.mysql-fetch-array.html" class="function">mysql_fetch_array()</a></span>，<span class="function"><a href="function.mysql-fetch-assoc.html" class="function">mysql_fetch_assoc()</a></span>，<span class="function"><a href="function.mysql-fetch-object.html" class="function">mysql_fetch_object()</a></span>，<span class="function"><a href="function.mysql-data-seek.html" class="function">mysql_data_seek()</a></span>，<span class="function"><a href="function.mysql-fetch-lengths.html" class="function">mysql_fetch_lengths()</a></span> 和
+     <span class="function"><a href="function.mysql-result.html" class="function">mysql_result()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.mysql-fetch-object.html">mysql_fetch_object</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.mysql-field-flags.html">mysql_field_flags</a></div>
+ <div class="up"><a href="ref.mysql.html">MySQL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

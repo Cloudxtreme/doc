@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>require</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.return.html">return</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.include.html">include</a></div>
+ <div class="up"><a href="language.control-structures.html">控制结构</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.require" class="sect1">
+  <h2 class="title"><span class="function"><b>require()</b></span></h2>
+
+  <p class="simpara">
+   <span class="function"><b>require()</b></span> 语句包含并运行指定文件。
+  </p>
+  <p class="simpara">
+   <span class="function"><b>require()</b></span> 语句包含并运行指定文件。有关包括如何工作的详细信息见
+   <span class="function"><a href="function.include.html" class="function">include()</a></span> 的文档。
+  </p>
+  <p class="simpara">
+   <span class="function"><b>require()</b></span> 和 <span class="function"><a href="function.include.html" class="function">include()</a></span>
+   几乎完全一样，除了处理失败的方式不同之外。<span class="function"><a href="function.include.html" class="function">include()</a></span> 产生一个<a href="errorfunc.constants.html#errorfunc.constants.errorlevels.e-warning" class="link">Warning</a>而 <span class="function"><b>require()</b></span>
+   则导致一个<a href="errorfunc.constants.html#errorfunc.constants.errorlevels.e-error" class="link">
+     Fatal Error</a>。换句话说，如果想在丢失文件时停止处理页面，那就别犹豫了，用
+   <span class="function"><b>require()</b></span> 吧。<span class="function"><a href="function.include.html" class="function">include()</a></span>
+   就不是这样，脚本会继续运行。同时也要确认设置了合适的<a href="ini.core.html#ini.include-path" class="link">include_path</a>。
+  </p>
+  <p class="para">
+   <div class="example" id="example-118">
+    <p><b>Example #1 基本的 <span class="function"><b>require()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">require&nbsp;</span><span style="color: #DD0000">'prepend.php'</span><span style="color: #007700">;<br /><br />require&nbsp;</span><span style="color: #0000BB">$somefile</span><span style="color: #007700">;<br /><br />require&nbsp;(</span><span style="color: #DD0000">'somefile.txt'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="simpara">
+   更多例子参见 <span class="function"><a href="function.include.html" class="function">include()</a></span> 文档。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    在 PHP 4.0.2 之前适用以下规则：<span class="function"><b>require()</b></span>
+    总是会尝试读取目标文件，即使它所在的行根本就不会执行。条件语句不会影响
+    <span class="function"><b>require()</b></span>。不过如果 <span class="function"><b>require()</b></span>
+    所在的行没有执行，则目标文件中的代码也不会执行。同样，循环结构也不影响
+    <span class="function"><b>require()</b></span> 的行为。尽管目标文件中包含的代码仍然是循环的主体，但
+    <span class="function"><b>require()</b></span> 本身只会运行一次。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">因为是一个语言构造器而不是一个函数，不能被
+<a href="functions.variable-functions.html" class="link">可变函数</a> 调用。
+</span>
+</p></blockquote>
+  <div class="warning"><b class="warning">Warning</b><p class="para">Windows 版本的 PHP 在 4.3.0
+版之前不支持通过此函数访问远程文件，即使已经启用 <a href="filesystem.configuration.html#ini.allow-url-fopen" class="link">allow_url_fopen</a>.
+</p></div>
+  <p class="simpara">
+   参见 <span class="function"><a href="function.include.html" class="function">include()</a></span>，<span class="function"><a href="function.require-once.html" class="function">require_once()</a></span>，<span class="function"><a href="function.include-once.html" class="function">include_once()</a></span>，<span class="function"><a href="function.get-included-files.html" class="function">get_included_files()</a></span>，<span class="function"><a href="function.eval.html" class="function">eval()</a></span>，<span class="function"><a href="function.file.html" class="function">file()</a></span>，<span class="function"><a href="function.readfile.html" class="function">readfile()</a></span>，<span class="function"><a href="function.virtual.html" class="function">virtual()</a></span>
+   和 <a href="ini.core.html#ini.include-path" class="link">include_path</a>。
+  </p>
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.return.html">return</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.include.html">include</a></div>
+ <div class="up"><a href="language.control-structures.html">控制结构</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

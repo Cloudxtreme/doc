@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>COM 类</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.com.html">COM 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="class.dotnet.html">DOTNET</a></div>
+ <div class="up"><a href="ref.com.html">COM 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="class.com" class="refentry">
+  <div class="refnamediv">
+   <h1 class="refname">COM</h1>
+   <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5)</p><p class="refpurpose"><span class="refname">COM</span> &mdash; <span class="dc-title">COM 类</span></p>
+
+  </div>
+  <div class="refsynopsisdiv">
+  <pre class="synopsis">$obj = new <b class="classname">COM</b>(&quot;server.object&quot;)</pre>
+  </div>
+  <div class="refsect1 unknown" id="refsect1-class.com-unknown">
+   <h3 class="title">描述</h3>
+   <p class="simpara">
+    COM 类提供了一个将 (D)COM 组件整合到 PHP 脚本中的框架。
+   </p>
+  </div>
+
+  <div class="refsect1 unknown" id="refsect1-class.com-unknown">
+   <h3 class="title">方法</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type">string</span> <span class="methodname"><b>COM::COM</b></span>
+      ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$module_name</tt></span>
+     [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$server_name</tt></span>
+     [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$codepage</tt></span>
+    ]] )</div>
+
+   <p class="para rdfs-comment">
+    COM 类构造函数。参数：
+    <dl>
+
+    <dt>
+<span class="term">module_name</span>
+    <dd>
+
+     <span class="simpara">
+      被请求组件的名字或 class-id。
+     </span>
+    </dd>
+
+    </dt>
+
+    <dt>
+<span class="term">server_name</span>
+    <dd>
+
+     <span class="simpara">
+      DCOM 服务器的名字，组件在此服务器上被取用。如果是 
+      <b><tt>NULL</tt></b>，则假定是 <i>localhost</i>。想要允许 
+      DCOM，必须将 <var class="filename">php.ini</var> 中的 <b><tt>com.allow_dcom</tt></b>
+      设为 <b><tt>TRUE</tt></b>。
+     </span>
+    </dd>
+
+    </dt>
+
+    <dt>
+<span class="term">codepage</span>
+    <dd>
+
+     <span class="simpara">
+      指定用于将 PHP 字符串（php-strings）转换成 
+      UNICODE 字符串（unicode-strings）的代码页，反之亦然。可用的值为
+      <b><tt>CP_ACP</tt></b>、<b><tt>CP_MACCP</tt></b>、<b><tt>CP_OEMCP</tt></b>、<b><tt>CP_SYMBOL</tt></b>、<b><tt>CP_THREAD_ACP</tt></b>, <b><tt>CP_UTF7</tt></b>
+      和 <b><tt>CP_UTF8</tt></b>。
+     </span>
+    </dd>
+
+    </dt>
+
+    </dl>
+
+   </p>
+   <p class="para">
+    <div class="example" id="example.com1">
+     <p><b>Example #1 COM 示例 （1）</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+//&nbsp;启动&nbsp;word<br />$word&nbsp;=&nbsp;new&nbsp;COM("word.application")&nbsp;or&nbsp;die("Unable&nbsp;to&nbsp;instanciate&nbsp;Word");<br />print&nbsp;"Loaded&nbsp;Word,&nbsp;version&nbsp;{$word-&gt;Version}\n";<br /><br />//将其置前<br />$word-&gt;Visible&nbsp;=&nbsp;1;<br /><br />//打开一个空文档<br />$word-&gt;Documents-&gt;Add();<br /><br />//随便做些事情<br />$word-&gt;Selection-&gt;TypeText("This&nbsp;is&nbsp;a&nbsp;test...");<br />$word-&gt;Documents[1]-&gt;SaveAs("Useless&nbsp;test.doc");<br /><br />//关闭&nbsp;word<br />$word-&gt;Quit();<br /><br />//释放对象<br />$word-&gt;Release();<br />$word&nbsp;=&nbsp;null;</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+   <p class="para">
+    <div class="example" id="example.com2">
+     <p><b>Example #2 COM 示例 （2）</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+$conn&nbsp;=&nbsp;new&nbsp;COM("ADODB.Connection")&nbsp;or&nbsp;die("Cannot&nbsp;start&nbsp;ADO");<br />$conn-&gt;Open("Provider=SQLOLEDB;&nbsp;Data&nbsp;Source=localhost;<br />Initial&nbsp;Catalog=database;&nbsp;User&nbsp;ID=user;&nbsp;Password=password");<br /><br />$rs&nbsp;=&nbsp;$conn-&gt;Execute("SELECT&nbsp;*&nbsp;FROM&nbsp;sometable");&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;记录集<br /><br />$num_columns&nbsp;=&nbsp;$rs-&gt;Fields-&gt;Count();<br />echo&nbsp;$num_columns&nbsp;.&nbsp;"\n";<br /><br />for&nbsp;($i=0;&nbsp;$i&nbsp;&lt;&nbsp;$num_columns;&nbsp;$i++)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;$fld[$i]&nbsp;=&nbsp;$rs-&gt;Fields($i);<br />}<br /><br />$rowcount&nbsp;=&nbsp;0;<br />while&nbsp;(!$rs-&gt;EOF)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;($i=0;&nbsp;$i&nbsp;&lt;&nbsp;$num_columns;&nbsp;$i++)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$fld[$i]-&gt;value&nbsp;.&nbsp;"\t";<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"\n";<br />&nbsp;&nbsp;&nbsp;&nbsp;$rowcount++;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;rowcount&nbsp;自增<br />&nbsp;&nbsp;&nbsp;&nbsp;$rs-&gt;MoveNext();<br />}<br /><br />$rs-&gt;Close();<br />$conn-&gt;Close();<br /><br />$rs-&gt;Release();<br />$conn-&gt;Release();<br /><br />$rs&nbsp;=&nbsp;null;<br />$conn&nbsp;=&nbsp;null;</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.com.html">COM 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="class.dotnet.html">DOTNET</a></div>
+ <div class="up"><a href="ref.com.html">COM 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>本文档中使用的伪类型</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.types.null.html">NULL</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.types.type-juggling.html">类型转换的判别</a></div>
+ <div class="up"><a href="language.types.html">类型</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="language.pseudo-types" class="sect1">
+ <h2 class="title">本文档中使用的伪类型</h2> 
+
+ <div class="sect2" id="language.types.mixed">
+  <h3 class="title">mixed</h3>
+
+  <p class="para">
+    <i>mixed</i> 说明一个参数可以接受多种不同的（但并不必须是所有的）类型。
+  </p>
+
+  <p class="para">
+    例如 <span class="function"><a href="function.gettype.html" class="function">gettype()</a></span> 可以接受所有的 PHP 类型，<span class="function"><a href="function.str-replace.html" class="function">str_replace()</a></span> 可以接受字符串和数组。
+  </p>
+
+ </div>
+
+ <div class="sect2" id="language.types.number">
+  <h3 class="title">number</h3>
+
+  <p class="para">
+    <i>number</i> 说明一个参数可以是 <span class="type"><a href="language.types.integer.html" class="type integer">integer</a></span> 或者 <span class="type"><a href="language.types.float.html" class="type float">float</a></span>。
+  </p>
+
+ </div>
+
+ <div class="sect2" id="language.types.callback">
+  <h3 class="title">callback</h3>
+
+  <p class="para">
+    有些诸如 <span class="function"><b>call_user_function()</b></span> 或 <span class="function"><a href="function.usort.html" class="function">usort()</a></span> 的函数接受用户自定义的函数作为一个参数。Callback 函数不仅可以是一个简单的函数，它还可以是一个对象的方法，包括静态类的方法。
+  </p>
+
+  <p class="para">
+    一个 PHP 函数用函数名字符串来传递。可以传递任何内置的或者用户自定义的函数，除了语言结构如
+    <span class="function"><a href="function.array.html" class="function">array()</a></span>，<span class="function"><a href="function.echo.html" class="function">echo()</a></span>，<span class="function"><a href="function.empty.html" class="function">empty()</a></span>，<span class="function"><a href="function.eval.html" class="function">eval()</a></span>，<span class="function"><a href="function.exit.html" class="function">exit()</a></span>，<span class="function"><a href="function.isset.html" class="function">isset()</a></span>，<span class="function"><a href="function.list.html" class="function">list()</a></span>，<span class="function"><a href="function.print.html" class="function">print()</a></span>
+    和 <span class="function"><a href="function.unset.html" class="function">unset()</a></span>。
+  </p>
+
+  <p class="para">
+    一个对象的方法以数组的形式来传递，数组的下标 0 指明对象名，下标 1 指明方法名。
+  </p>
+
+  <p class="para">
+    对于没有实例化为对象的静态类，要传递其方法，将数组 0 下标指明的对象名换成该类的名称即可。
+  </p>
+
+  <p class="para">
+   除了普通的用户定义的函数外，也可以使用<span class="function"><a href="function.create-function.html" class="function">create_function()</a></span>来创建一个匿名的回调函数(callback)。
+  </p>
+
+  <div class="example" id="example-85">
+   <p><b>Example #1 
+    回调函数(callback)示例
+   </b></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;普通的回调函数<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">my_callback_function</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'hello&nbsp;world!'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;回调方法<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">MyClass&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">myCallbackMethod</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Hello&nbsp;World!'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;Type&nbsp;1:&nbsp;Simple&nbsp;callback<br /></span><span style="color: #0000BB">call_user_func</span><span style="color: #007700">(</span><span style="color: #DD0000">'my_callback_function'</span><span style="color: #007700">);&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;Type&nbsp;2:&nbsp;Static&nbsp;class&nbsp;method&nbsp;call<br /></span><span style="color: #0000BB">call_user_func</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'MyClass'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'myCallbackMethod'</span><span style="color: #007700">));&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;Type&nbsp;3:&nbsp;Object&nbsp;method&nbsp;call<br /></span><span style="color: #0000BB">$obj&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">MyClass</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">call_user_func</span><span style="color: #007700">(array(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'myCallbackMethod'</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">//&nbsp;Type&nbsp;4:&nbsp;Static&nbsp;class&nbsp;method&nbsp;call&nbsp;(As&nbsp;of&nbsp;PHP&nbsp;5.2.3)<br /></span><span style="color: #0000BB">call_user_func</span><span style="color: #007700">(</span><span style="color: #DD0000">'MyClass::myCallbackMethod'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;Type&nbsp;5:&nbsp;Relative&nbsp;static&nbsp;class&nbsp;method&nbsp;call&nbsp;(As&nbsp;of&nbsp;PHP&nbsp;5.3.0)<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">A&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">who</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"A\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br />class&nbsp;</span><span style="color: #0000BB">B&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">A&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">who</span><span style="color: #007700">()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"B\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">call_user_func</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'B'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'parent::who'</span><span style="color: #007700">));&nbsp;</span><span style="color: #FF8000">//&nbsp;A<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    在 PHP4 中，必须使用引用来创建一个指向实际<span class="type"><a href="language.types.object.html" class="type object">object</a></span>，而不是它的一个拷贝。详情请见<a href="language.references.html" class="link">引用的解释</a>。
+    In PHP4, it was necessary to use a reference to create a callback that
+    points to the actual <span class="type"><a href="language.types.object.html" class="type object">object</a></span>, and not a copy of it. For more
+    details, see
+    <a href="language.references.html" class="link">References Explained</a>.
+   </span>
+  </p></blockquote>
+
+ </div>
+ 
+ <div class="sect2" id="language.types.void">
+  <h3 class="title">void</h3>
+
+  <p class="para">
+   <i>void</i> 作为返回类型意味着函数的返回值是无用的。<i>void</i>作为参数列表意味着函数不接受任何参数。
+  </p>
+
+ </div>
+
+ <div class="sect2" id="language.types.dotdotdot">
+  <h3 class="title">...</h3>
+
+  <p class="para">
+   在函数原型中，<i><tt class="parameter">$...</tt></i> 表示<i>等等</i>的意思。当一个函数可以接受任意个参数时使用此变量名。
+  </p>
+
+ </div>
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.types.null.html">NULL</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.types.type-juggling.html">类型转换的判别</a></div>
+ <div class="up"><a href="language.types.html">类型</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>输出一个文件</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.popen.html">popen</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.readlink.html">readlink</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.readfile" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">readfile</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">readfile</span> &mdash; <span class="dc-title">输出一个文件</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.readfile-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">int</span> <span class="methodname"><b>readfile</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$use_include_path</tt></span>
+   [, <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$context</tt></span>
+  ]] )</div>
+
+  <p class="para rdfs-comment">
+   读入一个文件并写入到输出缓冲。
+  </p>
+  <p class="para">
+   返回从文件中读入的字节数。如果出错返回
+   <b><tt>FALSE</tt></b> 并且除非是以
+   @<span class="function"><b>readfile()</b></span> 形式调用，否则会显示错误信息。
+  </p>
+  <div class="tip"><b class="tip">Tip</b><p class="simpara">如已启用<a href="filesystem.configuration.html#ini.allow-url-fopen" class="link">fopen 包装器</a>，在此函数中， URL 可作为文件名。关于如何指定文件名详见 <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>。各种
+wapper 的不同功能请参见 <a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>，注意其用法及其可提供的预定义变量。</p></div>
+  <p class="para">
+   如果也想在
+   <a href="ini.core.html#ini.include-path" class="link">include_path</a>
+   中搜索文件，可以使用可选的第二个参数并将其设为 <b><tt>TRUE</tt></b>。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">在 PHP 5.0.0 中增加了 对上下文(Context)的支持。
+有关 <i>上下文(Context)</i> 的说明参见 <a href="ref.stream.html" class="xref">Stream 函数</a>。</span></p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.fpassthru.html" class="function">fpassthru()</a></span>，<span class="function"><a href="function.file.html" class="function">file()</a></span>，<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>，<span class="function"><a href="function.include.html" class="function">include()</a></span>，<span class="function"><a href="function.require.html" class="function">require()</a></span>，<span class="function"><a href="function.virtual.html" class="function">virtual()</a></span>，<span class="function"><a href="function.file-get-contents.html" class="function">file_get_contents()</a></span>
+   和<a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.popen.html">popen</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.readlink.html">readlink</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

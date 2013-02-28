@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>打开进程文件指针</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.pclose.html">pclose</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.readfile.html">readfile</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.popen" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">popen</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">popen</span> &mdash; <span class="dc-title">打开进程文件指针</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.popen-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">resource</span> <span class="methodname"><b>popen</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$command</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$mode</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   打开一个指向进程的管道，该进程由派生给定的 <i><tt class="parameter">command</tt></i> 命令执行而产生。
+  </p>
+  <p class="para">
+   返回一个和 <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span>
+   所返回的相同的文件指针，只不过它是单向的（只能用于读或写）并且必须用
+   <span class="function"><a href="function.pclose.html" class="function">pclose()</a></span> 来关闭。此指针可以用于
+   <span class="function"><a href="function.fgets.html" class="function">fgets()</a></span>，<span class="function"><a href="function.fgetss.html" class="function">fgetss()</a></span> 和
+   <span class="function"><a href="function.fwrite.html" class="function">fwrite()</a></span>。
+  </p>
+  <p class="para">
+   如果出错返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    如果需要双向支持，使用 <span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span>。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <div class="example" id="example-1860">
+    <p><b>Example #1 <span class="function"><b>popen()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$handle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">popen</span><span style="color: #007700">(</span><span style="color: #DD0000">"/bin/ls"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"r"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    如果未找到要执行的命令，会返回一个合法的资源。这看上去很怪，但有道理。它允许访问
+    shell 返回的任何错误信息：
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />error_reporting</span><span style="color: #007700">(</span><span style="color: #0000BB">E_ALL</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/*&nbsp;加入重定向以得到标准错误输出&nbsp;stderr。&nbsp;*/<br /></span><span style="color: #0000BB">$handle&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">popen</span><span style="color: #007700">(</span><span style="color: #DD0000">'/path/to/spooge&nbsp;2&gt;&amp;1'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"'</span><span style="color: #0000BB">$handle</span><span style="color: #DD0000">';&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">gettype</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$read&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fread</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2096</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">$read</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">pclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$handle</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara"><a href="features.safe-mode.html" class="link">安全模式</a> 启用时，可仅可用
+<a href="ini.sect.safe-mode.html#ini.safe-mode-exec-dir" class="link">safe_mode_exec_dir</a> 执行文件。实际上，现在不允许在到可执行的路径中存在 <i>..</i> 组件。</span></p></blockquote>
+  <div class="warning"><b class="warning">Warning</b><p class="simpara"><a href="features.safe-mode.html" class="link">安全模式</a> 启用时，命令字符串会被
+<span class="function"><a href="function.escapeshellcmd.html" class="function">escapeshellcmd()</a></span> 转换。因此，
+<i>echo y | echo x</i> 会变成
+<i>echo y \| echo x</i>。</p></div>
+  <p class="para">
+   参见 <span class="function"><a href="function.pclose.html" class="function">pclose()</a></span>，<span class="function"><a href="function.fopen.html" class="function">fopen()</a></span> 和
+   <span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.pclose.html">pclose</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.readfile.html">readfile</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

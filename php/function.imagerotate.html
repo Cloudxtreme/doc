@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>用给定角度旋转图像</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagerectangle.html">imagerectangle</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagesavealpha.html">imagesavealpha</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.imagerotate" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagerotate</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5)</p><p class="refpurpose"><span class="refname">imagerotate</span> &mdash; <span class="dc-title">用给定角度旋转图像</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.imagerotate-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">resource</span> <span class="methodname"><b>imagerotate</b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$src_im</tt></span>
+   , <span class="methodparam"><span class="type">float</span> <tt class="parameter">$angle</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$bgd_color</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$ignore_transparent</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   将 <i><tt class="parameter">src_im</tt></i> 图像用给定的
+   <i><tt class="parameter">angle</tt></i> 角度旋转。<i><tt class="parameter">bgd_color</tt></i>
+   指定了旋转后没有覆盖到的部分的颜色。
+  </p>
+  <p class="para">
+   旋转的中心是图像的中心，旋转后的图像会按比例缩小以适合目标图像的大小——边缘不会被剪去。
+  </p>
+  <p class="para">
+   如果 <i><tt class="parameter">ignore_transparent</tt></i>
+   被设为非零值，则透明色会被忽略（否则会被保留）。此参数是
+   PHP 5.1 新加的。
+  </p>
+  <p class="para">
+   <div class="example" id="example-2592">
+    <p><b>Example #1 将图像旋转 180 度</b></p>
+    <div class="example-contents"><p>
+     本例将把一幅图像旋转 180 度——上下颠倒。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+//&nbsp;File&nbsp;and&nbsp;rotation<br />$filename&nbsp;=&nbsp;'test.jpg';<br />$degrees&nbsp;=&nbsp;180;<br /><br />//&nbsp;Content&nbsp;type<br />header('Content-type:&nbsp;image/jpeg');<br /><br />//&nbsp;Load<br />$source&nbsp;=&nbsp;imagecreatefromjpeg($filename);<br /><br />//&nbsp;Rotate<br />$rotate&nbsp;=&nbsp;imagerotate($source,&nbsp;$degrees,&nbsp;0);<br /><br />//&nbsp;Output<br />imagejpeg($rotate);</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">此函数仅在与 GD 库捆绑编译的 PHP 版本中可用。</span></p></blockquote>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.imagerectangle.html">imagerectangle</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.imagesavealpha.html">imagesavealpha</a></div>
+ <div class="up"><a href="ref.image.html">GD and Image 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

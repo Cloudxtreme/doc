@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>判断一个图像的类型</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.exif.html">Exif 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.exif-read-data.html">exif_read_data</a></div>
+ <div class="up"><a href="ref.exif.html">Exif 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.exif-imagetype" class="refentry">
+  <div class="refnamediv">
+   <h1 class="refname">exif_imagetype</h1>
+   <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5)</p><p class="refpurpose"><span class="refname">exif_imagetype</span> &mdash; <span class="dc-title">判断一个图像的类型</span></p>
+
+  </div>
+  <div class="refsect1 description" id="refsect1-function.exif-imagetype-description">
+   <h3 class="title">说明</h3>
+   <div class="methodsynopsis dc-description">
+    <span class="type">int</span> <span class="methodname"><b>exif_imagetype</b></span>
+     ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+    )</div>
+
+   <p class="para rdfs-comment">
+    <span class="function"><b>exif_imagetype()</b></span> 读取一个图像的第一个字节并检查其签名。
+   </p>
+   <p class="para">
+    本函数可用来避免调用其它 <a href="ref.exif.html" class="link">exif</a>
+    函数用到了不支持的文件类型上或和
+    <var class="varname"><var class="varname"><a href="reserved.variables.server.html" class="classname">$_SERVER['HTTP_ACCEPT']</a></var></var>
+    结合使用来检查浏览器是否可以显示某个指定的图像。
+   </p>
+  </div>
+
+  <div class="refsect1 parameters" id="refsect1-function.exif-imagetype-parameters">
+   <h3 class="title">参数</h3>
+   <p class="para">
+    <dl>
+
+     <dt>
+
+      <span class="term"><i><tt class="parameter">filename</tt></i></span>
+      <dd>
+
+       <span class="simpara">
+        被检查的图像文件名。
+       </span>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </p>
+  </div>
+
+  <div class="refsect1 returnvalues" id="refsect1-function.exif-imagetype-returnvalues">
+   <h3 class="title">返回值</h3>
+   <p class="para">
+    如果发现了恰当的签名则返回一个对应的常量，否则返回
+    <b><tt>FALSE</tt></b>。返回值和 <span class="function"><a href="function.getimagesize.html" class="function">getimagesize()</a></span>
+    返回的数组中的索引 2 的值是一样的，但本函数快得多。
+   </p>
+  </div>
+
+  <div class="refsect1 changelog" id="refsect1-function.exif-imagetype-changelog">
+   <h3 class="title">更新日志</h3>
+   <p class="para">
+    <table class="doctable informaltable">
+     
+      <thead valign="middle">
+       <tr valign="middle">
+        <th>版本</th>
+        <th>说明</th>
+       </tr>
+
+      </thead>
+
+      <tbody valign="middle" class="tbody">
+       <tr valign="middle">
+        <td align="left">4.3.2</td>
+        <td align="left">
+         支持
+         <acronym title="Japan Picture">JPC</acronym>，<acronym title="JPEG-2000">JP2</acronym>，<acronym>JPX</acronym>，<acronym title="Joint Bilevel Image Experts Group">JB2</acronym>，<acronym title="X Bitmap">XBM</acronym>
+         以及 <acronym title="Wireless Bitmap">WBMP</acronym>
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">4.3.0</td>
+        <td align="left">支持 <acronym>SWC</acronym></td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+  </div>
+
+  <div class="refsect1 constants" id="refsect1-function.exif-imagetype-constants">
+   <h3 class="title">预定义常量</h3>
+   <p class="para">
+    定义有以下常量，并代表了 <span class="function"><b>exif_imagetype()</b></span> 可能的返回值：
+    <table class="doctable table">
+    <caption><b>图像类型常量</b></caption>
+     
+      <thead valign="middle">
+       <tr valign="middle">
+        <th>值</th>
+        <th>常量</th>
+       </tr>
+
+      </thead>
+
+      <tbody valign="middle" class="tbody">
+       <tr valign="middle">
+        <td align="left">1</td>
+        <td align="left"><b><tt>IMAGETYPE_GIF</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">2</td>
+        <td align="left"><b><tt>IMAGETYPE_JPEG</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">3</td>
+        <td align="left"><b><tt>IMAGETYPE_PNG</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">4</td>
+        <td align="left"><b><tt>IMAGETYPE_SWF</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">5</td>
+        <td align="left"><b><tt>IMAGETYPE_PSD</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">6</td>
+        <td align="left"><b><tt>IMAGETYPE_BMP</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">7</td>
+        <td align="left"><b><tt>IMAGETYPE_TIFF_II</tt></b>（Intel 字节顺序）</td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">8</td>
+        <td align="left">
+         <b><tt>IMAGETYPE_TIFF_MM</tt></b>（Motorola 字节顺序）
+        </td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">9</td>
+        <td align="left"><b><tt>IMAGETYPE_JPC</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">10</td>
+        <td align="left"><b><tt>IMAGETYPE_JP2</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">11</td>
+        <td align="left"><b><tt>IMAGETYPE_JPX</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">12</td>
+        <td align="left"><b><tt>IMAGETYPE_JB2</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">13</td>
+        <td align="left"><b><tt>IMAGETYPE_SWC</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">14</td>
+        <td align="left"><b><tt>IMAGETYPE_IFF</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">15</td>
+        <td align="left"><b><tt>IMAGETYPE_WBMP</tt></b></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left">16</td>
+        <td align="left"><b><tt>IMAGETYPE_XBM</tt></b></td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+  </div>
+
+  <div class="refsect1 examples" id="refsect1-function.exif-imagetype-examples">
+   <h3 class="title">范例</h3>
+   <p class="para">
+    <div class="example" id="example-2547">
+     <p><b>Example #1 <span class="function"><b>exif_imagetype()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">exif_imagetype</span><span style="color: #007700">(</span><span style="color: #DD0000">"image.gif"</span><span style="color: #007700">)&nbsp;!=&nbsp;</span><span style="color: #0000BB">IMAGETYPE_GIF</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"The&nbsp;picture&nbsp;is&nbsp;not&nbsp;a&nbsp;gif"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+   </p>
+  </div>
+
+  <div class="refsect1 seealso" id="refsect1-function.exif-imagetype-seealso">
+   <h3 class="title">参见</h3>
+   <p class="para">
+    <ul class="simplelist">
+     <li class="member"><span class="function"><a href="function.getimagesize.html" class="function" rel="rdfs-seeAlso">getimagesize()</a> - 取得图像大小</span></li>
+    </ul>
+   </p>
+  </div>
+
+ </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.exif.html">Exif 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.exif-read-data.html">exif_read_data</a></div>
+ <div class="up"><a href="ref.exif.html">Exif 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

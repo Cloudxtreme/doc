@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>对使用 MIME base64 编码的数据进行解码</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.url.html">URL 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.base64-encode.html">base64_encode</a></div>
+ <div class="up"><a href="ref.url.html">URL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.base64-decode" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">base64_decode</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">base64_decode</span> &mdash; <span class="dc-title">对使用 MIME base64 编码的数据进行解码</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.base64-decode-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>base64_decode</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$encoded_data</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>base64_decode()</b></span> 对
+   <i><tt class="parameter">encoded_data</tt></i> 进行解码，返回原始数据，失败则返回
+   <b><tt>FALSE</tt></b>。返回的数据可能是二进制的。
+  </p>
+  <p class="para">
+   <div class="example" id="example-3195">
+    <p><b>Example #1 <span class="function"><b>base64_decode()</b></span> 示例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'VGhpcyBpcyBhbiBlbmNvZGVkIHN0cmluZw=='</span><span style="color: #007700">;<br />echo&nbsp;</span><span style="color: #0000BB">base64_decode</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     此示例将显示：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+This is an encoded string
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.base64-encode.html" class="function">base64_encode()</a></span> 和
+   <a href="http://www.faqs.org/rfcs/rfc2045" class="link external">&raquo;&nbsp;RFC 2045</a> 的 6.8 章节。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="ref.url.html">URL 函数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.base64-encode.html">base64_encode</a></div>
+ <div class="up"><a href="ref.url.html">URL 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

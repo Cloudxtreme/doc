@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>使用一个持久连接连到 Oracle 数据库</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.oci-password-change.html">oci_password_change</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.oci-result.html">oci_result</a></div>
+ <div class="up"><a href="ref.oci8.html">OCI8 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.oci-pconnect" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">oci_pconnect</h1>
+  <p class="verinfo">(PHP 5, PECL OCI8 &gt;= 1.1.0)</p><p class="refpurpose"><span class="refname">oci_pconnect</span> &mdash; <span class="dc-title">使用一个持久连接连到 Oracle 数据库</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.oci-pconnect-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">resource</span> <span class="methodname"><b>oci_pconnect</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$username</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$password</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$db</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$charset</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$session_mode</tt></span>
+  ]]] )</div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><b>oci_pconnect()</b></span> 创建一个到 Oracle
+   服务器的持久连接并登录。持久连接会被缓冲并在请求之间重复使用，可以降低每个页面加载的消耗。一个典型的
+   PHP 应用程序对于每个 Apache 子进程（或者 PHP FastCGI/CGI
+   进程）会有一个打开的持久连接到 Oracle 服务器。更多信息见<a href="features.persistent-connections.html" class="link">数据库持久连接</a>一节。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    自 OCI8 扩展库版本 1.1 起，持久 Oracle
+    连接的生命周期和最大数目可以通过设定以下配置选项来调整：<a href="oci8.configuration.html#ini.oci8.persistent-timeout" class="link">oci8.persistent_timeout</a>，<a href="oci8.configuration.html#ini.oci8.ping-interval" class="link">oci8.ping_interval</a>
+    和 <a href="oci8.configuration.html#ini.oci8.max-persistent" class="link">oci8.max_persistent</a>。
+   </span>
+  </p></blockquote>
+  <p class="para">
+   可选的第三个参数可以是本地 Oracle 实例的名字或者是在
+   <var class="filename">tnsnames.ora</var>
+   的条目中的名字。如果没有指定第三个参数， PHP 使用环境变量
+   <i>ORACLE_SID</i> 和 <i>TWO_TASK</i>
+   来分别确定本地 Oracle 实例的名字和
+   <var class="filename">tnsnames.ora</var> 的位置。
+  </p>
+  <p class="para">
+   <i><tt class="parameter">session_mode</tt></i> 参数自版本 1.1
+   起可用并接受如下值：<b><tt>OCI_DEFAULT</tt></b>，<b><tt>OCI_SYSOPER</tt></b>
+   和 <b><tt>OCI_SYSDBA</tt></b>。如果指定了
+   <b><tt>OCI_SYSOPER</tt></b> 或 <b><tt>OCI_SYSDBA</tt></b>
+   其中之一，<span class="function"><a href="function.oci-new-connect.html" class="function">oci_new_connect()</a></span>
+   将尝试使用外部认证信息建立特权连接。特权连接默认被禁止。要启用，需要将
+   <a href="oci8.configuration.html#ini.oci8.privileged-connect" class="link">oci8.privileged_connect</a>
+   设为 On。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    如果 PHP 用的是 Oracle Instant
+    Client，可以用容易的命名连接方法，说明见这里：<a href="http://download.oracle.com/docs/cd/E11882_01/network.112/e10836/naming.htm" class="link external">&raquo;&nbsp;http://download.oracle.com/docs/cd/E11882_01/network.112/e10836/naming.htm</a>。基本上这意味着可以指定
+    &quot;//db_host[:port]/database_name&quot;
+    作为数据库名。但如果想用命名的旧方法则<em class="emphasis">必须</em>设定
+    <b><tt>ORACLE_HOME</tt></b> 或 <b><tt>TNS_ADMIN</tt></b> 二者之一。
+   </span>
+  </p></blockquote>
+  <p class="para">使用 Oracle
+客户端库来确定字符集。字符集不需要与数据库的字符集相匹配。如果不匹配，Oracle
+会尽可能地将数据从数据库字符集进行转换。因为依赖于字符集，可能不能给出可用的结果。转换也增加一些时间开销。</p>
+<p class="para">如果不指定，Oracle 客户端用 <b><tt>NLS_LANG</tt></b> 环境变量来决定字符集。</p>
+<p class="para">传递此参数可减少连接时间。</p>
+  <p class="para">
+   <span class="function"><b>oci_pconnect()</b></span> 返回连接标识符，出错则返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    在 PHP 5.0.0 之前的版本必须使用 <span class="function"><a href="function.ociplogon.html" class="function">ociplogon()</a></span>
+    替代本函数。该函数名仍然可用，为向下兼容作为
+    <span class="function"><b>oci_pconnect()</b></span> 的别名。不过其已被废弃，不推荐使用。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.oci-connect.html" class="function">oci_connect()</a></span> 和
+   <span class="function"><a href="function.oci-new-connect.html" class="function">oci_new_connect()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.oci-password-change.html">oci_password_change</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.oci-result.html">oci_result</a></div>
+ <div class="up"><a href="ref.oci8.html">OCI8 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,545 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Windows 下安装扩展库</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.windows.building.html">从源程序编译</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.windows.commandline.html">Command Line PHP on Microsoft Windows</a></div>
+ <div class="up"><a href="install.windows.html">Windows 系统下的安装</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="install.windows.extensions" class="sect1">
+  <h2 class="title">Windows 下安装扩展库</h2>
+  <p class="para">在 Windows 下安装完 PHP 和 web 服务器之后，可能想要安装一些扩展库来获得更多功能。可以通过修改 <var class="filename">php.ini</var> 来选择当 PHP 启动时加载哪些扩展库。也可以在脚本中通过使用 
+  <span class="function"><a href="function.dl.html" class="function">dl()</a></span>来动态加载。</p>
+  <p class="para">PHP 扩展库的 DLL 文件都具有 
+  <i>php_</i>前缀。</p>
+  <p class="para">很多扩展库都
+  <em class="emphasis">内置于</em>Windows 版的 PHP 之中。这意味着要加载这些扩展库
+  <em class="emphasis">不需要</em>额外的 DLL 文件和 
+  <a href="ini.core.html#ini.extension" class="link">extension</a>配置指令。Windows 下的 
+  <a href="install.windows.extensions.html#install.windows.extensions.overview" class="link">PHP 扩展库</a>列表列出了需要或曾经需要额外 PHP DLL 文件的扩展库。下面是内置的扩展库列表：</p>
+  <p class="para">PHP 4 中（截止到 PHP 4.3.11）：
+  <a href="ref.bc.html" class="link">BCMath</a>，
+  <a href="ref.calendar.html" class="link">Caledar</a>，
+  <a href="ref.com.html" class="link">COM</a>，
+  <a href="ref.ctype.html" class="link">Ctype</a>，
+  <a href="ref.ftp.html" class="link">FTP</a>，
+  <a href="ref.mysql.html" class="link">MySQL</a>，
+  <a href="ref.uodbc.html" class="link">ODBC</a>，
+  <a href="ref.overload.html" class="link">Overload</a>，
+  <a href="ref.pcre.html" class="link">PCRE</a>，
+  <a href="ref.session.html" class="link">Session</a>，
+  <a href="ref.tokenizer.html" class="link">Tokenizer</a>，
+  <a href="ref.wddx.html" class="link">WDDX</a>，
+  <a href="ref.xml.html" class="link">XML</a>&amp;listendand; 
+  <a href="ref.zlib.html" class="link">Zlib</a>。</p>
+  <p class="para">PHP 5 中（截止到 5.0.4）有以下修改。新增内置：
+  <a href="ref.dom.html" class="link">DOM</a>，
+  <a href="ref.libxml.html" class="link">LibXML</a>，
+  <a href="ref.iconv.html" class="link">Iconv</a>，
+  <a href="ref.simplexml.html" class="link">SimpleXML</a>，
+  <a href="ref.spl.html" class="link">SPL</a>&amp;listendand;
+  <a href="ref.sqlite.html" class="link">SQLite</a>。以下不再内置：
+  <a href="ref.mysql.html" class="link">MySQL</a>和 
+  <a href="ref.overload.html" class="link">Overload</a>。</p>
+  <p class="para">PHP 搜索扩展库的默认位置在 PHP 4 中是 
+  <var class="filename">C:\php4\extensions</var>，在 PHP 5 中是 
+  <var class="filename">C:\php5</var>。要修改此项以符合用户自己的 PHP 设置，需要编辑 <var class="filename">php.ini</var> 文件： 
+  <ul class="itemizedlist">
+    <li class="listitem">
+      <p class="para">需要修改 
+      <a href="ini.core.html#ini.extension-dir" class="link">extension_dir</a>设置以指向用户放置扩展库的目录或者说放置 
+      <var class="filename">php_*.dll</var>文件的位置。例如： 
+      <div class="informalexample">
+        <div class="example-contents">
+          <div class="inicode"><pre class="inicode">extension_dir = C:\php\extensions</pre>
+</div>
+</div>
+
+      </div></p>
+    </li>
+    <li class="listitem">
+      <p class="para">要在 <var class="filename">php.ini</var> 中启用某扩展库，需要去掉该行 
+      <i>extension=php_*.dll</i>前的注释符号，将想要加载的扩展库前的分号（;）删除即可。 
+      <div class="example" id="example-61">
+        <p><b>Example #1 启用 
+        <a href="ref.bzip2.html" class="link">Bzip2</a>扩展库</b></p>
+        <div class="example-contents">
+          <div class="inicode"><pre class="inicode">// 将这一行
+;extension=php_bz2.dll
+
+// 改成这样
+extension=php_bz2.dll</pre>
+</div>
+</div>
+
+      </div></p>
+    </li>
+    <li class="listitem">
+      <p class="para">有些扩展库需要额外的 DLL 才能工作。其中一部分包括在发行包里，PHP 4 中在 
+      <var class="filename">C:\php\dlls\</var>目录下，PHP 5 中在主目录下，但还有一些，例如 Oracle（
+      <var class="filename">php_oci8.dll</var>）所需要的 DLL 没有绑定在发行包里。如果安装 PHP 4，将绑定的 DLL 从 
+      <var class="filename">C:\php\dlls</var>拷贝到主目录 
+      <var class="filename">C:\php</var>中。别忘了将 
+      <var class="filename">C:\php</var>放到系统路径 
+      <var class="varname"><var class="varname">PATH</var></var>中去（此过程在另外的 
+      <a href="faq.installation.html#faq.installation.addtopath" class="link">FAQ 条目</a>中有说明）。</p>
+    </li>
+    <li class="listitem">
+      <p class="para">某些 DLL 没有绑定在 PHP 发行包中，详情见每个扩展库的文档页。此外有关 
+      <acronym title="PHP Extension and Application Repository">PECL</acronym>的说明见手册页 
+      <a href="install.pecl.html" class="link">PECL 扩展库安装</a>。在 
+      <acronym title="PHP Extension and Application Repository">PECL</acronym>中有日益增加数目巨大的 PHP 扩展库，这些扩展库需要
+      <a href="install.pecl.downloads.html" class="link">单独下载</a>。</p>
+    </li>
+  </ul>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+    <span class="simpara">如果运行服务器模块版的 PHP，在修改了 <var class="filename">php.ini</var> 之后别忘了重新启动 web 服务器以使其改动生效。</span>
+  </p></blockquote></p>
+  <p class="para">下表说明了哪些扩展库需要额外的 DLL。 
+  <table id="install.windows.extensions.overview" class="doctable table">
+    <caption><b>PHP 扩展库</b></caption>
+    
+      <thead valign="middle">
+        <tr valign="middle">
+          <th>扩展库</th>
+          <th>说明</th>
+          <th>注解</th>
+        </tr>
+
+      </thead>
+
+      <tbody valign="middle" class="tbody">
+        <tr valign="middle">
+          <td align="left">php_bz2.dll</td>
+          <td align="left">
+          <a href="ref.bzip2.html" class="link">bzip2</a>压缩函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_calendar.dll</td>
+          <td align="left">
+          <a href="ref.calendar.html" class="link">历法</a>转换函数库</td>
+          <td align="left">自 PHP 4.0.3 起内置</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_crack.dll</td>
+          <td align="left">
+          <a href="ref.crack.html" class="link">密码破解</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_ctype.dll</td>
+          <td align="left">
+          <a href="ref.ctype.html" class="link">ctype</a>家族函数库</td>
+          <td align="left">自 PHP 4.3.0 起内置</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_curl.dll</td>
+          <td align="left">
+          <a href="ref.curl.html" class="link">CURL</a>，客户端 URL 库函数库</td>
+          <td align="left">需要：
+          <var class="filename">libeay32.dll</var>，
+          <var class="filename">ssleay32.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_dba.dll</td>
+          <td align="left">
+          <a href="ref.dba.html" class="link">DBA</a>：数据库（dbm 风格）抽象层函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_dbase.dll</td>
+          <td align="left">
+          <a href="ref.dbase.html" class="link">dBase</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_dbx.dll</td>
+          <td align="left">
+          <a href="ref.dbx.html" class="link">dbx</a>函数库</td>
+          <td class="empty">&nbsp;</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_domxml.dll</td>
+          <td align="left">
+          <a href="ref.domxml.html" class="link">DOM XML</a>函数库</td>
+          <td align="left">PHP &lt;= 4.2.0 需要：
+          <var class="filename">libxml2.dll</var>（已附带），PHP &gt;= 4.3.0 需要：
+          <var class="filename">iconv.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_dotnet.dll</td>
+          <td align="left">
+          <a href="ref.dotnet.html" class="link">.NET</a>函数库</td>
+          <td align="left">PHP &lt;= 4.1.1</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_exif.dll</td>
+          <td align="left">
+          <a href="ref.exif.html" class="link">EXIF</a>函数库</td>
+          <td align="left">需要 
+          <a href="ref.mbstring.html" class="link">php_mbstring.dll</a>。并且在 <var class="filename">php.ini</var> 中，
+          <var class="filename">php_exif.dll</var>必须在 
+          <var class="filename">php_mbstring.dll</var>
+          <i>之后</i>加载。</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_fbsql.dll</td>
+          <td align="left">
+          <a href="ref.fbsql.html" class="link">FrontBase</a>函数库</td>
+          <td align="left">PHP &lt;= 4.2.0</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_fdf.dll</td>
+          <td align="left">
+          <a href="ref.fdf.html" class="link">FDF</a>：表单数据格式化函数库</td>
+          <td align="left">需要：
+          <var class="filename">fdftk.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_filepro.dll</td>
+          <td align="left">
+          <a href="ref.filepro.html" class="link">filePro</a>函数库</td>
+          <td align="left">只读访问</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_ftp.dll</td>
+          <td align="left">
+          <a href="ref.ftp.html" class="link">FTP</a>函数库</td>
+          <td align="left">自 PHP 4.0.3 起内置</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_gd.dll</td>
+          <td align="left">
+          <a href="ref.image.html" class="link">GD</a>库图像函数库</td>
+          <td align="left">在 PHP 4.3.2 中删除。此外注意在 GD1 中不能用真彩色函数，用 
+          <var class="filename">php_gd2.dll</var>替代。</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_gd2.dll</td>
+          <td align="left">
+          <a href="ref.image.html" class="link">GD</a>库图像函数库</td>
+          <td align="left">GD2</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_gettext.dll</td>
+          <td align="left">
+          <a href="ref.gettext.html" class="link">Gettext</a>函数库</td>
+          <td align="left">PHP &lt;= 4.2.0 需要 
+          <var class="filename">gnu_gettext.dll</var>（已附带），PHP &gt;= 4.2.3 需要 
+          <var class="filename">libintl-1.dll</var>，
+          <var class="filename">iconv.dll</var>（已附带）。</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_hyperwave.dll</td>
+          <td align="left">
+          <a href="ref.hw.html" class="link">HyperWave</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_iconv.dll</td>
+          <td align="left">
+          <a href="ref.iconv.html" class="link">ICONV</a>字符集转换</td>
+          <td align="left">需要：
+          <var class="filename">iconv-1.3.dll</var>（已附带），PHP &gt;=4.2.1 需要 
+          <var class="filename">iconv.dll</var></td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_ifx.dll</td>
+          <td align="left">
+          <a href="ref.ifx.html" class="link">Informix</a>函数库</td>
+          <td align="left">需要：Informix 库</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_iisfunc.dll</td>
+          <td align="left">IIS 管理函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_imap.dll</td>
+          <td align="left">
+          <a href="ref.imap.html" class="link">IMAP</a>，POP3 和 NNTP 函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_ingres.dll</td>
+          <td align="left">
+          <a href="ref.ingres.html" class="link">Ingres II</a>函数库</td>
+          <td align="left">需要：Ingres II 库</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_interbase.dll</td>
+          <td align="left">
+          <a href="ref.ibase.html" class="link">InterBase</a>functions</td>
+          <td align="left">需要：
+          <var class="filename">gds32.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_java.dll</td>
+          <td align="left">
+          <a href="ref.java.html" class="link">Java</a>函数库</td>
+          <td align="left">PHP &lt;= 4.0.6 需要：
+          <var class="filename">jvm.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_ldap.dll</td>
+          <td align="left">
+          <a href="ref.ldap.html" class="link">LDAP</a>函数库</td>
+          <td align="left">PHP &lt;= 4.2.0 需要 
+          <var class="filename">libsasl.dll</var>（已附带），PHP &gt;= 4.3.0 需要 
+          <var class="filename">libeay32.dll</var>，
+          <var class="filename">ssleay32.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_mbstring.dll</td>
+          <td align="left">
+          <a href="ref.mbstring.html" class="link">多字节字符串</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_mcrypt.dll</td>
+          <td align="left">
+          <a href="ref.mcrypt.html" class="link">Mcrypt 加密</a>函数库</td>
+          <td align="left">需要：
+          <var class="filename">libmcrypt.dll</var></td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_mhash.dll</td>
+          <td align="left">
+          <a href="ref.mhash.html" class="link">Mhash</a>函数库</td>
+          <td align="left">PHP &gt;= 4.3.0 需要：
+          <var class="filename">libmhash.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_mime_magic.dll</td>
+          <td align="left">
+          <a href="book.mime-magic.html" class="link">Mimetype</a>函数库</td>
+          <td align="left">需要：
+          <var class="filename">magic.mime</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_ming.dll</td>
+          <td align="left">
+          <a href="ref.ming.html" class="link">Ming</a>函数库（Flash）</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_msql.dll</td>
+          <td align="left">
+          <a href="ref.msql.html" class="link">mSQL</a>函数库</td>
+          <td align="left">需要：
+          <var class="filename">msql.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_mssql.dll</td>
+          <td align="left">
+          <a href="ref.mssql.html" class="link">MSSQL</a>函数库</td>
+          <td align="left">需要：
+          <var class="filename">ntwdblib.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_mysql.dll</td>
+          <td align="left">
+          <a href="ref.mysql.html" class="link">MySQL</a>函数库</td>
+          <td align="left">PHP &gt;= 5.0.0 需要 
+          <var class="filename">libmysql.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_mysqli.dll</td>
+          <td align="left">
+          <a href="ref.mysqli.html" class="link">MySQLi</a>函数库</td>
+          <td align="left">PHP &gt;= 5.0.0 需要 
+          <var class="filename">libmysql.dll</var>（PHP &lt;= 5.0.2 中是 
+          <var class="filename">libmysqli.dll</var>）（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_oci8.dll</td>
+          <td align="left">
+          <a href="ref.oci8.html" class="link">Oracle 8</a>函数库</td>
+          <td align="left">需要：Oracle 8.1+ 客户端库</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_openssl.dll</td>
+          <td align="left">
+          <a href="ref.openssl.html" class="link">OpenSSL</a>函数库</td>
+          <td align="left">需要：
+          <var class="filename">libeay32.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_overload.dll</td>
+          <td align="left">
+          <a href="ref.overload.html" class="link">对象重载</a>函数库</td>
+          <td align="left">自 PHP 4.3.0 起内置</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_pdf.dll</td>
+          <td align="left">
+          <a href="ref.pdf.html" class="link">PDF</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_pgsql.dll</td>
+          <td align="left">
+          <a href="ref.pgsql.html" class="link">PostgreSQL</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_printer.dll</td>
+          <td align="left">
+          <a href="ref.printer.html" class="link">打印机</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_shmop.dll</td>
+          <td align="left">
+          <a href="ref.shmop.html" class="link">共享内存</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_snmp.dll</td>
+          <td align="left">
+          <a href="ref.snmp.html" class="link">SNMP</a>函数库</td>
+          <td align="left">仅用于 Windows NT！</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_soap.dll</td>
+          <td align="left">
+          <a href="ref.soap.html" class="link">SOAP</a>函数库</td>
+          <td align="left">PHP &gt;= 5.0.0</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_sockets.dll</td>
+          <td align="left">
+          <a href="ref.sockets.html" class="link">Socket</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_sybase_ct.dll</td>
+          <td align="left">
+          <a href="ref.sybase.html" class="link">Sybase</a>函数库</td>
+          <td align="left">需要：Sybase 客户端库</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_tidy.dll</td>
+          <td align="left">
+          <a href="ref.tidy.html" class="link">Tidy</a>函数库</td>
+          <td align="left">PHP &gt;= 5.0.0</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_tokenizer.dll</td>
+          <td align="left">
+          <a href="ref.tokenizer.html" class="link">Tokenizer</a>函数库</td>
+          <td align="left">自 PHP 4.3.0 起内置</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_w32api.dll</td>
+          <td align="left">
+          <a href="ref.w32api.html" class="link">W32api</a>函数库</td>
+          <td align="left">无</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_xmlrpc.dll</td>
+          <td align="left">
+          <a href="ref.xmlrpc.html" class="link">XML-RPC</a>函数库</td>
+          <td align="left">PHP &gt;= 4.2.1 需要 
+          <var class="filename">iconv.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_xslt.dll</td>
+          <td align="left">
+          <a href="ref.xslt.html" class="link">XSLT</a>函数库</td>
+          <td align="left">PHP &lt;= 4.2.0 需要 
+          <var class="filename">sablot.dll</var>，
+          <var class="filename">expat.dll</var>（已附带）。PHP &gt;= 4.2.1 需要 
+          <var class="filename">sablot.dll</var>，
+          <var class="filename">expat.dll</var>，
+          <var class="filename">iconv.dll</var>（已附带）。</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_yaz.dll</td>
+          <td align="left">
+          <a href="ref.yaz.html" class="link">YAZ</a>函数库</td>
+          <td align="left">需要：
+          <var class="filename">yaz.dll</var>（已附带）</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_zip.dll</td>
+          <td align="left">
+          <a href="ref.zip.html" class="link">Zip 文件</a>函数库</td>
+          <td align="left">只读访问</td>
+        </tr>
+
+        <tr valign="middle">
+          <td align="left">php_zlib.dll</td>
+          <td align="left">
+          <a href="ref.zlib.html" class="link">ZLib</a>压缩函数库</td>
+          <td align="left">自 PHP 4.3.0 起内置</td>
+        </tr>
+
+      </tbody>
+    
+  </table>
+</p>
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="install.windows.building.html">从源程序编译</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="install.windows.commandline.html">Command Line PHP on Microsoft Windows</a></div>
+ <div class="up"><a href="install.windows.html">Windows 系统下的安装</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

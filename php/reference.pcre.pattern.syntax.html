@@ -1,0 +1,2056 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>解说 Perl 兼容正则表达式的语法</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="pcre.pattern.html">PCRE模式</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="reference.pcre.pattern.modifiers.html">正则表达式模式中可用的模式修饰符</a></div>
+ <div class="up"><a href="pcre.pattern.html">PCRE模式</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="reference.pcre.pattern.syntax" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">模式语法</h1>
+  <p class="verinfo">(No version information available, might only be in SVN)</p><p class="refpurpose"><span class="refname">模式语法</span> &mdash; <span class="dc-title">解说 Perl 兼容正则表达式的语法</span></p>
+
+ </div>
+
+ <div class="refsect1 unknown" id="refsect1-reference.pcre.pattern.syntax-unknown">
+  <h3 class="title">说明</h3>
+  <p class="simpara">
+   PCRE 库是一组用和 Perl 5
+   相同的语法和语义实现了正则表达式模式匹配的函数，不过有少许区别（见下面）。当前
+   PCRE 的实现是与 Perl 5.005 相符的。
+  </p>
+ </div>
+
+
+ <div class="refsect1 unknown" id="refsect1-reference.pcre.pattern.syntax-unknown">
+  <h3 class="title">与 Perl 的区别</h3>
+  <p class="para">
+   这里谈到的区别是就 Perl 5.005 来说的。
+  <ol type="1">
+   <li class="listitem">
+    <span class="simpara">
+     默认情况下，空白字符是 C 语言库函数 isspace()
+     所能识别的任何字符，尽管有可能与别的字符类型表编译在一起。通常
+     isspace() 匹配空格，换页符，换行符，回车符，水平制表符和垂直制表符。Perl 5
+     不再将垂直制表符包括在空白字符中了。事实上长久以来存在于 Perl
+     文档中的转义序列 \v 从未被识别过，不过该字符至少到 5.002
+     为止都被当成空白字符的。在 5.004 和 5.005 中 \s 不匹配此字符。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     PCRE 不允许在向前断言中使用重复的数量符。Perl
+     允许这样，但可能不是你想象中的含义。例如，(?!a){3}
+     并不是断言下面三个字符不是“a”，而是断言下一个字符不是“a”三次。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     捕获出现在排除模式断言中的子模式虽然被计数，但并未在偏移向量中设定其条目。Perl
+     在匹配失败前从此种模式中设定其数字变量，但只在排触摸式断言只包含一个分支时。
+     
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     尽管目标字符串中支持二进制的零字符，但不能出现在模式字符串中，因为它被当作普通的
+     C 字符串传递，以二进制零终止。转义序列“\x00”可以在模式中用来表示二进制零。
+    </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      不支持下列 Perl 转义序列：\l，\u，\L，\U。事实上这些是由
+      Perl 的字符串处理来实现的，并不是模式匹配引擎的一部分。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      不支持 Perl 的 \G 断言，因为这和单个的模式匹配无关。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      很明显，PCRE 不支持 (?{code}) 结构。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      当部分模式重复的时候，有关 Perl 5.005_02
+      捕获字符串的设定有些古怪的地方。举例说，用模式
+      /^(a(b)?)+$/ 去匹配 &quot;aba&quot; 会将 $2 设为 &quot;b&quot;，但是用模式
+      /^(aa(bb)?)+$/ 去匹配 &quot;aabbaa&quot; 会使 $2 无值。然而，如果把模式改成
+      /^(aa(b(b))?)+$/，则 $2（和 $3）就有值了。在
+      Perl 5.004 中以上两种情况下 $2 都会被赋值，在 PCRE 中也是
+      <b><tt>TRUE</tt></b>。如果以后 Perl 改了，PCRE 可能也会跟着改。
+     </span>
+    </li>
+    <li class="listitem">
+    <span class="simpara">
+     另一个未解决的矛盾是 Perl 5.005_02 中模式
+     /^(a)?(?(1)a|b)+$/ 能匹配上字符串 &quot;a&quot;，但是 PCRE
+     不会。然而，在 Perl 和 PCRE 中用 /^(a)?a/
+     去匹配 &quot;a&quot; 会使 $1 没有值。
+    </span>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      PCRE 提供了一些对 Perl 正则表达式机制的扩展：
+      <ol type="1">
+       <li class="listitem">
+        <span class="simpara">
+         尽管向后断言必须匹配固定长度字符串，但每个向后断言的分支可以匹配不同长度的字符串。Perl
+         5.005 要求所有分支的长度相同。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         如果设定了
+         <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOLLAR_ENDONLY</a>
+         而没有设定
+         <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a>，则
+         $ 元字符只匹配字符串的最末尾。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         如果设定了
+         <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTRA</a>，反斜线后面跟一个没有特殊含义的字母会出错。
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         如果设定了
+         <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_UNGREEDY</a>，则重复的数量符的
+         greed 被反转，即，默认时不是 greedy，但如果后面跟上一个问号就变成 greedy 了。
+        </span>
+       </li>
+      </ol>
+     </p>
+    </li>
+   </ol>
+  </p>
+ </div>
+
+
+ <div class="refsect1 unknown" id="refsect1-reference.pcre.pattern.syntax-unknown">
+  <h3 class="title">Delimiters</h3>
+  <p class="para">
+   When using the PCRE functions, it is required that the pattern is enclosed
+   by <em class="emphasis">delimiters</em>. A delimiter can be any non-alphanumeric,
+   non-backslash, non-whitespace character.
+  </p>
+  <p class="para">
+   Often used delimiters are forward slashes (<i>/</i>), hash
+   signs (<i>#</i>) and tildes (<i>~</i>). The
+   following are all examples of valid delimited patterns.
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="cdata"><pre>
+/foo bar/
+#^[^0-9]$#
++php+
+%[a-zA-Z0-9_-]%
+</pre></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   If the delimiter needs to be matched inside the pattern it must be
+   escaped using a backslash. If the delimiter appears often inside the
+   pattern, it is a good idea to choose another delimiter in order to increase
+   readability.
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="cdata"><pre>
+/http:\/\//
+#http://#
+</pre></div>
+    </div>
+
+   </div>
+   The <span class="function"><a href="function.preg-quote.html" class="function">preg_quote()</a></span> function may be used to escape a string
+   for injection into a pattern and its optional second parameter may be used 
+   to specify the delimiter to be escaped.
+  </p>
+  <p class="para">
+   In addition to the aforementioned delimiters, it is also possible to use
+   bracket style delimiters where the opening and closing brackets are the
+   starting and ending delimiter, respectively.
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="cdata"><pre>
+{this is a pattern}
+</pre></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   You may add <a href="reference.pcre.pattern.modifiers.html" class="link">pattern
+   modifiers</a> after the ending delimiter. The following is an example
+   of case-insensitive matching:
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="cdata"><pre>
+#[a-z]#i
+</pre></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 unknown" id="refsect1-reference.pcre.pattern.syntax-unknown">
+  <h3 class="title">正则表达式详解</h3>
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">介绍</h4>
+   <p class="para">
+    下面说明 PCRE 所支持的正则表达式的语法和语义。Perl
+    文档和很多其它书中也解说了正则表达式，有的书中有很多例子。Jeffrey
+    Friedl 写的“Mastering  Regular  Expressions”，由 O&#039;Reilly
+    出版社发行（ISBN 1-56592-257-3），包含了大量细节。这里的说明只是个参考文档。
+   </p>
+   <p class="para">
+    正则表达式是从左向右去匹配目标字符串的一组模式。大多数字符在模式中表示它们自身并匹配目标中相应的字符。作为一个小例子，模式
+    <i>The quick brown fox</i> 匹配了目标字符串中与其完全相同的一部分。
+   </p>
+  </div>
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">元字符</h4>
+   <p class="para">
+    正则表达式的威力在于其能够在模式中包含选择和循环。它们通过使用<em class="emphasis">元字符</em>来编码在模式中，元字符不代表其自身，它们用一些特殊的方式来解析。
+   </p>
+   <p class="para">
+    有两组不同的元字符：一种是模式中除了方括号内都能被识别的，还有一种是在方括号内被识别的。方括号之外的元字符有这些：
+    <dl>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\</em></span>
+      <dd>
+
+       <span class="simpara">
+        有数种用途的通用转义符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">^</em></span>
+      <dd>
+
+       <span class="simpara">
+        断言目标的开头（或在多行模式下行的开头，即紧随一换行符之后）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">$</em></span>
+      <dd>
+
+       <span class="simpara">
+        断言目标的结尾（或在多行模式下行的结尾，即紧随一换行符之前）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">.</em></span>
+      <dd>
+
+       <span class="simpara">
+        匹配除了换行符外的任意一个字符（默认情况下）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">[</em></span>
+      <dd>
+
+       <span class="simpara">
+        字符类定义开始
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">]</em></span>
+      <dd>
+
+       <span class="simpara">
+        字符类定义结束
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">|</em></span>
+      <dd>
+
+       <span class="simpara">
+        开始一个多选一的分支
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">(</em></span>
+      <dd>
+
+       <span class="simpara">
+        子模式开始
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">)</em></span>
+      <dd>
+
+       <span class="simpara">
+        子模式结束
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">?</em></span>
+      <dd>
+
+       <span class="simpara">
+        扩展 ( 的含义，也是 0 或 1 数量限定符，以及数量限定符最小值
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">*</em></span>
+      <dd>
+
+       <span class="simpara">
+        匹配 0 个或多个的数量限定符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">+</em></span>
+      <dd>
+
+       <span class="simpara">
+        匹配 1 个或多个的数量限定符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">{</em></span>
+      <dd>
+
+       <span class="simpara">
+        最少／最多数量限定开始
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">}</em></span>
+      <dd>
+
+       <span class="simpara">
+        最少／最多数量限定结束
+       </span>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+    模式中方括号内的部分称为“字符类”。字符类中可用的元字符为：
+    <dl>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\</em></span>
+      <dd>
+
+       <span class="simpara">
+        通用转义字符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">^</em></span>
+      <dd>
+
+       <span class="simpara">
+        排除字符类，但仅当其为第一个字符时有效
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">-</em></span>
+      <dd>
+
+       <span class="simpara">
+        指出字符范围
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">]</em></span>
+      <dd>
+
+       <span class="simpara">
+        结束字符类
+       </span>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+    以下说明了每一个元字符的用法。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">反斜线（\）</h4>
+   <p class="para">
+    反斜线字符有几种用途。首先，如果其后跟着一个非字母数字字符，则取消该字符可能具有的任何特殊含义。此种将反斜线用作转义字符的用法适用于无论是字符类之中还是之外。
+   </p>
+   <p class="para">
+    例如，如果想匹配一个“*”字符，则在模式中用“\*”。这适用于无论下一个字符是否会被当作元字符来解释，因此在非字母数字字符之前加上一个“\”来指明该字符就代表其本身总是安全的。尤其是，如果要匹配一个反斜线，用“\\”。
+   </p>
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     单引号或双引号括起来的 PHP <a href="language.types.string.html#language.types.string.syntax" class="link">字符串</a>中的反斜线有特殊含义。因此必须用正则表达式的
+     \\ 来匹配 \，而在 PHP 代码中要用 &quot;\\\\&quot; 或 &#039;\\\\&#039;。
+    </p>
+   </p></blockquote>
+   <p class="para">
+    如果模式编译时加上了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a>
+    选项，模式中的空白字符（字符类中以外的）以及字符类之外的“#”到换行符之间的字符都被忽略。可以用转义的反斜线将空白字符或者“#”字符包括到模式中去。
+   </p>
+   <p class="para">
+    反斜线的第二种用途提供了一种在模式中以可见方式去编码不可打印字符的方法。并没有不可打印字符出现的限制，除了代表模式结束的二进制零以外。但用文本编辑器来准备模式的时候，通常用以下的转义序列来表示那些二进制字符更容易一些：
+   </p>
+   <p class="para">
+    <dl>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\a</em></span>
+      <dd>
+
+       <span class="simpara">
+        alarm，即 BEL 字符（0x07）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\cx</em></span>
+      <dd>
+
+       <span class="simpara">
+        &quot;control-x&quot;，其中 x 是任意字符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\e</em></span>
+      <dd>
+
+       <span class="simpara">
+        escape（0x1B）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\f</em></span>
+      <dd>
+
+       <span class="simpara">
+        换页符 formfeed（0x0C）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\n</em></span>
+      <dd>
+
+       <span class="simpara">
+        换行符 newline（0x0A）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\r</em></span>
+      <dd>
+
+       <span class="simpara">
+        回车符 carriage return（0x0D）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\t</em></span>
+      <dd>
+
+       <span class="simpara">
+        制表符 tab（0x09）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\xhh</em></span>
+      <dd>
+
+       <span class="simpara">
+        十六进制代码为 hh 的字符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\ddd</em></span>
+      <dd>
+
+       <span class="simpara">
+        八进制代码为 ddd 的字符，或 backreference
+       </span>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </p>
+   <p class="para">
+    “<i>\cx</i>”的精确效果如下：如果“<i>x</i>”是小写字母，则被转换为大写字母。接着字符中的第
+    6 位（0x40）被反转。从而“<i>\cz</i>”成为
+    0x1A，但“<i>\c{</i>”成为
+    0x3B，而“<i>\c;</i>”成为 0x7B。
+   </p>
+   <p class="para">
+    在“<i>\x</i>”之后最多再读取两个十六进制数字（其中的字母可以是大写或小写）。在 <em class="emphasis">UTF-8
+    模式</em>下，允许用“<i>\x{...}</i>”，花括号中的内容是表示十六进制数字的字符串。原来的十六进制转义序列
+    <i>\xhh</i> 如果其值大于 127 的话则匹配了一个双字节 UTF-8 字符。
+   </p>
+   <p class="para">
+    在“<i>\0</i>”之后最多再读取两个八进制数字。以上两种情况下，如果少于两个数字，则只使用已出现的。因此序列“<i>\0\x\07</i>”代表两个二进制的零加一个
+    BEL 字符。如果是八进制数字则确保在开始的零后面再提供两个数字。
+   </p>
+   <p class="para">
+    处理反斜线后面跟着一个不是 0
+    的数字比较复杂。在字符类之外，PCRE
+    以十进制数字读取该数字及其后面的数字。如果数字小于
+    10，或者之前表达式中捕获到至少该数字的左圆括号，则这个序列将被作为<em class="emphasis">逆向引用</em>。有关此如何运作的说明在后面，以及括号内的子模式。
+   </p>
+   <p class="para">
+    在字符类之中，或者如果十进制数字大于 9
+    并且之前没有那么多捕获的子模式，PCRE 重新从反斜线开始读取其后的最多三个八进制数字，并以最低位的
+    8 个比特产生出一个单一字节。任何其后的数字都代表自身。例如：
+   </p>
+   <p class="para">
+    <dl>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\040</em></span>
+      <dd>
+
+       <span class="simpara">
+        另一种表示空格的方法
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\40</em></span>
+      <dd>
+
+       <span class="simpara">
+        同上，如果之前捕获的子模式少于 40 个的话
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\7</em></span>
+      <dd>
+
+       <span class="simpara">
+        总是一个逆向引用
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\11</em></span>
+      <dd>
+
+       <span class="simpara">
+        可能是个逆向引用，或者是制表符 tab
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\011</em></span>
+      <dd>
+
+       <span class="simpara">
+        总是表示制表符 tab
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\0113</em></span>
+      <dd>
+
+       <span class="simpara">
+        表示制表符 tab 后面跟着一个字符“3”
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\113</em></span>
+       <dd>
+
+       <span class="simpara">
+        表示八进制代码为 113 的字符（因为不能超过 99 个逆向引用）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\377</em></span>
+      <dd>
+
+       <span class="simpara">
+        表示一个所有的比特都是 1 的字节
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\81</em></span>
+      <dd>
+
+       <span class="simpara">
+        要么是一个逆向引用，要么是一个二进制的零后面跟着两个字符“8”和“1”
+       </span>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </p>
+   <p class="para">
+    注意八进制值 100 或更大的值之前不能以零打头，因为不会读取（反斜线后）超过三个八进制数字。
+   </p>
+   <p class="para">
+    所有的定义了一个单一字节的序列可以用于字符类之中或之外。此外，在字符类之中，序列“<i>\b</i>”被解释为反斜线字符（0x08），而在字符类之外有不同含义（见下面）。
+   </p>
+   <p class="para">
+    反斜线的第三个用法是指定通用字符类型：
+   </p>
+   <p class="para">
+    <dl>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\d</em></span>
+      <dd>
+
+       <span class="simpara">
+        任一十进制数字
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\D</em></span>
+      <dd>
+
+       <span class="simpara">
+        任一非十进制数的字符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\s</em></span>
+      <dd>
+
+       <span class="simpara">
+        任一空白字符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\S</em></span>
+      <dd>
+
+       <span class="simpara">
+        任一非空白字符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\w</em></span>
+      <dd>
+
+       <span class="simpara">
+        任一“字”的字符
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\W</em></span>
+      <dd>
+
+       <span class="simpara">
+        任一“非字”的字符
+       </span>
+      </dd>
+
+     </dt>
+
+    </dl>
+
+   </p>
+   <p class="para">
+    任何一个转义序列将完整的字符组合分割成两个分离的部分。任一给定的字符匹配一个且仅一个转义序列。
+   </p>
+   <p class="para">
+    “字”的字符是指任何一个字母或数字或下划线，也就是说，任何可以是
+    Perl &quot;<i>word</i>&quot; 的字符。字母和数字的定义由
+    PCRE 字符表控制，可能会根据指定区域的匹配而改变。举例说，在
+    &quot;fr&quot; (French) 区域，某些编码大于 128 的字符用来表示重音字母，这些字符能够被
+    <i>\w</i> 所匹配。
+   </p>
+   <p class="para">
+    这些字符类型序列可以出现在字符类之中和之外。每一个匹配相应类型中的一个字符。如果当前匹配点在目标字符串的结尾，以上所有匹配都失败，因为没有字符可供匹配。
+   </p>
+   <p class="para">
+    反斜线的第四个用法是某些简单的断言。断言是指在一个匹配中的特定位置必须达到的条件，并不会消耗目标字符串中的任何字符。子模式中更复杂的断言的用法在下面描述。反斜线的断言有：
+   </p>
+   <p class="para">
+    <dl>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\b</em></span>
+      <dd>
+
+       <span class="simpara">
+        字分界线
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\B</em></span>
+      <dd>
+
+       <span class="simpara">
+        非字分界线
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\A</em></span>
+      <dd>
+
+       <span class="simpara">
+        目标的开头（独立于多行模式）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\Z</em></span>
+      <dd>
+
+       <span class="simpara">
+        目标的结尾或位于结尾的换行符前（独立于多行模式）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\z</em></span>
+      <dd>
+
+       <span class="simpara">
+        目标的结尾（独立于多行模式）
+       </span>
+      </dd>
+
+     </dt>
+
+     <dt>
+
+      <span class="term"><em class="emphasis">\G</em></span>
+      <dd>
+<span class="simpara">目标中的第一个匹配位置</span></dd>
+
+     </dt>
+
+    </dl>
+
+   </p>
+   <p class="para">
+    这些断言可能不能出现在字符类中（但是注意
+    &quot;<i>\b</i>&quot; 有不同的含义，在字符类之中也就是反斜线字符）。
+   </p>
+   <p class="para">
+    字边界是目标字符串中的一个位置，其当前字符和前一个字符不能同时匹配
+    <i>\w</i> 或者 <i>\W</i>（也就是其中一个匹配
+    <i>\w</i> 而另一个匹配
+    <i>\W</i>），或者是字符串的开头或结尾，假如第一个或最后一个字符匹配
+    \w 的话。
+   </p>
+   <p class="para">
+    <i>\A</i>，<i>\Z</i> 和 <i>\z</i>
+    断言与传统的音调符和美元符（下面说明）的不同之处在于它们仅匹配目标字符串的绝对开头和结尾而不管设定了任何选项。它们不受
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_NOTBOL</a> 或
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_NOTEOL</a>
+    选项的影响。<i>\Z</i> 和
+    <i>\z</i> 的不同之处在于 <i>\Z</i>
+    匹配了作为字符串最后一个字符的换行符之前以及字符串的结尾，而
+    <i>\z</i> 仅匹配字符串的结尾。
+   </p>
+   <p class="para">
+    <i>\G</i> 断言仅在当前匹配位置是匹配开始那一点时为真，如
+    <span class="function"><a href="function.preg-match.html" class="function">preg_match()</a></span> 的 <i><tt class="parameter">offset</tt></i>
+    参数指定那样。当 <i><tt class="parameter">offset</tt></i>
+    的值非零时这和 <i>\A</i> 不同。自 PHP 4.3.3 起可用。
+   </p>
+   <p class="para">
+    <i>\Q</i> 和 <i>\E</i> 自 PHP 4.3.3
+    起可被用来在模式中忽略正则表达式匹配字符。例如：<i>\w+\Q.$.\E$</i>
+    将匹配一个或多个可组成字的字符，其后接着的是字面上的 <i>.$.</i>
+    并且位于字符串末尾。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">Unicode 字符属性</h4>
+   <p class="para">
+    自 PHP 4.4.0 和 5.1.0 起，当选择了
+    additional escape sequences to match generic character types are available
+    <em class="emphasis">UTF-8 模式</em>时有三种更多的转移序列可用：
+   </p>
+   <dl>
+
+    <dt>
+
+     <span class="term"><em class="emphasis">\p{xx}</em></span>
+     <dd>
+<span class="simpara">具有 xx 属性的一个字符</span></dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><em class="emphasis">\P{xx}</em></span>
+     <dd>
+<span class="simpara">没有 xx 属性的一个字符</span></dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><em class="emphasis">\X</em></span>
+     <dd>
+<span class="simpara">一个扩展 Unicode 序列</span></dd>
+
+    </dt>
+
+   </dl>
+
+   <p class="para">
+    以上由 <i>xx</i> 所表示的属性名限于 Unicode
+    通用类型属性。每个字符具有一个此种属性，由两个缩写字母指定。为和
+    Perl 兼容，可以在左花括号和属性名中间加入一个上箭头符号来表示排除属性。例如
+    <i>\p{^Lu}</i> 就和 <i>\P{Lu}</i> 相同。
+   </p>
+   <p class="para">
+    如果在 <i>\p</i> 或 <i>\P</i>
+    中只用了一个字母，则包括了所有该字母开头的属性。此情况下，如果不是排除的话，可以省略花括号。下面例子中的两项具有相同效果：
+   </p>
+   <pre class="literallayout">
+    \p{L}
+    \pL
+   </pre>
+   <table class="doctable table">
+    <caption><b>所支持的属性代码</b></caption>
+    
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle"><td align="left"><i>C</i></td><td align="left">Other - 其它</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Cc</i></td><td align="left">Control - 控制</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Cf</i></td><td align="left">Format - 格式</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Cn</i></td><td align="left">Unassigned - 无符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Co</i></td><td align="left">Private use - 私有</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Cs</i></td><td align="left">Surrogate - 代替</td></tr>
+
+      <tr valign="middle"><td align="left"><i>L</i></td><td align="left">Letter -字母</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Ll</i></td><td align="left">Lower case letter - 小写字母</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Lm</i></td><td align="left">Modifier letter - 修正符字母</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Lo</i></td><td align="left">Other letter - 其它字母</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Lt</i></td><td align="left">Title case letter - 标题大写字母</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Lu</i></td><td align="left">Upper case letter - 大写字母</td></tr>
+
+      <tr valign="middle"><td align="left"><i>M</i></td><td align="left">Mark - 标记</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Mc</i></td><td align="left">Spacing mark - 空格标记</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Me</i></td><td align="left">Enclosing mark - 环绕标记</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Mn</i></td><td align="left">Non-spacing mark - 非空格标记</td></tr>
+
+      <tr valign="middle"><td align="left"><i>N</i></td><td align="left">Number - 数字</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Nd</i></td><td align="left">Decimal number - 十进制数字</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Nl</i></td><td align="left">Letter number - 字母数字</td></tr>
+
+      <tr valign="middle"><td align="left"><i>No</i></td><td align="left">Other number - 其它数字</td></tr>
+
+      <tr valign="middle"><td align="left"><i>P</i></td><td align="left">Punctuation - 标点符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Pc</i></td><td align="left">Connector punctuation - 连接标点符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Pd</i></td><td align="left">Dash punctuation - 横线标点符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Pe</i></td><td align="left">Close punctuation - 结束标点符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Pf</i></td><td align="left">Final punctuation - 最终标点符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Pi</i></td><td align="left">Initial punctuation - 起始标点符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Po</i></td><td align="left">Other punctuation - 其它标点符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Ps</i></td><td align="left">Open punctuation - 开始标点符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>S</i></td><td align="left">Symbol - 符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Sc</i></td><td align="left">Currency symbol - 货币符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Sk</i></td><td align="left">Modifier symbol - 修正符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Sm</i></td><td align="left">Mathematical symbol - 算术符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>So</i></td><td align="left">Other symbol - 其它符号</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Z</i></td><td align="left">Separator - 分隔符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Zl</i></td><td align="left">Line separator - 行分隔符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Zp</i></td><td align="left">Paragraph separator - 段落分隔符</td></tr>
+
+      <tr valign="middle"><td align="left"><i>Zs</i></td><td align="left">Space separator - 空格分隔符</td></tr>
+
+     </tbody>
+    
+   </table>
+
+   <p class="para">
+    PCRE 不支持扩展属性例如 &quot;Greek&quot; 或 &quot;InMusicalSymbols&quot;。
+   </p>
+   <p class="para">
+    指定不区分大小写的匹配不影响此类转义序列。例如 <i>\p{Lu}</i>
+    总是仅和大写字母匹配。
+   </p>
+   <p class="para">
+    <i>\X</i> 转移符匹配能组成扩展 Unicode 序列的任何数目的 Unicode 字符。<i>\X</i>
+    和 <i>(?&gt;\PM\pM*)</i> 相同。
+   </p>
+   <p class="para">
+    也就是，它匹配一个没有“mark”属性，后面跟着零或多个具有“mark”属性的字符，并且将此序列看成原子组（见下）。典型的具有“mark”属性的字母是影响到前面的字符的重音符。
+   </p>
+   <p class="para">
+    用 Unicode 属性来匹配字符并不快，因为 PCRE
+    不得不搜索一个包含超过一万五千字符数据的结构。这正是为什么在
+    PCRE 中传统的转义序列例如 <i>\d</i> 和
+    <i>\w</i> 不使用 Unicode 属性。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">音调符（^）和美元符（$）</h4>
+   <p class="para">
+    在字符类之外，默认匹配模式下，音调符是一个仅在当前匹配点是目标字符串的开头时才为真的断言。在字符类之中，音调符的含义完全不同（见下面）。
+   </p>
+   <p class="para">
+    如果涉及到几选一时音调符不需要是模式的第一个字符，但如果出现在某个分支中则应该是该选择分支的第一个字符。如果所有的选择分支都以音调符开头，这就是说，如果模式限制为只匹配目标的开头，那么这是一个紧固模式。（也有其它结构可以使模式成为紧固的。）
+   </p>
+   <p class="para">
+    美元符是一个仅在当前匹配点是目标字符串的结尾或者当最后一个字符是换行符时其前面的位置时为
+    <b><tt>TRUE</tt></b> 的断言（默认情况下）。如果涉及到几选一时美元符不需要是模式的最后一个字符，但应该是其出现的分支中的最后一个字符。美元符在字符类之中没有特殊含义。
+   </p>
+   <p class="para">
+    美元符的含义可被改变使其仅匹配字符串的结尾，只要在编译或匹配时设定了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOLLAR_ENDONLY</a>
+    选项即可。这并不影响 \Z 断言。
+   </p>
+   <p class="para">
+    如果设定了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a>
+    选项则音调符和美元符的含义被改变了。此种情况下，它们分别匹配紧接着内部
+    &quot;\n&quot; 字符的之后和之前，再加上目标字符串的开头和结尾。例如模式
+    /^abc$/ 在多行模式下匹配了目标字符串
+    &quot;def\nabc&quot;，但正常时不匹配。因此，由于所有分支都以
+    &quot;^&quot; 开头而在单行模式下成为紧固的模式在多行模式下为非紧固的。如果设定了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a>，则
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOLLAR_ENDONLY</a>
+    选项会被忽略。
+   </p>
+   <p class="para">
+    注意 \A，\Z 和 \z 序列在两种情况下都可以用来匹配目标的开头和结尾，如果模式所有的分支都以
+    \A 开始则其总是紧固的，不论是否设定了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a>。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">句号（.）</h4>
+   <p class="para">
+    在字符类之外，模式中的圆点可以匹配目标中的任何一个字符，包括不可打印字符，但不匹配换行符（默认情况下）。如果设定了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a>
+    则圆点也会匹配换行符。处理圆点与处理音调符和美元符是完全独立的，唯一的联系就是它们都涉及到换行符。圆点在字符类之中没有特殊含义。
+   </p>
+   <p class="para">
+    <em class="emphasis">\C</em> 可以用来匹配单一字节。在
+    <em class="emphasis">UTF-8 模式</em>下这有意义，因为句号可以匹配由多个字节组成的整个字符。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">方括号（[]）</h4>
+   <p class="para">
+    左方括号开始了一个字符类，右方括号结束之。单独一个右方括号不是特殊字符。如果在字符类之中需要一个右方括号，则其应该是字符类中的第一个字符（如果有音调符的话，则紧接音调符之后），或者用反斜线转义。
+   </p>
+   <p class="para">
+    字符类匹配目标中的一个字符，该字符必须是字符类定义的字符集中的一个；除非字符类中的第一个字符是音调符，此情况下目标字符必须不在字符类定义的字符集中。如果在字符类中需要音调符本身，则其必须不是第一个字符，或用反斜线转义。
+   </p>
+   <p class="para">
+    举例说，字符类 [aeiou] 匹配了任何一个小写元音字母，而 [^aeiou]
+    匹配了任何一个不是小写元音字母的字符。注意音调符只是一个通过枚举指定那些不在字符类之中的字符的符号。不是断言：仍旧会消耗掉目标字符串中的一个字符，如果当前位置在字符串结尾的话则失败。
+   </p>
+   <p class="para">
+    当设定了不区分大小写的匹配时，字符类中的任何字母同时代表了其大小写形式，因此举例说，小写的
+    [aeiou] 同时匹配了 &quot;A&quot; 和 &quot;a&quot;，小写的
+    [^aeiou] 不匹配 &quot;A&quot;，但区分大小写时则会匹配。
+   </p>
+   <p class="para">
+    换行符在字符类中不会特殊对待，不论
+   <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a> 或者
+   <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a>
+   选项设定了什么值。形如 [^a] 的字符类总是能够和换行符相匹配的。
+   </p>
+   <p class="para">
+    减号（-）字符可以在字符类中指定一个字符范围。例如，[d-m]
+    匹配了 d 和 m 之间的任何字符，包括两者。如果字符类中需要减号本身，则必须用反斜线转义或者放到一个不能被解释为指定范围的位置，典型的位置是字符类中的第一个或最后一个字符。
+   </p>
+   <p class="para">
+    字面上的 &quot;]&quot; 不可能被当成字符范围的结束。形如
+    [W-]46] 的模式会被解释为包括两个字符的字符类（&quot;W&quot; and &quot;-&quot;）后面跟着字符串
+    &quot;46]&quot;，因此其会匹配 &quot;W46]&quot; 或者 &quot;-46]&quot;。然而，如果将
+    &quot;]&quot; 用反斜线转义，则会被当成范围的结束来解释。因此
+    [W-\]46] 会被解释为一个字符类，包含有一个范围以及两个单独的字符。八进制或十六进制表示的
+    &quot;]&quot; 也可以用来表示范围的结束。
+   </p>
+   <p class="para">
+    范围是以 ASCII 比较顺序来操作的。也可以用于用数字表示的字符，例如
+    [\000-\037]。在不区分大小写匹配中如果范围里包括了字母，则同时匹配大小写字母。例如
+    [W-c] 等价于 [][\^_`wxyzabc] 不区分大小写地匹配。如果使用了
+    &quot;fr&quot; 区域的字符表，[\xc8-\xcb] 匹配了大小写的重音 E 字符。
+   </p>
+   <p class="para">
+    字符类型 \d，\D，\s，\S，\w 和 \W
+    也可以出现于字符类中，并将其所能匹配的字符添加进字符类中。例如，[\dABCDEF]
+    匹配了任何十六进制数字。用音调符可以很方便地制定严格的字符集，例如
+    [^\W_] 匹配了任何字母或数字，但不匹配下划线。
+   </p>
+   <p class="para">
+    任何除了 \，-，^（位于开头）以及结束的 ]
+    之外的非字母数字字符在字符类中都没有特殊含义，但是将它们转义也没有坏处。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">竖线（|）</h4>
+   <p class="para">
+    竖线字符用来分隔多选一模式。例如，模式：
+    <div class="example-contents screen">
+<div class="unknowncode"><pre class="unknowncode">gilbert|sullivan</pre>
+</div>
+    </div>
+    匹配了 &quot;gilbert&quot; 或者 &quot;sullivan&quot;
+    中的一个。可以有任意多个分支，也可以有空的分支（匹配空字符串）。匹配进程从左到右轮流尝试每个分支，并使用第一个成功匹配的分支。如果分支在子模式（在下面定义）中，则“成功匹配”表示同时匹配了子模式中的分支以及主模式的其它部分。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">内部选项设定</h4>
+   <p class="para">
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_CASELESS</a>，<a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a>，<a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a>，<a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTRA</a> 和
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a>
+    的设定可以在模式内部通过包含在
+    &quot;(?&quot; 和 &quot;)&quot; 之间的 Perl 选项字母序列来改变。选项字母为：
+    <table class="doctable table">
+     <caption><b>内部选项字母</b></caption>
+     
+      <tbody valign="middle" class="tbody">
+       <tr valign="middle">
+        <td align="left"><i>i</i></td>
+        <td align="left">代表 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_CASELESS</a></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left"><i>m</i></td>
+        <td align="left">代表 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left"><i>s</i></td>
+        <td align="left">代表 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left"><i>x</i></td>
+        <td align="left">代表 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a></td>
+        </tr>
+
+       <tr valign="middle">
+        <td align="left"><i>U</i></td>
+        <td align="left">代表 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_UNGREEDY</a></td>
+       </tr>
+
+       <tr valign="middle">
+        <td align="left"><i>X</i></td>
+        <td align="left">代表 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTRA</a></td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+   <p class="para">
+    例如，(?im) 设定了不区分大小写，多行匹配。也可以通过在字母前加上减号来取消这些选项。例如组合的选项
+    (?im-sx)，设定了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_CASELESS</a> 和
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_MULTILINE</a>，并取消了
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a> 和
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a>。如果一个字母在减号之前与之后都出现了，则该选项被取消设定。
+   </p>
+   <p class="para">
+    如果选项改变出现于顶层（即不在子模式的括号中），则改变应用于其后的剩余模式。因此
+    <i>/ab(?i)c/</i> 只匹配 &quot;abc&quot; 和
+    and &quot;abC&quot;。此行为是自 PHP 4.3.3 起绑定的 PCRE 4.0 中被修改的。在此版本之前
+    <i>/ab(?i)c/</i> 的执行与
+    <i>/abc/i</i> 相同（例如匹配 &quot;ABC&quot; 和 &quot;aBc&quot;）。
+   </p>
+   <p class="para">
+    如果选项改变出现于子模式中，则效果不同。这是
+    Perl 5.005 的行为的一个变化。子模式中的选项改变只影响到子模式内部其后的部分，因此
+    <i>(a(?i)b)c</i>
+    将只匹配 &quot;abc&quot; 和 &quot;aBc&quot;（假定没有使用
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_CASELESS</a>）。这意味着选项在模式的不同部位可以造成不同的设定。在一个分支中的改变可以传递到同一个子模式中后面的分支中，例如
+    <i>(a(?i)b|c)</i>
+    将匹配 &quot;ab&quot;，&quot;aB&quot;，&quot;c&quot; 和 &quot;C&quot;，尽管在匹配 &quot;C&quot;
+    的时候第一个分支会在选项设定之前就被丢弃。这是因为选项设定的效果是在编译时确定的，否则会造成非常怪异的行为。
+   </p>
+   <p class="para">
+    PCRE 专用选项
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_UNGREEDY</a> 和
+    <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTRA</a>
+    可以和 Perl 兼容选项以同样的方式来改变，分别使用字母
+    U 和 X。(?X) 标记设定有些特殊，它必须出现于任何其它特性之前。最好放在最开头的位置。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">子模式</h4>
+   <p class="para">
+    子模式由圆括号定界，可以嵌套。将模式中的一部分标记为子模式可以：
+   </p>
+   <p class="para">
+    1. 将多选一的分支局部化。例如，模式：
+    <div class="example-contents screen">
+<div class="unknowncode"><pre class="unknowncode">cat(aract|erpillar|)</pre>
+</div>
+    </div>
+    匹配了 &quot;cat&quot;，&quot;cataract&quot; 或 &quot;caterpillar&quot;
+    之一，没有圆括号的话将匹配 &quot;cataract&quot;，&quot;erpillar&quot; 或空字符串。
+   </p>
+   <p class="para">
+    2. 将子模式设定为捕获子模式（如同以前定义的）。当整个模式匹配时，目标字符串中匹配了子模式的部分会通过
+    <span class="function"><b>pcre_exec()</b></span> 的 <em class="emphasis">ovector</em>
+    参数传递回调用者。左圆括号从左到右计数（从 1 开始）以取得捕获子模式的数目。
+   </p>
+   <p class="para">
+    例如，如果将字符串 &quot;the red king&quot; 来和模式
+    <div class="example-contents screen">
+<div class="unknowncode"><pre class="unknowncode">the ((red|white) (king|queen))</pre>
+</div>
+    </div>
+    进行匹配，捕获的子串为 &quot;red king&quot;，&quot;red&quot;
+    以及 &quot;king&quot;，并被计为 1，2 和 3。
+   </p>
+   <p class="para">
+    简单的括号实现两种功能的事实不总是有帮助的。经常有需要一组子模式但不需要捕获的时候。如果左括号后面跟着
+    &quot;?:&quot;，子模式不做任何捕获，并且在计算任何之后捕获的子模式时也不算在内。例如，如果用字符串
+    &quot;the white queen&quot; 去和模式  <i>the ((?:red|white) (king|queen))</i> 匹配，捕获的子串是
+    &quot;white queen&quot; 和 &quot;queen&quot;，并被计为 1 和 2。所捕获的子串的最大数目是
+    99，所有子模式，包括捕获的和没捕获的，最大数目是 200。
+   </p>
+   <p class="para">
+    作为方便的速记，如果在非捕获子模式的开头需要任何选项设定，则选项字母可以出现在
+    &quot;?&quot; 和 &quot;:&quot; 中间。因此下面两个模式
+   </p>
+
+   <pre class="literallayout">
+       (?i:saturday|sunday)
+       (?:(?i)saturday|sunday)
+   </pre>
+
+   <p class="para">
+    匹配了完全相同的一组字符串。因为分支选项是从左向右尝试的，并且直到子模式结束前都不会重置选项，因此在一个分支中的选项设定会影响到之后的分支，所以以上模式会匹配
+    &quot;SUNDAY&quot; 和 &quot;Saturday&quot;。
+   </p>
+
+   <p class="para">
+    自 PHP 4.3.3 起有可能通过 <i>(?P&lt;name&gt;pattern)</i>
+    来给一个模式命名。匹配结果的数组会同时包含以模式名为索引和以数字为索引的部分。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">重复</h4>
+   <p class="para">
+    重复是由数量符指定的，可以接以下任何一项：
+    <ul class="itemizedlist">
+     <li class="listitem"><span class="simpara">单个字符，可以是被转义的</span></li>
+     <li class="listitem"><span class="simpara">. 匹配字符</span></li>
+     <li class="listitem"><span class="simpara">一类字符</span></li>
+     <li class="listitem"><span class="simpara">一个反向引用（见下一节）</span></li>
+     <li class="listitem"><span class="simpara">一个括号中的子模式（除非是个断言 - 见下）</span></li>
+    </ul>
+  </p>
+  <p class="para">
+   普通的重复数量符指定了所允许的匹配的最小和最大数目，方法是将两个数字放在花括号中，中间用逗号分隔。数字必须小于
+   65536，并且第一个数字必须小于或等于第二个数字。例如：<i>z{2,4}</i>
+   匹配了 &quot;zz&quot;，&quot;zzz&quot; 或 &quot;zzzz&quot;。单个的右花括号不算是特殊字符。如果省略了第二个数字但是有逗号，则表示没有上限。如果同时省略了第二个数字和逗号，则数量符指定了匹配的准确数目。因此
+   <i>[aeiou]{3,}</i> 匹配至少连续 3 个元音，但是可以匹配更多。<i>\d{8}</i>
+   则匹配了正好 8 个数字。出现在不允许放置数量符位置或者不符合数量符语法的左花括号，被当成字面上的该字符。例如
+   {,6} 不是一个数量符，而是字面上的这四个字符。
+  </p>
+  <p class="para">
+   数量符 {0} 是允许的，导致表达式理解为前一项和数量符不存在。
+  </p>
+  <p class="para">
+   为方便起见（以及历史性的兼容），三个最常用的数量符都有单字符的缩写：
+   <table class="doctable table">
+    <caption><b>单字符数量符</b></caption>
+    
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="left"><i>*</i></td>
+       <td align="left">等同于 <i>{0,}</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>+</i></td>
+       <td align="left">等同于 <i>{1,}</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>?</i></td>
+       <td align="left">等同于 <i>{0,1}</i></td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+  <p class="para">
+   有可能通过在一个不匹配任何字符的子模式后面跟一个没有上限的数量符构造出无限循环，例如：<i>(a?)*</i>。
+  </p>
+  <p class="para">
+   对此类模式早期版本的 Perl 和 PCRE
+   会在编译时给出错误。不过由于这在某些情况下有用，如今已经接受此种模式了，但是如果任何子模式的重复确实不匹配任何字符，则循环会被强制打断。
+  </p>
+  <p class="para">
+   默认时，数量符是“贪吃型”（greedy）的，即会在不导致剩余模式失败的情况下尽可能多地匹配（直到所允许的数目上限）。这会出问题的经典例子是尝试匹配
+   C 语言的注释。在 /* 和 */ 序列中间，可能会出现单个的 *
+   和 / 字符。对 C 注释如果试图用 <i>/\*.*\*/</i>
+   去和字符串 <i>/* first comment */  not comment  /* second comment */</i>
+   匹配会失败，因为由于 .* 项目的贪吃性，会匹配成整个字符串。
+  </p>
+  <p class="para">
+   不过，如果在后面加一个问号数量符，则会停止贪吃性，而变成匹配尽可能少的数目，因此模式
+
+       <i>/\*.*?\*/</i>
+
+   就会正确匹配 C 注释。各种数量符的含义并没有改变，只是优先的匹配数目。不要将问号的此用法和其自己作为数量符的使用混淆。因为有两种用法，有时可以两个一起出现，例如
+
+       <i>\d??\d</i>
+
+   会优先匹配一个数字，但如别无选择也可以匹配两个以使剩余模式匹配。
+  </p>
+  <p class="para">
+   如果设定了 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_UNGREEDY</a> 选项（此选项 Perl
+   中没有）则数量符默认不是贪吃型的，但是在个别模式后加上一个问号可以将其变成贪吃型的。换句话说，这可以反转默认的行为。
+  </p>
+  <p class="para">
+   后面跟上一个 <i>+</i> 的数量符是“占有性”（possessive）的。它会匹配尽可能多的字符而不管剩余的模式。因此
+   <i>.*abc</i> 可以匹配 &quot;aabc&quot; 但是
+   <i>.*+abc</i> 就不会，因为 <i>.*+</i>
+   已经匹配了整个字符串。自 PHP 4.3.3 起可以用占有性数量符可以来加快处理过程。
+  </p>
+  <p class="para">
+     When a parenthesized subpattern is quantified with a minimum
+     repeat  count  that is greater than 1 or with a limited maximum,
+     more store is required for the  compiled  pattern,  in
+     proportion to the size of the minimum or maximum.
+  </p>
+  <p class="para">
+     If a pattern starts with .* or  .{0,}  and  the  <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a>
+     option (equivalent to Perl&#039;s /s) is set, thus allowing the .
+     to match newlines, then the pattern is implicitly  anchored,
+     because whatever follows will be tried against every character
+     position in the subject string, so there is no point  in
+     retrying  the overall match at any position after the first.
+     PCRE treats such a pattern as though it were preceded by \A.
+     In  cases where it is known that the subject string contains
+     no newlines, it is worth setting <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a>  when  the  pattern begins with .* in order to
+     obtain this optimization, or
+     alternatively using ^ to indicate anchoring explicitly.
+  </p>
+  <p class="para">
+     When a capturing subpattern is repeated, the value  captured
+     is the substring that matched the final iteration. For example, after
+
+       <i>(tweedle[dume]{3}\s*)+</i>
+
+     has matched &quot;tweedledum tweedledee&quot; the value  of  the  captured
+     substring  is  &quot;tweedledee&quot;.  However,  if  there are
+     nested capturing  subpatterns,  the  corresponding  captured
+     values  may  have been set in previous iterations. For example,
+     after
+
+       <i>/(a|(b))+/</i>
+
+     matches &quot;aba&quot; the value of the second captured substring  is
+     &quot;b&quot;.
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">Back references</h4>
+   <p class="para">
+     Outside a character class, a backslash followed by  a  digit
+     greater  than  0  (and  possibly  further  digits) is a back
+     reference to a capturing subpattern  earlier  (i.e.  to  its
+     left)  in  the  pattern,  provided there have been that many
+     previous capturing left parentheses.
+  </p>
+  <p class="para">
+     However, if the decimal number following  the  backslash  is
+     less  than  10,  it is always taken as a back reference, and
+     causes an error only if there are not  that  many  capturing
+     left  parentheses in the entire pattern. In other words, the
+     parentheses that are referenced need not be to the  left  of
+     the  reference  for  numbers  less  than 10. See the section
+     entitled &quot;Backslash&quot; above for further details of  the  handling
+     of digits following a backslash.
+  </p>
+  <p class="para">
+     A back reference matches whatever actually matched the  capturing
+     subpattern in the current subject string, rather than
+     anything matching the subpattern itself. So the pattern
+
+       <i>(sens|respons)e and \1ibility</i>
+
+     matches &quot;sense and sensibility&quot; and &quot;response and  responsibility&quot;,
+     but  not  &quot;sense  and  responsibility&quot;. If caseful
+     matching is in force at the time of the back reference, then
+     the case of letters is relevant. For example,
+
+       <i>((?i)rah)\s+\1</i>
+
+     matches &quot;rah rah&quot; and &quot;RAH RAH&quot;, but  not  &quot;RAH  rah&quot;,  even
+     though  the  original  capturing subpattern is matched caselessly.
+  </p>
+  <p class="para">
+     There may be more than one back reference to the  same  subpattern.
+     If  a  subpattern  has not actually been used in a
+     particular match, then any  back  references  to  it  always
+     fail. For example, the pattern
+
+       <i>(a|(bc))\2</i>
+
+     always fails if it starts to match  &quot;a&quot;  rather  than  &quot;bc&quot;.
+     Because  there  may  be up to 99 back references, all digits
+     following the backslash are taken as  part  of  a  potential
+     back reference number. If the pattern continues with a digit
+     character, then some delimiter must be used to terminate the
+     back reference. If the <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a>  option is set, this can
+     be whitespace.  Otherwise an empty comment can be used.
+  </p>
+  <p class="para">
+     A back reference that occurs inside the parentheses to which
+     it  refers  fails when the subpattern is first used, so, for
+     example, (a\1) never matches.  However, such references  can
+     be useful inside repeated subpatterns. For example, the pattern
+
+       <i>(a|b\1)+</i>
+
+     matches any number of &quot;a&quot;s and also &quot;aba&quot;, &quot;ababaa&quot; etc.  At
+     each iteration of the subpattern, the back reference matches
+     the character string corresponding to  the  previous  iteration.
+     In order for this to work, the pattern must be such
+     that the first iteration does not need  to  match  the  back
+     reference.  This  can  be  done using alternation, as in the
+     example above, or by a quantifier with a minimum of zero.
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">Assertions</h4>
+   <p class="para">
+     An assertion is  a  test  on  the  characters  following  or
+     preceding  the current matching point that does not actually
+     consume any characters. The simple assertions coded  as  \b,
+     \B,  \A,  \Z,  \z, ^ and $ are described above. More complicated
+     assertions are coded as  subpatterns.  There  are  two
+     kinds:  those that look ahead of the current position in the
+     subject string, and those that look behind it.
+   </p>
+   <p class="para">
+     An assertion subpattern is matched in the normal way, except
+     that  it  does not cause the current matching position to be
+     changed. Lookahead assertions start with  (?=  for  positive
+     assertions and (?! for negative assertions. For example,
+
+       <i>\w+(?=;)</i>
+
+     matches a word followed by a semicolon, but does not include
+     the semicolon in the match, and
+
+       <i>foo(?!bar)</i>
+
+     matches any occurrence of &quot;foo&quot;  that  is  not  followed  by
+     &quot;bar&quot;. Note that the apparently similar pattern
+
+       <i>(?!foo)bar</i>
+
+     does not find an occurrence of &quot;bar&quot;  that  is  preceded  by
+     something other than &quot;foo&quot;; it finds any occurrence of &quot;bar&quot;
+     whatsoever, because the assertion  (?!foo)  is  always  <b><tt>TRUE</tt></b>
+     when  the  next  three  characters  are  &quot;bar&quot;. A lookbehind
+     assertion is needed to achieve this effect.
+   </p>
+   <p class="para">
+     Lookbehind assertions start with (?&lt;=  for  positive  assertions
+     and (?&lt;! for negative assertions. For example,
+
+       <i>(?&lt;!foo)bar</i>
+
+     does find an occurrence of &quot;bar&quot; that  is  not  preceded  by
+     &quot;foo&quot;. The contents of a lookbehind assertion are restricted
+     such that all the strings  it  matches  must  have  a  fixed
+     length.  However, if there are several alternatives, they do
+     not all have to have the same fixed length. Thus
+
+       <i>(?&lt;=bullock|donkey)</i>
+
+     is permitted, but
+
+       <i>(?&lt;!dogs?|cats?)</i>
+
+     causes an error at compile time. Branches  that  match  different
+     length strings are permitted only at the top level of
+     a lookbehind assertion. This is an extension  compared  with
+     Perl  5.005,  which  requires all branches to match the same
+     length of string. An assertion such as
+
+       <i>(?&lt;=ab(c|de))</i>
+
+     is not permitted, because its single  top-level  branch  can
+     match two different lengths, but it is acceptable if rewritten
+     to use two top-level branches:
+
+       <i>(?&lt;=abc|abde)</i>
+
+     The implementation of lookbehind  assertions  is,  for  each
+     alternative,  to  temporarily move the current position back
+     by the fixed width and then  try  to  match.  If  there  are
+     insufficient  characters  before  the  current position, the
+     match is deemed to fail.  Lookbehinds  in  conjunction  with
+     once-only  subpatterns can be particularly useful for matching
+     at the ends of strings; an example is given at  the  end
+     of the section on once-only subpatterns.
+   </p>
+   <p class="para">
+     Several assertions (of any sort) may  occur  in  succession.
+     For example,
+
+       <i>(?&lt;=\d{3})(?&lt;!999)foo</i>
+
+     matches &quot;foo&quot; preceded by three digits that are  not  &quot;999&quot;.
+     Notice  that each of the assertions is applied independently
+     at the same point in the subject string. First  there  is  a
+     check  that  the  previous  three characters are all digits,
+     then there is a check that the same three characters are not
+     &quot;999&quot;.   This  pattern  does not match &quot;foo&quot; preceded by six
+     characters, the first of which are digits and the last three
+     of  which  are  not  &quot;999&quot;.  For  example,  it doesn&#039;t match
+     &quot;123abcfoo&quot;. A pattern to do that is
+
+      <i>(?&lt;=\d{3}...)(?&lt;!999)foo</i>
+   </p>
+   <p class="para">
+     This time the first assertion looks  at  the  preceding  six
+     characters,  checking  that  the first three are digits, and
+     then the second assertion checks that  the  preceding  three
+     characters are not &quot;999&quot;.
+   </p>
+   <p class="para">
+     Assertions can be nested in any combination. For example,
+
+       <i>(?&lt;=(?&lt;!foo)bar)baz</i>
+
+     matches an occurrence of &quot;baz&quot; that  is  preceded  by  &quot;bar&quot;
+     which in turn is not preceded by &quot;foo&quot;, while
+
+       <i>(?&lt;=\d{3}...(?&lt;!999))foo</i>
+
+     is another pattern which matches  &quot;foo&quot;  preceded  by  three
+     digits and any three characters that are not &quot;999&quot;.
+   </p>
+   <p class="para">
+     Assertion subpatterns are not capturing subpatterns, and may
+     not  be  repeated,  because  it makes no sense to assert the
+     same thing several times. If any kind of assertion  contains
+     capturing  subpatterns  within it, these are counted for the
+     purposes of numbering the capturing subpatterns in the whole
+     pattern.   However,  substring capturing is carried out only
+     for positive assertions, because it does not make sense  for
+     negative assertions.
+   </p>
+   <p class="para">
+     Assertions count towards the maximum  of  200  parenthesized
+     subpatterns.
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">Once-only subpatterns</h4>
+   <p class="para">
+     With both maximizing and minimizing repetition,  failure  of
+     what  follows  normally  causes  the repeated item to be
+     re-evaluated to see if a different number of repeats allows the
+     rest  of  the  pattern  to  match. Sometimes it is useful to
+     prevent this, either to change the nature of the  match,  or
+     to  cause  it fail earlier than it otherwise might, when the
+     author of the pattern knows there is no  point  in  carrying
+     on.
+   </p>
+   <p class="para">
+     Consider, for example, the pattern \d+foo  when  applied  to
+     the subject line
+
+       <i>123456bar</i>
+   </p>
+   <p class="para">
+     After matching all 6 digits and then failing to match &quot;foo&quot;,
+     the normal action of the matcher is to try again with only 5
+     digits matching the \d+ item, and then with 4,  and  so  on,
+     before ultimately failing. Once-only subpatterns provide the
+     means for specifying that once a portion of the pattern  has
+     matched,  it  is  not to be re-evaluated in this way, so the
+     matcher would give up immediately on failing to match  &quot;foo&quot;
+     the  first  time.  The  notation  is another kind of special
+     parenthesis, starting with (?&gt; as in this example:
+
+       <i>(?&gt;\d+)bar</i>
+   </p>
+   <p class="para">
+     This kind of parenthesis &quot;locks up&quot; the  part of the pattern
+     it  contains once it has matched, and a failure further into
+     the pattern is prevented from backtracking  into  it.
+     Backtracking  past  it to previous items, however, works as normal.
+   </p>
+   <p class="para">
+     An alternative description is that a subpattern of this type
+     matches  the  string  of  characters that an identical standalone
+     pattern would match, if anchored at the current point
+     in the subject string.
+   </p>
+   <p class="para">
+     Once-only subpatterns are not capturing subpatterns.  Simple
+     cases  such as the above example can be thought of as a maximizing
+     repeat that must  swallow  everything  it  can.  So,
+     while both \d+ and \d+? are prepared to adjust the number of
+     digits they match in order to make the rest of  the  pattern
+     match, (?&gt;\d+) can only match an entire sequence of digits.
+   </p>
+   <p class="para">
+     This construction can of course contain arbitrarily  complicated
+     subpatterns, and it can be nested.
+   </p>
+   <p class="para">
+     Once-only subpatterns can be used in conjunction with
+     look-behind  assertions  to specify efficient matching at the end
+     of the subject string. Consider a simple pattern such as
+
+       <i>abcd$</i>
+
+     when applied to a long string which does not match.  Because
+     matching  proceeds  from  left  to right, PCRE will look for
+     each &quot;a&quot; in the subject and then see if what follows matches
+     the rest of the pattern. If the pattern is specified as
+
+       <i>^.*abcd$</i>
+
+     then the initial .* matches the entire string at first,  but
+     when  this  fails  (because  there  is no following &quot;a&quot;), it
+     backtracks to match all but the last character, then all but
+     the  last  two  characters, and so on. Once again the search
+     for &quot;a&quot; covers the entire string, from right to left, so  we
+     are no better off. However, if the pattern is written as
+
+       <i>^(?&gt;.*)(?&lt;=abcd)</i>
+
+     then there can be no backtracking for the .*  item;  it  can
+     match  only  the  entire  string.  The subsequent lookbehind
+     assertion does a single test on the last four characters. If
+     it  fails,  the  match  fails immediately. For long strings,
+     this approach makes a significant difference to the processing time.
+   </p>
+   <p class="para">
+     When a pattern contains an unlimited repeat inside a subpattern
+     that can itself be repeated an unlimited number of
+     times, the use of a once-only subpattern is the only way  to
+     avoid  some  failing matches taking a very long time indeed.
+     The pattern
+
+       <i>(\D+|&lt;\d+&gt;)*[!?]</i>
+
+     matches an unlimited number of substrings that  either  consist
+     of  non-digits,  or digits enclosed in &lt;&gt;, followed by
+     either ! or ?. When it matches, it runs quickly. However, if
+     it is applied to
+
+       <i>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</i>
+
+     it takes a long  time  before  reporting  failure.  This  is
+     because the string can be divided between the two repeats in
+     a large number of ways, and all have to be tried. (The example
+     used  [!?]  rather  than a single character at the end,
+     because both PCRE and Perl have an optimization that  allows
+     for  fast  failure  when  a  single  character is used. They
+     remember the last single character that is  required  for  a
+     match,  and  fail early if it is not present in the string.)
+     If the pattern is changed to
+
+       <i>((?&gt;\D+)|&lt;\d+&gt;)*[!?]</i>
+
+     sequences of non-digits cannot be broken, and  failure  happens quickly.
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">Conditional subpatterns</h4>
+   <p class="para">
+     It is possible to cause the matching process to obey a  subpattern
+     conditionally  or to choose between two alternative
+     subpatterns, depending on the result  of  an  assertion,  or
+     whether  a previous capturing subpattern matched or not. The
+     two possible forms of conditional subpattern are
+   </p>
+
+   <pre class="literallayout">
+       (?(condition)yes-pattern)
+       (?(condition)yes-pattern|no-pattern)
+   </pre>
+   <p class="para">
+     If the condition is satisfied, the yes-pattern is used; otherwise
+     the  no-pattern  (if  present) is used. If there are
+     more than two alternatives in the subpattern, a compile-time
+     error occurs.
+   </p>
+   <p class="para">
+    There are two kinds of condition. If the  text  between  the
+     parentheses  consists  of  a  sequence  of  digits, then the
+     condition is satisfied if the capturing subpattern  of  that
+     number  has  previously matched. Consider the following pattern,
+     which contains non-significant white space to make  it
+     more  readable  (assume  the  <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a>   option)  and to
+     divide it into three parts for ease of discussion:
+
+       <i>( \( )?    [^()]+    (?(1) \) )</i>
+   </p>
+   <p class="para">
+     The first part matches an optional opening parenthesis,  and
+     if  that character is present, sets it as the first captured
+     substring. The second part matches one  or  more  characters
+     that  are  not  parentheses. The third part is a conditional
+     subpattern that tests whether the first set  of  parentheses
+     matched  or  not.  If  they did, that is, if subject started
+     with an opening parenthesis, the condition is <b><tt>TRUE</tt></b>,  and  so
+     the  yes-pattern  is  executed  and a closing parenthesis is
+     required. Otherwise, since no-pattern is  not  present,  the
+     subpattern  matches  nothing.  In  other words, this pattern
+     matches a sequence of non-parentheses,  optionally  enclosed
+     in parentheses.
+   </p>
+   <p class="para">
+     If the condition is the string <i>(R)</i>, it is satisfied if
+     a recursive call to the pattern or subpattern has been made. At &quot;top
+     level&quot;, the condition is false.
+   </p>
+   <p class="para">
+     If the condition is not a sequence of digits or (R), it must be  an
+     assertion.  This  may be a positive or negative lookahead or
+     lookbehind assertion. Consider this pattern, again  containing
+     non-significant  white space, and with the two alternatives on
+     the second line:
+   </p>
+
+   <pre class="literallayout">
+       (?(?=[^a-z]*[a-z])
+       \d{2}-[a-z]{3}-\d{2}  |  \d{2}-\d{2}-\d{2} )
+   </pre>
+   <p class="para">
+     The condition is a positive lookahead assertion that matches
+     an optional sequence of non-letters followed by a letter. In
+     other words, it tests for  the  presence  of  at  least  one
+     letter  in the subject. If a letter is found, the subject is
+     matched against  the  first  alternative;  otherwise  it  is
+     matched  against the second. This pattern matches strings in
+     one of the two forms dd-aaa-dd or dd-dd-dd,  where  aaa  are
+     letters and dd are digits.
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">注释</h4>
+   <p class="para">
+    序列 (?# 标记了注释的开头直到下一个右括号为止。不允许嵌套注释。注释在模式匹配中完全没有作用。
+   </p>
+   <p class="para">
+    如果设定了 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a>
+    选项，则不在字符类中间并且未转义的 # 字符标记了注释的开头，直到模式中的下一个换行符结束。
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">Recursive patterns</h4>
+   <p class="para">
+     Consider the problem of matching a  string  in  parentheses,
+     allowing  for  unlimited nested parentheses. Without the use
+     of recursion, the best that can be done is to use a  pattern
+     that  matches  up  to some fixed depth of nesting. It is not
+     possible to handle an arbitrary nesting depth. Perl 5.6  has
+     provided   an  experimental  facility  that  allows  regular
+     expressions to recurse (among other things).  The  special
+     item (?R) is  provided for  the specific  case of recursion.
+     This PCRE  pattern  solves the  parentheses  problem (assume
+     the <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_EXTENDED</a>
+     option is set so that white space is
+     ignored):
+
+       <i>\( ( (?&gt;[^()]+) | (?R) )* \)</i>
+   </p>
+   <p class="para">
+     First it matches an opening parenthesis. Then it matches any
+     number  of substrings which can either be a sequence of
+     non-parentheses, or a recursive  match  of  the  pattern  itself
+     (i.e. a correctly parenthesized substring). Finally there is
+     a closing parenthesis.
+   </p>
+   <p class="para">
+     This particular example pattern  contains  nested  unlimited
+     repeats, and so the use of a once-only subpattern for matching
+     strings of non-parentheses is  important  when  applying
+     the  pattern to strings that do not match. For example, when
+     it is applied to
+
+       <i>(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa()</i>
+
+     it yields &quot;no match&quot; quickly. However, if a  once-only  subpattern
+     is  not  used,  the match runs for a very long time
+     indeed because there are so many different ways the + and  *
+     repeats  can carve up the subject, and all have to be tested
+     before failure can be reported.
+   </p>
+   <p class="para">
+     The values set for any capturing subpatterns are those  from
+     the outermost level of the recursion at which the subpattern
+     value is set. If the pattern above is matched against
+
+       <i>(ab(cd)ef)</i>
+
+     the value for the capturing parentheses is  &quot;ef&quot;,  which  is
+     the  last  value  taken  on  at the top level. If additional
+     parentheses are added, giving
+
+       <i>\( ( ( (?&gt;[^()]+) | (?R) )* ) \)</i>
+     then the string they capture
+     is &quot;ab(cd)ef&quot;, the contents of the top level parentheses. If
+     there are more than 15 capturing parentheses in  a  pattern,
+     PCRE  has  to  obtain  extra  memory  to store data during a
+     recursion, which it does by using  pcre_malloc,  freeing  it
+     via  pcre_free  afterwards. If no memory can be obtained, it
+     saves data for the first 15 capturing parentheses  only,  as
+     there is no way to give an out-of-memory error from within a
+     recursion.
+   </p>
+
+   <p class="para">
+      Since PHP 4.3.3, <i>(?1)</i>, <i>(?2)</i> and so on can be used
+      for recursive subpatterns too. It is also possible to use named
+      subpatterns: <i>(?P&gt;foo)</i>.
+   </p>
+   <p class="para">
+      If the syntax for a recursive subpattern reference (either by number or
+      by name) is used outside the parentheses to which it refers, it operates
+      like a subroutine in a programming language. An earlier example
+      pointed out that the pattern
+      <i>(sens|respons)e and \1ibility</i>
+      matches &quot;sense and sensibility&quot; and &quot;response and responsibility&quot;, but
+      not &quot;sense and responsibility&quot;. If instead the pattern
+      <i>(sens|respons)e and (?1)ibility</i>
+      is used, it does match &quot;sense and responsibility&quot; as well as the other
+      two strings. Such references must, however, follow the subpattern to
+      which they refer.
+   </p>
+  </div>
+
+
+  <div class="refsect2 unknown" id="refsect2-reference.pcre.pattern.syntax-unknown">
+   <h4 class="title">Performances</h4>
+   <p class="para">
+     Certain items that may appear in patterns are more efficient
+     than  others.  It is more efficient to use a character class
+     like [aeiou] than a set of alternatives such as (a|e|i|o|u).
+     In  general,  the  simplest  construction  that provides the
+     required behaviour is usually the  most  efficient.  Jeffrey
+     Friedl&#039;s  book contains a lot of discussion about optimizing
+     regular expressions for efficient performance.
+   </p>
+   <p class="para">
+     When a pattern begins with .* and the <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a>  option  is
+     set,  the  pattern  is implicitly anchored by PCRE, since it
+     can match only at the start of a subject string. However, if
+     <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a>   is not set, PCRE cannot make this optimization,
+     because the . metacharacter does not then match  a  newline,
+     and if the subject string contains newlines, the pattern may
+     match from the character immediately following one  of  them
+     instead of from the very start. For example, the pattern
+
+       <i>(.*) second</i>
+
+     matches the subject &quot;first\nand second&quot; (where \n stands for
+     a newline character) with the first captured substring being
+     &quot;and&quot;. In order to do this, PCRE  has  to  retry  the  match
+     starting after every newline in the subject.
+   </p>
+   <p class="para">
+     If you are using such a pattern with subject strings that do
+     not  contain  newlines,  the best performance is obtained by
+     setting <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE_DOTALL</a>, or starting the  pattern  with  ^.*  to
+     indicate  explicit anchoring. That saves PCRE from having to
+     scan along the subject looking for a newline to restart at.
+   </p>
+   <p class="para">
+     Beware of patterns that contain nested  indefinite  repeats.
+     These  can  take a long time to run when applied to a string
+     that does not match. Consider the pattern fragment
+
+       <i>(a+)*</i>
+   </p>
+   <p class="para">
+     This can match &quot;aaaa&quot; in 33 different ways, and this  number
+     increases  very  rapidly  as  the string gets longer. (The *
+     repeat can match 0, 1, 2, 3, or 4 times,  and  for  each  of
+     those  cases other than 0, the + repeats can match different
+     numbers of times.) When the remainder of the pattern is such
+     that  the entire match is going to fail, PCRE has in principle
+     to try every possible variation, and this  can  take  an
+     extremely long time.
+   </p>
+   <p class="para">
+     An optimization catches some of the more simple  cases  such
+     as
+
+       <i>(a+)*b</i>
+
+     where a literal character follows. Before embarking  on  the
+     standard matching procedure, PCRE checks that there is a &quot;b&quot;
+     later in the subject string, and if there is not,  it  fails
+     the  match  immediately. However, when there is no following
+     literal this optimization cannot be used. You  can  see  the
+     difference by comparing the behaviour of
+
+       <i>(a+)*\d</i>
+
+     with the pattern above. The former gives  a  failure  almost
+     instantly  when  applied  to a whole line of &quot;a&quot; characters,
+     whereas the latter takes an appreciable  time  with  strings
+     longer than about 20 characters.
+   </p>
+  </div>
+
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="pcre.pattern.html">PCRE模式</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="reference.pcre.pattern.modifiers.html">正则表达式模式中可用的模式修饰符</a></div>
+ <div class="up"><a href="pcre.pattern.html">PCRE模式</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>重命名一个文件或目录</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.realpath.html">realpath</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.rewind.html">rewind</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.rename" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">rename</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">rename</span> &mdash; <span class="dc-title">重命名一个文件或目录</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.rename-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>rename</b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$oldname</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$newname</tt></span>
+   [, <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$context</tt></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   尝试把 <i><tt class="parameter">oldname</tt></i> 重命名为
+   <i><tt class="parameter">newname</tt></i>。
+  </p>
+  <p class="para">
+   成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+  </p>
+  <p class="para">
+   <div class="example" id="example-1865">
+    <p><b>Example #1 <span class="function"><b>rename()</b></span> 例子 </b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />rename</span><span style="color: #007700">(</span><span style="color: #DD0000">"/tmp/tmp_file.txt"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"/home/user/login/docs/my_file.txt"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    在 PHP 4.3.3 之前，<span class="function"><b>rename()</b></span> 不能在基于
+    *nix 的系统中跨磁盘分区重命名文件。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    自 PHP 5.0.0 起 <span class="function"><b>rename()</b></span>
+    也可用于<em class="emphasis">某些</em>
+    URL 封装协议。参见<a href="wrappers.html" class="xref">Supported Protocols and Wrappers</a>
+    的列表看看 <span class="function"><b>rename()</b></span> 支持哪些 URL 封装协议。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <span class="simpara">
+    用于 <i><tt class="parameter">oldname</tt></i> 中的封装协议<em class="emphasis">必须</em>和用于
+    <i><tt class="parameter">newname</tt></i> 中的相匹配。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: <span class="simpara">在 PHP 5.0.0 中增加了 对上下文(Context)的支持。
+有关 <i>上下文(Context)</i> 的说明参见 <a href="ref.stream.html" class="xref">Stream 函数</a>。</span></p></blockquote>
+  <p class="para">
+   参见 <span class="function"><a href="function.copy.html" class="function">copy()</a></span>，<span class="function"><a href="function.unlink.html" class="function">unlink()</a></span>
+   和 <span class="function"><a href="function.move-uploaded-file.html" class="function">move_uploaded_file()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.realpath.html">realpath</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.rewind.html">rewind</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

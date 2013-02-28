@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>使用用户自定义的比较函数对数组中的值进行排序并保持索引关联</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.sort.html">sort</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.uksort.html">uksort</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.uasort" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">uasort</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">uasort</span> &mdash; <span class="dc-title">
+     使用用户自定义的比较函数对数组中的值进行排序并保持索引关联
+    </span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.uasort-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">bool</span> <span class="methodname"><b>uasort</b></span>
+       ( <span class="methodparam"><span class="type">array</span> <tt class="parameter reference">&$array</tt></span>
+      , <span class="methodparam"><span class="type"><a href="language.pseudo-types.html#language.types.callback" class="type callback">callback</a></span> <tt class="parameter">$cmp_function</tt></span>
+      )</div>
+
+    <p class="para rdfs-comment">
+     本函数对数组排序并保持索引和单元之间的关联。主要用于对那些单元顺序很重要的结合数组进行排序。比较函数是用户自定义的。
+    </p>
+    <p class="para">
+     成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+    </p>
+    <blockquote class="note"><p><b class="note">Note</b>: 
+     <p class="para">
+      用户自定义比较函数的例子请参考 <span class="function"><a href="function.usort.html" class="function">usort()</a></span> 和 <span class="function"><a href="function.uksort.html" class="function">uksort()</a></span>。
+     </p>
+    </p></blockquote>
+    <p class="para">
+     参见 <span class="function"><a href="function.usort.html" class="function">usort()</a></span>，<span class="function"><a href="function.uksort.html" class="function">uksort()</a></span>，<span class="function"><a href="function.sort.html" class="function">sort()</a></span>，<span class="function"><a href="function.asort.html" class="function">asort()</a></span>，<span class="function"><a href="function.arsort.html" class="function">arsort()</a></span>，<span class="function"><a href="function.ksort.html" class="function">ksort()</a></span>
+     和 <span class="function"><a href="function.rsort.html" class="function">rsort()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.sort.html">sort</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.uksort.html">uksort</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

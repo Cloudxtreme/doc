@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>如果此对象是该类的子类，则返回 TRUE</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-a.html">is_a</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.method-exists.html">method_exists</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Object 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.is-subclass-of" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">is_subclass_of</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">is_subclass_of</span> &mdash; <span class="dc-title">如果此对象是该类的子类，则返回 <b><tt>TRUE</tt></b></span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.is-subclass-of-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>is_subclass_of</b></span>
+    ( <span class="methodparam"><span class="type">object</span> <tt class="parameter">$object</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$class_name</tt></span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   如果对象 <i><tt class="parameter">object</tt></i>
+   所属类是类 <i><tt class="parameter">class_name</tt></i>
+   的子类，则返回 <b><tt>TRUE</tt></b>，否则返回 <b><tt>FALSE</tt></b>。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    自 PHP 5.0.3 起也可以用一个字符串来指定 <i><tt class="parameter">object</tt></i>
+    参数（类名）。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <div class="example" id="example-3978">
+    <p><b>Example #1 <span class="function"><b>is_subclass_of()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;define&nbsp;a&nbsp;class<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">WidgetFactory<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;var&nbsp;</span><span style="color: #0000BB">$oink&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'moo'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;define&nbsp;a&nbsp;child&nbsp;class<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">WidgetFactory_Child&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">WidgetFactory<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;var&nbsp;</span><span style="color: #0000BB">$oink&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'oink'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;create&nbsp;a&nbsp;new&nbsp;object<br /></span><span style="color: #0000BB">$WF&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">WidgetFactory</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$WFC&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">WidgetFactory_Child</span><span style="color: #007700">();<br /><br />if&nbsp;(</span><span style="color: #0000BB">is_subclass_of</span><span style="color: #007700">(</span><span style="color: #0000BB">$WFC</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'WidgetFactory'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"yes,&nbsp;\$WFC&nbsp;is&nbsp;a&nbsp;subclass&nbsp;of&nbsp;WidgetFactory\n"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"no,&nbsp;\$WFC&nbsp;is&nbsp;not&nbsp;a&nbsp;subclass&nbsp;of&nbsp;WidgetFactory\n"</span><span style="color: #007700">;<br />}<br /><br />if&nbsp;(</span><span style="color: #0000BB">is_subclass_of</span><span style="color: #007700">(</span><span style="color: #0000BB">$WF</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'WidgetFactory'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"yes,&nbsp;\$WF&nbsp;is&nbsp;a&nbsp;subclass&nbsp;of&nbsp;WidgetFactory\n"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"no,&nbsp;\$WF&nbsp;is&nbsp;not&nbsp;a&nbsp;subclass&nbsp;of&nbsp;WidgetFactory\n"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;usable&nbsp;only&nbsp;since&nbsp;PHP&nbsp;5.0.3<br /></span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">is_subclass_of</span><span style="color: #007700">(</span><span style="color: #DD0000">'WidgetFactory_Child'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'WidgetFactory'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"yes,&nbsp;WidgetFactory_Child&nbsp;is&nbsp;a&nbsp;subclass&nbsp;of&nbsp;WidgetFactory\n"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"no,&nbsp;WidgetFactory_Child&nbsp;is&nbsp;not&nbsp;a&nbsp;subclass&nbsp;of&nbsp;WidgetFactory\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上例程会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+yes, $WFC is a subclass of WidgetFactory
+no, $WF is not a subclass of WidgetFactory
+yes, WidgetFactory_Child is a subclass of WidgetFactory
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="simpara">
+   参见 <span class="function"><a href="function.get-class.html" class="function">get_class()</a></span>、 
+   <span class="function"><a href="function.get-parent-class.html" class="function">get_parent_class()</a></span> 和 
+   <span class="function"><a href="function.is-a.html" class="function">is_a()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.is-a.html">is_a</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.method-exists.html">method_exists</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Object 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>取得一个脚本中所有日期时间函数所使用的默认时区</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date-date-set.html">date_date_set</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.date-default-timezone-set.html">date_default_timezone_set</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.date-default-timezone-get" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">date_default_timezone_get</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.1.0)</p><p class="refpurpose"><span class="refname">date_default_timezone_get</span> &mdash; <span class="dc-title">取得一个脚本中所有日期时间函数所使用的默认时区</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.date-default-timezone-get-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">string</span> <span class="methodname"><b>date_default_timezone_get</b></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+
+  <p class="para rdfs-comment">
+   本函数返回默认时区，使用如下“假定”的顺序：
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <p class="para">
+      用 <span class="function"><a href="function.date-default-timezone-set.html" class="function">date_default_timezone_set()</a></span>
+      函数设定的时区（如果设定了的话）
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <var class="varname"><var class="varname">TZ</var></var> 环境变量（如果非空）
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      <a href="datetime.configuration.html#ini.date.timezone" class="link">date.timezone</a> 配置选项（如果设定了的话）
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      自己推测（如果操作系统支持）
+     </p>
+    </li>
+    <li class="listitem">
+     <p class="para">
+      如果以上选择都不成功，则返回 <i>UTC</i>
+     </p>
+    </li>
+   </ul>
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.date-default-timezone-get-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回一个 <span class="type"><a href="language.types.string.html" class="type string">string</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.date-default-timezone-get-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.date-default-timezone-set.html" class="function" rel="rdfs-seeAlso">date_default_timezone_set()</a> - 设定用于一个脚本中所有日期时间函数的默认时区</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date-date-set.html">date_date_set</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.date-default-timezone-set.html">date_default_timezone_set</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>轻便的咨询文件锁定</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.filetype.html">filetype</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fnmatch.html">fnmatch</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.flock" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">flock</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">flock</span> &mdash; <span class="dc-title">轻便的咨询文件锁定</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.flock-unknown">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type">bool</span> <span class="methodname"><b>flock</b></span>
+    ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$handle</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$operation</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter reference">&$wouldblock</tt></span>
+  ] )</div>
+
+  <p class="simpara">
+   PHP 支持以咨询方式（也就是说所有访问程序必须使用同一方式锁定, 否则它不会工作）锁定全部文件的一种轻便方法。
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    在 Windows 下 <span class="function"><b>flock()</b></span> 将会强制执行。
+   </p>
+  </p></blockquote>
+  <p class="simpara">
+   <span class="function"><b>flock()</b></span> 操作的 <i><tt class="parameter">handle</tt></i>
+   必须是一个已经打开的文件指针。<i><tt class="parameter">operation</tt></i>
+   可以是以下值之一：
+  </p>
+  <p class="para">
+   <ul class="itemizedlist">
+    <li class="listitem">
+     <span class="simpara">
+      要取得共享锁定（读取的程序），将
+      <i><tt class="parameter">operation</tt></i> 设为
+      <b><tt>LOCK_SH</tt></b>（PHP 4.0.1 以前的版本设置为 1）。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      要取得独占锁定（写入的程序），将
+      <i><tt class="parameter">operation</tt></i> 设为
+      <b><tt>LOCK_EX</tt></b>（PHP 4.0.1 以前的版本中设置为 2）。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      要释放锁定（无论共享或独占），将
+      <i><tt class="parameter">operation</tt></i> 设为
+      <b><tt>LOCK_UN</tt></b>（PHP 4.0.1 以前的版本中设置为 3）。
+     </span>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      如果不希望 <span class="function"><b>flock()</b></span> 在锁定时堵塞，则给
+      <i><tt class="parameter">operation</tt></i> 加上
+      <b><tt>LOCK_NB</tt></b>（PHP 4.0.1 以前的版本中设置为 4）。
+     </span>
+    </li>
+   </ul>
+  </p>
+  <p class="simpara">
+   <span class="function"><b>flock()</b></span> 允许执行一个简单的可以在任何平台中使用的读取/写入模型（包括大部分的
+   Unix 派生版和甚至是 Windows）。如果锁定会堵塞的话（EWOULDBLOCK
+   错误码情况下），可选的第三个参数会被设置为 <b><tt>TRUE</tt></b>。锁定操作也可以被
+   <span class="function"><a href="function.fclose.html" class="function">fclose()</a></span> 释放（代码执行完毕时也会自动调用）。
+  </p>
+  <p class="simpara">
+   成功时返回 <b><tt>TRUE</tt></b>， 或者在失败时返回 <b><tt>FALSE</tt></b>.
+  </p>
+  <p class="para">
+   <div class="example" id="example-1834">
+    <p><b>Example #1 <span class="function"><b>flock()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$fp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"/tmp/lock.txt"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"w+"</span><span style="color: #007700">);<br /><br />if&nbsp;(</span><span style="color: #0000BB">flock</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">LOCK_EX</span><span style="color: #007700">))&nbsp;{&nbsp;</span><span style="color: #FF8000">//&nbsp;进行排它型锁定<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fwrite</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Write&nbsp;something&nbsp;here\n"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">flock</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">LOCK_UN</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;释放锁定<br /></span><span style="color: #007700">}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Couldn't&nbsp;lock&nbsp;the&nbsp;file&nbsp;!"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    由于 <span class="function"><b>flock()</b></span>
+    需要一个文件指针， 因此可能不得不用一个特殊的锁定文件来保护打算通过写模式打开的文件的访问（在
+    <span class="function"><a href="function.fopen.html" class="function">fopen()</a></span> 函数中加入 &quot;w&quot; 或 &quot;w+&quot;）。
+   </p>
+  </p></blockquote>
+  <div class="warning"><b class="warning">Warning</b>
+   <p class="para">
+    <span class="function"><b>flock()</b></span> 不能用于 NFS
+    以及其它一些网络文件系统。详细资料查看自己操作系统的文档。
+   </p>
+   <p class="para">
+    在部分操作系统中 <span class="function"><b>flock()</b></span> 以进程级实现。当用一个多线程服务器
+    API（比如 ISAPI）时，可能不可以依靠
+    <span class="function"><b>flock()</b></span> 来保护文件，因为运行于同一服务器实例中其它并行线程的
+    PHP 脚本可以对该文件进行处理。
+   </p>
+   <p class="para">
+    <span class="function"><b>flock()</b></span> 不支持旧的文件系统，如 <i>FAT</i>
+    以及它的派生系统。因此，此环境下总是返回 <b><tt>FALSE</tt></b>（尤其是对 Windows 98 用户来说）。
+   </p>
+  </div>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.filetype.html">filetype</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.fnmatch.html">fnmatch</a></div>
+ <div class="up"><a href="ref.filesystem.html">Filesystem 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

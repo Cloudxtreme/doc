@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>将一个数组分割成多个</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-change-key-case.html">array_change_key_case</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-combine.html">array_combine</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-chunk" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_chunk</h1>
+    <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5)</p><p class="refpurpose"><span class="refname">array_chunk</span> &mdash; <span class="dc-title">将一个数组分割成多个</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.array-chunk-unknown">
+    <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="type">array</span> <span class="methodname"><b>array_chunk</b></span>
+       ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$input</tt></span>
+      , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$size</tt></span>
+      [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$preserve_keys</tt></span>
+     ] )</div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><b>array_chunk()</b></span> 将一个数组分割成多个数组，其中每个数组的单元数目由
+     <i><tt class="parameter">size</tt></i> 决定。最后一个数组的单元数目可能会少几个。得到的数组是一个多维数组中的单元，其索引从零开始。
+    </p>
+    <p class="para">
+     将可选参数 <i><tt class="parameter">preserve_keys</tt></i> 设为 <b><tt>TRUE</tt></b>，可以使 PHP
+     保留输入数组中原来的键名。如果你指定了 <b><tt>FALSE</tt></b>，那每个结果数组将用从零开始的新数字索引。默认值是 <b><tt>FALSE</tt></b>。
+    </p>
+    <div class="example" id="example-3864">
+     <p><b>Example #1 <span class="function"><b>array_chunk()</b></span> 例子</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input_array&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'b'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'c'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'d'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'e'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_chunk</span><span style="color: #007700">(</span><span style="color: #0000BB">$input_array</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_chunk</span><span style="color: #007700">(</span><span style="color: #0000BB">$input_array</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+     <div class="example-contents"><p>以上例程会输出：</p></div>
+     <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; a
+            [1] =&gt; b
+        )
+
+    [1] =&gt; Array
+        (
+            [0] =&gt; c
+            [1] =&gt; d
+        )
+
+    [2] =&gt; Array
+        (
+            [0] =&gt; e
+        )
+
+)
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; a
+            [1] =&gt; b
+        )
+
+    [1] =&gt; Array
+        (
+            [2] =&gt; c
+            [3] =&gt; d
+        )
+
+    [2] =&gt; Array
+        (
+            [4] =&gt; e
+        )
+
+)
+</pre></div>
+     </div>
+    </div>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.array-change-key-case.html">array_change_key_case</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.array-combine.html">array_combine</a></div>
+ <div class="up"><a href="ref.array.html">数组 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>十六进制转换为十进制</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.getrandmax.html">getrandmax</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.hypot.html">hypot</a></div>
+ <div class="up"><a href="ref.math.html">Math 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.hexdec" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">hexdec</h1>
+    <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">hexdec</span> &mdash; <span class="dc-title">十六进制转换为十进制</span></p>
+
+   </div>
+   <div class="refsect1 unknown" id="refsect1-function.hexdec-unknown">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="type"><a href="language.pseudo-types.html#language.types.number" class="type number">number</a></span> <span class="methodname"><b>hexdec</b></span>
+      ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$hex_string</tt></span>
+     )</div>
+
+    <p class="para rdfs-comment">
+     返回与 <i><tt class="parameter">hex_string</tt></i>
+     参数所表示的十六进制数等值的的十进制数。<span class="function"><b>hexdec()</b></span>
+     将一个十六进制字符串转换为十进制数。所能转换的最大数值为
+     7fffffff，即十进制的 2147483647。PHP 4.1.0
+     开始，该函数可以处理大数字，这种情况下，它会返回 <span class="type"><a href="language.types.float.html" class="type float">float</a></span> 类型。
+    </p>
+    <p class="para">
+     <span class="function"><b>hexdec()</b></span> 会忽略所有非十六进制字符。
+     <div class="example" id="example-2740">
+      <p><b>Example #1 <span class="function"><b>hexdec()</b></span> 例子</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">hexdec</span><span style="color: #007700">(</span><span style="color: #DD0000">"See"</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">hexdec</span><span style="color: #007700">(</span><span style="color: #DD0000">"ee"</span><span style="color: #007700">));<br /></span><span style="color: #FF8000">//&nbsp;both&nbsp;print&nbsp;"int(238)"<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">hexdec</span><span style="color: #007700">(</span><span style="color: #DD0000">"that"</span><span style="color: #007700">));&nbsp;</span><span style="color: #FF8000">//&nbsp;print&nbsp;"int(10)"<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">hexdec</span><span style="color: #007700">(</span><span style="color: #DD0000">"a0"</span><span style="color: #007700">));&nbsp;</span><span style="color: #FF8000">//&nbsp;print&nbsp;"int(160)"<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     参见 <span class="function"><a href="function.dechex.html" class="function">dechex()</a></span>，<span class="function"><a href="function.bindec.html" class="function">bindec()</a></span>，<span class="function"><a href="function.octdec.html" class="function">octdec()</a></span>
+     和<span class="function"><a href="function.base-convert.html" class="function">base_convert()</a></span>。
+    </p>
+   </div>
+
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.getrandmax.html">getrandmax</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.hypot.html">hypot</a></div>
+ <div class="up"><a href="ref.math.html">Math 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>格式化一个本地时间／日期</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date-timezone-set.html">date_timezone_set</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.getdate.html">getdate</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.date" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">date</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose"><span class="refname">date</span> &mdash; <span class="dc-title">格式化一个本地时间／日期</span></p>
+
+ </div>
+ <div class="refsect1 unknown" id="refsect1-function.date-unknown">
+  <h3 class="title">说明</h3>
+   <div class="methodsynopsis dc-description">
+    <span class="type">string</span> <span class="methodname"><b>date</b></span>
+     ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$format</tt></span>
+    [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timestamp</tt></span>
+   ] )</div>
+
+  <p class="para rdfs-comment">
+   返回将整数 <i><tt class="parameter">timestamp</tt></i>
+   按照给定的格式字串而产生的字符串。如果没有给出时间戳则使用本地当前时间。换句话说，<i><tt class="parameter">timestamp</tt></i>
+   是可选的，默认值为 <span class="function"><a href="function.time.html" class="function">time()</a></span>。
+  </p>
+  <div class="tip"><b class="tip">Tip</b>
+   <p class="para">
+    自 PHP 5.1.1 起有几个有用的<a href="datetime.constants.html" class="link">常量</a>可用作标准的日期／时间格式来指定
+    <i><tt class="parameter">format</tt></i> 参数。
+   </p>
+  </div>
+  <div class="tip"><b class="tip">Tip</b>
+   <p class="para">
+    自 PHP 5.1 起在 <var class="varname"><var class="varname"><a href="reserved.variables.server.html" class="classname">$_SERVER['REQUEST_TIME']</a></var></var>
+    中保存了发起该请求时刻的时间戳。
+   </p>
+  </div>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    有效的时间戳典型范围是格林威治时间 1901 年 12 月 13 日 20:45:54
+    到 2038 年 1 月 19 日 03:14:07。（此范围符合 32
+    位有符号整数的最小值和最大值）。不过在 PHP 5.1 之前此范围在某些系统（如
+    Windows）中限制为从 1970 年 1 月 1 日到 2038 年 1 月 19 日。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><b class="note">Note</b>: 
+   <p class="para">
+    要将字符串表达的时间转换成时间戳，应该使用
+    <span class="function"><a href="function.strtotime.html" class="function">strtotime()</a></span>。此外一些数据库有一些函数将其时间格式转换成时间戳（例如
+    MySQL 的 <a href="http://dev.mysql.com/doc/mysql/en/date-and-time-functions.html" class="link external">&raquo;&nbsp;UNIX_TIMESTAMP</a> 函数）。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   <table class="doctable table">
+    <caption><b>格式字串可以识别以下 <i><tt class="parameter">format</tt></i> 参数的字符串</b></caption>
+    
+     <thead valign="middle">
+      <tr valign="middle">
+       <th><i><tt class="parameter">format</tt></i> 字符</th>
+       <th>说明</th>
+       <th>返回值例子</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle" class="tbody">
+      <tr valign="middle">
+       <td align="center"><em class="emphasis">日</em></td>
+       <td align="left">---</td>
+       <td align="left">---</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>d</i></td>
+       <td align="left">月份中的第几天，有前导零的 2 位数字</td>
+       <td align="left"><i>01</i> 到 <i>31</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>D</i></td>
+       <td align="left">星期中的第几天，文本表示，3 个字母</td>
+       <td align="left"><i>Mon</i> 到 <i>Sun</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>j</i></td>
+       <td align="left">月份中的第几天，没有前导零</td>
+       <td align="left"><i>1</i> 到 <i>31</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>l</i>（“L”的小写字母）</td>
+       <td align="left">星期几，完整的文本格式</td>
+       <td align="left"><i>Sunday</i> 到 <i>Saturday</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>N</i></td>
+       <td align="left">ISO-8601 格式数字表示的星期中的第几天（PHP 5.1.0 新加）</td>
+       <td align="left"><i>1</i>（表示星期一）到 <i>7</i>（表示星期天）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>S</i></td>
+       <td align="left">每月天数后面的英文后缀，2 个字符</td>
+       <td align="left"><i>st</i>，<i>nd</i>，<i>rd</i>
+        或者 <i>th</i>。可以和 <i>j</i> 一起用</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>w</i></td>
+       <td align="left">星期中的第几天，数字表示</td>
+       <td align="left"><i>0</i>（表示星期天）到 <i>6</i>（表示星期六）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>z</i></td>
+       <td align="left">年份中的第几天</td>
+       <td align="left"><i>0</i> 到 <i>366</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="center"><em class="emphasis">星期</em></td>
+       <td align="left">---</td>
+       <td align="left">---</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>W</i></td>
+       <td align="left">ISO-8601 格式年份中的第几周，每周从星期一开始（PHP 4.1.0 新加的）</td>
+       <td align="left">例如：<i>42</i>（当年的第 42 周）</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="center"><em class="emphasis">月</em></td>
+       <td align="left">---</td>
+       <td align="left">---</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>F</i></td>
+       <td align="left">月份，完整的文本格式，例如 January 或者 March</td>
+       <td align="left"><i>January</i> 到 <i>December</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>m</i></td>
+       <td align="left">数字表示的月份，有前导零</td>
+       <td align="left"><i>01</i> 到 <i>12</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>M</i></td>
+       <td align="left">三个字母缩写表示的月份</td>
+       <td align="left"><i>Jan</i> 到 <i>Dec</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>n</i></td>
+       <td align="left">数字表示的月份，没有前导零</td>
+       <td align="left"><i>1</i> 到 <i>12</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>t</i></td>
+       <td align="left">给定月份所应有的天数</td>
+       <td align="left"><i>28</i> 到 <i>31</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="center"><em class="emphasis">年</em></td>
+       <td align="left">---</td>
+       <td align="left">---</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>L</i></td>
+       <td align="left">是否为闰年</td>
+       <td align="left">如果是闰年为 <i>1</i>，否则为 <i>0</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>o</i></td>
+       <td align="left">ISO-8601 格式年份数字。这和
+        <i>Y</i> 的值相同，只除了如果 ISO
+        的星期数（<i>W</i>）属于前一年或下一年，则用那一年。（PHP 5.1.0 新加）</td>
+       <td align="left">Examples: <i>1999</i> or <i>2003</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>Y</i></td>
+       <td align="left">4 位数字完整表示的年份</td>
+       <td align="left">例如：<i>1999</i> 或 <i>2003</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>y</i></td>
+       <td align="left">2 位数字表示的年份</td>
+       <td align="left">例如：<i>99</i> 或 <i>03</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="center"><em class="emphasis">时间</em></td>
+       <td align="left">---</td>
+       <td align="left">---</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>a</i></td>
+       <td align="left">小写的上午和下午值</td>
+       <td align="left"><i>am</i> 或 <i>pm</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>A</i></td>
+       <td align="left">大写的上午和下午值</td>
+       <td align="left"><i>AM</i> 或 <i>PM</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>B</i></td>
+       <td align="left">Swatch Internet 标准时</td>
+       <td align="left"><i>000</i> 到 <i>999</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>g</i></td>
+       <td align="left">小时，12 小时格式，没有前导零</td>
+       <td align="left"><i>1</i> 到 <i>12</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>G</i></td>
+       <td align="left">小时，24 小时格式，没有前导零</td>
+       <td align="left"><i>0</i> 到 <i>23</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>h</i></td>
+       <td align="left">小时，12 小时格式，有前导零</td>
+       <td align="left"><i>01</i> 到 <i>12</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>H</i></td>
+       <td align="left">小时，24 小时格式，有前导零</td>
+       <td align="left"><i>00</i> 到 <i>23</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>i</i></td>
+       <td align="left">有前导零的分钟数</td>
+       <td align="left"><i>00</i> 到 <i>59</i>&gt;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>s</i></td>
+       <td align="left">秒数，有前导零</td>
+       <td align="left"><i>00</i> 到 <i>59</i>&gt;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="center"><em class="emphasis">时区</em></td>
+       <td align="left">---</td>
+       <td align="left">---</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>e</i></td>
+       <td align="left">时区标识（PHP 5.1.0 新加）</td>
+       <td align="left">例如：<i>UTC</i>，<i>GMT</i>，<i>Atlantic/Azores</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>I</i></td>
+       <td align="left">是否为夏令时</td>
+       <td align="left">如果是夏令时为 <i>1</i>，否则为 <i>0</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>O</i></td>
+       <td align="left">与格林威治时间相差的小时数</td>
+       <td align="left">例如：<i>+0200</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>P</i></td>
+       <td align="left">与格林威治时间（GMT）的差别，小时和分钟之间有冒号分隔（PHP 5.1.3 新加）</td>
+       <td align="left">例如：<i>+02:00</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>T</i></td>
+       <td align="left">本机所在的时区</td>
+       <td align="left">例如：<i>EST</i>，<i>MDT</i>（【译者注】在 Windows
+       下为完整文本格式，例如“Eastern Standard Time”，中文版会显示“中国标准时间”）。</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>Z</i></td>
+       <td align="left">时差偏移量的秒数。UTC 西边的时区偏移量总是负的，UTC 东边的时区偏移量总是正的。</td>
+       <td align="left"><i>-43200</i> 到 <i>43200</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="center"><em class="emphasis">完整的日期／时间</em></td>
+       <td align="left">---</td>
+       <td align="left">---</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>c</i></td>
+       <td align="left">ISO 8601 格式的日期（PHP 5 新加）</td>
+       <td align="left">2004-02-12T15:19:21+00:00</td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>r</i></td>
+       <td align="left">RFC 822 格式的日期</td>
+       <td align="left">例如：<i>Thu, 21 Dec 2000 16:01:07 +0200</i></td>
+      </tr>
+
+      <tr valign="middle">
+       <td align="left"><i>U</i></td>
+       <td align="left">从 Unix 纪元（January 1 1970 00:00:00 GMT）开始至今的秒数</td>
+       <td align="left">参见 <span class="function"><a href="function.time.html" class="function">time()</a></span></td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+  <p class="para">
+   格式字串中不能被识别的字符将原样显示。<i>Z</i> 格式在使用
+   <span class="function"><a href="function.gmdate.html" class="function">gmdate()</a></span> 时总是返回 <i>0</i>。
+  </p>
+  <p class="para">
+   <div class="example" id="example-591">
+    <p><b>Example #1 <span class="function"><b>date()</b></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;设定要用的默认时区。自&nbsp;PHP&nbsp;5.1&nbsp;可用<br /></span><span style="color: #0000BB">date_default_timezone_set</span><span style="color: #007700">(</span><span style="color: #DD0000">'UTC'</span><span style="color: #007700">);<br /><br /><br /></span><span style="color: #FF8000">//&nbsp;输出类似：Monday<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"l"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;输出类似：Monday&nbsp;15th&nbsp;of&nbsp;August&nbsp;2005&nbsp;03:12:46&nbsp;PM<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'l&nbsp;dS&nbsp;\of&nbsp;F&nbsp;Y&nbsp;h:i:s&nbsp;A'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;输出：July&nbsp;1,&nbsp;2000&nbsp;is&nbsp;on&nbsp;a&nbsp;Saturday<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"July&nbsp;1,&nbsp;2000&nbsp;is&nbsp;on&nbsp;a&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"l"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">mktime</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">7</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2000</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">/*&nbsp;在格式参数中使用常量&nbsp;*/<br />//&nbsp;输出类似：Mon,&nbsp;15&nbsp;Aug&nbsp;2005&nbsp;15:12:46&nbsp;UTC<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #0000BB">DATE_RFC822</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">//&nbsp;输出类似：2000-07-01T00:00:00+00:00<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #0000BB">DATE_ATOM</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">mktime</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">7</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2000</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   在格式字串中的字符前加上反斜线来转义可以避免它被按照上表解释。如果加上反斜线后的字符本身就是一个特殊序列，那还要转义反斜线。
+   <div class="example" id="example-592">
+    <p><b>Example #2 在 <span class="function"><b>date()</b></span> 中转义字符</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;prints&nbsp;something&nbsp;like:&nbsp;Wednesday&nbsp;the&nbsp;15th<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"l&nbsp;\\t\h\e&nbsp;jS"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   可以把 <span class="function"><b>date()</b></span> 和
+   <span class="function"><a href="function.mktime.html" class="function">mktime()</a></span> 结合使用来得到未来或过去的日期。
+   <div class="example" id="example-593">
+    <p><b>Example #3 <span class="function"><b>date()</b></span> 和 <span class="function"><a href="function.mktime.html" class="function">mktime()</a></span> 例子</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$tomorrow&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mktime</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"m"</span><span style="color: #007700">)&nbsp;&nbsp;,&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"d"</span><span style="color: #007700">)+</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"Y"</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">$lastmonth&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mktime</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"m"</span><span style="color: #007700">)-</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"d"</span><span style="color: #007700">),&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"Y"</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">$nextyear&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mktime</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"m"</span><span style="color: #007700">),&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"d"</span><span style="color: #007700">),&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"Y"</span><span style="color: #007700">)+</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <blockquote class="note"><p><b class="note">Note</b>: 
+    <p class="para">
+     由于夏令时的缘故，这种方法比简单地在时间戳上加减一天或者一个月的秒数更可靠。
+    </p>
+   </p></blockquote>
+  </p>
+  <p class="para">
+   一些使用 <span class="function"><b>date()</b></span>
+   格式化日期的例子。注意要转义所有其它的字符，因为目前有特殊含义的字符会产生不需要的结果，而其余字符在
+   PHP 将来的版本中可能会被用上。当转义时，注意用单引号以避免类似 \n 的字符变成了换行符。
+   <div class="example" id="example-594">
+    <p><b>Example #4 <span class="function"><b>date()</b></span> 格式举例</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;假定今天是：March&nbsp;10th,&nbsp;2001,&nbsp;5:16:18&nbsp;pm<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"F&nbsp;j,&nbsp;Y,&nbsp;g:i&nbsp;a"</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;March&nbsp;10,&nbsp;2001,&nbsp;5:16&nbsp;pm<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"m.d.y"</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;03.10.01<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"j,&nbsp;n,&nbsp;Y"</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;10,&nbsp;3,&nbsp;2001<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"Ymd"</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;20010310<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'h-i-s,&nbsp;j-m-y,&nbsp;it&nbsp;is&nbsp;w&nbsp;Day&nbsp;z&nbsp;'</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;05-16-17,&nbsp;10-03-01,&nbsp;1631&nbsp;1618&nbsp;6&nbsp;Fripm01<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'\i\t&nbsp;\i\s&nbsp;\t\h\e&nbsp;jS&nbsp;\d\a\y.'</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;It&nbsp;is&nbsp;the&nbsp;10th&nbsp;day.<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"D&nbsp;M&nbsp;j&nbsp;G:i:s&nbsp;T&nbsp;Y"</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Sat&nbsp;Mar&nbsp;10&nbsp;15:16:08&nbsp;MST&nbsp;2001<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'H:m:s&nbsp;\m&nbsp;\i\s\&nbsp;\m\o\n\t\h'</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;17:03:17&nbsp;m&nbsp;is&nbsp;month<br /></span><span style="color: #0000BB">$today&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">"H:i:s"</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;17:16:17<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   要格式化其它语种的日期，应该用 <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span> 和
+   <span class="function"><a href="function.strftime.html" class="function">strftime()</a></span> 函数来代替 <span class="function"><b>date()</b></span>。
+  </p>
+  <p class="para">
+   参见 <span class="function"><a href="function.getlastmod.html" class="function">getlastmod()</a></span>，<span class="function"><a href="function.gmdate.html" class="function">gmdate()</a></span>，<span class="function"><a href="function.mktime.html" class="function">mktime()</a></span>，<span class="function"><a href="function.strftime.html" class="function">strftime()</a></span>
+   和 <span class="function"><a href="function.time.html" class="function">time()</a></span>。
+  </p>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.date-timezone-set.html">date_timezone_set</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.getdate.html">getdate</a></div>
+ <div class="up"><a href="ref.datetime.html">Date/Time 函数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>
